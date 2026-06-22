@@ -145,6 +145,23 @@ assert($('#drawer').classList.contains('open'), 'drawer opens on card click');
 esc();
 assert(!$('#drawer').classList.contains('open'), 'Esc closes the drawer when it is top-most');
 
+// LANGUAGE TOGGLE: switching language flips the active button + <html lang>,
+// and with an empty/partial overlay every string safely falls back to English.
+click($('.switch button[data-mode="questions"]'));
+assert($$('#lang-switch button').length===3, 'three language buttons present');
+eq($('#lang-switch button.active')?.dataset.lang, 'en', 'English is the active language on load');
+const firstCardName=$('#m-questions .card .c-id')?.textContent;
+click($('#lang-switch button[data-lang="zh"]'));
+eq($('#lang-switch button.active')?.dataset.lang, 'zh', 'clicking 繁 makes Traditional Chinese active');
+eq(window.document.documentElement.lang, 'zh-Hant', 'html lang switches to zh-Hant');
+assert(!$('#about-mt-note').hasAttribute('hidden'), 'machine-assisted note shows for a non-English language');
+click($('#lang-switch button[data-lang="ru"]'));
+eq($('#lang-switch button.active')?.dataset.lang, 'ru', 'clicking RU makes Russian active');
+click($('#lang-switch button[data-lang="en"]'));
+eq(window.document.documentElement.lang, 'en', 'html lang returns to en');
+assert($('#about-mt-note').hasAttribute('hidden'), 'machine-assisted note hidden again in English');
+eq($('#m-questions .card .c-id')?.textContent, firstCardName, 'concept names restore on English (fallback round-trips)');
+
 console.log(`SMOKE OK — ${PASS} assertions passed.`);
 // Do NOT force exit. The known async d3-zoom error is swallowed by the
 // uncaughtException handler above; the process then exits 0 on its own. Any

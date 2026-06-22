@@ -30,13 +30,14 @@ run("merge.py")
 print("3/3  Injecting data + vendored assets into template…")
 ideas = (SRC / "ideas.json").read_text(encoding="utf-8").replace("</", "<\\/")
 atlas = (SRC / "atlas_graph.json").read_text(encoding="utf-8").replace("</", "<\\/")
+i18n  = (SRC / "i18n.json").read_text(encoding="utf-8").replace("</", "<\\/")
 d3js  = (SRC / "vendor" / "d3.min.js").read_text(encoding="utf-8").replace("</script", "<\\/script")
 fonts = (SRC / "vendor" / "fonts.css").read_text(encoding="utf-8")
 assert "</style" not in fonts.lower(), "fonts.css must not contain a closing style tag"
 html  = (SRC / "template.html").read_text(encoding="utf-8")
-html  = html.replace("__IDEAS_JSON__", ideas).replace("__ATLAS_JSON__", atlas)
+html  = html.replace("__IDEAS_JSON__", ideas).replace("__ATLAS_JSON__", atlas).replace("__I18N_JSON__", i18n)
 html  = html.replace("__FONTS_CSS__", fonts).replace("__D3_JS__", d3js)
-assert not any(p in html for p in ("__IDEAS_JSON__", "__ATLAS_JSON__", "__FONTS_CSS__", "__D3_JS__")), "placeholder not replaced"
+assert not any(p in html for p in ("__IDEAS_JSON__", "__ATLAS_JSON__", "__I18N_JSON__", "__FONTS_CSS__", "__D3_JS__")), "placeholder not replaced"
 out = ROOT / "index.html"
 out.write_text(html, encoding="utf-8")
 print(f"✓ Wrote {out.relative_to(ROOT)}  ({len(html):,} bytes)")

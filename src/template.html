@@ -237,6 +237,13 @@
   .hbtn.on{background:var(--gold);color:#1a1205;border-color:var(--gold);}
   .hchip{font-size:11px;color:var(--muted);white-space:nowrap;}
   .hchip b{color:var(--gold);font-weight:500;}
+  #lang-switch{display:flex;gap:0;border:1px solid var(--panel-edge);border-radius:3px;overflow:hidden;}
+  #lang-switch button{background:transparent;border:none;border-right:1px solid var(--panel-edge);
+    color:var(--muted);font-family:'Inter';font-size:11px;letter-spacing:.04em;padding:7px 9px;
+    cursor:pointer;transition:all .18s;white-space:nowrap;line-height:1;}
+  #lang-switch button:last-child{border-right:none;}
+  #lang-switch button:hover{color:var(--parchment);background:rgba(217,182,95,.08);}
+  #lang-switch button.active{background:var(--gold);color:#1a1205;}
 
   /* ---------- filter rail ---------- */
   #filters{position:absolute;left:0;top:0;bottom:0;width:248px;z-index:30;
@@ -377,20 +384,25 @@
 <body>
   <header>
     <div class="brand">
-      <div class="eyebrow">A Companion to the Constellation</div>
+      <div class="eyebrow" data-i18n="A Companion to the Constellation">A Companion to the Constellation</div>
       <h1>The Anatomy of Ideas</h1>
     </div>
     <div class="switch" role="tablist" aria-label="Views">
-      <button data-mode="questions" class="active" role="tab" aria-selected="true"><span class="n">I</span>Questions</button>
-      <button data-mode="timeline" role="tab" aria-selected="false"><span class="n">II</span>Timeline</button>
-      <button data-mode="web" role="tab" aria-selected="false"><span class="n">III</span>Idea Web</button>
-      <button data-mode="threads" role="tab" aria-selected="false"><span class="n">IV</span>Threads</button>
-      <button data-mode="constellation" role="tab" aria-selected="false"><span class="n">V</span>Constellation</button>
+      <button data-mode="questions" class="active" role="tab" aria-selected="true"><span class="n">I</span><span data-i18n="Questions">Questions</span></button>
+      <button data-mode="timeline" role="tab" aria-selected="false"><span class="n">II</span><span data-i18n="Timeline">Timeline</span></button>
+      <button data-mode="web" role="tab" aria-selected="false"><span class="n">III</span><span data-i18n="Idea Web">Idea Web</span></button>
+      <button data-mode="threads" role="tab" aria-selected="false"><span class="n">IV</span><span data-i18n="Threads">Threads</span></button>
+      <button data-mode="constellation" role="tab" aria-selected="false"><span class="n">V</span><span data-i18n="Constellation">Constellation</span></button>
     </div>
-    <button id="filt-btn" class="hbtn" aria-expanded="false" aria-controls="filters">Filters</button>
-    <button id="about-btn" class="hbtn" aria-haspopup="dialog">How to read this</button>
+    <div id="lang-switch" role="group" aria-label="Language">
+      <button data-lang="en" class="active" aria-pressed="true">EN</button>
+      <button data-lang="zh" aria-pressed="false" lang="zh-Hant">繁</button>
+      <button data-lang="ru" aria-pressed="false" lang="ru">RU</button>
+    </div>
+    <button id="filt-btn" class="hbtn" aria-expanded="false" aria-controls="filters" data-i18n="Filters">Filters</button>
+    <button id="about-btn" class="hbtn" aria-haspopup="dialog" data-i18n="How to read this">How to read this</button>
     <div id="progress" class="hchip" title="Ideas marked read"></div>
-    <input id="search2" type="text" placeholder="Find a concept…" autocomplete="off" aria-label="Search ideas and thinkers">
+    <input id="search2" type="text" placeholder="Find a concept…" data-i18n-attr="placeholder" data-i18n="Find a concept…" autocomplete="off" aria-label="Search ideas and thinkers">
     <div id="res2"></div>
   </header>
 
@@ -399,6 +411,7 @@
   <div id="about-overlay" role="dialog" aria-modal="true" aria-labelledby="about-title">
     <div id="about-panel">
       <button id="about-close" aria-label="Close">×</button>
+      <div id="about-content">
       <div class="sub">A note before you wander</div>
       <h2 id="about-title">How to read this</h2>
       <p>This is <b>one map, drawn from one vantage</b> — not a neutral survey. It leans, by
@@ -429,25 +442,29 @@
         <a href="https://github.com/chinhau/anatomy-of-ideas/issues">tell me</a>.</p>
       <p class="about-note">Best explored on a desktop or tablet — the maps are built around a
         wide canvas, and a small phone screen will feel cramped.</p>
+      </div>
+      <p class="about-note" id="about-mt-note" hidden>The non-English text is a machine-assisted
+        translation — proper names, technical terms, and the framing may not be exact. Corrections
+        welcome.</p>
     </div>
   </div>
 
   <div id="stage">
     <aside id="filters" aria-label="Filters" hidden>
-      <div class="flt-head">Filters<button id="flt-close" aria-label="Close filters">×</button></div>
+      <div class="flt-head"><span data-i18n="Filters">Filters</span><button id="flt-close" aria-label="Close filters">×</button></div>
       <div class="flt-body">
-        <div class="flt-sec">Reading status</div>
+        <div class="flt-sec" data-i18n="Reading status">Reading status</div>
         <div id="flt-read" class="flt-pills"></div>
-        <div class="flt-sec">Era</div>
+        <div class="flt-sec" data-i18n="Era">Era</div>
         <div class="flt-era">
           <input id="era-min" type="range" aria-label="Earliest era"><input id="era-max" type="range" aria-label="Latest era">
           <div id="era-out" class="flt-erao"></div>
         </div>
-        <div class="flt-sec">Question</div>
+        <div class="flt-sec" data-i18n="Question">Question</div>
         <div id="flt-q" class="flt-list"></div>
-        <div class="flt-sec">Tradition region</div>
+        <div class="flt-sec" data-i18n="Tradition region">Tradition region</div>
         <div id="flt-region" class="flt-pills"></div>
-        <button id="flt-reset" class="hbtn" style="margin-top:14px;width:100%">Reset all</button>
+        <button id="flt-reset" class="hbtn" style="margin-top:14px;width:100%" data-i18n="Reset all">Reset all</button>
       </div>
     </aside>
 
@@ -455,21 +472,21 @@
     <section id="m-timeline" class="view">
       <svg id="tl-svg"></svg>
       <div class="wlegend">
-        <div class="row"><span class="ln" style="border-color:rgba(233,220,192,.7)"></span>builds on</div>
-        <div class="row"><span class="ln" style="border-color:var(--oppose);border-top-style:dashed"></span>rejects / opposes</div>
-        <div class="row"><span class="ln" style="border-color:var(--echo);border-top-style:dotted"></span>echoes</div>
-        <div class="row" style="margin-top:6px;opacity:.7">size = ideas built on it</div>
+        <div class="row"><span class="ln" style="border-color:rgba(233,220,192,.7)"></span><span data-i18n="builds on">builds on</span></div>
+        <div class="row"><span class="ln" style="border-color:var(--oppose);border-top-style:dashed"></span><span data-i18n="rejects / opposes">rejects / opposes</span></div>
+        <div class="row"><span class="ln" style="border-color:var(--echo);border-top-style:dotted"></span><span data-i18n="echoes">echoes</span></div>
+        <div class="row" style="margin-top:6px;opacity:.7" data-i18n="size = ideas built on it">size = ideas built on it</div>
       </div>
-      <div class="con-hint">Every idea placed at its era, in the lane of its world. Hover to trace its kin; click for the full entry. Drag the era handles to narrow the centuries.</div>
+      <div class="con-hint" data-i18n="Every idea placed at its era, in the lane of its world. Hover to trace its kin; click for the full entry. Drag the era handles to narrow the centuries.">Every idea placed at its era, in the lane of its world. Hover to trace its kin; click for the full entry. Drag the era handles to narrow the centuries.</div>
     </section>
     <section id="m-web" class="view">
       <svg id="web-svg"></svg>
       <div class="wlegend">
-        <div class="row"><span class="ln" style="border-color:rgba(233,220,192,.7)"></span>builds on</div>
-        <div class="row"><span class="ln" style="border-color:var(--oppose);border-top-style:dashed"></span>rejects / opposes</div>
-        <div class="row"><span class="ln" style="border-color:var(--echo);border-top-style:dotted"></span>echoes across traditions</div>
+        <div class="row"><span class="ln" style="border-color:rgba(233,220,192,.7)"></span><span data-i18n="builds on">builds on</span></div>
+        <div class="row"><span class="ln" style="border-color:var(--oppose);border-top-style:dashed"></span><span data-i18n="rejects / opposes">rejects / opposes</span></div>
+        <div class="row"><span class="ln" style="border-color:var(--echo);border-top-style:dotted"></span><span data-i18n="echoes across traditions">echoes across traditions</span></div>
       </div>
-      <div class="web-hint">Colour marks the <em>question</em> each idea answers. Hover to trace its kin; click for the full entry.</div>
+      <div class="web-hint" data-i18n-html="Colour marks the &lt;em&gt;question&lt;/em&gt; each idea answers. Hover to trace its kin; click for the full entry.">Colour marks the <em>question</em> each idea answers. Hover to trace its kin; click for the full entry.</div>
     </section>
     <section id="m-threads" class="view">
       <div id="thr-wrap">
@@ -479,21 +496,21 @@
           <div id="thr-rail"></div>
           <div id="thr-step"></div>
           <div id="thr-nav">
-            <button id="thr-prev" class="hbtn">‹ Prev</button>
+            <button id="thr-prev" class="hbtn" data-i18n="‹ Prev">‹ Prev</button>
             <span id="thr-count"></span>
-            <button id="thr-next" class="hbtn">Next ›</button>
+            <button id="thr-next" class="hbtn" data-i18n="Next ›">Next ›</button>
           </div>
         </div>
       </div>
     </section>
     <section id="m-constellation" class="view">
       <svg id="con-svg"></svg>
-      <div class="con-hint">The original star-chart of thinkers &amp; schools, clustered into West, Psyche &amp; East. Hover to trace a lineage; click a star to see who they were — and the ideas they shaped.</div>
+      <div class="con-hint" data-i18n="The original star-chart of thinkers &amp; schools, clustered into West, Psyche &amp; East. Hover to trace a lineage; click a star to see who they were — and the ideas they shaped.">The original star-chart of thinkers &amp; schools, clustered into West, Psyche &amp; East. Hover to trace a lineage; click a star to see who they were — and the ideas they shaped.</div>
     </section>
 
     <div id="empty-state" hidden>
-      <div class="es-h">No ideas match these filters.</div>
-      <button id="empty-reset" class="hbtn">Reset filters</button>
+      <div class="es-h" data-i18n="No ideas match these filters.">No ideas match these filters.</div>
+      <button id="empty-reset" class="hbtn" data-i18n="Reset filters">Reset filters</button>
     </div>
 
     <aside id="drawer" role="dialog" aria-label="Idea details" aria-modal="false">
@@ -517,6 +534,7 @@
 
 <script id="ideas-data" type="application/json">__IDEAS_JSON__</script>
 <script id="atlas-data" type="application/json">__ATLAS_JSON__</script>
+<script id="i18n-data" type="application/json">__I18N_JSON__</script>
 <script>
 (function(){
   "use strict";
@@ -525,6 +543,29 @@
 
   const qById = {}; D.questions.forEach(q=>qById[q.id]=q);
   const cById = {}; D.concepts.forEach(c=>cById[c.id]=c);
+
+  // ========== i18n (EN / zh-Hant / ru) ==========
+  // Translations are an overlay keyed by the stable English keys; English ids
+  // stay the data keys (deep-links + cross-linking unaffected). Missing strings
+  // fall back to English, so partial coverage is always safe.
+  let I18N={}; try{ I18N=JSON.parse(document.getElementById('i18n-data').textContent)||{}; }catch(e){ I18N={}; }
+  const esc0 = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  const LANGS=['en','zh','ru'];
+  let LANG='en'; try{ const s=localStorage.getItem('aoi.lang'); if(LANGS.includes(s)) LANG=s; }catch(e){}
+  const pick=o=>{ if(!o) return undefined; const v=o[LANG]; return (v===undefined||v===null||v==='')?undefined:v; };
+  const T   = k => (LANG==='en'?undefined:pick((I18N.ui||{})[k])) || k;          // UI chrome string
+  const cName  = c => (LANG==='en'?undefined:pick(((I18N.concepts||{})[c.id]||{}).name))  || c.id;
+  const cGloss = c => (LANG==='en'?undefined:pick(((I18N.concepts||{})[c.id]||{}).gloss)) || c.gloss;
+  const cTrad  = c => (LANG==='en'?undefined:pick((I18N.tradLabels||{})[c.tradLabel])) || c.tradLabel;
+  const qLabel   = q => (LANG==='en'?undefined:pick(((I18N.questions||{})[q.id]||{}).label))   || q.label;
+  const qFraming = q => (LANG==='en'?undefined:pick(((I18N.questions||{})[q.id]||{}).framing)) || q.framing;
+  const aTitle = a => (LANG==='en'?undefined:pick(((I18N.arguments||{})[a.title]||{}).title)) || a.title;
+  const aNote  = a => (LANG==='en'?undefined:pick(((I18N.arguments||{})[a.title]||{}).note))  || a.note;
+  // a step name is usually a concept id; translate via concept name, else step table
+  const stepName = s => (cById[s] ? cName(cById[s]) : ((LANG==='en'?undefined:pick((I18N.steps||{})[s])) || s));
+  const caption  = m => (LANG==='en'?undefined:pick((I18N.captions||{})[m])) || (CAPTIONS[m]||'');
+  // Captured once at load: the authored English About markup, restored when LANG==='en'.
+  const ABOUT_EN = (document.getElementById('about-content')||{}).innerHTML || '';
 
   // adjacency
   const adj = new Map(); D.concepts.forEach(c=>adj.set(c.id,[]));
@@ -550,26 +591,26 @@
   function openConcept(id){
     const c=cById[id]; if(!c) return;
     const q=qById[c.q];
-    document.getElementById('dr-q').innerHTML=`<span class="dot" style="background:${q.hue}"></span>${q.label}`;
-    document.getElementById('dr-name').textContent=c.id;
-    document.getElementById('dr-meta').textContent=`${c.tradLabel} · ${eraTxt(c.era)}`;
-    document.getElementById('dr-gloss').textContent=c.gloss;
+    document.getElementById('dr-q').innerHTML=`<span class="dot" style="background:${q.hue}"></span>${esc0(qLabel(q))}`;
+    document.getElementById('dr-name').textContent=cName(c);
+    document.getElementById('dr-meta').textContent=`${cTrad(c)} · ${eraTxt(c.era)}`;
+    document.getElementById('dr-gloss').textContent=cGloss(c);
     const cbadge=document.getElementById('dr-contested'); if(cbadge) cbadge.toggleAttribute('hidden',!c.contested);
     const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
     const tw=document.getElementById('dr-thinkers');
     tw.innerHTML = (c.thinkers&&c.thinkers.length)
-      ? `<div class="dr-sec">Principal thinkers</div><div class="chips">`+
+      ? `<div class="dr-sec">${esc0(T('Principal thinkers'))}</div><div class="chips">`+
         c.thinkers.map(t=>{ const aid=atlasIdForThinker(t);
           return aid?`<span class="chip link" data-aid="${esc(aid)}">${esc(t)}</span>`
                     :`<span class="chip">${esc(t)}</span>`; }).join('')+`</div>`
       : '';
     const rw=document.getElementById('dr-readings');
     rw.innerHTML = (c.readings&&c.readings.length)
-      ? `<div class="dr-sec">Essential readings <span class="sub">— ranked by influence</span></div>`+
+      ? `<div class="dr-sec">${esc0(T('Essential readings'))} <span class="sub">${esc0(T('— ranked by influence'))}</span></div>`+
         `<div class="readings">`+
         c.readings.map((r,i)=>{
           const primary = r.kind==='Primary';
-          const label = primary?'Primary source':r.kind;
+          const label = primary?T('Primary source'):r.kind;
           return `<div class="reading"><div class="rk">${i+1}</div><div>`+
             `<div class="tt">${esc(r.title)}</div>`+
             `<div class="by">${esc(r.author)} · ${esc(r.year)}</div>`+
@@ -584,12 +625,12 @@
     ['builds','rejects','echoes'].forEach(t=>{
       if(!groups[t].length) return;
       const [lab,cls]=REL_LABEL[t];
-      const h=document.createElement('div'); h.className='rel-h '+cls; h.textContent=lab; wrap.appendChild(h);
+      const h=document.createElement('div'); h.className='rel-h '+cls; h.textContent=T(lab); wrap.appendChild(h);
       groups[t].sort((a,b)=>a.other.localeCompare(b.other)).forEach(r=>{
         const o=cById[r.other];
         const arrow = t==='echoes' ? '↔' : (r.dir==='out'?'→':'←');
         const it=document.createElement('div'); it.className='rel-i';
-        it.innerHTML=`<span class="dot" style="background:${o.color}"></span><span>${o.id}</span>`+
+        it.innerHTML=`<span class="dot" style="background:${o.color}"></span><span>${esc0(cName(o))}</span>`+
           `<span style="color:var(--muted);margin-left:auto;font-size:11px">${arrow}</span>`;
         it.onclick=()=>{ openConcept(r.other); crossHighlight(r.other); };
         wrap.appendChild(it);
@@ -611,17 +652,17 @@
   D.questions.forEach(q=>{
     const band=document.createElement('div'); band.className='band'; band.dataset.q=q.id;
     const side=document.createElement('div'); side.className='q-side';
-    side.innerHTML=`<div class="q-tag">${q.label.replace(/[?]/,'')}</div>`+
-      `<div class="q-title">${q.label}</div>`+
-      `<div class="q-frame">${q.framing}</div>`+
+    side.innerHTML=`<div class="q-tag">${esc0(qLabel(q).replace(/[?？]/,''))}</div>`+
+      `<div class="q-title">${esc0(qLabel(q))}</div>`+
+      `<div class="q-frame">${esc0(qFraming(q))}</div>`+
       `<div class="q-bar" style="background:${q.hue}"></div>`;
     const cards=document.createElement('div'); cards.className='cards';
     D.concepts.filter(c=>c.q===q.id).sort((a,b)=>a.era-b.era).forEach(c=>{
       const el=document.createElement('div'); el.className='card';
       el.style.borderLeftColor=c.color;
-      el.innerHTML=`<div class="c-id">${c.id}</div>`+
-        `<div class="c-trad">${c.tradLabel} · ${eraTxt(c.era)}</div>`+
-        `<div class="c-gloss">${c.gloss}</div>`;
+      el.innerHTML=`<div class="c-id">${esc0(cName(c))}</div>`+
+        `<div class="c-trad">${esc0(cTrad(c))} · ${eraTxt(c.era)}</div>`+
+        `<div class="c-gloss">${esc0(cGloss(c))}</div>`;
       el.onclick=(e)=>{ e.stopPropagation(); openConcept(c.id); };
       cards.appendChild(el); cardEls[c.id]=el;
     });
@@ -818,14 +859,14 @@
   function updateProgress(){ const n=D.concepts.filter(c=>statusOf(c.id)==='read').length;
     const el=document.getElementById('progress'); if(el) el.innerHTML='<b>'+n+'</b> / '+D.concepts.length+' read'; }
   function renderStatus(id){ const w=document.getElementById('dr-status'); if(!w) return; const cur=statusOf(id);
-    w.innerHTML=['unread','reading','read'].map(s=>'<button data-s="'+s+'"'+(s===cur?' class="on"':'')+'>'+s+'</button>').join('');
+    w.innerHTML=['unread','reading','read'].map(s=>'<button data-s="'+s+'"'+(s===cur?' class="on"':'')+'>'+esc0(T(s))+'</button>').join('');
     w.querySelectorAll('button').forEach(b=>b.onclick=()=>setStatus(id,b.dataset.s)); }
   function renderFoil(c){ const w=document.getElementById('dr-foil'); if(!w) return; w.innerHTML='';
     const foes=(adj.get(c.id)||[]).filter(e=>e.type==='rejects').map(e=>e.other);
     if(!foes.length) return;
-    const lab=document.createElement('span'); lab.className='lab'; lab.textContent='Argues against: '; w.appendChild(lab);
+    const lab=document.createElement('span'); lab.className='lab'; lab.textContent=T('Argues against:')+' '; w.appendChild(lab);
     foes.slice(0,3).forEach((f,i)=>{ if(i) w.appendChild(document.createTextNode(', '));
-      const a=document.createElement('a'); a.textContent=f; a.tabIndex=0;
+      const a=document.createElement('a'); a.textContent=cById[f]?cName(cById[f]):f; a.tabIndex=0;
       a.onclick=()=>{ openConcept(f); crossHighlight(f); };
       a.onkeydown=(e)=>{ if(e.key==='Enter'){ openConcept(f); crossHighlight(f); } };
       w.appendChild(a); }); }
@@ -859,15 +900,15 @@
     filtBtn.setAttribute('aria-expanded',open?'true':'false'); }
   function buildFilterRail(){
     const rd=document.getElementById('flt-read');
-    rd.innerHTML=['unread','reading','read'].map(s=>'<span class="flt-pill on" data-s="'+s+'">'+s+'</span>').join('');
+    rd.innerHTML=['unread','reading','read'].map(s=>'<span class="flt-pill on" data-s="'+s+'">'+esc0(T(s))+'</span>').join('');
     rd.querySelectorAll('.flt-pill').forEach(p=>p.onclick=()=>{ const s=p.dataset.s;
       if(F.read.has(s))F.read.delete(s); else F.read.add(s); p.classList.toggle('on',F.read.has(s)); applyFilters(); });
     const rg=document.getElementById('flt-region');
-    rg.innerHTML=['West','Psyche','East'].map(s=>'<span class="flt-pill on" data-s="'+s+'">'+s+'</span>').join('');
+    rg.innerHTML=['West','Psyche','East'].map(s=>'<span class="flt-pill on" data-s="'+s+'">'+esc0(T(s))+'</span>').join('');
     rg.querySelectorAll('.flt-pill').forEach(p=>p.onclick=()=>{ const s=p.dataset.s;
       if(F.regions.has(s))F.regions.delete(s); else F.regions.add(s); p.classList.toggle('on',F.regions.has(s)); applyFilters(); });
     const ql=document.getElementById('flt-q');
-    ql.innerHTML=D.questions.map(q=>'<div class="flt-row" data-q="'+q.id+'"><span class="sw" style="background:'+q.hue+'"></span><span class="nm">'+q.label+'</span></div>').join('');
+    ql.innerHTML=D.questions.map(q=>'<div class="flt-row" data-q="'+q.id+'"><span class="sw" style="background:'+q.hue+'"></span><span class="nm">'+esc0(qLabel(q))+'</span></div>').join('');
     ql.querySelectorAll('.flt-row').forEach(r=>r.onclick=()=>{ const id=r.dataset.q;
       if(F.questions.has(id))F.questions.delete(id); else F.questions.add(id); r.classList.toggle('off',!F.questions.has(id)); applyFilters(); });
     const lo=document.getElementById('era-min'), hi=document.getElementById('era-max'), out=document.getElementById('era-out');
@@ -970,35 +1011,35 @@
   function buildThreads(){
     if(thrBuilt) return; thrBuilt=true;
     const list=document.getElementById('thr-list');
-    list.innerHTML=D.arguments.map((a,i)=>'<div class="thr-item'+(i===0?' on':'')+'" data-i="'+i+'" tabindex="0"><div class="tt">'+a.title+'</div><div class="nt">'+a.note+'</div></div>').join('');
+    list.innerHTML=D.arguments.map((a,i)=>'<div class="thr-item'+(i===0?' on':'')+'" data-i="'+i+'" tabindex="0"><div class="tt">'+esc0(aTitle(a))+'</div><div class="nt">'+esc0(aNote(a))+'</div></div>').join('');
     list.querySelectorAll('.thr-item').forEach(el=>{ const go=()=>{ thrI=+el.dataset.i; thrStep=0; renderThread(); };
       el.onclick=go; el.onkeydown=e=>{ if(e.key==='Enter') go(); }; });
     document.getElementById('thr-prev').onclick=()=>{ if(thrStep>0){ thrStep--; renderThread(); } };
     document.getElementById('thr-next').onclick=()=>{ const a=D.arguments[thrI]; if(thrStep<a.steps.length-1){ thrStep++; renderThread(); } };
     renderThread();
   }
-  function whyText(a,i){ const role=a.steps[i][1], prev=a.steps[i-1][0];
-    if(role==='antithesis') return 'The counter-move — it pushes back against '+prev+'.';
-    if(role==='synthesis') return 'The resolution — it tries to hold the tension together.';
-    if(role==='response') return 'A reply in the same key, answering '+prev+' from another angle.';
+  function whyText(a,i){ const role=a.steps[i][1], prev=stepName(a.steps[i-1][0]);
+    if(role==='antithesis') return T('The counter-move — it pushes back against {prev}.').replace('{prev}',prev);
+    if(role==='synthesis') return T('The resolution — it tries to hold the tension together.');
+    if(role==='response') return T('A reply in the same key, answering {prev} from another angle.').replace('{prev}',prev);
     return ''; }
   function renderThread(){
     const a=D.arguments[thrI];
     document.querySelectorAll('.thr-item').forEach(el=>el.classList.toggle('on',+el.dataset.i===thrI));
-    document.getElementById('thr-title').innerHTML=a.title+'<span class="note">'+a.note+'</span>';
+    document.getElementById('thr-title').innerHTML=esc0(aTitle(a))+'<span class="note">'+esc0(aNote(a))+'</span>';
     const rail=document.getElementById('thr-rail'); rail.innerHTML='';
     a.steps.forEach((s,i)=>{ const c=cById[s[0]];
       if(i){ const cn=document.createElement('div'); cn.className='thr-conn'+(s[1]==='antithesis'?' rej':''); rail.appendChild(cn); }
       const d=document.createElement('div'); d.className='thr-dot'+(i===thrStep?' on':'')+(i<=thrStep?' done':'');
       d.style.color=c?c.color:'var(--muted)';
-      const pip=document.createElement('div'); pip.className='pip'; pip.title=c?c.id:s[0];
+      const pip=document.createElement('div'); pip.className='pip'; pip.title=c?cName(c):stepName(s[0]);
       pip.onclick=()=>{ thrStep=i; renderThread(); }; d.appendChild(pip); rail.appendChild(d); });
     const s=a.steps[thrStep], c=cById[s[0]];
     const st=document.getElementById('thr-step');
-    st.innerHTML='<div class="thr-role" style="color:'+ROLE_COL[s[1]]+'">'+ROLE_NAME[s[1]]+'</div>'+
-      '<div class="thr-name" id="thr-open">'+(c?c.id:s[0])+'</div>'+
-      '<div class="thr-meta">'+(c?c.tradLabel+' · '+eraTxt(c.era):'')+'</div>'+
-      '<div class="thr-gloss">'+(c?c.gloss:'')+'</div>'+
+    st.innerHTML='<div class="thr-role" style="color:'+ROLE_COL[s[1]]+'">'+esc0(T(ROLE_NAME[s[1]]))+'</div>'+
+      '<div class="thr-name" id="thr-open">'+esc0(c?cName(c):stepName(s[0]))+'</div>'+
+      '<div class="thr-meta">'+(c?esc0(cTrad(c))+' · '+eraTxt(c.era):'')+'</div>'+
+      '<div class="thr-gloss">'+(c?esc0(cGloss(c)):'')+'</div>'+
       (thrStep>0?'<div class="thr-why">'+whyText(a,thrStep)+'</div>':'');
     const op=document.getElementById('thr-open'); if(op&&c){ op.onclick=()=>openConcept(c.id); }
     document.getElementById('thr-count').textContent=(thrStep+1)+' / '+a.steps.length;
@@ -1032,7 +1073,7 @@
     document.querySelectorAll('.switch button').forEach(b=>{ const on=b.dataset.mode===mode;
       b.classList.toggle('active',on); b.setAttribute('aria-selected',on?'true':'false'); });
     Object.entries(views).forEach(([m,id])=>document.getElementById(id).classList.toggle('active',m===mode));
-    document.getElementById('caption').innerHTML=CAPTIONS[mode]||'';
+    document.getElementById('caption').innerHTML=caption(mode);
     if(mode==='web') buildWeb();
     if(mode==='timeline') buildTimeline();
     if(mode==='threads') buildThreads();
@@ -1051,9 +1092,61 @@
   });
   window.addEventListener('hashchange',()=>{ if(!suppressHash) parseHash(); });
 
+  // ========== language switching ==========
+  const HTML_LANG={en:'en',zh:'zh-Hant',ru:'ru'};
+  // Relabel the lazily-built graphs in place (preserve node positions / sim state).
+  function webRelabel(){ if(!webBuilt||!wnode) return;
+    wnode.select('text').text(d=>cName(d));
+    wnode.select('title').text(d=>cName(d));
+    wnode.attr('aria-label',d=>cName(d)+(qById[d.q]?' — '+qLabel(qById[d.q]):'')); }
+  function tlRelabel(){ if(!tlBuilt||!tlNode) return;
+    tlNode.select('text').text(c=>cName(c));
+    tlNode.select('title').text(c=>cName(c));
+    tlNode.attr('aria-label',c=>cName(c)+' — '+cTrad(c)+', '+eraTxt(c.era));
+    if(tlWorld) tlWorld.selectAll('.tl-lane-lab').text(function(){ return T(this.textContent.trim()); }); }
+  function applyLang(lang){
+    if(!LANGS.includes(lang)) lang='en';
+    LANG=lang; try{ localStorage.setItem('aoi.lang',lang); }catch(e){}
+    document.documentElement.lang=HTML_LANG[lang];
+    document.querySelectorAll('#lang-switch button').forEach(b=>{ const on=b.dataset.lang===lang;
+      b.classList.toggle('active',on); b.setAttribute('aria-pressed',on?'true':'false'); });
+    // static chrome
+    document.querySelectorAll('[data-i18n]').forEach(el=>{ el.textContent=T(el.getAttribute('data-i18n')); });
+    document.querySelectorAll('[data-i18n-attr]').forEach(el=>{ el.setAttribute(el.getAttribute('data-i18n-attr'),T(el.getAttribute('data-i18n'))); });
+    document.querySelectorAll('[data-i18n-html]').forEach(el=>{ el.innerHTML=T(el.getAttribute('data-i18n-html')); });
+    // About panel: swap whole body for the translated block, flag machine-assisted
+    const ab=(I18N.about||{})[lang];
+    const ac=document.getElementById('about-content'); if(ac) ac.innerHTML=(lang!=='en'&&ab)?ab:ABOUT_EN;
+    const mt=document.getElementById('about-mt-note'); if(mt) mt.toggleAttribute('hidden',lang==='en');
+    // Questions: relabel bands + cards in place (keeps cardEls refs + filter display)
+    D.questions.forEach(q=>{ const band=mQ.querySelector('.band[data-q="'+q.id+'"]'); if(!band) return;
+      const t=band.querySelector('.q-tag'); if(t) t.textContent=qLabel(q).replace(/[?？]/,'');
+      const ti=band.querySelector('.q-title'); if(ti) ti.textContent=qLabel(q);
+      const fr=band.querySelector('.q-frame'); if(fr) fr.textContent=qFraming(q); });
+    D.concepts.forEach(c=>{ const el=cardEls[c.id]; if(!el) return;
+      const id=el.querySelector('.c-id'); if(id) id.textContent=cName(c);
+      const tr=el.querySelector('.c-trad'); if(tr) tr.textContent=cTrad(c)+' · '+eraTxt(c.era);
+      const gl=el.querySelector('.c-gloss'); if(gl) gl.textContent=cGloss(c); });
+    // Filter rail: relabel pills/rows in place (preserve on/off state)
+    document.querySelectorAll('#flt-read .flt-pill, #flt-region .flt-pill').forEach(p=>{ p.textContent=T(p.dataset.s); });
+    document.querySelectorAll('#flt-q .flt-row').forEach(r=>{ const nm=r.querySelector('.nm'); if(nm){ const q=qById[r.dataset.q]; if(q) nm.textContent=qLabel(q); } });
+    // dynamic surfaces
+    document.getElementById('caption').innerHTML=caption(currentMode);
+    webRelabel(); tlRelabel();
+    if(thrBuilt){
+      document.querySelectorAll('#thr-list .thr-item').forEach(el=>{ const a=D.arguments[+el.dataset.i]; if(!a) return;
+        const tt=el.querySelector('.tt'); if(tt) tt.textContent=aTitle(a);
+        const nt=el.querySelector('.nt'); if(nt) nt.textContent=aNote(a); });
+      renderThread();
+    }
+    if(selected&&cById[selected]) openConcept(selected);
+  }
+  document.querySelectorAll('#lang-switch button').forEach(b=>b.onclick=()=>applyLang(b.dataset.lang));
+
   // init
   updateProgress();
   if(!parseHash()) setMode('questions');
+  applyLang(LANG);
 
   // ---------- search ----------
   const s2=document.getElementById('search2'), r2=document.getElementById('res2');
