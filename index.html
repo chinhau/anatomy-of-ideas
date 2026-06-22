@@ -1061,7 +1061,13 @@
   function focusLens(id, rel){
     if(!cById[id]||!lensBuilt) return; lensFocus=id;
     const [W,H]=lensSize(); lsvg.attr('viewBox',`0 0 ${W} ${H}`);
-    const c=cById[id], neigh=neighborsOf(id), cx=W/2, cy=H/2, R=Math.min(W,H)*0.36;
+    // Reserve the control bar (top) and caption card (bottom) so the ego-ring never
+    // hides behind them; centre the ring in the band that's left and size R to fit it.
+    const ctrlEl=document.getElementById('lens-ctrl'), capEl=document.getElementById('lens-cap');
+    const topInset=14+Math.max(ctrlEl?ctrlEl.offsetHeight:0,48)+22;  // bar + gap + label room
+    const botInset=18+Math.max(capEl?capEl.offsetHeight:0,118)+14;   // caption + gap
+    const c=cById[id], neigh=neighborsOf(id), cx=W/2, cy=(topInset+(H-botInset))/2;
+    const R=Math.max(70,Math.min((H-botInset-topInset)/2, W/2-70));
     const pos={}; pos[id]={x:cx,y:cy,r:8+Math.sqrt(c.deg)*1.6,focus:true,c};
     const n=neigh.length||1;
     neigh.forEach((nb,i)=>{ const a=-Math.PI/2+(i+0.5)/n*2*Math.PI, o=cById[nb.id];
@@ -1088,7 +1094,12 @@
       .on('keydown',(e,d)=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); e.stopPropagation();
         d.focus?openConcept(d.id):focusLens(d.id,d.type); } });
     ndA.select('circle').attr('r',d=>d.r).attr('fill',d=>d.c.color).attr('filter',d=>d.focus?'url(#lglow)':null);
-    ndA.select('text').attr('y',d=>-(d.r+6)).text(d=>cName(d.c));
+    // Anchor each neighbour's label to its side of the focus so adjacent labels near
+    // the vertical axis (top/bottom of the ring) splay apart instead of overlapping.
+    ndA.select('text')
+      .attr('text-anchor',d=>(d.focus||Math.abs(d.x-cx)<10)?'middle':(d.x<cx?'end':'start'))
+      .attr('x',d=>(d.focus||Math.abs(d.x-cx)<10)?0:(d.x<cx?-(d.r+4):(d.r+4)))
+      .attr('y',d=>-(d.r+6)).text(d=>cName(d.c));
     ndA.transition().duration(dur).style('opacity',1).attr('transform',d=>`translate(${d.x},${d.y})`);
 
     narrate(c,rel);
