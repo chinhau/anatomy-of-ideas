@@ -110,8 +110,13 @@ assert($$('#dr-status button').find(b=>b.dataset.s==='read')?.classList.contains
 const contestedId=D.concepts.find(c=>c.contested)?.id;
 const plainId=D.concepts.find(c=>!c.contested)?.id;
 function openByName(n){ const card=$$('#m-questions .card .c-id').find(e=>e.textContent===n); click(card?.closest('.card')); }
-if(contestedId){ openByName(contestedId); assert(!$('#dr-contested').hasAttribute('hidden'), 'contested concept shows the Contested badge'); }
-if(plainId){ openByName(plainId); assert($('#dr-contested').hasAttribute('hidden'), 'non-contested concept hides the badge'); }
+// Assert computed display, not just the attribute: #dr-contested{display:flex}
+// outranks UA [hidden]{display:none} by specificity, so the attribute alone
+// would leave the badge on for every concept (regression guard).
+if(contestedId){ openByName(contestedId); assert(!$('#dr-contested').hasAttribute('hidden'), 'contested concept shows the Contested badge');
+  eq(window.getComputedStyle($('#dr-contested')).display,'flex','contested badge is display:flex (visible)'); }
+if(plainId){ openByName(plainId); assert($('#dr-contested').hasAttribute('hidden'), 'non-contested concept hides the badge');
+  eq(window.getComputedStyle($('#dr-contested')).display,'none','non-contested badge is display:none (truly hidden)'); }
 
 // FOIL (argues against)
 openByName('Modern Virtue Ethics');
