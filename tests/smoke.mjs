@@ -24,7 +24,7 @@ global.SVGElement=window.SVGElement; global.Element=window.Element; global.HTMLE
 global.localStorage=window.localStorage; global.location=window.location; global.history=window.history;
 window.d3=d3; window.matchMedia=()=>({matches:false,addEventListener(){}}); global.matchMedia=window.matchMedia;
 window.requestAnimationFrame=cb=>setTimeout(()=>cb(Date.now()),0);
-for(const id of ['m-questions','m-timeline','m-web','m-threads','m-constellation']){const el=window.document.getElementById(id);
+for(const id of ['m-questions','m-timeline','m-web','m-threads','m-constellation','m-lens']){const el=window.document.getElementById(id);
   Object.defineProperty(el,'clientWidth',{value:1180,configurable:true});Object.defineProperty(el,'clientHeight',{value:640,configurable:true});}
 window.Element.prototype.scrollIntoView=function(){};
 
@@ -54,8 +54,32 @@ eq($('.switch button.active')?.getAttribute('aria-selected'),'true','active tab 
 eq(window.getComputedStyle($('#empty-state')).display,'none','empty-state is display:none on load (not just [hidden])');
 
 // build every mode without throwing
-for(const mo of ['timeline','web','threads','constellation','questions']) click($('.switch button[data-mode="'+mo+'"]'));
-console.log('5 modes built ok');
+for(const mo of ['timeline','web','threads','constellation','lens','questions']) click($('.switch button[data-mode="'+mo+'"]'));
+console.log('6 modes built ok');
+
+// LENS (Map VI): focus+context ego-graph, travel, random walk, guided tour
+click($('.switch button[data-mode="lens"]'));
+eq($('.switch button.active')?.dataset.mode, 'lens', 'lens tab activates');
+assert($$('#lens-svg g.lnode').length>1, 'lens renders a focus node plus neighbours');
+eq($$('#lens-svg g.lnode.focus').length, 1, 'exactly one focus node at the centre');
+const lensName0=$('#lens-cap .lc-name')?.textContent||'';
+assert(lensName0.length>0, 'lens caption names the focal idea');
+const focusName0=$('#lens-svg g.lnode.focus text')?.textContent;
+click($$('#lens-svg g.lnode')[1]); // travel to a neighbour
+assert($('#lens-svg g.lnode.focus text')?.textContent!==focusName0, 'clicking a neighbour re-centres the lens');
+click($('#lens-random')); // serendipity dice — must keep a valid focus
+eq($$('#lens-svg g.lnode.focus').length, 1, 'random walk keeps a single focus');
+// guided tour
+click($('#lens-tour'));
+assert(!$('#lens-tour-nav').hasAttribute('hidden'), 'guided tour reveals the step controls');
+assert(/^1\s*\/\s*\d+/.test($('#lens-count').textContent), 'tour starts at step 1 / N');
+const tourBefore=$('#lens-count').textContent; click($('#lens-next'));
+assert($('#lens-count').textContent!==tourBefore, 'Next advances the tour step');
+// "open full entry" bridges to the shared dossier
+click($('.switch button[data-mode="lens"]')); click($('#lens-explore'));
+click($('#lens-cap .lc-open'));
+assert($('#drawer').classList.contains('open'), 'lens "open full entry" opens the shared dossier');
+esc(); click($('.switch button[data-mode="questions"]'));
 
 // TIMELINE
 click($('.switch button[data-mode="timeline"]'));

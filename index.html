@@ -552,6 +552,40 @@
   #about-close{position:absolute;top:14px;right:16px;background:none;border:none;color:var(--muted);
     font-size:24px;cursor:pointer;line-height:1;}
   #about-close:hover{color:var(--gold);}
+
+  /* ===== MODE VI : IDEA LENS ===== */
+  #m-lens{inset:0;}
+  #lens-svg{width:100%;height:100%;display:block;}
+  #lens-ctrl{position:absolute;top:14px;left:50%;transform:translateX(-50%);z-index:6;
+    display:flex;align-items:center;gap:10px;background:var(--panel);
+    border:1px solid var(--panel-edge);border-radius:30px;padding:6px 10px;backdrop-filter:blur(6px);}
+  .lens-seg{display:flex;background:rgba(255,255,255,0.04);border-radius:20px;padding:2px;}
+  .lens-seg button{background:none;border:none;color:var(--parchment-dim);font-family:'Inter';
+    font-size:11px;letter-spacing:0.05em;padding:5px 13px;border-radius:18px;cursor:pointer;transition:all .16s;}
+  .lens-seg button.on{background:var(--gold);color:var(--void);font-weight:600;}
+  #lens-tour-nav{display:flex;align-items:center;gap:8px;}
+  #lens-count{font-size:11px;color:var(--muted);min-width:46px;text-align:center;}
+  #lens-cap{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);z-index:6;
+    max-width:560px;width:calc(100% - 48px);text-align:center;background:var(--panel);
+    border:1px solid var(--panel-edge);border-radius:6px;padding:13px 18px;backdrop-filter:blur(6px);}
+  #lens-cap .lc-rel{font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);margin-bottom:5px;}
+  #lens-cap .lc-rel b{font-weight:600;color:var(--parchment-dim);}
+  #lens-cap .lc-name{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;line-height:1.05;}
+  #lens-cap .lc-gloss{font-size:12.5px;line-height:1.5;color:var(--parchment-dim);margin-top:5px;}
+  #lens-cap .lc-open{margin-top:9px;font-size:11px;color:var(--gold);cursor:pointer;display:inline-block;
+    border-bottom:1px solid rgba(217,182,95,.4);}
+  #lens-cap .lc-open:hover{border-bottom-color:var(--gold);}
+  .lnode{cursor:pointer;}
+  .lnode circle{stroke:var(--void);stroke-width:1.4px;}
+  .lnode text{font-size:11px;fill:var(--parchment);paint-order:stroke;stroke:var(--void);
+    stroke-width:3px;stroke-linejoin:round;pointer-events:none;}
+  .lnode.focus circle{stroke:var(--gold);stroke-width:2px;}
+  .lnode.focus text{font-size:13.5px;font-weight:600;}
+  .lnode.dimf{opacity:0.26;}
+  .llink{fill:none;stroke-width:1.4px;}
+  .llink.builds{stroke:rgba(233,220,192,0.5);}
+  .llink.rejects{stroke:var(--oppose);stroke-dasharray:4 4;opacity:0.7;}
+  .llink.echoes{stroke:var(--echo);stroke-dasharray:1 5;opacity:0.8;}
 </style>
 </head>
 <body>
@@ -566,6 +600,7 @@
       <button data-mode="web" role="tab" aria-selected="false"><span class="n">III</span><span data-i18n="Idea Web">Idea Web</span></button>
       <button data-mode="threads" role="tab" aria-selected="false"><span class="n">IV</span><span data-i18n="Threads">Threads</span></button>
       <button data-mode="constellation" role="tab" aria-selected="false"><span class="n">V</span><span data-i18n="Constellation">Constellation</span></button>
+      <button data-mode="lens" role="tab" aria-selected="false"><span class="n">VI</span><span data-i18n="Lens">Lens</span></button>
     </div>
     <div id="lang-switch" role="group" aria-label="Language">
       <button data-lang="en" class="active" aria-pressed="true">EN</button>
@@ -680,6 +715,24 @@
       <svg id="con-svg"></svg>
       <div class="con-hint" data-i18n="The original star-chart of thinkers &amp; schools, clustered into West, Psyche &amp; East. Hover to trace a lineage; click a star to see who they were — and the ideas they shaped.">The original star-chart of thinkers &amp; schools, clustered into West, Psyche &amp; East. Hover to trace a lineage; click a star to see who they were — and the ideas they shaped.</div>
     </section>
+    <section id="m-lens" class="view">
+      <svg id="lens-svg"></svg>
+      <div id="lens-ctrl">
+        <div class="lens-seg" role="group" aria-label="Lens mode">
+          <button id="lens-explore" class="on" data-i18n="Explore">Explore</button>
+          <button id="lens-tour" data-i18n="Guided tour">Guided tour</button>
+        </div>
+        <button id="lens-random" class="hbtn" data-i18n="🎲 Random walk">🎲 Random walk</button>
+        <span id="lens-tour-nav" hidden>
+          <button id="lens-prev" class="hbtn" data-i18n="‹ Prev">‹ Prev</button>
+          <button id="lens-play" class="hbtn" data-i18n="Play">Play</button>
+          <button id="lens-next" class="hbtn" data-i18n="Next ›">Next ›</button>
+          <span id="lens-count"></span>
+        </span>
+      </div>
+      <div id="lens-cap"></div>
+      <div class="con-hint" data-i18n="One idea at its centre, its kin around it. Click any neighbour to travel to it; roll the dice to wander; or take a guided tour through the lineage.">One idea at its centre, its kin around it. Click any neighbour to travel to it; roll the dice to wander; or take a guided tour through the lineage.</div>
+    </section>
 
     <div id="empty-state" hidden>
       <div class="es-h" data-i18n="No ideas match these filters.">No ideas match these filters.</div>
@@ -766,7 +819,8 @@
     timeline:'<b>Map II</b> Every idea placed at its era, in the lane of its world — West, Psyche or East. Size marks how many later ideas build on it; hover to trace its kin across the centuries.',
     web:'<b>Map III</b> The ideas as a single web. Each star is a concept, colour-coded by the question it answers; the threads are the relationships between thoughts.',
     threads:'<b>Map IV</b> Long arguments, walked one move at a time — thesis provokes antithesis provokes synthesis. Pick a thread on the left and step through it.',
-    constellation:'<b>Map V</b> The original constellation — every thinker and school as a star, clustered into the traditions of West, Psyche and East. Click a star to cross into the ideas they shaped.'
+    constellation:'<b>Map V</b> The original constellation — every thinker and school as a star, clustered into the traditions of West, Psyche and East. Click a star to cross into the ideas they shaped.',
+    lens:'<b>Map VI</b> One idea at the centre, the thoughts it touches arranged around it. Travel from neighbour to neighbour, roll the dice to wander, or let a guided tour walk you through a lineage.'
   };
 
   // ---------- shared drawer ----------
@@ -964,6 +1018,145 @@
     wnode.select('circle').attr('filter',d=>d.id===id?'url(#wglow)':null);
   }
 
+  // ---------- MODE VI : Idea Lens — focus+context, guided tour & random walk (lazy) ----------
+  let lensBuilt=false, lsvg, lworld, llinkG, lnodeG, lensFocus=null, lensMode='explore';
+  let tourPath=[], tourIdx=0, tourTimer=null;
+  const TYPE_ORDER={builds:0,echoes:1,rejects:2};
+  const REL_VERB={builds:'builds on',rejects:'rejects',echoes:'echoes'};
+
+  function lensSize(){ const h=document.getElementById('m-lens');
+    return [Math.max(h.clientWidth||980,320), Math.max(h.clientHeight||620,320)]; }
+
+  function buildLens(){
+    if(lensBuilt) return; lensBuilt=true;
+    lsvg=d3.select('#lens-svg');
+    const defs=lsvg.append('defs');
+    const g=defs.append('filter').attr('id','lglow').attr('x','-60%').attr('y','-60%').attr('width','220%').attr('height','220%');
+    g.append('feGaussianBlur').attr('stdDeviation','3.5').attr('result','b');
+    const me=g.append('feMerge'); me.append('feMergeNode').attr('in','b'); me.append('feMergeNode').attr('in','SourceGraphic');
+    lworld=lsvg.append('g'); llinkG=lworld.append('g'); lnodeG=lworld.append('g');
+    lsvg.on('click',()=>{ if(selected) closeDrawer(); });
+    document.getElementById('lens-explore').onclick=()=>setLensMode('explore');
+    document.getElementById('lens-tour').onclick=()=>setLensMode('tour');
+    document.getElementById('lens-random').onclick=()=>randomWalk();
+    document.getElementById('lens-prev').onclick=()=>tourGo(tourIdx-1);
+    document.getElementById('lens-next').onclick=()=>tourGo(tourIdx+1);
+    document.getElementById('lens-play').onclick=()=>toggleTour();
+    if(!lensFocus){ const s=D.concepts.slice().sort((a,b)=>b.deg-a.deg)[0]; lensFocus=s?s.id:D.concepts[0].id; }
+    focusLens(lensFocus,null);
+  }
+
+  function neighborsOf(id){
+    const seen={}, out=[];
+    (adj.get(id)||[]).forEach(e=>{ if(!cById[e.other]||seen[e.other]) return; seen[e.other]=1;
+      out.push({id:e.other,type:e.type,dir:e.dir}); });
+    out.sort((a,b)=>(TYPE_ORDER[a.type]-TYPE_ORDER[b.type])||(cById[a.id].era-cById[b.id].era));
+    return out;
+  }
+
+  function edgePath(s,t){ const dx=t.x-s.x,dy=t.y-s.y,dr=Math.hypot(dx,dy)||1,ux=dx/dr,uy=dy/dr;
+    return `M${s.x+ux*(s.r+2)},${s.y+uy*(s.r+2)}L${t.x-ux*(t.r+2)},${t.y-uy*(t.r+2)}`; }
+
+  // render the ego-graph around `id`; `rel` is the relation just traversed (for narration)
+  function focusLens(id, rel){
+    if(!cById[id]||!lensBuilt) return; lensFocus=id;
+    const [W,H]=lensSize(); lsvg.attr('viewBox',`0 0 ${W} ${H}`);
+    const c=cById[id], neigh=neighborsOf(id), cx=W/2, cy=H/2, R=Math.min(W,H)*0.36;
+    const pos={}; pos[id]={x:cx,y:cy,r:8+Math.sqrt(c.deg)*1.6,focus:true,c};
+    const n=neigh.length||1;
+    neigh.forEach((nb,i)=>{ const a=-Math.PI/2+(i+0.5)/n*2*Math.PI, o=cById[nb.id];
+      pos[nb.id]={x:cx+Math.cos(a)*R,y:cy+Math.sin(a)*R,r:5+Math.sqrt(o.deg)*1.3,c:o,type:nb.type}; });
+    const nodes=Object.entries(pos).map(([k,v])=>Object.assign({id:k},v));
+    const links=neigh.map(nb=>({s:pos[id],t:pos[nb.id],type:nb.type}));
+    const dur=reduce?0:520;
+
+    const lk=llinkG.selectAll('path').data(links,d=>d.t.id);
+    lk.exit().remove();
+    const lkA=lk.enter().append('path').attr('d',`M${cx},${cy}L${cx},${cy}`).merge(lk);
+    lkA.attr('class',d=>'llink '+d.type);
+    lkA.transition().duration(dur).attr('d',d=>edgePath(d.s,d.t));
+
+    const nd=lnodeG.selectAll('g.lnode').data(nodes,d=>d.id);
+    nd.exit().transition().duration(dur).style('opacity',0).remove();
+    const enter=nd.enter().append('g').attr('class','lnode').attr('tabindex',0).attr('role','button')
+      .attr('transform',`translate(${cx},${cy})`).style('opacity',0);
+    enter.append('circle'); enter.append('text').attr('text-anchor','middle');
+    const ndA=enter.merge(nd);
+    ndA.classed('focus',d=>!!d.focus).classed('dimf',d=>!d.focus&&!passes(d.c))
+      .attr('aria-label',d=>cName(d.c)+(d.focus?'':' — '+T(REL_VERB[d.type]||'related')));
+    ndA.on('click',(e,d)=>{ e.stopPropagation(); d.focus?openConcept(d.id):focusLens(d.id,d.type); })
+      .on('keydown',(e,d)=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); e.stopPropagation();
+        d.focus?openConcept(d.id):focusLens(d.id,d.type); } });
+    ndA.select('circle').attr('r',d=>d.r).attr('fill',d=>d.c.color).attr('filter',d=>d.focus?'url(#lglow)':null);
+    ndA.select('text').attr('y',d=>-(d.r+6)).text(d=>cName(d.c));
+    ndA.transition().duration(dur).style('opacity',1).attr('transform',d=>`translate(${d.x},${d.y})`);
+
+    narrate(c,rel);
+  }
+
+  function narrate(c, rel){
+    const cap=document.getElementById('lens-cap'); if(!cap||!c) return;
+    const relHtml=rel?`<div class="lc-rel">${esc0(T('You followed'))} · <b>${esc0(T(REL_VERB[rel]))}</b></div>`:'';
+    cap.innerHTML=relHtml+`<div class="lc-name">${esc0(cName(c))}</div>`+
+      `<div class="lc-gloss">${esc0(cGloss(c))}</div>`+
+      `<span class="lc-open" role="button" tabindex="0">${esc0(T('Open full entry →'))}</span>`;
+    const op=cap.querySelector('.lc-open');
+    if(op){ op.onclick=()=>openConcept(c.id);
+      op.onkeydown=e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); openConcept(c.id); } }; }
+    if(lensMode==='tour'){ const cnt=document.getElementById('lens-count');
+      if(cnt) cnt.textContent=(tourIdx+1)+' / '+tourPath.length; }
+  }
+
+  function randomWalk(){
+    const cur=lensFocus, neigh=neighborsOf(cur), pool=D.concepts.filter(passes);
+    let target,rel=null;
+    if(neigh.length&&Math.random()<0.7){ const p=neigh[Math.floor(Math.random()*neigh.length)]; target=p.id; rel=p.type; }
+    else { const p=(pool.length?pool:D.concepts).filter(c=>c.id!==cur);
+      if(!p.length) return; target=p[Math.floor(Math.random()*p.length)].id; }
+    if(lensMode==='tour') stopTour();
+    focusLens(target,rel);
+  }
+
+  // ----- guided tour: greedy lineage walk from the current focus -----
+  function buildTourPath(start){
+    const path=[start], seen={}; seen[start]=1; let cur=start;
+    for(let i=0;i<11;i++){
+      const cand=neighborsOf(cur).filter(nb=>!seen[nb.id]); if(!cand.length) break;
+      cand.sort((a,b)=>(TYPE_ORDER[a.type]-TYPE_ORDER[b.type])||
+        (Math.abs(cById[a.id].era-cById[cur].era)-Math.abs(cById[b.id].era-cById[cur].era)));
+      const nx=cand[0]; path.push(nx.id); seen[nx.id]=1; cur=nx.id;
+    }
+    return path;
+  }
+  function setLensMode(m){
+    lensMode=m;
+    document.getElementById('lens-explore').classList.toggle('on',m==='explore');
+    document.getElementById('lens-tour').classList.toggle('on',m==='tour');
+    document.getElementById('lens-tour-nav').toggleAttribute('hidden',m!=='tour');
+    if(m==='tour'){ tourPath=buildTourPath(lensFocus); tourIdx=0; tourGo(0,true); }
+    else { stopTour(); focusLens(lensFocus,null); }
+  }
+  function tourGo(i, first){
+    if(!tourPath.length) return;
+    tourIdx=Math.max(0,Math.min(tourPath.length-1,i));
+    let rel=null; const prev=(!first&&tourIdx>0)?tourPath[tourIdx-1]:null;
+    if(prev){ const e=(adj.get(prev)||[]).find(x=>x.other===tourPath[tourIdx]); rel=e?e.type:null; }
+    focusLens(tourPath[tourIdx],rel);
+    if(tourIdx>=tourPath.length-1) stopTour();
+  }
+  function toggleTour(){ if(tourTimer) stopTour(); else startTour(); }
+  function startTour(){
+    if(reduce){ tourGo(Math.min(tourIdx+1,tourPath.length-1)); return; } // no autoplay under reduced-motion
+    if(tourIdx>=tourPath.length-1){ tourIdx=0; tourGo(0,true); }
+    const p=document.getElementById('lens-play'); if(p) p.textContent=T('Pause');
+    tourTimer=setInterval(()=>{ if(tourIdx>=tourPath.length-1){ stopTour(); return; } tourGo(tourIdx+1); },3600);
+  }
+  function stopTour(){ if(tourTimer){ clearInterval(tourTimer); tourTimer=null; }
+    const p=document.getElementById('lens-play'); if(p) p.textContent=T('Play'); }
+  function lensRelabel(){ if(!lensBuilt) return;
+    if(lnodeG) lnodeG.selectAll('g.lnode text').text(d=>cName(d.c));
+    if(lensFocus) narrate(cById[lensFocus],null); }
+
   // ---------- MODE 3 : Dialectic Flow (lazy) ----------
   let flowBuilt=false, fsvg, fNodePos={};
   function buildFlow(){
@@ -1073,6 +1266,7 @@
       if(wlink) wlink.style('display',l=>{ const s=cById[(l.source&&l.source.id)||l.source], t=cById[(l.target&&l.target.id)||l.target];
         return passes(s)&&passes(t)?null:'none'; }); }
     if(tlBuilt) tlApplyFilter();
+    if(lensBuilt&&currentMode==='lens'&&lensFocus) focusLens(lensFocus,null);
     const fb=document.getElementById('filt-btn'); if(fb) fb.classList.toggle('on',filterActive());
     const es=document.getElementById('empty-state');
     if(es){ const none=!D.concepts.some(passes); es.toggleAttribute('hidden',!none); } }
@@ -1249,7 +1443,7 @@
   }
 
   // ========== mode switching ==========
-  const views={questions:'m-questions',timeline:'m-timeline',web:'m-web',threads:'m-threads',constellation:'m-constellation'};
+  const views={questions:'m-questions',timeline:'m-timeline',web:'m-web',threads:'m-threads',constellation:'m-constellation',lens:'m-lens'};
   function setMode(mode){
     if(!views[mode]) mode='questions';
     currentMode=mode;
@@ -1261,6 +1455,7 @@
     if(mode==='timeline') buildTimeline();
     if(mode==='threads') buildThreads();
     if(mode==='constellation') buildConstellation();
+    if(mode==='lens') buildLens();
     applyFilters();
     if(selected) crossHighlight(selected);
     if(!selected && mode!=='threads') setHash('/'+mode);
@@ -1315,7 +1510,7 @@
     document.querySelectorAll('#flt-q .flt-row').forEach(r=>{ const nm=r.querySelector('.nm'); if(nm){ const q=qById[r.dataset.q]; if(q) nm.textContent=qLabel(q); } });
     // dynamic surfaces
     document.getElementById('caption').innerHTML=caption(currentMode);
-    webRelabel(); tlRelabel();
+    webRelabel(); tlRelabel(); lensRelabel();
     if(thrBuilt){
       document.querySelectorAll('#thr-list .thr-item').forEach(el=>{ const a=D.arguments[+el.dataset.i]; if(!a) return;
         const tt=el.querySelector('.tt'); if(tt) tt.textContent=aTitle(a);
