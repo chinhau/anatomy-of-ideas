@@ -1,0 +1,53 @@
+The Anatomy of Ideas — Third-Party Notices
+==========================================
+
+The built page (index.html) bundles the following third-party components.
+Their licenses are reproduced or referenced below and continue to apply.
+
+--------------------------------------------------------------------------
+1. D3.js v7 — ISC License
+--------------------------------------------------------------------------
+Copyright 2010–2023 Mike Bostock
+
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted, provided that the above
+copyright notice and this permission notice appear in all copies.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+
+--------------------------------------------------------------------------
+2. Cormorant Garamond and Inter fonts — SIL Open Font License, Version 1.1
+--------------------------------------------------------------------------
+Cormorant Garamond: Copyright 2015 The Cormorant Project Authors
+  (https://github.com/CatharsisFonts/Cormorant), with Reserved Font Name "Cormorant".
+Inter: Copyright 2016 The Inter Project Authors
+  (https://github.com/rsms/inter), with Reserved Font Name "Inter".
+
+Both fonts are licensed under the SIL Open Font License, Version 1.1.
+The full license text is available at: https://scripts.sil.org/OFL
+
+PREAMBLE
+The goals of the Open Font License (OFL) are to stimulate worldwide
+development of collaborative font projects, to support the font creation
+efforts of academic and linguistic communities, and to provide a free and
+open framework in which fonts may be shared and improved in partnership
+with others.
+
+The OFL allows the licensed fonts to be used, studied, modified and
+redistributed freely as long as they are not sold by themselves. The fonts,
+including any derivative works, can be bundled, embedded, redistributed
+and/or sold with any software provided that any reserved names are not used
+by derivative works. The fonts and derivatives, however, cannot be released
+under any other type of license. The requirement for fonts to remain under
+this license does not apply to any document created using the fonts or their
+derivatives.
+
+The complete terms and conditions of the SIL Open Font License v1.1 govern
+use and redistribution of these fonts and are incorporated here by reference
+from https://scripts.sil.org/OFL.

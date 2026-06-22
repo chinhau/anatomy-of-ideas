@@ -1,0 +1,15 @@
+{
+  "name": "anatomy-of-ideas",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "An interactive atlas of philosophy, psychology and consciousness — 167 ideas across eleven questions, cross-linked to a 425-star constellation of thinkers and schools.",
+  "scripts": {
+    "build": "python3 build.py",
+    "test": "node tests/smoke.mjs"
+  },
+  "devDependencies": {
+    "d3": "^7.8.5",
+    "jsdom": "^24.1.0"
+  }
+}
