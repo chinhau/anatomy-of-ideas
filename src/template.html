@@ -810,7 +810,7 @@
 
   // ========== reading status (persisted) ==========
   const RKEY='aoi.reading.v1';
-  let readStatus={}; try{ readStatus=JSON.parse(localStorage.getItem(RKEY))||{}; }catch(e){ readStatus={}; }
+  let readStatus={}; try{ const r=JSON.parse(localStorage.getItem(RKEY)); readStatus=(r&&typeof r==='object'&&!Array.isArray(r))?r:{}; }catch(e){ readStatus={}; }
   function statusOf(id){ return readStatus[id]||'unread'; }
   function saveRead(){ try{ localStorage.setItem(RKEY,JSON.stringify(readStatus)); }catch(e){} }
   function setStatus(id,st){ if(st==='unread') delete readStatus[id]; else readStatus[id]=st;
@@ -874,7 +874,7 @@
     [lo,hi].forEach(s=>{ s.min=ERA_MIN; s.max=ERA_MAX; s.step=10; });
     lo.value=ERA_MIN; hi.value=ERA_MAX;
     function eraLabel(){ out.textContent=eraTxt(Math.round(F.eraLo))+'  —  '+eraTxt(Math.round(F.eraHi)); }
-    function onEra(){ let a=+lo.value,b=+hi.value; if(a>b){const t=a;a=b;b=t;} F.eraLo=a; F.eraHi=b; eraLabel(); applyFilters(); }
+    function onEra(){ let a=+lo.value,b=+hi.value; if(!Number.isFinite(a))a=ERA_MIN; if(!Number.isFinite(b))b=ERA_MAX; if(a>b){const t=a;a=b;b=t;} F.eraLo=a; F.eraHi=b; eraLabel(); applyFilters(); }
     lo.oninput=onEra; hi.oninput=onEra; eraLabel();
     document.getElementById('flt-reset').onclick=()=>{ F.questions=new Set(D.questions.map(q=>q.id));
       F.regions=new Set(['West','Psyche','East']); F.read=new Set(['unread','reading','read']);
