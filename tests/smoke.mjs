@@ -47,6 +47,11 @@ assert(D.concepts.length>=160,'ideas data present');
 // init state
 eq($('.switch button.active')?.dataset.mode,'questions','init mode is questions');
 eq($('.switch button.active')?.getAttribute('aria-selected'),'true','active tab aria-selected');
+// The empty-state overlay must be truly invisible on load, not merely carry the
+// [hidden] attribute: an ID rule (#empty-state{display:flex}) outranks the UA
+// [hidden]{display:none}, so the attribute alone does NOT hide it. Assert the
+// CSS cascade actually collapses it (regression guard for the always-on overlay).
+eq(window.getComputedStyle($('#empty-state')).display,'none','empty-state is display:none on load (not just [hidden])');
 
 // build every mode without throwing
 for(const mo of ['timeline','web','threads','constellation','questions']) click($('.switch button[data-mode="'+mo+'"]'));
