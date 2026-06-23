@@ -8,7 +8,7 @@ import json
 # ---- the eight perennial questions (the spine) ----
 # qid, label, hue, one-line framing
 QUESTIONS = [
-    ("real",  "What is real?",            "#E3B23C", "Metaphysics — the nature of being itself."),
+    ("real",  "What is real?",            "#C99A33", "Metaphysics — the nature of being itself."),
     ("know",  "What can I know?",         "#46C4D4", "Epistemology — knowledge, its sources and limits."),
     ("self",  "What is the self?",        "#E2719E", "Mind & identity — what, if anything, the 'I' is."),
     ("live",  "How should I live?",       "#A9C23F", "Ethics — the good life and right action."),

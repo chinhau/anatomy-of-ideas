@@ -15,8 +15,9 @@
 <style>
   :root{
     --void:#070b16; --void-2:#0e1530;
-    --parchment:#e9dcc0; --parchment-dim:#b6ad96; --muted:#7d869c;
+    --parchment:#e9dcc0; --parchment-dim:#b6ad96; --muted:#9aa3bd;
     --rule:#2a3354; --gold:#d9b65f; --oppose:#d8505c; --echo:#5fc7b8;
+    --affirm:#86c08a; --silver:#c3c7cf; --vermilion:#b8472f; --ink:#7a6038;
     --panel:rgba(11,17,34,0.9); --panel-edge:rgba(217,182,95,0.28);
   }
   *{box-sizing:border-box;}
@@ -76,19 +77,26 @@
   .q-title{font-family:'Cormorant Garamond',serif;font-size:27px;font-weight:500;line-height:1.04;
     margin:5px 0 6px;}
   .q-frame{font-size:12px;color:var(--parchment-dim);line-height:1.5;max-width:220px;}
+  .q-frame::first-letter{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:2em;
+    line-height:0.74;float:left;color:var(--vermilion);margin:3px 6px -1px 0;}
   .q-bar{height:3px;width:46px;margin-top:11px;border-radius:2px;}
   .cards{display:flex;flex-wrap:wrap;gap:9px;}
-  .card{width:206px;background:rgba(255,255,255,0.018);border:1px solid var(--rule);
+  .card{position:relative;width:206px;background:rgba(255,255,255,0.018);border:1px solid var(--rule);
     border-left-width:3px;border-radius:3px;padding:11px 12px;cursor:pointer;transition:all .16s;}
   .card:hover{background:rgba(255,255,255,0.05);transform:translateY(-1px);}
   .card .c-id{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:600;line-height:1.1;}
   .card .c-trad{font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);margin:3px 0 6px;}
   .card .c-gloss{font-size:11.5px;line-height:1.46;color:var(--parchment-dim);}
   .card.dim{opacity:0.16;}
-  .card.related{box-shadow:0 0 0 1px var(--gold),0 0 18px rgba(217,182,95,0.25);}
+  .card.related{box-shadow:0 0 0 1px var(--affirm),0 0 18px rgba(134,192,138,0.22);}
   .card.related.rej{box-shadow:0 0 0 1px var(--oppose),0 0 18px rgba(216,80,92,0.25);}
   .card.related.ech{box-shadow:0 0 0 1px var(--echo),0 0 18px rgba(95,199,184,0.25);}
   .card.sel{box-shadow:0 0 0 2px var(--gold),0 0 26px rgba(217,182,95,0.4);background:rgba(217,182,95,0.07);}
+  .c-glyph{position:absolute;top:7px;right:9px;font-family:'Cormorant Garamond',serif;
+    font-size:14px;line-height:1;opacity:0;pointer-events:none;transition:opacity .16s;}
+  .card.related .c-glyph{opacity:0.9;color:var(--affirm);}
+  .card.related.rej .c-glyph{color:var(--oppose);}
+  .card.related.ech .c-glyph{color:var(--echo);}
 
   /* ===== MODE 3 : DIALECTIC FLOW ===== */
   #m-flow{overflow:auto;padding:6px 0 40px;}
@@ -133,6 +141,12 @@
     stroke-linecap:round;stroke-linejoin:round;opacity:0.8;
     filter:drop-shadow(0 0 5px color-mix(in srgb,var(--reg) 40%, transparent));}
   .dr-head h2{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:28px;line-height:1.05;margin:0;}
+  .dr-seal{position:absolute;right:20px;bottom:14px;width:34px;height:34px;opacity:0;transition:opacity .25s;}
+  .dr-seal.on{opacity:0.8;}
+  .dr-seal svg{width:100%;height:100%;display:block;}
+  .dr-seal path,.dr-seal circle{fill:none;stroke:var(--gold);stroke-width:0.6;
+    filter:drop-shadow(0 0 3px rgba(217,182,95,0.28));}
+  .dr-seal .seal-pin{fill:var(--gold);stroke:none;}
   .dr-meta{font-size:11px;color:var(--muted);margin-top:7px;}
   .dr-body{padding:18px 24px 50px;overflow-y:auto;}
   .dr-gloss{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:18px;line-height:1.45;
@@ -177,9 +191,13 @@
   #m-constellation{inset:0;background:radial-gradient(circle at 50% 44%, #0e1530 0%, #070b16 72%);}
   #con-svg{width:100%;height:100%;display:block;}
   .cstar{fill:#cdd6f0;}
-  .cring{fill:none;stroke:var(--rule);stroke-width:0.6;}
-  .cring.major{stroke:rgba(217,182,95,0.15);}
-  .cspoke{stroke:var(--rule);stroke-width:0.5;stroke-dasharray:2 6;opacity:0.45;}
+  .cring{fill:none;stroke:var(--silver);stroke-width:0.5;opacity:0.12;}
+  .cring.major{stroke:rgba(217,182,95,0.16);opacity:1;}
+  .cspoke{stroke:var(--silver);stroke-width:0.5;stroke-dasharray:2 7;opacity:0.16;}
+  .climb{fill:none;stroke:var(--silver);stroke-width:0.6;opacity:0.20;}
+  .ctick{stroke:var(--silver);stroke-width:0.6;opacity:0.28;}
+  .ctick.maj{stroke-width:0.9;opacity:0.42;}
+  .cecliptic{fill:none;stroke:rgba(217,182,95,0.22);stroke-width:0.8;stroke-dasharray:1 7;}
   .cregion{fill:rgba(217,182,95,0.32);font-family:'Cormorant Garamond',serif;font-style:italic;
     font-size:22px;letter-spacing:0.4em;text-anchor:middle;text-transform:uppercase;
     paint-order:stroke;stroke:var(--void);stroke-width:5px;}
@@ -731,6 +749,7 @@
         <h2 id="dr-name"></h2>
         <div class="dr-meta" id="dr-meta"></div>
         <div class="dr-status" id="dr-status"></div>
+        <span class="dr-seal" id="dr-seal" aria-hidden="true"></span>
       </div>
       <div class="dr-body">
         <p class="dr-gloss" id="dr-gloss"></p>
@@ -843,6 +862,7 @@
     const c=cById[id]; if(!c) return;
     const q=qById[c.q];
     document.getElementById('dr-figure').innerHTML='';
+    drSeal(false);
     document.getElementById('dr-q').innerHTML=`<span class="dot" style="background:${q.hue}"></span>${esc0(qLabel(q))}`;
     document.getElementById('dr-name').textContent=cName(c);
     document.getElementById('dr-meta').textContent=`${cTrad(c)} · ${eraTxt(c.era)}`;
@@ -914,7 +934,8 @@
     D.concepts.filter(c=>c.q===q.id).sort((a,b)=>a.era-b.era).forEach(c=>{
       const el=document.createElement('div'); el.className='card';
       el.style.borderLeftColor=c.color;
-      el.innerHTML=`<div class="c-id">${esc0(cName(c))}</div>`+
+      el.innerHTML=`<div class="c-glyph" aria-hidden="true"></div>`+
+        `<div class="c-id">${esc0(cName(c))}</div>`+
         `<div class="c-trad">${esc0(cTrad(c))} · ${eraTxt(c.era)}</div>`+
         `<div class="c-gloss">${esc0(cGloss(c))}</div>`;
       el.onclick=(e)=>{ e.stopPropagation(); openConcept(c.id); };
@@ -933,10 +954,12 @@
       const rel={}; (adj.get(id)||[]).forEach(e=>rel[e.other]=e.type);
       Object.entries(cardEls).forEach(([cid,el])=>{
         el.className='card';
+        const gly=el.querySelector('.c-glyph');
         if(cid===id) el.classList.add('sel');
         else if(rel[cid]){ el.classList.add('related');
-          if(rel[cid]==='rejects') el.classList.add('rej');
-          if(rel[cid]==='echoes') el.classList.add('ech'); }
+          if(rel[cid]==='rejects'){ el.classList.add('rej'); if(gly) gly.textContent='↯'; }
+          else if(rel[cid]==='echoes'){ el.classList.add('ech'); if(gly) gly.textContent='≈'; }
+          else if(gly){ gly.textContent='＋'; } }
         else el.classList.add('dim');
       });
     }
@@ -1910,8 +1933,26 @@
     fig.style.setProperty('--reg',regColor);
     fig.innerHTML=inner;
   }
+  function sealMarkup(){
+    const cx=20,cy=20;
+    const rosette=(R,amp,petals,phase)=>{let d='';const steps=petals*18;
+      for(let i=0;i<=steps;i++){const t=i/steps*Math.PI*2,rr=R+amp*Math.cos(petals*t+phase);
+        d+=(i?'L':'M')+(cx+Math.cos(t)*rr).toFixed(2)+' '+(cy+Math.sin(t)*rr).toFixed(2);}
+      return d+'Z';};
+    return `<svg viewBox="0 0 40 40" aria-hidden="true">`+
+      `<circle cx="20" cy="20" r="18.6"/>`+
+      `<path d="${rosette(14,2.4,12,0)}"/>`+
+      `<path d="${rosette(14,2.4,12,Math.PI/12)}"/>`+
+      `<circle cx="20" cy="20" r="6.2"/>`+
+      `<circle class="seal-pin" cx="20" cy="20" r="1.9"/></svg>`;
+  }
+  function drSeal(canonical){
+    const s=document.getElementById('dr-seal');
+    s.innerHTML=canonical?sealMarkup():''; s.classList.toggle('on',!!canonical);
+  }
   function openPerson(id){
     const n=aById[id]; if(!n)return; const g=aGroup[n.group];
+    drSeal(n.big);
     const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
     const regName={West:'Occident',Psyche:'Psyche',East:'Orient'}[g.region]||g.region;
     drFigure(n,g);
@@ -1995,6 +2036,15 @@
       .attr('cx',cx).attr('cy',cy).attr('r',R*f));
     aOrder.forEach(c=>{const a=aAngle[c];ringG.append('line').attr('class','cspoke')
       .attr('x1',cx).attr('y1',cy).attr('x2',cx+Math.cos(a)*R*1.28).attr('y2',cy+Math.sin(a)*R*1.28);});
+    // astrolabe limb: graduated outer ring with degree ticks
+    const limbR=R*1.40;
+    ringG.append('circle').attr('class','climb').attr('cx',cx).attr('cy',cy).attr('r',limbR);
+    for(let dg=0;dg<360;dg+=6){const a=dg*Math.PI/180,maj=(dg%30===0),t=maj?10:5;
+      ringG.append('line').attr('class','ctick'+(maj?' maj':''))
+        .attr('x1',cx+Math.cos(a)*limbR).attr('y1',cy+Math.sin(a)*limbR)
+        .attr('x2',cx+Math.cos(a)*(limbR-t)).attr('y2',cy+Math.sin(a)*(limbR-t));}
+    // ecliptic: the off-centre zodiac band of an astrolabe rete
+    ringG.append('circle').attr('class','cecliptic').attr('cx',cx).attr('cy',cy-R*0.30).attr('r',R*0.95);
     [['West','Occident'],['Psyche','Psyche'],['East','Orient']].forEach(([key,label])=>{
       const codes=aOrder.filter(c=>aGroup[c].region===key); if(!codes.length)return;
       const mid=codes.map(c=>aAngle[c]).reduce((a,b)=>a+b,0)/codes.length;
