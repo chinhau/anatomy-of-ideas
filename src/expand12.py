@@ -72,6 +72,12 @@ NEW_R12 = [
  ("Liberation Theology","Agape","builds"),
  ("Liberation Theology","Satyagraha","echoes"),
  ("Liberation Theology","Denial of the Will","rejects"),
+ # --- audit repairs: missing links + tethering prior singletons ---
+ ("Ātman = Brahman","Brahman","builds"),
+ ("Nirvana","Samsara & Moksha","echoes"),
+ ("Non-Attachment","The Disinterested Deed","echoes"),
+ ("Hylomorphism","Atomism","rejects"),
+ ("Legalism","Leviathan","echoes"),
 ]
 concepts.R.extend(NEW_R12)
 

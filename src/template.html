@@ -327,6 +327,43 @@
   #thr-nav{display:flex;align-items:center;gap:16px;margin-top:24px;}
   #thr-count{font-size:12px;color:var(--muted);}
 
+  /* ===== MODE VII : JOURNEYS ===== */
+  #jrn-wrap{display:flex;height:100%;}
+  #jrn-list{flex:none;width:250px;border-right:1px solid var(--rule);overflow-y:auto;padding:14px 0;}
+  .jrn-item{padding:10px 18px;cursor:pointer;border-left:2px solid transparent;transition:all .15s;}
+  .jrn-item:hover{background:rgba(217,182,95,.06);}
+  .jrn-item.on{background:rgba(217,182,95,.12);border-left-color:var(--gold);}
+  .jrn-item .tt{font-family:'Cormorant Garamond',serif;font-size:16px;color:var(--parchment);line-height:1.2;}
+  .jrn-item .nt{font-size:11px;color:var(--muted);margin-top:3px;line-height:1.35;}
+  #jrn-stage{flex:1;overflow-y:auto;padding:30px 40px 48px;min-width:0;}
+  .jrn-h{font-family:'Cormorant Garamond',serif;font-size:27px;color:var(--gold);}
+  .jrn-blurb{font-size:14px;font-style:italic;color:var(--parchment-dim);margin-top:4px;}
+  .jrn-step{max-width:600px;}
+  .jrn-claim{display:flex;align-items:baseline;gap:9px;margin:14px 0 14px 6px;padding-left:14px;
+    border-left:2px solid var(--panel-edge);font-size:12px;line-height:1.5;color:var(--parchment-dim);}
+  .jrn-claim.builds{border-left-color:rgba(233,220,192,.5);}
+  .jrn-claim.rejects{border-left-color:var(--oppose);}
+  .jrn-claim.echoes{border-left-color:var(--echo);}
+  .jrn-claim.none{border-left-style:dashed;}
+  .jrn-claim .tag{flex:none;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+    padding-top:1px;}
+  .jrn-gate{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-top:24px;}
+  .jrn-num{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);font-weight:500;margin-top:22px;}
+  .jrn-name{font-family:'Cormorant Garamond',serif;font-size:23px;color:var(--parchment);margin:5px 0 2px;
+    cursor:pointer;display:inline-block;}
+  .jrn-name:hover{color:var(--gold);}
+  .jrn-meta{font-size:12px;color:var(--muted);margin-bottom:9px;}
+  .jrn-gloss{font-size:15px;line-height:1.6;color:var(--parchment);}
+  .jrn-why{font-size:13px;line-height:1.55;color:var(--parchment-dim);margin-top:9px;}
+  .jrn-syn{margin-top:34px;padding-top:22px;border-top:1px solid var(--rule);max-width:600px;}
+  .jrn-syn .jrn-gate{margin-top:0;}
+  .jrn-syn p{font-size:15px;line-height:1.6;color:var(--parchment);font-style:italic;margin:8px 0 12px;}
+  .jrn-syn textarea{width:100%;min-height:96px;resize:vertical;background:var(--void);color:var(--parchment);
+    border:1px solid var(--panel-edge);border-radius:5px;padding:11px 13px;font-family:inherit;font-size:14px;
+    line-height:1.55;box-sizing:border-box;}
+  .jrn-syn textarea:focus{outline:none;border-color:var(--gold);}
+  .jrn-saved{font-size:11px;color:var(--muted);margin-top:6px;height:14px;}
+
   /* ---------- drawer: foil + reading status ---------- */
   .dr-status{display:flex;gap:6px;margin-top:12px;}
   .dr-status button{flex:1;font-size:10px;letter-spacing:.06em;text-transform:uppercase;
@@ -509,6 +546,7 @@
       <button data-mode="threads" role="tab" aria-selected="false"><span class="n">IV</span><span data-i18n="Threads">Threads</span></button>
       <button data-mode="constellation" role="tab" aria-selected="false"><span class="n">V</span><span data-i18n="Constellation">Constellation</span></button>
       <button data-mode="lens" role="tab" aria-selected="false"><span class="n">VI</span><span data-i18n="Lens">Lens</span></button>
+      <button data-mode="journeys" role="tab" aria-selected="false"><span class="n">VII</span><span data-i18n="Journeys">Journeys</span></button>
     </div>
     <div id="lang-switch" role="group" aria-label="Language">
       <button data-lang="en" class="active" aria-pressed="true">EN</button>
@@ -539,11 +577,13 @@
         some of them differently. The “argues against” foil on each entry is a useful provocation,
         not a claim that the two thinkers saw themselves as opponents.</p>
       <h3>These debates are live, not settled</h3>
-      <p>Several ideas here are presented among genuine rivals, and a few are <b>minority or
-        contested positions</b> in their own fields — flagged with a “Contested” tag when you open them. The nature
-        of consciousness (integrated-information, global-workspace, illusionist and idealist
-        theories), idealism versus materialism, and the freedom of the will are open questions.
-        Where this map states one, it is taking a side, not reporting a consensus.</p>
+      <p>Several ideas here are presented among genuine rivals. The <b>“Contested” tag</b> you'll
+        see on some entries is scoped narrowly: it flags claims that arrive in the dress of
+        established empirical science but lack consensus — the theories of consciousness
+        (integrated-information, global-workspace, illusionist and idealist accounts) above all.
+        Religious and metaphysical claims aren't tagged this way; their tradition badge already
+        says whose claim it is. Idealism versus materialism and the freedom of the will are open
+        questions too. Where this map states one, it is taking a side, not reporting a consensus.</p>
       <h3>Philosophy in stories</h3>
       <p>Some ideas were thought first in stories. Tragedy understood fate before the Stoics
         formalised it; the novel mapped the modern self before psychology did. Entries badged
@@ -564,8 +604,9 @@
           (Agape, Covenant, Imago Dei, Tawhid…) and other ancient civilizations (Zoroastrian
           Persia, Nahua Mesoamerica, Gilgamesh, Egyptian <i>ma'at</i>) now enter too. The
           <b>Hermetic &amp; Esoteric</b> current (As Above So Below, Gnosis, alchemy, the Perennial
-          Philosophy) is included as historically influential and <b>tagged Contested</b> — mapped,
-          not endorsed. <b>Genuinely oral and shamanic cosmologies remain largely absent</b>, since
+          Philosophy) is included as historically influential — mapped, not endorsed; like every
+          religious and metaphysical claim here, it is disclosed by its tradition badge rather than
+          singled out for a warning. <b>Genuinely oral and shamanic cosmologies remain largely absent</b>, since
           the sources we could cite honestly are still thin.</li>
         <li>It remains weighted toward Western and South-Asian sources.</li>
       </ul>
@@ -671,6 +712,12 @@
       <div id="lens-cap"></div>
       <div id="lens-hint" class="con-hint" data-i18n="One idea at its centre, its kin around it. Click any neighbour to travel to it; roll the dice to wander; or take a guided tour through the lineage.">One idea at its centre, its kin around it. Click any neighbour to travel to it; roll the dice to wander; or take a guided tour through the lineage.</div>
     </section>
+    <section id="m-journeys" class="view">
+      <div id="jrn-wrap">
+        <nav id="jrn-list" aria-label="Reading journeys"></nav>
+        <div id="jrn-stage"></div>
+      </div>
+    </section>
 
     <div id="empty-state" hidden>
       <div class="es-h" data-i18n="No ideas match these filters.">No ideas match these filters.</div>
@@ -748,7 +795,8 @@
     web:'<b>Map III</b> The ideas as a single web. Each star is a concept, colour-coded by the question it answers; the threads are the relationships between thoughts.',
     threads:'<b>Map IV</b> Long arguments, walked one move at a time — thesis provokes antithesis provokes synthesis. Pick a thread on the left and step through it.',
     constellation:'<b>Map V</b> The original constellation — every thinker and school as a star, clustered into the traditions of West, Psyche and East. Click a star to cross into the ideas they shaped.',
-    lens:'<b>Map VI</b> One idea at the centre, the thoughts it touches arranged around it. Travel from neighbour to neighbour, roll the dice to wander, or let a guided tour walk you through a lineage.'
+    lens:'<b>Map VI</b> One idea at the centre, the thoughts it touches arranged around it. Travel from neighbour to neighbour, roll the dice to wander, or let a guided tour walk you through a lineage.',
+    journeys:'<b>Map VII</b> A few curated paths across the whole atlas — a gateway, a handful of steps, and a synthesis you finish yourself. The links between steps are claims to verify, not verdicts.'
   };
 
   // ---------- shared drawer ----------
@@ -1563,6 +1611,63 @@
     setHash('/threads/'+thrI+'.'+thrStep);
   }
 
+  // ========== JOURNEYS (Map VII) ==========
+  // Curated cross-cutting paths: a gateway, steps, and a synthesis the reader
+  // finishes. The connector between two steps reports the atlas's typed link as a
+  // *claim to verify*, never a verdict — and says so plainly when no link exists.
+  const JKEY='aoi.journeys.v1';
+  let jSyn={}; try{ const r=JSON.parse(localStorage.getItem(JKEY)); jSyn=(r&&typeof r==='object'&&!Array.isArray(r))?r:{}; }catch(e){ jSyn={}; }
+  const CLAIM={
+    builds:['Builds on','Claim to verify: the atlas links these as “builds on.” Read both — does the lineage run the way you would expect?'],
+    rejects:['Rejects','Claim to verify: the atlas marks these as opposed. Read both — is the quarrel real, or do they talk past each other?'],
+    echoes:['Echoes','Claim to verify: the atlas hears an echo across traditions. Read both — true resonance, or coincidence?']
+  };
+  function journeyClaim(prevId,curId){
+    const e=(adj.get(prevId)||[]).find(x=>x.other===curId);
+    if(!e) return {cls:'none',tag:T('No link'),txt:T('The atlas draws no line between these — decide for yourself whether one belongs.')};
+    const c=CLAIM[e.type]; return {cls:e.type,tag:T(c[0]),txt:T(c[1])};
+  }
+  let jrnBuilt=false, jrnI=0;
+  function buildJourneys(){
+    if(jrnBuilt) return; jrnBuilt=true;
+    const list=document.getElementById('jrn-list');
+    list.innerHTML=(D.journeys||[]).map((j,i)=>'<div class="jrn-item'+(i===0?' on':'')+'" data-i="'+i+'" tabindex="0" role="button"><div class="tt">'+esc0(j.title)+'</div><div class="nt">'+esc0(j.blurb)+'</div></div>').join('');
+    list.querySelectorAll('.jrn-item').forEach(el=>{ const go=()=>selectJourney(+el.dataset.i);
+      el.onclick=go; el.onkeydown=e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); go(); } }; });
+    renderJourney();
+  }
+  function selectJourney(i){ jrnI=Math.max(0,Math.min((D.journeys||[]).length-1,i)); renderJourney(); }
+  function jStep(label,gate,id,why){ const c=cById[id];
+    return '<div class="jrn-step">'+
+      '<div class="'+(gate?'jrn-gate':'jrn-num')+'">'+esc0(label)+'</div>'+
+      '<div class="jrn-name" data-id="'+esc0(id)+'" tabindex="0" role="button">'+esc0(c?cName(c):id)+'</div>'+
+      '<div class="jrn-meta">'+(c?esc0(cTrad(c))+' · '+eraTxt(c.era):'')+'</div>'+
+      '<div class="jrn-gloss">'+(c?esc0(cGloss(c)):'')+'</div>'+
+      (why?'<div class="jrn-why">'+esc0(why)+'</div>':'')+'</div>'; }
+  function renderJourney(){
+    const J=D.journeys||[]; if(!J.length) return; const j=J[jrnI];
+    document.querySelectorAll('.jrn-item').forEach(el=>el.classList.toggle('on',+el.dataset.i===jrnI));
+    const seq=[j.gateway.id, ...j.steps.map(s=>s.id)];
+    let html='<div class="jrn-h">'+esc0(j.title)+'</div><div class="jrn-blurb">'+esc0(j.blurb)+'</div>';
+    html+=jStep(T('Start here'),true,j.gateway.id,j.gateway.framing);
+    j.steps.forEach((s,k)=>{ const cl=journeyClaim(seq[k],seq[k+1]);
+      html+='<div class="jrn-claim '+cl.cls+'"><span class="tag">'+esc0(cl.tag)+'</span><span>'+esc0(cl.txt)+'</span></div>';
+      html+=jStep(T('Step')+' '+(k+1),false,s.id,s.why); });
+    const saved=jSyn[j.title]||'';
+    html+='<div class="jrn-syn"><div class="jrn-gate">'+esc0(T('Synthesis — your turn'))+'</div>'+
+      '<p>'+esc0(j.synthesis)+'</p>'+
+      '<textarea id="jrn-syn-ta" aria-label="'+esc0(T('Your synthesis'))+'" placeholder="'+esc0(T('Write your own answer…'))+'">'+esc0(saved)+'</textarea>'+
+      '<div class="jrn-saved" id="jrn-saved">'+(saved?esc0(T('Saved')):'')+'</div></div>';
+    const stage=document.getElementById('jrn-stage'); stage.innerHTML=html; stage.scrollTop=0;
+    stage.querySelectorAll('.jrn-name').forEach(el=>{ const go=()=>openConcept(el.dataset.id);
+      el.onclick=go; el.onkeydown=e=>{ if(e.key==='Enter'){ go(); } }; });
+    const ta=document.getElementById('jrn-syn-ta');
+    if(ta) ta.oninput=()=>{ const v=ta.value; if(v.trim()) jSyn[j.title]=v; else delete jSyn[j.title];
+      try{ localStorage.setItem(JKEY,JSON.stringify(jSyn)); }catch(e){}
+      const sv=document.getElementById('jrn-saved'); if(sv) sv.textContent=v.trim()?T('Saved'):''; };
+    setHash('/journeys/'+jrnI);
+  }
+
   // ========== deep-link routing ==========
   let currentMode='questions', suppressHash=false;
   function setHash(s){ if(suppressHash) return; const h='#'+s;
@@ -1580,11 +1685,12 @@
       else if(mode==='threads' && p[1]){ const seg=p[1].split('.'); buildThreads();
         thrI=Math.max(0,Math.min(D.arguments.length-1,+seg[0]||0));
         thrStep=Math.max(0,Math.min(D.arguments[thrI].steps.length-1,+seg[1]||0)); renderThread(); }
+      else if(mode==='journeys' && p[1]){ buildJourneys(); selectJourney(+p[1]||0); }
     }catch(e){} suppressHash=false; return true;
   }
 
   // ========== mode switching ==========
-  const views={questions:'m-questions',timeline:'m-timeline',web:'m-web',threads:'m-threads',constellation:'m-constellation',lens:'m-lens'};
+  const views={questions:'m-questions',timeline:'m-timeline',web:'m-web',threads:'m-threads',constellation:'m-constellation',lens:'m-lens',journeys:'m-journeys'};
   function setMode(mode){
     if(!views[mode]) mode='questions';
     currentMode=mode;
@@ -1597,9 +1703,10 @@
     if(mode==='threads') buildThreads();
     if(mode==='constellation') buildConstellation();
     if(mode==='lens') buildLens();
+    if(mode==='journeys') buildJourneys();
     applyFilters();
     if(selected) crossHighlight(selected);
-    if(!selected && mode!=='threads') setHash('/'+mode);
+    if(!selected && mode!=='threads' && mode!=='journeys') setHash('/'+mode);
   }
   document.querySelectorAll('.switch button').forEach(b=>b.onclick=()=>setMode(b.dataset.mode));
 

@@ -306,6 +306,10 @@ ARG = [
 ]
 
 # ===================== build & validate =====================
+# "Contested" is scoped to claims presented in the register of established empirical
+# science that nonetheless lack consensus. It is deliberately NOT applied to doctrinal
+# or metaphysical truth-claims (religious or esoteric) — those are disclosed by their
+# tradition badge instead, so the tag fires the same way across every tradition.
 CONTESTED = {"Integrated Information","The Ego Tunnel","Analytic Idealism","The Case Against Reality","The Readiness Potential","Global Workspace"}
 
 def main():

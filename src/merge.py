@@ -55,6 +55,19 @@ ideas['recurring'] = sorted(
     key=lambda r: (-r['count'], r['author']),
 )
 
+# Cross-cutting reading journeys (Map VII). Curated, but every concept id they
+# reference is validated here so a renamed/removed idea fails the build loudly
+# rather than rotting into a dead link.
+from journeys import JOURNEYS as _JOURNEYS
+_jref = []
+for j in _JOURNEYS:
+    _jref.append(j['gateway']['id'])
+    _jref.extend(s['id'] for s in j['steps'])
+_jmiss = sorted(set(_jref) - ids)
+if _jmiss:
+    raise SystemExit("JOURNEY references unknown concept: " + ", ".join(_jmiss))
+ideas['journeys'] = _JOURNEYS
+
 json.dump(ideas, open('ideas.json','w',encoding='utf-8'), ensure_ascii=False)
 
 tn = sum(len(c['thinkers']) for c in ideas['concepts'])

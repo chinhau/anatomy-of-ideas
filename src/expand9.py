@@ -38,13 +38,11 @@ NEW_C9 = [
 ]
 concepts.C.extend(NEW_C9)
 
-# the esoteric truth-claims are minority / disputed positions — flag them
-concepts.CONTESTED.update({
-    "As Above, So Below",
-    "Gnosis (The Divine Spark)",
-    "The Magnum Opus",
-    "The Perennial Philosophy",
-})
+# Note: these esoteric concepts are NOT flagged "Contested". The badge is scoped
+# to claims that present in the register of established empirical science but lack
+# consensus (the consciousness/reality theories). Doctrinal and metaphysical
+# claims — esoteric AND religious alike — are disclosed by their tradition badge,
+# not by this tag, so the tag fires consistently across traditions.
 
 # ---- links: (a, b, type)  builds / rejects / echoes ----
 NEW_R9 = [

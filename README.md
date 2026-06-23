@@ -160,7 +160,9 @@ Originally built as a private research scaffold, then taken through a launch-rea
       corrections welcome via GitHub Issues.
 - [x] **"How to read this" panel.** States the viewpoint (leans toward detachment), that the
       links are interpretive, and that several debates (consciousness theories, idealism vs
-      materialism, free will) are *live*. Contested positions carry a "Contested" tag.
+      materialism, free will) are *live*. A "Contested" tag flags claims dressed as established
+      science but lacking consensus (the consciousness theories); doctrinal/metaphysical claims are
+      disclosed by their tradition badge, so the tag fires evenly across traditions.
 - [x] **Self-hosted assets.** D3 and both fonts are inlined into `index.html` — no Google
       Fonts (GDPR), no CDN single-point-of-failure. Zero runtime network calls.
 - [x] **Deploy hygiene.** Title/description/OG tags + favicon in `<head>`; an empty-state
@@ -188,8 +190,9 @@ Originally built as a private research scaffold, then taken through a launch-rea
       largest remaining **civilizational gaps**: Zoroastrian Persia, Nahua (Aztec) Mesoamerica,
       the *Epic of Gilgamesh*, Egyptian *ma'at*, and Heschel. Round nine adds a **Hermetic &
       Esoteric** tier (As Above So Below, Gnosis, the alchemical Magnum Opus, the Perennial
-      Philosophy) plus Norse *Ragnarök* — the four esoteric truth-claims carry the **Contested**
-      tag, presented as historically influential, not endorsed. Round eleven closes the
+      Philosophy) plus Norse *Ragnarök* — presented as historically influential, not endorsed,
+      and (like every religious/metaphysical claim) disclosed by their tradition badge rather than
+      the **Contested** tag, which is reserved for unsettled-science claims (see below). Round eleven closes the
       **practice-text gap** — contemplative traditions whose unit is a *method*, not a thesis:
       hesychast prayer of the heart (Gregory Palamas), the Ignatian *Spiritual Exercises*,
       Dzogchen (Longchenpa), the Buddha's four foundations of mindfulness, and Sufi *dhikr* (Ibn

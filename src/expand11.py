@@ -28,7 +28,7 @@ NEW_C11 = [
  ("Hesychasm (The Jesus Prayer)","trans","chr",1338,"Still the mind, draw it down into the heart, and pray the Name without ceasing until the uncreated light dawns within.",["Gregory Palamas"]),
  ("The Spiritual Exercises","self","chr",1548,"A graded month of imaginative meditation and daily self-examination, training the soul to discern the spirits and choose freely for the good.",["Ignatius of Loyola"]),
  ("Dzogchen (The Great Perfection)","mind","bud",1350,"Awareness is already pure and perfect; nothing need be added or removed — simply recognize the naked, self-knowing ground and rest there.",["Longchenpa"]),
- ("The Four Foundations of Mindfulness","know","bud",-250,"Watch the body, feelings, mind, and phenomena arise and pass; in bare, sustained attention, see directly how all things are impermanent and not-self.",["The Buddha"]),
+ ("The Four Foundations of Mindfulness","peace","bud",-250,"Watch the body, feelings, mind, and phenomena arise and pass; in bare, sustained attention, see directly how all things are impermanent and not-self.",["The Buddha"]),
  ("Dhikr (Remembrance)","trans","isl",1300,"Repeat the divine Name with breath and heart until rememberer, remembered, and remembrance become one and the heart is polished to a mirror.",["Ibn ʿAṭāʾ Allāh al-Iskandarī"]),
 ]
 concepts.C.extend(NEW_C11)

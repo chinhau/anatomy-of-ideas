@@ -24,7 +24,7 @@ global.SVGElement=window.SVGElement; global.Element=window.Element; global.HTMLE
 global.localStorage=window.localStorage; global.location=window.location; global.history=window.history;
 window.d3=d3; window.matchMedia=()=>({matches:false,addEventListener(){}}); global.matchMedia=window.matchMedia;
 window.requestAnimationFrame=cb=>setTimeout(()=>cb(Date.now()),0);
-for(const id of ['m-questions','m-timeline','m-web','m-threads','m-constellation','m-lens']){const el=window.document.getElementById(id);
+for(const id of ['m-questions','m-timeline','m-web','m-threads','m-constellation','m-lens','m-journeys']){const el=window.document.getElementById(id);
   Object.defineProperty(el,'clientWidth',{value:1180,configurable:true});Object.defineProperty(el,'clientHeight',{value:640,configurable:true});}
 window.Element.prototype.scrollIntoView=function(){};
 
@@ -54,8 +54,8 @@ eq($('.switch button.active')?.getAttribute('aria-selected'),'true','active tab 
 eq(window.getComputedStyle($('#empty-state')).display,'none','empty-state is display:none on load (not just [hidden])');
 
 // build every mode without throwing
-for(const mo of ['timeline','web','threads','constellation','lens','questions']) click($('.switch button[data-mode="'+mo+'"]'));
-console.log('6 modes built ok');
+for(const mo of ['timeline','web','threads','constellation','lens','journeys','questions']) click($('.switch button[data-mode="'+mo+'"]'));
+console.log('7 modes built ok');
 
 // LENS (Map VI): "Eleven Doors In" board → focus+context ego-graph
 click($('.switch button[data-mode="lens"]'));
@@ -121,6 +121,24 @@ const stepName=$('#thr-open')||$('.thr-name');
 assert(stepName && stepName.textContent.trim().length>0, 'thread step shows a non-empty name');
 click($$('.thr-item')[3]);
 assert(($('#thr-title')?.textContent||'').length>0, 'clicking a thread sets its title');
+
+// JOURNEYS (Map VII): curated paths whose every step id must resolve; selecting
+// one renders gateway + steps + claim connectors; the synthesis textarea persists.
+assert(Array.isArray(D.journeys)&&D.journeys.length>=4, 'at least four curated journeys are baked into the data');
+const jIds=new Set(D.concepts.map(c=>c.id));
+assert(D.journeys.every(j=>jIds.has(j.gateway.id)&&j.steps.every(s=>jIds.has(s.id))), 'every journey gateway + step references a real concept');
+click($('.switch button[data-mode="journeys"]'));
+eq($$('#jrn-list .jrn-item').length, D.journeys.length, 'one journey item per curated path');
+assert($$('#jrn-stage .jrn-step').length === D.journeys[0].steps.length+1, 'journey stage renders the gateway plus each step');
+eq($$('#jrn-stage .jrn-claim').length, D.journeys[0].steps.length, 'a claim connector precedes every step after the gateway');
+const ta=$('#jrn-syn-ta'); assert(ta, 'journey shows a synthesis textarea');
+ta.value='my synthesis'; ta.dispatchEvent(new window.window.Event('input',{bubbles:true}));
+assert(/my synthesis/.test(window.localStorage.getItem('aoi.journeys.v1')||''), 'synthesis text persists to localStorage');
+click($$('#jrn-list .jrn-item')[1]);
+assert($('#jrn-stage .jrn-h')?.textContent===D.journeys[1].title, 'selecting another journey swaps the stage to its title');
+click($('#jrn-stage .jrn-name')); // open the gateway concept
+assert($('#drawer').classList.contains('open'), 'clicking a journey step opens its concept drawer');
+esc();
 
 // FILTERS
 click($('#filt-btn'));
