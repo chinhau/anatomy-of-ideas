@@ -212,9 +212,13 @@
       "zh": "十一扇門",
       "ru": "Одиннадцать дверей"
     },
-    "One way into each of the eleven questions. Pick a door to drop into the web of ideas around it.": {
-      "zh": "為十一個問題各設一道入口。選一扇門，進入環繞它的思想之網。",
-      "ru": "По одной двери в каждый из одиннадцати вопросов. Выберите дверь, чтобы войти в сеть идей вокруг неё."
+    "One way into each of the eleven questions, fanned like a hand of cards. Lift any card to read it, riffle to re-deal, then step through a door into the field of ideas around it.": {
+      "zh": "為十一個問題各設一道入口，如紙牌般展開成扇形。掀起任一張牌即可閱讀，洗牌可重新發牌，然後穿過一扇門，進入環繞它的思想之網。",
+      "ru": "По одной двери в каждый из одиннадцати вопросов, развёрнутых веером, как карты в руке. Поднимите любую карту, чтобы прочесть её, перетасуйте колоду, чтобы раздать заново, затем войдите в дверь — в сеть идей вокруг неё."
+    },
+    "Riffle the deck": {
+      "zh": "洗牌",
+      "ru": "Перетасовать"
     },
     "‹ Doors": {
       "zh": "‹ 諸門",
