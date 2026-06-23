@@ -108,7 +108,7 @@ esc(); click($('.switch button[data-mode="questions"]'));
 // TIMELINE
 click($('.switch button[data-mode="timeline"]'));
 eq($$('#tl-svg .tl-node').length, D.concepts.length, 'timeline renders one node per concept');
-eq($$('#tl-svg .tl-lane').length, 3, 'timeline has 3 lanes');
+eq($$('#tl-svg .tl-lane').length, 4, 'timeline has 4 lanes');
 assert($$('#tl-svg .tl-tick').length>0, 'timeline has era ticks');
 
 // THREADS
@@ -165,6 +165,19 @@ if(contestedId){ openByName(contestedId); assert(!$('#dr-contested').hasAttribut
   eq(window.getComputedStyle($('#dr-contested')).display,'flex','contested badge is display:flex (visible)'); }
 if(plainId){ openByName(plainId); assert($('#dr-contested').hasAttribute('hidden'), 'non-contested concept hides the badge');
   eq(window.getComputedStyle($('#dr-contested')).display,'none','non-contested badge is display:none (truly hidden)'); }
+
+// READINGS: honest Primary-led order (merge.py bakes KIND_ORDER). No Primary
+// may trail a companion text in any concept's list; the drawer leads each list
+// with "primary sources first" and only companion texts carry a quiet badge —
+// the retired "ranked by influence" claim must be gone from the whole artifact.
+const allPrimaryLed=D.concepts.every(c=>{ let sawNon=false;
+  return (c.readings||[]).every(r=>{ if(r.kind!=='Primary'){sawNon=true; return true;} return !sawNon; }); });
+assert(allPrimaryLed, 'every concept lists its Primary readings first (baked Primary-led order)');
+assert(!/ranked by influence/i.test(html), 'retired the false "ranked by influence" label everywhere');
+const mixed=D.concepts.find(c=>(c.readings||[]).some(r=>r.kind==='Primary')&&(c.readings||[]).some(r=>r.kind!=='Primary'));
+if(mixed){ openByName(mixed.id);
+  eq($$('#dr-readings .reading .badge').length, (mixed.readings||[]).filter(r=>r.kind!=='Primary').length, 'only companion (non-Primary) readings carry a badge');
+  assert(!$$('#dr-readings .reading')[0].querySelector('.badge'), 'the leading (Primary) reading is unmarked'); }
 
 // FOIL (argues against)
 openByName('Modern Virtue Ethics');

@@ -4,7 +4,15 @@ from readings import DATA as _RD
 from readings_extra import EXTRA as _EX
 from readings_extra2 import EXTRA2 as _EX2
 from readings_extra3 import EXTRA3 as _EX3
-RD = {**_RD, **_EX, **_EX2, **_EX3}
+from readings_extra4 import EXTRA4 as _EX4
+from readings_extra5 import EXTRA5 as _EX5
+from readings_extra6 import EXTRA6 as _EX6
+from readings_extra7 import EXTRA7 as _EX7
+from readings_extra8 import EXTRA8 as _EX8
+from readings_extra9 import EXTRA9 as _EX9
+from readings_extra10 import EXTRA10 as _EX10
+from readings_extra11 import EXTRA11 as _EX11
+RD = {**_RD, **_EX, **_EX2, **_EX3, **_EX4, **_EX5, **_EX6, **_EX7, **_EX8, **_EX9, **_EX10, **_EX11}
 
 ideas = json.load(open('ideas.json', encoding='utf-8'))
 ids = {c['id'] for c in ideas['concepts']}
@@ -17,12 +25,19 @@ if missing:
 if extra:
     raise SystemExit("READINGS reference unknown concept: " + ", ".join(extra))
 
+# Honest reading order: lead with the primary text (Adler — read the source
+# before commentary), then the inspectional/secondary apparatus. Stable, so the
+# editor's authored sequence within each band is preserved. NOT an "influence
+# rank" — a 1–3 item list can't carry one; influence lives at the atlas level.
+KIND_ORDER = {"Primary": 0, "Translation": 1, "Intro": 2, "Study": 3, "Commentary": 4}
+
 for c in ideas['concepts']:
     thinkers, readings = RD[c['id']]
     c['thinkers'] = thinkers
+    ordered = sorted(readings, key=lambda r: KIND_ORDER.get(r[3], 9))
     c['readings'] = [
         {"author": a, "title": t, "year": y, "kind": k, "note": n}
-        for (a, t, y, k, n) in readings
+        for (a, t, y, k, n) in ordered
     ]
 
 json.dump(ideas, open('ideas.json','w',encoding='utf-8'), ensure_ascii=False)

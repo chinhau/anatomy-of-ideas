@@ -165,8 +165,6 @@
   .reading .by{font-size:11px;color:var(--parchment-dim);margin-top:3px;}
   .reading .badge{display:inline-block;font-size:8.5px;letter-spacing:0.12em;text-transform:uppercase;
     padding:1.5px 7px;border-radius:3px;margin-top:6px;border:1px solid var(--rule);color:var(--muted);}
-  .reading .badge.primary{color:var(--gold);border-color:rgba(217,182,95,0.4);
-    background:rgba(217,182,95,0.06);}
   .reading .nt{font-size:11.5px;color:var(--muted);margin-top:5px;line-height:1.45;}
   .rel-h{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;margin:14px 0 6px;
     padding-bottom:4px;border-bottom:1px solid var(--rule);}
@@ -527,14 +525,30 @@
         of consciousness (integrated-information, global-workspace, illusionist and idealist
         theories), idealism versus materialism, and the freedom of the will are open questions.
         Where this map states one, it is taking a side, not reporting a consensus.</p>
+      <h3>Philosophy in stories</h3>
+      <p>Some ideas were thought first in stories. Tragedy understood fate before the Stoics
+        formalised it; the novel mapped the modern self before psychology did. Entries badged
+        <b>“Literature &amp; Imagination”</b> mark ideas whose native form is the artwork —
+        <i>enacted</i> in a character, image or plot rather than <i>argued</i> in a treatise.
+        They earn their place by the same rule as every other idea here: a single thesis sharp
+        enough to name. The badge marks a <b>method, not a lesser rank</b>.</p>
       <h3>What it leaves out</h3>
-      <p>The coverage is uneven, and some gaps are total:</p>
+      <p>The coverage is uneven, and some gaps remain:</p>
       <ul>
-        <li><b>Women are about 7%</b> of the thinkers — a structural under-representation.</li>
-        <li><b>African, Latin-American, Indigenous, and Korean thought are essentially absent</b>
-          as ideas; Japanese thought is barely present.</li>
-        <li>It is weighted toward Western and South-Asian sources, ancient and modern more than
-          medieval.</li>
+        <li><b>Women are still under-represented</b>, though the literary canon and figures like
+          Simone de Beauvoir have begun to close the gap.</li>
+        <li><b>African and Indigenous philosophy now have a dedicated lane</b> — Ubuntu, Àṣẹ,
+          Amerindian perspectivism, the sacred land, Aboriginal law — added on a strict bar: each
+          carries a named modern author and a real dated text, with no outsider ethnography
+          standing in as authority. Korean thought joins the East lane on the same bar
+          (the Four-Seven Debate, Wŏnhyo, Jinul, Donghak); the scripture-born Abrahamic core
+          (Agape, Covenant, Imago Dei, Tawhid…) and other ancient civilizations (Zoroastrian
+          Persia, Nahua Mesoamerica, Gilgamesh, Egyptian <i>ma'at</i>) now enter too. The
+          <b>Hermetic &amp; Esoteric</b> current (As Above So Below, Gnosis, alchemy, the Perennial
+          Philosophy) is included as historically influential and <b>tagged Contested</b> — mapped,
+          not endorsed. <b>Genuinely oral and shamanic cosmologies remain largely absent</b>, since
+          the sources we could cite honestly are still thin.</li>
+        <li>It remains weighted toward Western and South-Asian sources.</li>
       </ul>
       <p>The facts — datings, attributions, titles — have been checked across the whole atlas,
         but errors will remain. If you find one, treat it as the map's, not the territory's, and
@@ -727,15 +741,17 @@
       : '';
     const rw=document.getElementById('dr-readings');
     rw.innerHTML = (c.readings&&c.readings.length)
-      ? `<div class="dr-sec">${esc0(T('Essential readings'))} <span class="sub">${esc0(T('— ranked by influence'))}</span></div>`+
+      ? `<div class="dr-sec">${esc0(T('Essential readings'))} <span class="sub">${esc0(T('— primary sources first'))}</span></div>`+
         `<div class="readings">`+
         c.readings.map((r,i)=>{
+          // Primaries lead and are the unmarked default; only the companion
+          // texts (intro/study/commentary/translation) carry a quiet tag, so
+          // the badge marks the exception rather than papering every row.
           const primary = r.kind==='Primary';
-          const label = primary?T('Primary source'):r.kind;
           return `<div class="reading"><div class="rk">${i+1}</div><div>`+
             `<div class="tt">${esc(r.title)}</div>`+
             `<div class="by">${esc(r.author)} · ${esc(r.year)}</div>`+
-            `<span class="badge${primary?' primary':''}">${esc(label)}</span>`+
+            (primary?'':`<span class="badge">${esc(T(r.kind))}</span>`)+
             `<div class="nt">${esc(r.note)}</div></div></div>`;
         }).join('')+`</div>`
       : '';
@@ -1306,13 +1322,14 @@
   // ========== filters ==========
   function regionOf(c){ const t=c.trad;
     if(t==='psy'||t==='cog'||t==='csn') return 'Psyche';
-    if(t==='ind'||t==='bud'||t==='chn'||t==='jpn') return 'East';
+    if(t==='ind'||t==='bud'||t==='chn'||t==='jpn'||t==='kor') return 'East';
+    if(t==='afr'||t==='nam'||t==='abo'||t==='nah') return 'Indigenous';
     return 'West'; }
   const ERAS=D.concepts.map(c=>c.era), ERA_MIN=Math.min(...ERAS), ERA_MAX=Math.max(...ERAS);
-  const F={questions:new Set(D.questions.map(q=>q.id)), regions:new Set(['West','Psyche','East']),
+  const F={questions:new Set(D.questions.map(q=>q.id)), regions:new Set(['West','Psyche','East','Indigenous']),
     read:new Set(['unread','reading','read']), eraLo:ERA_MIN, eraHi:ERA_MAX};
   function passes(c){ return c&&F.questions.has(c.q)&&F.regions.has(regionOf(c))&&F.read.has(statusOf(c.id))&&c.era>=F.eraLo&&c.era<=F.eraHi; }
-  function filterActive(){ return F.questions.size<D.questions.length||F.regions.size<3||F.read.size<3||F.eraLo>ERA_MIN||F.eraHi<ERA_MAX; }
+  function filterActive(){ return F.questions.size<D.questions.length||F.regions.size<4||F.read.size<3||F.eraLo>ERA_MIN||F.eraHi<ERA_MAX; }
   function applyFilters(){
     D.questions.forEach(q=>{ let vis=0;
       D.concepts.filter(c=>c.q===q.id).forEach(c=>{ const el=cardEls[c.id]; if(!el) return;
@@ -1337,7 +1354,7 @@
     rd.querySelectorAll('.flt-pill').forEach(p=>p.onclick=()=>{ const s=p.dataset.s;
       if(F.read.has(s))F.read.delete(s); else F.read.add(s); p.classList.toggle('on',F.read.has(s)); applyFilters(); });
     const rg=document.getElementById('flt-region');
-    rg.innerHTML=['West','Psyche','East'].map(s=>'<span class="flt-pill on" data-s="'+s+'">'+esc0(T(s))+'</span>').join('');
+    rg.innerHTML=['West','Psyche','East','Indigenous'].map(s=>'<span class="flt-pill on" data-s="'+s+'">'+esc0(T(s))+'</span>').join('');
     rg.querySelectorAll('.flt-pill').forEach(p=>p.onclick=()=>{ const s=p.dataset.s;
       if(F.regions.has(s))F.regions.delete(s); else F.regions.add(s); p.classList.toggle('on',F.regions.has(s)); applyFilters(); });
     const ql=document.getElementById('flt-q');
@@ -1351,7 +1368,7 @@
     function onEra(){ let a=+lo.value,b=+hi.value; if(!Number.isFinite(a))a=ERA_MIN; if(!Number.isFinite(b))b=ERA_MAX; if(a>b){const t=a;a=b;b=t;} F.eraLo=a; F.eraHi=b; eraLabel(); applyFilters(); }
     lo.oninput=onEra; hi.oninput=onEra; eraLabel();
     document.getElementById('flt-reset').onclick=()=>{ F.questions=new Set(D.questions.map(q=>q.id));
-      F.regions=new Set(['West','Psyche','East']); F.read=new Set(['unread','reading','read']);
+      F.regions=new Set(['West','Psyche','East','Indigenous']); F.read=new Set(['unread','reading','read']);
       F.eraLo=ERA_MIN; F.eraHi=ERA_MAX; lo.value=ERA_MIN; hi.value=ERA_MAX; eraLabel();
       rd.querySelectorAll('.flt-pill').forEach(p=>p.classList.add('on'));
       rg.querySelectorAll('.flt-pill').forEach(p=>p.classList.add('on'));
@@ -1394,7 +1411,7 @@
     tlsvg=d3.select('#tl-svg').attr('viewBox','0 0 '+W+' '+H).attr('width',W).attr('height',H);
     tlWorld=tlsvg.append('g');
     const padL=64,padR=40,padT=44,padB=52, plotW=W-padL-padR;
-    const lanes=['West','Psyche','East'], laneBand=(H-padT-padB)/lanes.length, laneY={};
+    const lanes=['West','Psyche','East','Indigenous'], laneBand=(H-padT-padB)/lanes.length, laneY={};
     lanes.forEach((l,i)=>laneY[l]=padT+(i+0.5)*laneBand);
     const fr=[0,0.12,0.28,0.42,0.58,0.74,1];
     const x=d3.scaleLinear().domain([-600,0,1000,1500,1800,1900,2025])

@@ -8,7 +8,7 @@ import concepts
 
 # ---- new tradition badges ----
 concepts.TRAD.update({
-    "isl":"Islamic Golden Age", "cog":"Cognitive Science",
+    "isl":"Islamic", "cog":"Cognitive Science",
     "sci":"Science", "sys":"Systems & Cybernetics", "csn":"Consciousness Studies",
 })
 

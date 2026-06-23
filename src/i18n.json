@@ -148,13 +148,25 @@
    "zh": "必讀文獻",
    "ru": "Ключевые тексты"
   },
-  "— ranked by influence": {
-   "zh": "— 依影響力排序",
-   "ru": "— по степени влияния"
+  "— primary sources first": {
+   "zh": "— 原始文獻優先",
+   "ru": "— сначала первоисточники"
   },
-  "Primary source": {
-   "zh": "原始文獻",
-   "ru": "Первоисточник"
+  "Intro": {
+   "zh": "導論",
+   "ru": "Введение"
+  },
+  "Study": {
+   "zh": "研究",
+   "ru": "Исследование"
+  },
+  "Commentary": {
+   "zh": "註疏",
+   "ru": "Комментарий"
+  },
+  "Translation": {
+   "zh": "譯本",
+   "ru": "Перевод"
   },
   "Argues against:": {
    "zh": "反對：",
@@ -195,6 +207,10 @@
   "East": {
    "zh": "東方",
    "ru": "Восток"
+  },
+  "Indigenous": {
+   "zh": "原住民",
+   "ru": "Коренные"
   },
   "Colour marks the <em>question</em> each idea answers. Hover to trace its kin; click for the full entry.": {
    "zh": "顏色標示每個觀念所回應的<em>問題</em>。游標懸停以追溯其脈絡；點擊以閱讀完整條目。",
@@ -2166,6 +2182,38 @@
   }
  },
  "tradLabels": {
+  "African Philosophy": {
+   "zh": "非洲哲學",
+   "ru": "Африканская философия"
+  },
+  "Christian": {
+   "zh": "基督宗教",
+   "ru": "Христианская"
+  },
+  "Jewish": {
+   "zh": "猶太教",
+   "ru": "Иудейская"
+  },
+  "Aboriginal Australian": {
+   "zh": "澳洲原住民",
+   "ru": "Австралийские аборигены"
+  },
+  "Ancient Egyptian": {
+   "zh": "古埃及",
+   "ru": "Древнеегипетская"
+  },
+  "Nahua (Aztec)": {
+   "zh": "納瓦（阿茲特克）",
+   "ru": "Науа (ацтеки)"
+  },
+  "Zoroastrian": {
+   "zh": "瑣羅亞斯德教",
+   "ru": "Зороастрийская"
+  },
+  "Native American": {
+   "zh": "美洲原住民",
+   "ru": "Коренные американцы"
+  },
   "19th C.": {
    "zh": "十九世紀",
    "ru": "XIX в."
@@ -2226,13 +2274,29 @@
    "zh": "印度",
    "ru": "Индийская"
   },
-  "Islamic Golden Age": {
-   "zh": "伊斯蘭黃金時代",
-   "ru": "Золотой век ислама"
+  "Islamic": {
+   "zh": "伊斯蘭",
+   "ru": "Исламская"
+  },
+  "Hermetic & Esoteric": {
+   "zh": "赫密斯與祕傳",
+   "ru": "Герметизм и эзотерика"
+  },
+  "Norse": {
+   "zh": "北歐",
+   "ru": "Древнескандинавская"
   },
   "Japanese": {
    "zh": "日本",
    "ru": "Японская"
+  },
+  "Korean": {
+   "zh": "韓國",
+   "ru": "Корейская"
+  },
+  "Literature & Imagination": {
+   "zh": "文學與想像",
+   "ru": "Литература и воображение"
   },
   "Medieval": {
    "zh": "中世紀",
