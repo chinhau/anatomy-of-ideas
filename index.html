@@ -214,7 +214,7 @@
   .brand-mark svg{filter:drop-shadow(0 0.5px 0 rgba(0,0,0,0.55));}
   .brand-mark .seal-pin{fill:var(--gold);stroke:none;opacity:1;}
   .brand .eyebrow{font-size:10px;letter-spacing:0.42em;text-transform:uppercase;
-    color:var(--gold);opacity:0.82;}
+    color:var(--gold);opacity:0.82;white-space:nowrap;}
   .brand h1{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:25px;
     margin:1px 0 0;letter-spacing:0.01em;line-height:1;}
   .switch{display:flex;gap:0;margin-left:6px;border:1px solid var(--panel-edge);
@@ -341,6 +341,11 @@
   .dr-sigil path,.dr-sigil circle{fill:none;stroke:var(--reg);stroke-width:1.1;
     stroke-linecap:round;stroke-linejoin:round;opacity:0.8;
     filter:drop-shadow(0 0 5px color-mix(in srgb,var(--reg) 40%, transparent));}
+  /* small engraved region mark — same West/Psyche/East shapes as .dr-sigil, kept
+     quiet in --ink so region is read off the shape, never gold (guardrail 3). */
+  .rmark{width:13px;height:13px;flex:none;display:inline-block;vertical-align:-2px;}
+  .rmark path,.rmark circle{fill:none;stroke:var(--ink);stroke-width:3;
+    stroke-linecap:round;stroke-linejoin:round;}
   .dr-head h2{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:28px;line-height:1.05;margin:0;}
   .dr-seal{position:absolute;right:20px;bottom:14px;width:34px;height:34px;opacity:0;transition:opacity .25s;}
   .dr-seal.on{opacity:0.8;}
@@ -418,10 +423,15 @@
   .clegend{position:absolute;bottom:16px;left:16px;background:var(--panel);border:1px solid var(--panel-edge);
     border-radius:3px;padding:9px 11px;font-size:10.5px;backdrop-filter:blur(6px);max-height:48vh;
     overflow:auto;max-width:188px;line-height:1.5;}
-  .clegend .lr{display:flex;align-items:center;gap:7px;padding:1.5px 0;color:var(--parchment-dim);}
+  .clegend .lr{display:flex;align-items:center;gap:7px;padding:1.5px 4px;margin:0 -4px;border-radius:3px;
+    color:var(--parchment-dim);cursor:pointer;transition:color .15s,background .15s;}
+  .clegend .lr:hover{color:var(--parchment);}
+  .clegend .lr:focus-visible{outline:none;box-shadow:0 0 0 1.5px var(--gold);}
+  .clegend .lr.on{color:var(--gold);background:rgba(217,182,95,0.1);}
   .clegend .sw{width:9px;height:9px;border-radius:50%;flex:none;}
   .clegend .rg{font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);
     opacity:0.8;margin:7px 0 2px;}
+  .clegend .rg .rmark{width:11px;height:11px;margin-right:5px;vertical-align:-1px;}
   .con-hint{position:absolute;bottom:16px;right:16px;font-size:10.5px;color:var(--muted);
     max-width:220px;text-align:right;line-height:1.5;}
   .chip.link{cursor:pointer;}
@@ -766,7 +776,7 @@
     color:var(--gold);opacity:.82;animation:gate-rise .8s .06s ease both;}
   .gate-line{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:clamp(30px,6.4vw,58px);
     line-height:1.0;margin:14px 0 0;letter-spacing:0.01em;color:var(--parchment);max-width:15ch;
-    animation:gate-rise .8s .12s ease both;}
+    text-wrap:balance;animation:gate-rise .8s .12s ease both;}
   .gate-sub{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(15px,2.4vw,19px);
     line-height:1.5;color:var(--parchment-dim);margin:18px 0 0;max-width:30em;
     animation:gate-rise .8s .2s ease both;}
@@ -809,7 +819,7 @@
     <div class="brand" id="brand" role="button" tabindex="0" aria-label="Back to the landing page" title="Back to the landing page">
       <span class="brand-mark" id="brand-mark" aria-hidden="true"></span>
       <div class="brand-text">
-        <div class="eyebrow" data-i18n="You're not the first to wonder">You're not the first to wonder</div>
+        <div class="eyebrow" data-i18n="An atlas of the great questions">An atlas of the great questions</div>
         <h1>The Anatomy of Ideas</h1>
       </div>
     </div>
@@ -8584,7 +8594,7 @@
       "zh": "非英文文字為機器輔助翻譯——專有名詞、技術術語與措辭未必精確。歡迎指正。",
       "ru": "Текст не на английском языке — машинный перевод: имена собственные, технические термины и формулировки могут быть неточными. Будем рады исправлениям."
     },
-    "Eleven doors in": {
+    "Eleven doors": {
       "zh": "十一扇門",
       "ru": "Одиннадцать дверей"
     },
@@ -11932,7 +11942,7 @@
       });
     });
     drawer.classList.add('open');
-    renderFoil(c); renderStatus(id); setHash('/'+currentMode+'/idea/'+encodeURIComponent(id));
+    renderFoil(c); renderStatus(id); setHash('/'+modeSlug(currentMode)+'/idea/'+encodeURIComponent(id));
     selected=id;
     crossHighlight(id);
   }
@@ -12194,9 +12204,9 @@
   }
   function paintLensBoard(){
     const host=document.getElementById('lens-board'); if(!host) return;
-    const t=host.querySelector('[data-lb="title"]'); if(t) t.textContent=T('Eleven doors in');
+    const t=host.querySelector('[data-lb="title"]'); if(t) t.textContent=T('Eleven doors');
     const s=host.querySelector('[data-lb="sub"]'); if(s) s.textContent=T('One way into each of the eleven questions, fanned like a hand of cards. Lift any card to read it, riffle to re-deal, then step through a door into the field of ideas around it.');
-    const dk=host.querySelector('#lens-deck'); if(dk) dk.setAttribute('aria-label',T('Eleven doors in'));
+    const dk=host.querySelector('#lens-deck'); if(dk) dk.setAttribute('aria-label',T('Eleven doors'));
     host.querySelectorAll('.lb-card').forEach(card=>{
       const q=qById[card.dataset.qid], c=cById[card.dataset.cid]; if(!q||!c) return;
       const count=D.concepts.filter(x=>x.q===q.id).length, sign=DOOR_SIGN[q.id]||'';
@@ -12222,7 +12232,7 @@
     document.getElementById('lens-tour-nav').hidden=true;
     document.getElementById('lens-explore').classList.add('on');
     document.getElementById('lens-tour').classList.remove('on');
-    lensMode='explore'; setHash('/lens');
+    lensMode='explore'; setHash('/'+modeSlug('lens'));
     activeIdx=-1; dealFan();   // deal the fan in fresh each time the board appears
   }
   function showLensGraph(){
@@ -12320,7 +12330,7 @@
     if(opt.trail==='reset') lensTrail=[{id,rel:null}];
     else if(opt.trail!=='none') trailPush(id,rel);
     if(lensBoardOn) showLensGraph();
-    setHash('/lens/'+encodeURIComponent(id));
+    setHash('/'+modeSlug('lens')+'/'+encodeURIComponent(id));
     const [W,H]=lensSize(); lsvg.attr('viewBox',`0 0 ${W} ${H}`);
     // Reserve the top chrome (control bar + trail rail) and caption card (bottom) so the
     // ego-ring never hides behind them; centre the ring in the band that's left.
@@ -12375,7 +12385,7 @@
     // otherwise clicking a neighbour recentres the ring but leaves the side panel
     // stuck on the previously opened idea. Restore the canonical /lens/<id> hash
     // afterwards (openConcept writes the /lens/idea/<id> form).
-    if(selected && selected!==id){ openConcept(id); setHash('/lens/'+encodeURIComponent(id)); }
+    if(selected && selected!==id){ openConcept(id); setHash('/'+modeSlug('lens')+'/'+encodeURIComponent(id)); }
   }
 
   // The breadcrumb rail — one line of the path you walked. Past chips rewind on click;
@@ -12739,7 +12749,7 @@
     const p=raw.split('/').map(x=>{ try{ return decodeURIComponent(x); }catch(e){ return x; } });
     suppressHash=true;
     try{
-      const mode=p[0];
+      const mode=SLUG_MODE[p[0]]||p[0];
       // The Arguments/Reading-journeys views were removed; redirect their legacy
       // /paths, /threads and /journeys deep links to the default Questions tab.
       if(mode==='paths'||mode==='threads'||mode==='journeys'){
@@ -12755,6 +12765,12 @@
 
   // ========== mode switching ==========
   const views={questions:'m-questions',timeline:'m-timeline',constellation:'m-constellation',lens:'m-lens'};
+  // URL-friendly slugs so the hash reads like the visible tab names (Concepts /
+  // Thinkers) instead of the internal mode ids (lens / constellation). The reverse
+  // map also accepts the legacy ids so old shared links keep resolving.
+  const MODE_SLUG={questions:'questions',timeline:'timeline',lens:'concepts',constellation:'thinkers'};
+  const SLUG_MODE={questions:'questions',timeline:'timeline',concepts:'lens',thinkers:'constellation',lens:'lens',constellation:'constellation'};
+  const modeSlug=m=>MODE_SLUG[m]||m;
   function setMode(mode){
     if(!views[mode]) mode='questions';
     currentMode=mode;
@@ -12767,7 +12783,7 @@
     if(mode==='lens') buildLens();
     applyFilters();
     if(selected) crossHighlight(selected);
-    if(!selected) setHash('/'+mode);
+    if(!selected) setHash('/'+modeSlug(mode));
     locateInView(mode);   // re-locate the searched target in the new view
   }
   document.querySelectorAll('.switch button').forEach(b=>b.onclick=()=>setMode(b.dataset.mode));
@@ -12982,6 +12998,13 @@
     East:'<circle cx="30" cy="30" r="16"/>',
     _:'<path d="M30 14 L33 27 L46 30 L33 33 L30 46 L27 33 L14 30 L27 27 Z"/>'
   };
+  // Small inline region mark — reuses the engraved REGION_SIGIL vocabulary so the
+  // dossier line and legend headings carry the same West/Psyche/East shorthand the
+  // portrait niche already speaks. `name` becomes the hover/SR label.
+  function regionMark(reg,name){
+    const sig=REGION_SIGIL[reg]||REGION_SIGIL._;
+    return `<svg class="rmark" viewBox="0 0 60 60" role="img" aria-label="${name||reg}"><title>${name||reg}</title>${sig}</svg>`;
+  }
   function drFigure(n,g){
     const reg=g.region, regColor=g.color;
     const p=n.type!=='school'?PORTRAITS[n.id]:null;
@@ -13017,11 +13040,12 @@
   }
   function openPerson(id){
     const n=aById[id]; if(!n)return; const g=aGroup[n.group];
+    conGroupSel=null; markLegendActive();
     drSeal(n.big);
     const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
     const regName={West:'Occident',Psyche:'Psyche',East:'Orient'}[g.region]||g.region;
     drFigure(n,g);
-    document.getElementById('dr-q').innerHTML=`<span class="dot" style="background:${g.color}"></span>${esc(g.label)}`;
+    document.getElementById('dr-q').innerHTML=`${regionMark(g.region,regName)}<span class="dot" style="background:${g.color}"></span>${esc(g.label)}`;
     document.getElementById('dr-name').textContent=n.id;
     document.getElementById('dr-meta').textContent=
       (n.type==='school'?'School / tradition':'Thinker')+(n.dates?(' · '+n.dates):'')+' · '+regName;
@@ -13053,7 +13077,7 @@
     document.getElementById('dr-foil').innerHTML=''; document.getElementById('dr-status').innerHTML='';
     const cbadge=document.getElementById('dr-contested'); if(cbadge) cbadge.setAttribute('hidden','');
     drawer.classList.add('open'); selected=null; conHighlight(id);
-    setHash('/constellation/person/'+encodeURIComponent(id));
+    setHash('/'+modeSlug('constellation')+'/person/'+encodeURIComponent(id));
   }
 
   // delegated clicks inside the dossier's top section (thinker chips + idea chips)
@@ -13072,12 +13096,12 @@
   function conLegendHTML(){ let html='';
     [['West','Occident'],['Psyche','Psyche'],['East','Orient']].forEach(([reg,label])=>{
       const codes=aOrder.filter(c=>aGroup[c].region===reg); if(!codes.length)return;
-      html+=`<div class="rg">${esc0(T(label))}</div>`;
-      codes.forEach(c=>{const g=aGroup[c];html+=`<div class="lr"><span class="sw" style="background:${g.color}"></span>${esc0(T(g.label))}</div>`;});});
+      html+=`<div class="rg">${regionMark(reg,esc0(T(label)))}${esc0(T(label))}</div>`;
+      codes.forEach(c=>{const g=aGroup[c];html+=`<div class="lr" data-grp="${esc0(c)}" role="button" tabindex="0"><span class="sw" style="background:${g.color}"></span>${esc0(T(g.label))}</div>`;});});
     return html; }
   function conRelabel(){ if(!conBuilt) return;
     if(cworld) cworld.selectAll('.cregion').text(function(){ return T(this.getAttribute('data-reg')); });
-    if(conLeg) conLeg.innerHTML=conLegendHTML(); }
+    if(conLeg){ conLeg.innerHTML=conLegendHTML(); markLegendActive(); } }
   function buildConstellation(){
     if(conBuilt) return; conBuilt=true;
     const host=document.getElementById('m-constellation');
@@ -13147,12 +13171,12 @@
       .attr('font-size',d=>d.type==='school'?12:(d.big?11.5:10)).text(d=>d.id)
       .attr('class',d=>(d.type==='school'||d.big)?'show':'');
     cnode.append('title').text(d=>d.id);
-    cnode.on('mouseenter',(e,d)=>{if(!conSelected)conHighlight(d.id);})
-      .on('mouseleave',()=>{if(!conSelected)conHighlight(null);})
-      .on('focus',(e,d)=>{if(!conSelected)conHighlight(d.id);})
-      .on('blur',()=>{if(!conSelected)conHighlight(null);})
-      .on('keydown',(e,d)=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();e.stopPropagation();conSelected=d.id;openPerson(d.id);}})
-      .on('click',(e,d)=>{e.stopPropagation();conSelected=d.id;openPerson(d.id);});
+    cnode.on('mouseenter',(e,d)=>{if(!conSelected&&!conGroupSel)conHighlight(d.id);})
+      .on('mouseleave',()=>{if(!conSelected)conGroupSel?conHighlightGroup(conGroupSel):conHighlight(null);})
+      .on('focus',(e,d)=>{if(!conSelected&&!conGroupSel)conHighlight(d.id);})
+      .on('blur',()=>{if(!conSelected)conGroupSel?conHighlightGroup(conGroupSel):conHighlight(null);})
+      .on('keydown',(e,d)=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();e.stopPropagation();conGroupSel=null;markLegendActive();conSelected=d.id;openPerson(d.id);}})
+      .on('click',(e,d)=>{e.stopPropagation();conGroupSel=null;markLegendActive();conSelected=d.id;openPerson(d.id);});
     csim.on('tick',()=>{
       clink.attr('d',l=>{const s=l.source,t=l.target,dx=t.x-s.x,dy=t.y-s.y,dr=Math.hypot(dx,dy)||1;
         const ux=dx/dr,uy=dy/dr,ex=t.x-ux*(t.r+2.5),ey=t.y-uy*(t.r+2.5),sx=s.x+ux*(s.r+1),sy=s.y+uy*(s.r+1);
@@ -13163,10 +13187,14 @@
     czoom=d3.zoom().scaleExtent([0.25,6]).on('zoom',e=>{cworld.attr('transform',e.transform);
       cnode.selectAll('text').classed('show',d=>d.type==='school'||d.big||e.transform.k>1.7);});
     csvg.call(czoom).on('dblclick.zoom',null)
-      .on('click',()=>{if(conSelected){conSelected=null;closeDrawer();}});
+      .on('click',()=>{ if(conGroupSel){conGroupSel=null;conHighlight(null);markLegendActive();}
+        if(conSelected){conSelected=null;closeDrawer();} });
     // compact tradition legend
     conLeg=document.createElement('div'); conLeg.className='clegend';
     conLeg.innerHTML=conLegendHTML(); host.appendChild(conLeg);
+    conLeg.addEventListener('click',e=>{ const r=e.target.closest('.lr[data-grp]'); if(r) toggleConGroup(r.dataset.grp); });
+    conLeg.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){ const r=e.target.closest('.lr[data-grp]');
+      if(r){ e.preventDefault(); toggleConGroup(r.dataset.grp); } } });
     setTimeout(()=>fitCon(W,H),reduce?0:1600);
   }
   function fitCon(W,H){ if(!conNodes.length)return; const p=70;
@@ -13186,6 +13214,27 @@
     cnode.selectAll('text').classed('show',d=>keep.has(d.id)||d.type==='school'||d.big);
     cnode.select('circle').attr('filter',d=>d.id===id?'url(#cglow)':null);
     clink.classed('faded',l=>!(((l.source.id||l.source)===id)||((l.target.id||l.target)===id)));
+  }
+  // Clicking a school/tradition in the bottom-left legend lights up just the stars
+  // that belong to it (and dims the rest), so you can see at a glance who sits under
+  // "Ancient Greek", "Vedānta", etc. Click the same row again to clear.
+  let conGroupSel=null;
+  function markLegendActive(){ if(!conLeg) return;
+    conLeg.querySelectorAll('.lr[data-grp]').forEach(r=>r.classList.toggle('on',r.dataset.grp===conGroupSel)); }
+  function conHighlightGroup(code){
+    if(!cnode) return;
+    if(!code){ conHighlight(null); return; }
+    const keep=new Set(conNodes.filter(n=>n.group===code).map(n=>n.id));
+    cnode.classed('faded',d=>!keep.has(d.id));
+    cnode.selectAll('text').classed('show',d=>keep.has(d.id)||d.type==='school'||d.big);
+    cnode.select('circle').attr('filter',null);
+    clink.classed('faded',l=>!(keep.has(l.source.id||l.source)&&keep.has(l.target.id||l.target)));
+  }
+  function toggleConGroup(code){
+    conGroupSel=(conGroupSel===code)?null:code;
+    if(conGroupSel){ conSelected=null; closeDrawer(); conHighlightGroup(conGroupSel); }
+    else conHighlight(null);
+    markLegendActive();
   }
   function focusPerson(id){ buildConstellation();
     const host=document.getElementById('m-constellation');
