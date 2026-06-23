@@ -432,8 +432,9 @@
   .clegend .rg{font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);
     opacity:0.8;margin:7px 0 2px;}
   .clegend .rg .rmark{width:11px;height:11px;margin-right:5px;vertical-align:-1px;}
-  .con-hint{position:absolute;bottom:16px;right:16px;font-size:10.5px;color:var(--muted);
-    max-width:220px;text-align:right;line-height:1.5;}
+  .con-hint{position:absolute;bottom:16px;right:16px;font-size:10px;letter-spacing:.03em;
+    color:var(--muted);opacity:.72;max-width:232px;text-align:right;line-height:1.5;
+    padding-top:7px;border-top:1px solid var(--rule);}
   .chip.link{cursor:pointer;}
   .chip.link:hover{color:var(--gold);border-color:var(--gold);}
   .chip.link::after{content:'↗';font-size:9px;margin-left:5px;opacity:0.5;}
@@ -949,7 +950,7 @@
     </section>
     <section id="m-constellation" class="view">
       <svg id="con-svg"></svg>
-      <div class="con-hint" data-i18n="The original star-chart of thinkers &amp; schools, clustered into West, Psyche &amp; East. Hover to trace a lineage; click a star to see who they were — and the ideas they shaped.">The original star-chart of thinkers &amp; schools, clustered into West, Psyche &amp; East. Hover to trace a lineage; click a star to see who they were — and the ideas they shaped.</div>
+      <div class="con-hint" data-i18n="Hover a star to trace its lineage; click to open it — or a school at left to isolate it.">Hover a star to trace its lineage; click to open it — or a school at left to isolate it.</div>
     </section>
     <section id="m-lens" class="view">
       <svg id="lens-svg"></svg>
@@ -972,7 +973,7 @@
       <nav id="lens-trail" hidden aria-label="Your path"></nav>
       </div>
       <div id="lens-cap"></div>
-      <div id="lens-hint" class="con-hint" data-i18n="One idea at its centre, its kin around it. Click any neighbour to travel to it; roll the dice to wander; or take a guided tour through the lineage.">One idea at its centre, its kin around it. Click any neighbour to travel to it; roll the dice to wander; or take a guided tour through the lineage.</div>
+      <div id="lens-hint" class="con-hint" data-i18n="Click a neighbour to travel; roll to wander, or take the guided tour.">Click a neighbour to travel; roll to wander, or take the guided tour.</div>
     </section>
 
     <div id="empty-state" hidden>
@@ -8582,13 +8583,13 @@
       "zh": "顏色標示每個觀念所回應的<em>問題<\/em>。游標懸停以追溯其脈絡；點擊以閱讀完整條目。",
       "ru": "Цвет обозначает <em>вопрос<\/em>, на который отвечает каждая идея. Наведите курсор, чтобы проследить её родство; нажмите, чтобы открыть полную статью."
     },
-    "The original star-chart of thinkers & schools, clustered into West, Psyche & East. Hover to trace a lineage; click a star to see who they were — and the ideas they shaped.": {
-      "zh": "思想家與學派的原初星圖，分群為西方、心靈與東方三大傳統。游標懸停以追溯傳承；點擊星辰以認識其人——以及他們所塑造的觀念。",
-      "ru": "Изначальная звёздная карта мыслителей и школ, сгруппированных по Западу, Психике и Востоку. Наведите курсор, чтобы проследить родословную; нажмите на звезду, чтобы узнать, кем они были — и какие идеи они сформировали."
+    "Hover a star to trace its lineage; click to open it — or a school at left to isolate it.": {
+      "zh": "懸停星辰以追溯其傳承；點擊以開啟——或點選左側學派以單獨顯示。",
+      "ru": "Наведите курсор на звезду, чтобы проследить её родословную; нажмите, чтобы открыть, — или на школу слева, чтобы выделить её."
     },
-    "One idea at its centre, its kin around it. Click any neighbour to travel to it; roll the dice to wander; or take a guided tour through the lineage.": {
-      "zh": "一個觀念居於中心，與之相連的思想環繞四周。點擊任一鄰點以前往；擲骰隨機漫遊；或讓導覽帶你走過一條思想脈絡。",
-      "ru": "Одна идея в центре, её родственные мысли вокруг. Нажмите на любого соседа, чтобы перейти к нему; бросьте кости, чтобы побродить; или отправьтесь на экскурсию по родословной."
+    "Click a neighbour to travel; roll to wander, or take the guided tour.": {
+      "zh": "點擊鄰點以前往；擲骰漫遊，或開始導覽。",
+      "ru": "Нажмите на соседа, чтобы перейти; бросьте кости, чтобы побродить, или начните экскурсию."
     },
     "The non-English text is a machine-assisted translation — proper names, technical terms, and the framing may not be exact. Corrections welcome.": {
       "zh": "非英文文字為機器輔助翻譯——專有名詞、技術術語與措辭未必精確。歡迎指正。",

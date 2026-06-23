@@ -196,13 +196,13 @@
       "zh": "顏色標示每個觀念所回應的<em>問題</em>。游標懸停以追溯其脈絡；點擊以閱讀完整條目。",
       "ru": "Цвет обозначает <em>вопрос</em>, на который отвечает каждая идея. Наведите курсор, чтобы проследить её родство; нажмите, чтобы открыть полную статью."
     },
-    "The original star-chart of thinkers & schools, clustered into West, Psyche & East. Hover to trace a lineage; click a star to see who they were — and the ideas they shaped.": {
-      "zh": "思想家與學派的原初星圖，分群為西方、心靈與東方三大傳統。游標懸停以追溯傳承；點擊星辰以認識其人——以及他們所塑造的觀念。",
-      "ru": "Изначальная звёздная карта мыслителей и школ, сгруппированных по Западу, Психике и Востоку. Наведите курсор, чтобы проследить родословную; нажмите на звезду, чтобы узнать, кем они были — и какие идеи они сформировали."
+    "Hover a star to trace its lineage; click to open it — or a school at left to isolate it.": {
+      "zh": "懸停星辰以追溯其傳承；點擊以開啟——或點選左側學派以單獨顯示。",
+      "ru": "Наведите курсор на звезду, чтобы проследить её родословную; нажмите, чтобы открыть, — или на школу слева, чтобы выделить её."
     },
-    "One idea at its centre, its kin around it. Click any neighbour to travel to it; roll the dice to wander; or take a guided tour through the lineage.": {
-      "zh": "一個觀念居於中心，與之相連的思想環繞四周。點擊任一鄰點以前往；擲骰隨機漫遊；或讓導覽帶你走過一條思想脈絡。",
-      "ru": "Одна идея в центре, её родственные мысли вокруг. Нажмите на любого соседа, чтобы перейти к нему; бросьте кости, чтобы побродить; или отправьтесь на экскурсию по родословной."
+    "Click a neighbour to travel; roll to wander, or take the guided tour.": {
+      "zh": "點擊鄰點以前往；擲骰漫遊，或開始導覽。",
+      "ru": "Нажмите на соседа, чтобы перейти; бросьте кости, чтобы побродить, или начните экскурсию."
     },
     "The non-English text is a machine-assisted translation — proper names, technical terms, and the framing may not be exact. Corrections welcome.": {
       "zh": "非英文文字為機器輔助翻譯——專有名詞、技術術語與措辭未必精確。歡迎指正。",
