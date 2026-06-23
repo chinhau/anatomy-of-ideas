@@ -279,6 +279,13 @@
     cursor:pointer;transition:all .18s;white-space:nowrap;}
   .hbtn:hover{color:var(--parchment);background:rgba(217,182,95,.08);border-color:var(--gold);}
   .hbtn.on{background:var(--gold);color:#1a1205;border-color:var(--gold);}
+  /* First-run hand-off: a single quiet glance toward "How to read this".
+     Under prefers-reduced-motion the keyframes are suppressed globally, so the
+     class still leaves a static gold highlight for the same brief window. */
+  .hbtn.nudge{color:var(--gold);border-color:var(--gold);box-shadow:0 0 0 1px var(--gold),0 0 12px rgba(217,182,95,.4);
+    animation:about-nudge 1.5s ease 2;}
+  @keyframes about-nudge{0%,100%{box-shadow:0 0 0 1px rgba(217,182,95,.25),0 0 0 rgba(217,182,95,0);}
+    45%{box-shadow:0 0 0 1px var(--gold),0 0 13px rgba(217,182,95,.55);}}
   #lens-random{display:inline-flex;align-items:center;gap:6px;}
   .rdie{flex:0 0 auto;opacity:.85;transform:rotate(-8deg);transition:transform .18s,opacity .18s;}
   #lens-random:hover .rdie{opacity:1;transform:rotate(8deg);}
@@ -1805,12 +1812,21 @@
   // deep link already aimed you somewhere); dismissable by the button or Esc.
   const gate=document.getElementById('gate');
   let gateSeen=false; try{ gateSeen=localStorage.getItem('aoi.entered')==='1'; }catch(e){}
+  let firstRunGate=false;
+  // After the first-run gate closes, point the newcomer at the one thing the
+  // gate never explained: where to find "How to read this". One quiet glance.
+  function nudgeAbout(){
+    const b=document.getElementById('about-btn'); if(!b) return;
+    b.classList.add('nudge');
+    setTimeout(()=>b.classList.remove('nudge'), reduce?2600:3400);
+  }
   function closeGate(){
     if(gate.hidden) return;
     try{ localStorage.setItem('aoi.entered','1'); }catch(e){}
-    if(reduce){ gate.hidden=true; return; }
+    const nudge=firstRunGate; firstRunGate=false;
+    if(reduce){ gate.hidden=true; if(nudge) nudgeAbout(); return; }
     gate.classList.add('closing');
-    setTimeout(()=>{ gate.hidden=true; gate.classList.remove('closing'); },480);
+    setTimeout(()=>{ gate.hidden=true; gate.classList.remove('closing'); if(nudge) nudgeAbout(); },480);
   }
   function openGate(){
     if(!gate.hidden) return;
@@ -1820,6 +1836,7 @@
     document.getElementById('gate-enter').focus();
   }
   if(!gateSeen && !hadHash){
+    firstRunGate=true;
     gate.querySelector('.gate-seal').innerHTML=sealMarkup();
     gate.hidden=false;
     document.getElementById('gate-enter').focus();
