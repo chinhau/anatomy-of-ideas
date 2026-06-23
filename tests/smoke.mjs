@@ -57,9 +57,14 @@ eq(window.getComputedStyle($('#empty-state')).display,'none','empty-state is dis
 for(const mo of ['timeline','web','threads','constellation','lens','questions']) click($('.switch button[data-mode="'+mo+'"]'));
 console.log('6 modes built ok');
 
-// LENS (Map VI): focus+context ego-graph, travel, random walk, guided tour
+// LENS (Map VI): "Eleven Doors In" board → focus+context ego-graph
 click($('.switch button[data-mode="lens"]'));
 eq($('.switch button.active')?.dataset.mode, 'lens', 'lens tab activates');
+eq($('#lens-board').hidden, false, 'lens opens on the Eleven Doors board');
+eq($$('.lb-cell').length, 11, 'board shows eleven question doors (one per question)');
+click($$('.lb-cell')[0]); // enter through the first door
+eq($('#lens-board').hidden, true, 'choosing a door dismisses the board');
+eq($('#lens-home').hidden, false, 'the "Doors" home button appears once inside the graph');
 assert($$('#lens-svg g.lnode').length>1, 'lens renders a focus node plus neighbours');
 eq($$('#lens-svg g.lnode.focus').length, 1, 'exactly one focus node at the centre');
 const lensName0=$('#lens-cap .lc-name')?.textContent||'';
@@ -75,6 +80,9 @@ assert(!$('#lens-tour-nav').hasAttribute('hidden'), 'guided tour reveals the ste
 assert(/^1\s*\/\s*\d+/.test($('#lens-count').textContent), 'tour starts at step 1 / N');
 const tourBefore=$('#lens-count').textContent; click($('#lens-next'));
 assert($('#lens-count').textContent!==tourBefore, 'Next advances the tour step');
+// the "Doors" home button returns to the board
+click($('#lens-home'));
+eq($('#lens-board').hidden, false, 'home button returns to the Eleven Doors board');
 // "open full entry" bridges to the shared dossier
 click($('.switch button[data-mode="lens"]')); click($('#lens-explore'));
 click($('#lens-cap .lc-open'));
