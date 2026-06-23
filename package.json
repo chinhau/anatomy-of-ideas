@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "An interactive atlas of philosophy, psychology and consciousness — 167 ideas across eleven questions, cross-linked to a 425-star constellation of thinkers and schools.",
+  "description": "An interactive atlas of the great questions humans keep asking — 263 ideas across eleven great questions, cross-linked to a 425-star constellation of thinkers and schools.",
   "scripts": {
     "build": "python3 build.py",
     "test": "node tests/smoke.mjs"
