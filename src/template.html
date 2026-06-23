@@ -341,6 +341,14 @@
   #tl-svg .tl-lane-lab{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:12.5px;
     fill:var(--gold);opacity:.85;}
   #tl-svg .tl-now{stroke:var(--gold);stroke-width:1;stroke-dasharray:2 4;opacity:.35;}
+  #tl-svg .tl-band{fill-opacity:.15;stroke-width:1;stroke-opacity:.5;pointer-events:none;}
+  .wlegend{position:absolute;bottom:16px;left:16px;background:var(--panel);border:1px solid var(--panel-edge);
+    border-radius:4px;padding:10px 13px;font-size:10.5px;color:var(--parchment-dim);line-height:1.5;z-index:5;max-width:210px;}
+  .wlegend .row{display:flex;align-items:center;gap:7px;padding:1.5px 0;}
+  .wlegend .ln{width:16px;border-top:2px solid transparent;flex:none;}
+  .wlegend .sw{width:9px;height:9px;border-radius:2px;flex:none;}
+  .wlegend .hd{font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold);opacity:.85;
+    margin:8px 0 2px;border-top:1px solid var(--rule);padding-top:7px;}
   #tl-svg .tl-axis{stroke:var(--rule);stroke-width:1;}
   #tl-svg .tl-tick{font-size:10px;fill:var(--muted);letter-spacing:.08em;}
   #tl-svg .tl-edge{fill:none;stroke:rgba(233,220,192,.4);stroke-width:.8;pointer-events:none;}
@@ -727,7 +735,7 @@
         <div class="row"><span class="ln" style="border-color:var(--echo);border-top-style:dotted"></span><span data-i18n="echoes">echoes</span></div>
         <div class="row" style="margin-top:6px;opacity:.7" data-i18n="size = ideas built on it">size = ideas built on it</div>
       </div>
-      <div class="con-hint" data-i18n="Every idea placed at its era, in the lane of its world. Hover to trace its kin; click for the full entry. Drag the era handles to narrow the centuries.">Every idea placed at its era, in the lane of its world. Hover to trace its kin; click for the full entry. Drag the era handles to narrow the centuries.</div>
+      <div class="con-hint" data-i18n="One lane per great question, in fixed order. Colour marks where the thinking stands; the band shows when a question was actually asked — its height is how often, not an even spread to now. A thin band can mean real quiet or a gap in this atlas.">One lane per great question, in fixed order. Colour marks where the thinking stands; the band shows when a question was actually asked — its height is how often, not an even spread to now. A thin band can mean real quiet or a gap in this atlas.</div>
     </section>
     <!-- Map "Paths": the curated-reading layer. Two near-twin views (dialectic
          Arguments + cross-tradition Reading paths) merged behind one sub-toggle
@@ -855,15 +863,15 @@
   // Each state carries a colour (gold is reserved for "live rivals", the
   // mission's heartbeat) and a glyph, so the signal survives without colour.
   const STATES={
-    'handed-off': {glyph:'\u2192', label:'Handed off to science',
+    'handed-off': {glyph:'\u2192', ink:'#5fc7b8', label:'Handed off to science',
       defn:'The empirical core migrated to a science that now constrains it; a metaphysical residue can remain.'},
-    'hardened':   {glyph:'\u25C6', label:'Hardened within a frame',
+    'hardened':   {glyph:'\u25C6', ink:'#86c08a', label:'Hardened within a frame',
       defn:'A durable consensus formed inside a frame; some sub-questions are genuinely closed.'},
-    'live-rivals':{glyph:'\u21C4', label:'Live rivals',
+    'live-rivals':{glyph:'\u21C4', ink:'#d9b65f', label:'Live rivals',
       defn:'Mature, articulate positions that argue on and have not converged.'},
-    'open':       {glyph:'\u25CB', label:'Perennially open',
+    'open':       {glyph:'\u25CB', ink:'#c3c7cf', label:'Perennially open',
       defn:'Resists resolution in principle; the map takes no side.'},
-    'dissolved':  {glyph:'\u223F', label:'Reframed, not answered',
+    'dissolved':  {glyph:'\u223F', ink:'#9aa3bd', label:'Reframed, not answered',
       defn:'The question was recast rather than settled; what counts as the question shifted.'}
   };
   const stLabel = id => T((STATES[id]||{}).label||'');
@@ -916,7 +924,7 @@
   // was dropped with the tab numerals — the views are peers, not a fixed sequence.
   const CAPTIONS = {
     questions:'<b>Questions</b> Eleven questions every tradition has wrestled with — and the rival answers, side by side. Click any answer to light up the ideas it builds on, rejects, or quietly echoes.',
-    timeline:'<b>Timeline</b> Every idea placed at its era, in the lane of its world — West, Psyche or East. Size marks how many later ideas build on it; hover to trace its kin across the centuries.',
+    timeline:'<b>Timeline</b> One lane per great question, in fixed order. Colour marks where the thinking stands; the band shows when it was actually asked — its height is how often, not an even spread to now. Hover an idea to trace its kin.',
     paths:'<b>Paths</b> Two ways to walk the atlas: step through a long argument, or follow a curated reading path across traditions.',
     threads:'<b>Arguments</b> Long arguments, walked one move at a time — thesis provokes antithesis provokes synthesis. Pick a thread on the left and step through it.',
     journeys:'<b>Journeys</b> A few curated paths across the whole atlas — a gateway, a handful of steps, and a synthesis you finish yourself. The links between steps are claims to verify, not verdicts.',
@@ -1600,26 +1608,41 @@
     tlsvg=d3.select('#tl-svg').attr('viewBox','0 0 '+W+' '+H).attr('width',W).attr('height',H);
     tlWorld=tlsvg.append('g');
     const padL=170,padR=40,padT=30,padB=52, plotW=W-padL-padR;
-    // One lane per great question, ordered by recurrence: the questions present in the
-    // most distinct era-buckets sit on top (longest era-span breaks ties). This turns
-    // "asked over and over, across every age" into the literal silhouette of the chart.
-    const EB=[0,1000,1500,1800,1900];
-    const bucketOf=era=>{ let i=0; while(i<EB.length&&era>=EB[i]) i++; return i; };
-    const qStat={}; D.questions.forEach(q=>qStat[q.id]={b:new Set(),lo:Infinity,hi:-Infinity});
-    D.concepts.forEach(c=>{ const s=qStat[c.q]; if(!s) return; s.b.add(bucketOf(c.era)); s.lo=Math.min(s.lo,c.era); s.hi=Math.max(s.hi,c.era); });
-    const lanes=D.questions.slice().sort((a,b)=>{ const sa=qStat[a.id],sb=qStat[b.id];
-      return (sb.b.size-sa.b.size) || ((sb.hi-sb.lo)-(sa.hi-sa.lo)); });
+    // FIXED lane order — the canonical question order, NOT sorted by recurrence.
+    // (Recurrence-ordering implied a false perennity: a question crowded into the
+    // last two centuries was drawn with the same "top-to-now" silhouette as one
+    // genuinely asked in every age. Lane colour now encodes epistemic STATUS, and
+    // the per-lane density band shows WHEN a question was actually asked.)
+    const lanes=D.questions.slice();
     const laneBand=(H-padT-padB)/lanes.length, laneY={};
     lanes.forEach((q,i)=>laneY[q.id]=padT+(i+0.5)*laneBand);
     const fr=[0,0.12,0.28,0.42,0.58,0.74,1];
     const x=d3.scaleLinear().domain([-600,0,1000,1500,1800,1900,2025])
       .range(fr.map(f=>padL+plotW*f)).clamp(true);
-    // per-question lane: faint baseline tinted with the question's hue + a left-gutter label
-    lanes.forEach(q=>{ tlWorld.append('line').attr('class','tl-lane').attr('x1',padL).attr('x2',W-padR)
-        .attr('y1',laneY[q.id]).attr('y2',laneY[q.id]).attr('stroke',q.hue).style('opacity',.45);
+    const inkOf=q=>(STATES[q.status]||{}).ink||q.hue;
+    // per-lane temporal density (a Gaussian KDE in screen space, normalised against
+    // ONE global maximum so a crowded lane stands taller: band height = recurrence,
+    // band shape = WHEN it was asked — not an even spread to the present).
+    const NS=140, BW=Math.max(14,plotW*0.022);
+    const laneXs={}; lanes.forEach(q=>laneXs[q.id]=[]);
+    D.concepts.forEach(c=>{ if(laneXs[c.q]) laneXs[c.q].push(x(c.era)); });
+    const dens={}; let gmax=0;
+    lanes.forEach(q=>{ const xs=laneXs[q.id], row=[];
+      for(let i=0;i<NS;i++){ const px=padL+plotW*i/(NS-1); let s=0;
+        for(let k=0;k<xs.length;k++){ const u=(px-xs[k])/BW; s+=Math.exp(-0.5*u*u); }
+        row.push([px,s]); if(s>gmax) gmax=s; }
+      dens[q.id]=row; });
+    const dScale=d3.scaleLinear().domain([0,gmax||1]).range([0,laneBand*0.80]);
+    const area=d3.area().x(p=>p[0]).y0(0).y1(p=>-dScale(p[1])).curve(d3.curveBasis);
+    // baseline + density band + left-gutter label, all coloured by epistemic status
+    lanes.forEach(q=>{ const ink=inkOf(q), y=laneY[q.id];
+      tlWorld.append('path').attr('class','tl-band').attr('transform','translate(0,'+y+')')
+        .attr('d',area(dens[q.id])).style('fill',ink).style('stroke',ink);
+      tlWorld.append('line').attr('class','tl-lane').attr('x1',padL).attr('x2',W-padR)
+        .attr('y1',y).attr('y2',y).style('stroke',ink).style('opacity',.55);
       tlWorld.append('text').attr('class','tl-lane-lab').attr('data-q',q.id)
-        .attr('x',padL-12).attr('y',laneY[q.id]).attr('dy','.32em').attr('text-anchor','end')
-        .attr('fill',q.hue).text(qLabel(q)); });
+        .attr('x',padL-12).attr('y',y).attr('dy','.32em').attr('text-anchor','end')
+        .style('fill',ink).text(qLabel(q)); });
     tlWorld.append('line').attr('class','tl-axis').attr('x1',padL).attr('x2',W-padR).attr('y1',H-padB).attr('y2',H-padB);
     [[-500,'500 BCE'],[0,'1 CE'],[1000,'1000'],[1500,'1500'],[1800,'1800'],[1900,'1900'],[2020,'now']].forEach(t=>{
       tlWorld.append('line').attr('class','tl-axis').attr('x1',x(t[0])).attr('x2',x(t[0])).attr('y1',H-padB).attr('y2',H-padB+5).style('opacity',.5);
@@ -1627,13 +1650,15 @@
     // "now" accent — every question's beats run right up to the present
     tlWorld.append('line').attr('class','tl-now').attr('x1',x(2025)).attr('x2',x(2025)).attr('y1',padT-4).attr('y2',H-padB);
     tlArc=tlWorld.append('g');
-    D.concepts.forEach(c=>{ const j=((hashId(c.id)%100)/100-0.5)*laneBand*0.58;
-      tlPos[c.id]={x:x(c.era), y:(laneY[c.q]!=null?laneY[c.q]:padT)+j}; });
+    // dots sit just BELOW the baseline (the density band rises above it), so the
+    // two honesty layers — the count-shape band and the individual ideas — don't collide.
+    D.concepts.forEach(c=>{ const j=((hashId(c.id)%100)/100)*laneBand*0.34;
+      tlPos[c.id]={x:x(c.era), y:(laneY[c.q]!=null?laneY[c.q]:padT)+6+j}; });
     tlNode=tlWorld.append('g').selectAll('g').data(D.concepts).join('g')
       .attr('class','tl-node').attr('transform',c=>'translate('+tlPos[c.id].x+','+tlPos[c.id].y+')')
       .attr('tabindex',0).attr('role','button')
       .attr('aria-label',c=>c.id+' — '+c.tradLabel+', '+eraTxt(c.era));
-    tlNode.append('circle').attr('r',c=>4+Math.min(buildsIn[c.id]||0,6)).attr('fill',c=>c.color);
+    tlNode.append('circle').attr('r',c=>3+Math.min(buildsIn[c.id]||0,6)).attr('fill',c=>inkOf(qById[c.q]));
     tlNode.append('text').attr('x',c=>6+Math.min(buildsIn[c.id]||0,6)).attr('y',3).text(c=>c.id);
     tlNode.append('title').text(c=>c.id);
     tlNode.on('mouseenter',(e,c)=>{ if(!selected) tlHighlight(c.id); })
@@ -1644,8 +1669,18 @@
       .on('click',(e,c)=>{ e.stopPropagation(); openConcept(c.id); });
     const zoom=d3.zoom().scaleExtent([0.6,6]).on('zoom',e=>tlWorld.attr('transform',e.transform));
     tlsvg.call(zoom).on('dblclick.zoom',null).on('click',()=>{ if(selected) closeDrawer(); });
+    buildTlStatusKey(host);
     tlRelabel(); // a lazy build under a non-EN language ships English text; localise now
     tlApplyFilter();
+  }
+  function buildTlStatusKey(host){
+    const wl=host.querySelector('.wlegend'); if(!wl||wl.querySelector('.tl-stkey')) return;
+    const order=['handed-off','hardened','live-rivals','open','dissolved'];
+    const div=document.createElement('div'); div.className='tl-stkey';
+    div.innerHTML='<div class="hd" data-i18n="Lane colour = status">'+esc0(T('Lane colour = status'))+'</div>'+
+      order.map(id=>'<div class="row"><span class="sw" style="background:'+STATES[id].ink+'"></span>'+
+        '<span class="stl" data-st="'+id+'">'+esc0(stLabel(id))+'</span></div>').join('');
+    wl.appendChild(div);
   }
   function tlArcPath(a,b){ const mx=(a.x+b.x)/2, my=(a.y+b.y)/2-Math.min(120,Math.abs(a.x-b.x)*0.35+30);
     return 'M'+a.x+','+a.y+' Q'+mx+','+my+' '+b.x+','+b.y; }
@@ -1865,7 +1900,8 @@
     tlNode.select('text').text(c=>cName(c));
     tlNode.select('title').text(c=>cName(c));
     tlNode.attr('aria-label',c=>cName(c)+' — '+cTrad(c)+', '+eraTxt(c.era));
-    if(tlWorld) tlWorld.selectAll('.tl-lane-lab').text(function(){ const q=qById[this.dataset.q]; return q?qLabel(q):T(this.textContent.trim()); }); }
+    if(tlWorld) tlWorld.selectAll('.tl-lane-lab').text(function(){ const q=qById[this.dataset.q]; return q?qLabel(q):T(this.textContent.trim()); });
+    document.querySelectorAll('#m-timeline .tl-stkey .stl').forEach(el=>{ el.textContent=stLabel(el.dataset.st); }); }
   // Declared up here (not in the constellation section below) so the bootstrap
   // applyLang(LANG) -> conRelabel() call is past their temporal dead zone.
   let conBuilt=false, conLeg=null;

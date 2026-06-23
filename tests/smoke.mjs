@@ -132,6 +132,15 @@ eq($$('#tl-svg .tl-node').length, D.concepts.length, 'timeline renders one node 
 eq($$('#tl-svg .tl-lane').length, D.questions.length, 'timeline has one lane per great question');
 eq($$('#tl-svg .tl-lane-lab').length, D.questions.length, 'each question lane is labelled');
 assert($$('#tl-svg .tl-tick').length>0, 'timeline has era ticks');
+// re-encode: FIXED lane order (canonical, not recurrence) + status colour + density bands
+eq($$('#tl-svg .tl-lane-lab').map(l=>l.dataset.q).join(' '), D.questions.map(q=>q.id).join(' '),
+  'timeline lanes are in fixed canonical question order (not sorted by recurrence)');
+eq($$('#tl-svg .tl-band').length, D.questions.length, 'each lane has a temporal density band');
+assert($$('#tl-svg .tl-band').every(b=>(b.getAttribute('d')||'').length>10), 'every density band has geometry');
+const STINK={'handed-off':'#5fc7b8','hardened':'#86c08a','live-rivals':'#d9b65f','open':'#c3c7cf','dissolved':'#9aa3bd'};
+assert($$('#tl-svg .tl-lane-lab').every(l=>l.style.fill===STINK[D.questions.find(q=>q.id===l.dataset.q).status]),
+  'lane label colour encodes epistemic status (not region/hue)');
+eq($$('#m-timeline .tl-stkey .row').length, 5, 'timeline legend keys all five status colours');
 
 // PATHS › Arguments (former Threads tab) — Paths opens on the Arguments pane by default
 click($('.switch button[data-mode="paths"]'));
