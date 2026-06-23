@@ -749,6 +749,13 @@
   const qFraming = q => (LANG==='en'?undefined:pick(((I18N.questions||{})[q.id]||{}).framing)) || q.framing;
   const aTitle = a => (LANG==='en'?undefined:pick(((I18N.arguments||{})[a.title]||{}).title)) || a.title;
   const aNote  = a => (LANG==='en'?undefined:pick(((I18N.arguments||{})[a.title]||{}).note))  || a.note;
+  // journeys are keyed by their English title; storage stays keyed on j.title too
+  const J18    = j => (I18N.journeys||{})[j.title]||{};
+  const jTitle = j => (LANG==='en'?undefined:pick(J18(j).title))     || j.title;
+  const jBlurb = j => (LANG==='en'?undefined:pick(J18(j).blurb))     || j.blurb;
+  const jFraming = j => (LANG==='en'?undefined:pick(J18(j).framing)) || j.gateway.framing;
+  const jSynth = j => (LANG==='en'?undefined:pick(J18(j).synthesis)) || j.synthesis;
+  const jWhy   = (j,id,why) => (LANG==='en'?undefined:pick((J18(j).steps||{})[id])) || why;
   // a step name is usually a concept id; translate via concept name, else step table
   const stepName = s => (cById[s] ? cName(cById[s]) : ((LANG==='en'?undefined:pick((I18N.steps||{})[s])) || s));
   const caption  = m => (LANG==='en'?undefined:pick((I18N.captions||{})[m])) || (CAPTIONS[m]||'');
@@ -1537,7 +1544,7 @@
   function buildJourneys(){
     if(jrnBuilt) return; jrnBuilt=true;
     const list=document.getElementById('jrn-list');
-    list.innerHTML=(D.journeys||[]).map((j,i)=>'<div class="jrn-item'+(i===0?' on':'')+'" data-i="'+i+'" tabindex="0" role="button"><div class="tt">'+esc0(j.title)+'</div><div class="nt">'+esc0(j.blurb)+'</div></div>').join('');
+    list.innerHTML=(D.journeys||[]).map((j,i)=>'<div class="jrn-item'+(i===0?' on':'')+'" data-i="'+i+'" tabindex="0" role="button"><div class="tt">'+esc0(jTitle(j))+'</div><div class="nt">'+esc0(jBlurb(j))+'</div></div>').join('');
     list.querySelectorAll('.jrn-item').forEach(el=>{ const go=()=>selectJourney(+el.dataset.i);
       el.onclick=go; el.onkeydown=e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); go(); } }; });
     renderJourney();
@@ -1554,14 +1561,14 @@
     const J=D.journeys||[]; if(!J.length) return; const j=J[jrnI];
     document.querySelectorAll('.jrn-item').forEach(el=>el.classList.toggle('on',+el.dataset.i===jrnI));
     const seq=[j.gateway.id, ...j.steps.map(s=>s.id)];
-    let html='<div class="jrn-h">'+esc0(j.title)+'</div><div class="jrn-blurb">'+esc0(j.blurb)+'</div>';
-    html+=jStep(T('Start here'),true,j.gateway.id,j.gateway.framing);
+    let html='<div class="jrn-h">'+esc0(jTitle(j))+'</div><div class="jrn-blurb">'+esc0(jBlurb(j))+'</div>';
+    html+=jStep(T('Start here'),true,j.gateway.id,jFraming(j));
     j.steps.forEach((s,k)=>{ const cl=journeyClaim(seq[k],seq[k+1]);
       html+='<div class="jrn-claim '+cl.cls+'"><span class="tag">'+esc0(cl.tag)+'</span><span>'+esc0(cl.txt)+'</span></div>';
-      html+=jStep(T('Step')+' '+(k+1),false,s.id,s.why); });
+      html+=jStep(T('Step')+' '+(k+1),false,s.id,jWhy(j,s.id,s.why)); });
     const saved=jSyn[j.title]||'';
     html+='<div class="jrn-syn"><div class="jrn-gate">'+esc0(T('Synthesis — your turn'))+'</div>'+
-      '<p>'+esc0(j.synthesis)+'</p>'+
+      '<p>'+esc0(jSynth(j))+'</p>'+
       '<textarea id="jrn-syn-ta" aria-label="'+esc0(T('Your synthesis'))+'" placeholder="'+esc0(T('Write your own answer…'))+'">'+esc0(saved)+'</textarea>'+
       '<div class="jrn-saved" id="jrn-saved">'+(saved?esc0(T('Saved')):'')+'</div></div>';
     const stage=document.getElementById('jrn-stage'); stage.innerHTML=html; stage.scrollTop=0;
@@ -1689,6 +1696,12 @@
         const tt=el.querySelector('.tt'); if(tt) tt.textContent=aTitle(a);
         const nt=el.querySelector('.nt'); if(nt) nt.textContent=aNote(a); });
       renderThread();
+    }
+    if(jrnBuilt){
+      document.querySelectorAll('#jrn-list .jrn-item').forEach(el=>{ const j=D.journeys[+el.dataset.i]; if(!j) return;
+        const tt=el.querySelector('.tt'); if(tt) tt.textContent=jTitle(j);
+        const nt=el.querySelector('.nt'); if(nt) nt.textContent=jBlurb(j); });
+      renderJourney();
     }
     if(selected&&cById[selected]) openConcept(selected);
   }
