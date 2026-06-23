@@ -607,6 +607,7 @@
     animation:gate-rise .8s ease both;}
   .gate-seal svg{width:100%;height:100%;display:block;}
   .gate-seal path,.gate-seal circle{fill:none;stroke:var(--gold);stroke-width:0.6;opacity:.8;}
+  .gate-seal .seal-rim{stroke-linecap:round;}
   .gate-seal svg{filter:drop-shadow(0 0.6px 0 rgba(0,0,0,0.55));}
   .gate-seal .seal-pin{fill:var(--gold);stroke:none;opacity:1;}
   .gate-eyebrow{font-size:10.5px;letter-spacing:0.42em;text-transform:uppercase;
@@ -1940,14 +1941,15 @@
   }
   function openGate(){
     if(!gate.hidden) return;
-    gate.querySelector('.gate-seal').innerHTML=sealMarkup();
+    gate.querySelector('.gate-seal').innerHTML=sealMarkup(true);
     gate.classList.remove('closing');
     gate.hidden=false;
     document.getElementById('gate-enter').focus();
   }
   if(!gateSeen && !hadHash){
     firstRunGate=true;
-    gate.querySelector('.gate-seal').innerHTML=sealMarkup();
+    // seal injected after the atlas data is parsed (see below) so the rim arcs
+    // can read live region counts; init is synchronous, so no flash of a plain seal.
     gate.hidden=false;
     document.getElementById('gate-enter').focus();
   }
@@ -2006,6 +2008,8 @@
   const A=JSON.parse(document.getElementById('atlas-data').textContent);
   const aGroup={}; A.groups.forEach(g=>aGroup[g.code]=g);
   const aById={}; A.nodes.forEach(n=>aById[n.id]=n);
+  // First-run gate seal: now that A/aGroup exist, inject the rim-arc seal.
+  if(firstRunGate){ const gs=gate.querySelector('.gate-seal'); if(gs) gs.innerHTML=sealMarkup(true); }
   const aAdj=new Map(); A.nodes.forEach(n=>aAdj.set(n.id,[]));
   A.links.forEach(l=>{ aAdj.get(l.source).push({other:l.target,type:l.type,dir:'out'});
                        aAdj.get(l.target).push({other:l.source,type:l.type,dir:'in'}); });
@@ -2075,19 +2079,44 @@
     fig.style.setProperty('--reg',regColor);
     fig.innerHTML=inner;
   }
-  function sealMarkup(){
+  // detail=true draws the phase-offset twin rosette (rich, for the 72px gate seal);
+  // at the 34px masthead/dossier sizes a single 11-lobe rosette keeps the petal
+  // count — one lobe per great question — crisply legible instead of muddying
+  // into a doubled 22-crossing ring.
+  function sealMarkup(detail){
     const cx=20,cy=20;
     const rosette=(R,amp,petals,phase)=>{let d='';const steps=petals*18;
       for(let i=0;i<=steps;i++){const t=i/steps*Math.PI*2,rr=R+amp*Math.cos(petals*t+phase);
         d+=(i?'L':'M')+(cx+Math.cos(t)*rr).toFixed(2)+' '+(cy+Math.sin(t)*rr).toFixed(2);}
       return d+'Z';};
     // 11-petal rosette: one lobe per great question (the spine of the atlas).
+    // detail also splits the rim into three region arcs (gate seal only).
     return `<svg viewBox="0 0 40 40" aria-hidden="true">`+
-      `<circle cx="20" cy="20" r="18.6"/>`+
+      (detail?regionRimArcs():`<circle cx="20" cy="20" r="18.6"/>`)+
       `<path d="${rosette(14,2.4,11,0)}"/>`+
-      `<path d="${rosette(14,2.4,11,Math.PI/11)}"/>`+
+      (detail?`<path d="${rosette(14,2.4,11,Math.PI/11)}"/>`:``)+
       `<circle cx="20" cy="20" r="6.2"/>`+
       `<circle class="seal-pin" cx="20" cy="20" r="1.9"/></svg>`;
+  }
+  // The gate seal's rim splits into three arcs — Occident / Psyche / Orient —
+  // each arc's length proportional to that world's share of the atlas's thinkers
+  // (a real datum: where the atlas's weight sits). Gate-only, so the 34px
+  // masthead/dossier seals keep a clean single rim. Reads off A/aGroup, so it
+  // tracks the data instead of hardcoding the split.
+  function regionRimArcs(){
+    const r=18.6,cx=20,cy=20,gap=0.12,order=['West','Psyche','East'];
+    const cnt={West:0,Psyche:0,East:0};
+    A.nodes.forEach(n=>{const g=aGroup[n.group]; if(g&&cnt[g.region]!=null)cnt[g.region]++;});
+    const tot=cnt.West+cnt.Psyche+cnt.East||1;
+    const P=ang=>[(cx+Math.cos(ang)*r).toFixed(2),(cy+Math.sin(ang)*r).toFixed(2)];
+    let a=-Math.PI/2+gap/2,out='';
+    order.forEach(rg=>{
+      const span=cnt[rg]/tot*Math.PI*2-gap, a1=a+span, large=span>Math.PI?1:0;
+      const [x0,y0]=P(a),[x1,y1]=P(a1);
+      out+=`<path class="seal-rim" d="M${x0} ${y0}A${r} ${r} 0 ${large} 1 ${x1} ${y1}"/>`;
+      a=a1+gap;
+    });
+    return out;
   }
   function drSeal(canonical){
     const s=document.getElementById('dr-seal');
