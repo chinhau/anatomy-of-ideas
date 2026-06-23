@@ -268,11 +268,7 @@
   .card:hover{background:rgba(255,255,255,0.05);transform:translateY(-1px);}
   .card .c-id{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:600;line-height:1.1;}
   .card .c-trad{font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);margin:3px 0 6px;}
-  .c-folio{font-family:'Cormorant Garamond',serif;font-weight:600;letter-spacing:0.06em;
-    color:color-mix(in srgb,var(--gold) 64%,var(--muted));font-variant:small-caps;}
   .c-contested{color:var(--vermilion);font-weight:600;cursor:help;}
-  .q-folio{font-family:'Cormorant Garamond',serif;font-weight:600;color:var(--gold);
-    margin-right:7px;letter-spacing:0.04em;}
   .card .c-gloss{font-size:11.5px;line-height:1.46;color:var(--parchment-dim);}
   .card.dim{opacity:0.16;}
   .card.related{box-shadow:0 0 0 1px var(--affirm),0 0 18px rgba(134,192,138,0.22);}
@@ -12003,11 +11999,6 @@
   const neighborSet = id => new Set([id, ...(adj.get(id)||[]).map(e=>e.other)]);
 
   const eraTxt = e => e<0 ? Math.abs(e)+' BCE' : (e<1000? e+' CE' : ''+e);
-  // Manuscript foliation: a small Roman numeral marks a thing's place in an
-  // ordered run (a concept's rank-by-era within its question, a question's
-  // place in the eleven). Numbering as the engraving's quiet structure, not ornament.
-  const ROMAN=[[1000,'M'],[900,'CM'],[500,'D'],[400,'CD'],[100,'C'],[90,'XC'],[50,'L'],[40,'XL'],[10,'X'],[9,'IX'],[5,'V'],[4,'IV'],[1,'I']];
-  const toRoman = n => { let s=''; for(const [v,g] of ROMAN){ while(n>=v){ s+=g; n-=v; } } return s; };
   const REL_LABEL = {builds:['Builds upon','b'], rejects:['Rejects / opposes','r'], echoes:['Echoes across traditions','e']};
 
   // Captions key off the *mode*; the Paths view sets its own per-pane caption
@@ -12090,22 +12081,21 @@
   // ---------- MODE 1 : Great Questions ----------
   const mQ=document.getElementById('m-questions');
   const cardEls={};
-  D.questions.forEach((q,qi)=>{
+  D.questions.forEach(q=>{
     const band=document.createElement('div'); band.className='band'; band.dataset.q=q.id;
     const side=document.createElement('div'); side.className='q-side';
-    side.innerHTML=`<div class="q-tag"><span class="q-folio">${toRoman(qi+1)}</span>${esc0(qLabel(q).replace(/[?？]/,''))}</div>`+
+    side.innerHTML=`<div class="q-tag">${esc0(qLabel(q).replace(/[?？]/,''))}</div>`+
       `<div class="q-title">${esc0(qLabel(q))}</div>`+
       `<div class="q-frame">${esc0(qFraming(q))}</div>`+
       `<div class="q-bar" style="background:${q.hue}"></div>`;
     const cards=document.createElement('div'); cards.className='cards';
-    D.concepts.filter(c=>c.q===q.id).sort((a,b)=>a.era-b.era).forEach((c,ci)=>{
+    D.concepts.filter(c=>c.q===q.id).sort((a,b)=>a.era-b.era).forEach(c=>{
       const el=document.createElement('div'); el.className='card'+(c.contested?' contested':'');
-      el.style.borderLeftColor=c.color; el.dataset.folio=toRoman(ci+1);
-      const folio=`<span class="c-folio">${toRoman(ci+1)}</span>`;
+      el.style.borderLeftColor=c.color;
       const mark=c.contested?` <span class="c-contested" title="Contested — actively debated">†</span>`:'';
       el.innerHTML=`<div class="c-glyph" aria-hidden="true"></div>`+
         `<div class="c-id">${esc0(cName(c))}</div>`+
-        `<div class="c-trad">${folio} · ${esc0(cTrad(c))} · ${eraTxt(c.era)}${mark}</div>`+
+        `<div class="c-trad">${esc0(cTrad(c))} · ${eraTxt(c.era)}${mark}</div>`+
         `<div class="c-gloss">${esc0(cGloss(c))}</div>`;
       el.onclick=(e)=>{ e.stopPropagation(); openConcept(c.id); };
       cards.appendChild(el); cardEls[c.id]=el;
@@ -12958,14 +12948,14 @@
     // no-ops — the gateways + recurring works are an English-only surface.)
     renderBegin(); renderRecurring();
     // Questions: relabel bands + cards in place (keeps cardEls refs + filter display)
-    D.questions.forEach((q,qi)=>{ const band=mQ.querySelector('.band[data-q="'+q.id+'"]'); if(!band) return;
-      const t=band.querySelector('.q-tag'); if(t) t.innerHTML=`<span class="q-folio">${toRoman(qi+1)}</span>${esc0(qLabel(q).replace(/[?？]/,''))}`;
+    D.questions.forEach(q=>{ const band=mQ.querySelector('.band[data-q="'+q.id+'"]'); if(!band) return;
+      const t=band.querySelector('.q-tag'); if(t) t.textContent=qLabel(q).replace(/[?？]/,'');
       const ti=band.querySelector('.q-title'); if(ti) ti.textContent=qLabel(q);
       const fr=band.querySelector('.q-frame'); if(fr) fr.textContent=qFraming(q); });
     D.concepts.forEach(c=>{ const el=cardEls[c.id]; if(!el) return;
       const id=el.querySelector('.c-id'); if(id) id.textContent=cName(c);
       const tr=el.querySelector('.c-trad'); if(tr){ const mk=c.contested?' <span class="c-contested" title="Contested — actively debated">†</span>':'';
-        tr.innerHTML=`<span class="c-folio">${el.dataset.folio||''}</span> · ${esc0(cTrad(c))} · ${eraTxt(c.era)}${mk}`; }
+        tr.innerHTML=`${esc0(cTrad(c))} · ${eraTxt(c.era)}${mk}`; }
       const gl=el.querySelector('.c-gloss'); if(gl) gl.textContent=cGloss(c); });
     // Filter rail: relabel pills/rows in place (preserve on/off state)
     document.querySelectorAll('#flt-read .flt-pill, #flt-region .flt-pill').forEach(p=>{ p.textContent=T(p.dataset.s); });

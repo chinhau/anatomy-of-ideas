@@ -1,6 +1,7 @@
 # ADR 0003 — Hermetic-codex art direction
 
-**Status:** Accepted · **Date:** 2026-06-23
+**Status:** Accepted (amended 2026-06-23 — numerology strand dropped, see below)
+· **Date:** 2026-06-23
 
 ## Context
 
@@ -31,7 +32,8 @@ four influences **nest** under this one direction:
 - **Tarot** = compositional grammar only (bordered emblem-plate cards, Roman
   numerals). **No suit icons, no fortune framing.**
 - **Numerology** = invisible structure (real counts → layout; manuscript
-  foliation; φ scale). **Never "lucky numbers."**
+  foliation; φ scale). **Never "lucky numbers."** — _**Dropped 2026-06-23**; see
+  "Amendment" below._
 - **Occult / alchemy** = binding texture (engraved hairlines, copperplate
   hatching, vermilion rubrication, seal roundels, alchemical Unicode glyphs).
 
@@ -67,26 +69,45 @@ regenerates `index.html`; `npm test` smoke-tests it.
   rule); concept cards as emblem-plates (inset double-rule); drawer colophon
   (⁂ asterism via `.dr-body::after`).
 
-- **Phase 3 — "Number & frame"** (commit **`2e6890c`**, deployed): manuscript
-  foliation. Roman-numeral folios (`toRoman()` helper, `.c-folio`) index each
-  concept by era *within its question*, and each question by its place in the
-  eleven (`.q-folio`). The 6 `contested` concepts now surface a vermilion
-  dagger † (`.c-contested`), closing a long-open canon-audit item ("contested
-  ideas were invisible"). The drawer portrait/sigil niche (`.dr-fig-wrap`)
-  became a double-rule engraved cameo over a hatched ground. Both
-  language-relabel paths in `applyLang` were updated so folios and the dagger
-  survive a language switch.
+- **Phase 3 — "Number & frame"** (commit **`2e6890c`**, deployed; foliation
+  later reverted — see Amendment): originally shipped Roman-numeral folios on
+  every concept card and question section, plus a vermilion `contested` dagger
+  and a double-rule engraved drawer cameo. The folios were the numerology
+  strand; they were removed the same day. **What remains from Phase 3:** the
+  `contested` dagger † (`.c-contested`, closing a long-open canon-audit item)
+  and the `.dr-fig-wrap` engraved cameo over a hatched ground.
+
+## Amendment — numerology strand dropped (2026-06-23)
+
+A Steve-Jobs-style simplicity critique (and the maintainer's own read of the
+shipped Questions header) found the Phase-3 Roman-numeral foliation was **too
+much** and, more fundamentally, **misfired on intent**:
+
+- The per-question gold numeral re-introduced the "implied mandatory sequence"
+  problem that **ADR 0001 deliberately removed** when it stripped the tab
+  numerals — an internal self-contradiction.
+- The per-card folio merely **duplicated the era** the card was already sorted
+  and labelled by; no reader could act on it. That is numerology-for-its-own-
+  sake, which **violates guardrail 1** (ornament must encode meaning).
+- "Numerology" was also a **misread of the brief**: the maintainer meant
+  repeating-digit / angel numbers (111, 222…), not manuscript foliation.
+
+**Decision:** drop the **numerology** influence entirely. Repeating-digit
+numerology cannot encode a real datum without being forced, so honouring it
+would mean garnish — exactly what the guardrails forbid. The art direction now
+nests **three** influences (astrology, tarot, occult/alchemy), not four. The
+folios (`.c-folio`, `.q-folio`, the `toRoman()` helper and their CSS) were
+removed; the `contested` dagger and drawer cameo were kept.
 
 ## Deferred (not started)
 
-These are higher-blast-radius or per-view internals, held until phases 1–3 can
-be judged live as a whole:
+Per-view internals, held until the shipped phases can be judged live as a whole:
 
-- **φ type/spacing scale** — a global change to every measurement; risky.
-- **Ogdoad octagon layout** for the eleven questions — the boldest numerology
-  move.
 - **Timeline** centuries as ruled ledger staves; **Lens "Doors"** board as
   framed emblem-plates; **node-link edges** as engraved hairline curves.
+
+(The former numerology-derived deferrals — φ type/spacing scale, ogdoad octagon
+layout — are dropped with the strand.)
 
 ## Alternatives considered
 
