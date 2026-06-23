@@ -178,6 +178,21 @@ assert(/\d+\s*\/\s*\d+/.test($('#progress').textContent), 'progress chip shows N
 assert(!!window.localStorage.getItem('aoi.reading.v1'), 'reading status persisted to localStorage');
 // renderStatus re-renders the buttons, so re-query for the now-active one.
 assert($$('#dr-status button').find(b=>b.dataset.s==='read')?.classList.contains('on'), 'read button shows active state after selection');
+// the card itself reflects status via data-rs (drives the dim+check / gold-dot CSS).
+eq($$('#m-questions .card')[0].dataset.rs, 'read', 'card carries data-rs="read" after marking read');
+click($$('#dr-status button').find(b=>b.dataset.s==='unread'));
+eq($$('#m-questions .card')[0].dataset.rs, 'unread', 'card data-rs returns to "unread"');
+
+// SEARCH "locate in all tabs": clicking an idea result locates it in the active tab (no forced switch)
+click($('.switch button[data-mode="questions"]'));
+const sIdea=D.concepts[0].id;
+const s2=$('#search2'); s2.value=sIdea; s2.dispatchEvent(new window.window.Event('input',{bubbles:true}));
+const ideaRes=$$('#res2 .r2').find(e=>/idea/.test(e.querySelector('.q')?.textContent||''));
+assert(!!ideaRes, 'search shows an idea result');
+click(ideaRes);
+assert($('#m-questions').classList.contains('active'), 'search result stays on the current tab (no forced switch)');
+const locCard=$$('#m-questions .card .c-id').find(e=>e.textContent===sIdea)?.closest('.card');
+assert(locCard?.classList.contains('sel'), 'clicking an idea search result locates (sel) its card in the current tab');
 
 // CONTESTED badge: opening a contested concept reveals the tag, a normal one hides it
 const contestedId=D.concepts.find(c=>c.contested)?.id;

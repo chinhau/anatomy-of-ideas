@@ -358,8 +358,11 @@
   #dr-foil a{color:var(--parchment);border-bottom:1px dotted var(--muted);cursor:pointer;text-decoration:none;}
   #dr-foil a:hover{color:var(--gold);}
 
-  /* reading dim overlay */
-  .rdim{opacity:.32 !important;}
+  /* reading status on cards */
+  .card[data-rs="read"]{opacity:.5;}
+  .card[data-rs="read"] .c-id::after{content:" ✓";color:var(--gold);font-weight:600;}
+  .card[data-rs="reading"] .c-id::after{content:" ●";color:var(--gold);font-size:9px;vertical-align:middle;}
+  .card.sel[data-rs="read"]{opacity:1;}
 
   /* keyboard focus rings on interactive SVG nodes */
   .tl-node:focus,.cnode:focus,.fnode:focus,
@@ -704,6 +707,7 @@
     <aside id="drawer" role="dialog" aria-label="Idea details" aria-modal="false">
       <div class="dr-head">
         <button id="drclose" aria-label="Close details">×</button>
+        <div class="dr-figure" id="dr-figure"></div>
         <div class="dr-q" id="dr-q"></div>
         <h2 id="dr-name"></h2>
         <div class="dr-meta" id="dr-meta"></div>
@@ -1276,9 +1280,10 @@
   const RKEY='aoi.reading.v1';
   let readStatus={}; try{ const r=JSON.parse(localStorage.getItem(RKEY)); readStatus=(r&&typeof r==='object'&&!Array.isArray(r))?r:{}; }catch(e){ readStatus={}; }
   function statusOf(id){ return readStatus[id]||'unread'; }
+  Object.keys(cardEls).forEach(id=>{ cardEls[id].dataset.rs=statusOf(id); });
   function saveRead(){ try{ localStorage.setItem(RKEY,JSON.stringify(readStatus)); }catch(e){} }
   function setStatus(id,st){ if(st==='unread') delete readStatus[id]; else readStatus[id]=st;
-    saveRead(); renderStatus(id); updateProgress(); applyFilters(); }
+    saveRead(); renderStatus(id); if(cardEls[id]) cardEls[id].dataset.rs=statusOf(id); updateProgress(); applyFilters(); }
   function updateProgress(){ const n=D.concepts.filter(c=>statusOf(c.id)==='read').length;
     const el=document.getElementById('progress'); if(el) el.innerHTML='<b>'+n+'</b> / '+D.concepts.length+' read'; }
   function renderStatus(id){ const w=document.getElementById('dr-status'); if(!w) return; const cur=statusOf(id);
@@ -1583,6 +1588,21 @@
 
   // ========== deep-link routing ==========
   let currentMode='questions', suppressHash=false;
+  // search "locate in all tabs": persistent target (an idea + a bridged thinker);
+  // re-located in whichever view is active, refreshed on every tab switch.
+  let locIdea=null, locPerson=null;
+  function locateInView(mode){
+    if(mode==='questions'){
+      if(locIdea&&cardEls[locIdea]){ crossHighlight(locIdea);
+        cardEls[locIdea].scrollIntoView({behavior:reduce?'auto':'smooth',block:'center'}); }
+    } else if(mode==='timeline'){
+      if(locIdea){ buildTimeline(); tlHighlight(locIdea); }
+    } else if(mode==='lens'){
+      if(locIdea){ buildLens(); showLensGraph(); focusLens(locIdea,null,{trail:'reset'}); }
+    } else if(mode==='constellation'){
+      if(locPerson) focusPerson(locPerson);
+    }
+  }
   function setHash(s){ if(suppressHash) return; const h='#'+s;
     if(location.hash!==h){ try{ history.replaceState(null,'',h); }catch(e){ location.hash=h; } } }
   function parseHash(){
@@ -1631,6 +1651,7 @@
     if(selected) crossHighlight(selected);
     // Paths writes its own detailed hash (/paths/<pane>/<arg>) via setPathsPane.
     if(!selected && mode!=='paths') setHash('/'+mode);
+    locateInView(mode);   // re-locate the searched target in the new view
   }
   document.querySelectorAll('.switch button').forEach(b=>b.onclick=()=>setMode(b.dataset.mode));
   document.getElementById('paths-threads').onclick=()=>setPathsPane('threads');
@@ -1733,11 +1754,17 @@
         `<span class="q">${h.tag}</span>`;
       el.onclick=()=>{ r2.classList.remove('open'); s2.value=h.id;
         if(h.kind==='idea'){
-          if(document.getElementById('m-constellation').classList.contains('active')) showIdeaInLens(h.id);
-          openConcept(h.id);
-          if(document.getElementById('m-questions').classList.contains('active'))
-            cardEls[h.id].scrollIntoView({behavior:reduce?'auto':'smooth',block:'center'});
-        } else { setMode('constellation'); focusPerson(h.id); }
+          locIdea=h.id; locPerson=null;
+          // bridge: pick a thinker behind this idea that exists in the constellation
+          for(const t of ((cById[h.id]&&cById[h.id].thinkers)||[])){ const a=atlasIdForThinker(t); if(a){ locPerson=a; break; } }
+          openConcept(h.id);          // ideas also open the dossier
+          locateInView(currentMode);  // stay on the current tab, just locate
+        } else {
+          locPerson=h.id;
+          // bridge: pick a concept this thinker holds
+          const cs=conceptsForPerson(h.id); locIdea=cs.length?cs[0]:null;
+          locateInView(currentMode);
+        }
       };
       r2.appendChild(el);
     });
