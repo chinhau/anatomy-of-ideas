@@ -136,20 +136,6 @@
   .card::before{content:'';position:absolute;inset:3px;border:0.5px solid rgba(195,199,207,0.07);
     border-radius:2px;pointer-events:none;}
 
-  /* ===== MODE 3 : DIALECTIC FLOW ===== */
-  #m-flow{overflow:auto;padding:6px 0 40px;}
-  #flow-svg{display:block;}
-  .lane-bg:nth-child(even){fill:rgba(255,255,255,0.012);}
-  .arg-title{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:600;fill:var(--parchment);}
-  .arg-note{font-size:11px;fill:var(--muted);}
-  .flow-edge{stroke:rgba(233,220,192,0.45);stroke-width:1.4;fill:none;}
-  .flow-edge.rej{stroke:var(--oppose);stroke-dasharray:4 4;}
-  .fnode{cursor:pointer;}
-  .fnode .label{font-family:'Cormorant Garamond',serif;font-size:14.5px;font-weight:600;fill:var(--parchment);}
-  .fnode .sub{font-size:9.5px;fill:var(--muted);}
-  .fnode .role{font-size:8.5px;letter-spacing:0.16em;text-transform:uppercase;}
-  .flow-axis{font-size:10px;fill:var(--muted);letter-spacing:0.1em;}
-
   /* ---------- shared dossier ---------- */
   #drawer{position:absolute;top:0;right:0;height:100%;width:360px;max-width:90vw;z-index:40;
     background-color:var(--void);background-image:var(--hatch),linear-gradient(180deg,var(--void-2),var(--void));
@@ -360,40 +346,6 @@
   #tl-svg .tl-node text{font-size:10px;fill:var(--parchment-dim);opacity:0;pointer-events:none;}
   #tl-svg .tl-node.lab text{opacity:1;}
 
-  /* ---------- threads stepper ---------- */
-  #thr-wrap{display:flex;height:100%;}
-  #thr-list{flex:none;width:250px;border-right:1px solid var(--rule);overflow-y:auto;padding:14px 0;}
-  .thr-item{padding:10px 18px;cursor:pointer;border-left:2px solid transparent;transition:all .15s;}
-  .thr-item:hover{background:rgba(217,182,95,.06);}
-  .thr-item.on{background:rgba(217,182,95,.12);border-left-color:var(--gold);}
-  .thr-item .tt{font-family:'Cormorant Garamond',serif;font-size:16px;color:var(--parchment);}
-  .thr-item .nt{font-size:11px;color:var(--muted);margin-top:2px;}
-  #thr-stage{flex:1;display:flex;flex-direction:column;padding:30px 40px;overflow-y:auto;min-width:0;}
-  #thr-title{font-family:'Cormorant Garamond',serif;font-size:27px;color:var(--gold);}
-  #thr-title .note{display:block;font-size:14px;font-style:italic;color:var(--parchment-dim);margin-top:4px;}
-  #thr-rail{display:flex;align-items:center;gap:0;margin:26px 0 8px;flex-wrap:wrap;}
-  .thr-dot{display:flex;align-items:center;gap:0;}
-  .thr-dot .pip{width:13px;height:13px;border-radius:50%;border:2px solid var(--rule);background:var(--void);
-    cursor:pointer;transition:all .2s;flex:none;}
-  .thr-dot.on .pip{transform:scale(1.35);box-shadow:0 0 10px currentColor;}
-  .thr-dot.done .pip{background:currentColor;}
-  .thr-conn{width:46px;height:2px;background:var(--rule);}
-  .thr-conn.rej{background:var(--oppose);}
-  #thr-step{margin-top:14px;flex:1;}
-  .thr-role{font-size:11px;letter-spacing:.22em;text-transform:uppercase;font-weight:500;}
-  .thr-name{font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--parchment);margin:6px 0 2px;
-    cursor:pointer;display:inline-block;}
-  .thr-name:hover{color:var(--gold);}
-  .thr-meta{font-size:12px;color:var(--muted);margin-bottom:12px;}
-  .thr-gloss{font-size:16px;line-height:1.62;color:var(--parchment);max-width:560px;}
-  .thr-why{font-size:13px;line-height:1.55;color:var(--parchment-dim);max-width:560px;margin-top:14px;
-    padding-left:14px;border-left:2px solid var(--panel-edge);}
-  #thr-nav{display:flex;align-items:center;gap:16px;margin-top:24px;}
-  #thr-count{font-size:12px;color:var(--muted);}
-
-  /* Arguments shell: the threads pane fills the whole tab. */
-  #m-paths.view.active{display:flex;flex-direction:column;}
-  #m-paths #thr-wrap{height:auto;flex:1;min-height:0;}
 
   /* ---------- drawer: foil + reading status ---------- */
   .dr-qstatus{display:flex;align-items:baseline;gap:6px;margin-top:6px;font-size:11px;cursor:help;}
@@ -416,9 +368,9 @@
   .card.sel[data-rs="read"]{opacity:1;}
 
   /* keyboard focus rings on interactive SVG nodes */
-  .tl-node:focus,.cnode:focus,.fnode:focus,
-  .tl-node:focus-visible,.cnode:focus-visible,.fnode:focus-visible{outline:none;}
-  .tl-node:focus circle,.cnode:focus circle,.fnode:focus circle{
+  .tl-node:focus,.cnode:focus,
+  .tl-node:focus-visible,.cnode:focus-visible{outline:none;}
+  .tl-node:focus circle,.cnode:focus circle{
     stroke:var(--gold);stroke-width:2.5px;}
   .tl-node:focus text,.cnode:focus text{opacity:.95 !important;}
 
@@ -670,8 +622,7 @@
     <div class="switch" role="tablist" aria-label="Views">
       <button data-mode="questions" class="active" role="tab" aria-selected="true"><span data-i18n="Questions">Questions</span></button>
       <button data-mode="timeline" role="tab" aria-selected="false"><span data-i18n="Timeline">Timeline</span></button>
-      <button data-mode="paths" role="tab" aria-selected="false"><span data-i18n="Arguments">Arguments</span></button>
-      <button data-mode="lens" role="tab" aria-selected="false"><span data-i18n="Ideas">Ideas</span></button>
+      <button data-mode="lens" role="tab" aria-selected="false"><span data-i18n="Concepts">Concepts</span></button>
       <button data-mode="constellation" role="tab" aria-selected="false"><span data-i18n="Thinkers">Thinkers</span></button>
     </div>
     <div id="lang-switch" role="group" aria-label="Language">
@@ -791,25 +742,6 @@
         <div class="row" style="margin-top:6px;opacity:.7" data-i18n="size = ideas built on it">size = ideas built on it</div>
       </div>
       <div class="con-hint" data-i18n="One lane per great question, in fixed order. Colour marks where the thinking stands; the band shows when a question was actually asked — its height is how often, not an even spread to now. A thin band can mean real quiet or a gap in this atlas.">One lane per great question, in fixed order. Colour marks where the thinking stands; the band shows when a question was actually asked — its height is how often, not an even spread to now. A thin band can mean real quiet or a gap in this atlas.</div>
-    </section>
-    <!-- Map "Arguments": the dialectic layer. Long arguments walked one move at a
-         time — thesis provokes antithesis provokes synthesis. (The cross-tradition
-         Reading-journeys view was removed in this redesign; Lens is the surviving
-         node-link graph.) -->
-    <section id="m-paths" class="view">
-      <div id="thr-wrap">
-        <nav id="thr-list" aria-label="Dialectic threads"></nav>
-        <div id="thr-stage">
-          <div id="thr-title"></div>
-          <div id="thr-rail"></div>
-          <div id="thr-step"></div>
-          <div id="thr-nav">
-            <button id="thr-prev" class="hbtn" data-i18n="‹ Prev">‹ Prev</button>
-            <span id="thr-count"></span>
-            <button id="thr-next" class="hbtn" data-i18n="Next ›">Next ›</button>
-          </div>
-        </div>
-      </div>
     </section>
     <section id="m-constellation" class="view">
       <svg id="con-svg"></svg>
@@ -940,10 +872,6 @@
   const qLabel   = q => (LANG==='en'?undefined:pick(((I18N.questions||{})[q.id]||{}).label))   || q.label;
   const qFraming = q => (LANG==='en'?undefined:pick(((I18N.questions||{})[q.id]||{}).framing)) || q.framing;
   const qWhy     = q => (LANG==='en'?undefined:pick(((I18N.questions||{})[q.id]||{}).statusWhy)) || q.statusWhy;
-  const aTitle = a => (LANG==='en'?undefined:pick(((I18N.arguments||{})[a.title]||{}).title)) || a.title;
-  const aNote  = a => (LANG==='en'?undefined:pick(((I18N.arguments||{})[a.title]||{}).note))  || a.note;
-  // a step name is usually a concept id; translate via concept name, else step table
-  const stepName = s => (cById[s] ? cName(cById[s]) : ((LANG==='en'?undefined:pick((I18N.steps||{})[s])) || s));
   const caption  = m => (LANG==='en'?undefined:pick((I18N.captions||{})[m])) || (CAPTIONS[m]||'');
   // Captured once at load: the authored English About markup, restored when LANG==='en'.
   const ABOUT_EN = (document.getElementById('about-content')||{}).innerHTML || '';
@@ -964,9 +892,8 @@
   const CAPTIONS = {
     questions:'<b>Questions</b> Eleven questions every tradition has wrestled with — and the rival answers, side by side. Click any answer to light up the ideas it builds on, rejects, or quietly echoes.',
     timeline:'<b>Timeline</b> One lane per great question, in fixed order. Colour marks where the thinking stands; the band shows when it was actually asked — its height is how often, not an even spread to now. Hover an idea to trace its kin.',
-    paths:'<b>Arguments</b> Long arguments, walked one move at a time — thesis provokes antithesis provokes synthesis. Pick a thread on the left and step through it.',
     constellation:'<b>Thinkers</b> The original constellation — every thinker and school as a star, clustered into the traditions of West, Psyche and East. Click a star to cross into the ideas they shaped.',
-    lens:'<b>Ideas</b> One idea at the centre, the thoughts it touches arranged around it. Travel from neighbour to neighbour, roll the dice to wander, or let a guided tour walk you through a lineage.'
+    lens:'<b>Concepts</b> One idea at the centre, the thoughts it touches arranged around it. Travel from neighbour to neighbour, roll the dice to wander, or let a guided tour walk you through a lineage.'
   };
 
   // ---------- shared drawer ----------
@@ -1107,8 +1034,6 @@
         else el.classList.add('dim');
       });
     }
-    // mode-3 flow
-    if(flowBuilt) flowHighlight(id);
     if(tlBuilt) tlHighlight(id);
   }
 
@@ -1509,74 +1434,6 @@
     if(lnodeG) lnodeG.selectAll('g.lnode text').text(d=>cName(d.c));
     if(lensFocus) narrate(cById[lensFocus],null); }
 
-  // ---------- MODE 3 : Dialectic Flow (lazy) ----------
-  let flowBuilt=false, fsvg, fNodePos={};
-  function buildFlow(){
-    if(flowBuilt) return; flowBuilt=true;
-    const host=document.getElementById('m-flow');
-    const W=Math.max(host.clientWidth, 980);
-    const padL=40, padR=40, top=20, laneH=128;
-    const args=D.arguments;
-    const maxSteps=Math.max(...args.map(a=>a.steps.length));
-    const colW=(W-padL-padR-220)/(maxSteps-1);
-    const H=top + args.length*laneH + 60;
-    fsvg=d3.select('#flow-svg').attr('width',W).attr('height',H).attr('viewBox',`0 0 ${W} ${H}`);
-
-    const defs=fsvg.append('defs');
-    defs.append('marker').attr('id','fa').attr('viewBox','0 -5 10 10').attr('refX',9).attr('refY',0)
-      .attr('markerWidth',6).attr('markerHeight',6).attr('orient','auto')
-      .append('path').attr('d','M0,-4L9,0L0,4').attr('fill','rgba(233,220,192,.55)');
-    defs.append('marker').attr('id','far').attr('viewBox','0 -5 10 10').attr('refX',9).attr('refY',0)
-      .attr('markerWidth',6).attr('markerHeight',6).attr('orient','auto')
-      .append('path').attr('d','M0,-4L9,0L0,4').attr('fill','var(--oppose)');
-
-    const ROLE={thesis:'Thesis',antithesis:'Antithesis',synthesis:'Synthesis',response:'Response'};
-    const ROLE_C={thesis:'var(--parchment)',antithesis:'var(--oppose)',synthesis:'var(--gold)',response:'var(--echo)'};
-
-    args.forEach((arg,li)=>{
-      const y0=top+li*laneH;
-      fsvg.append('rect').attr('class','lane-bg').attr('x',0).attr('y',y0).attr('width',W).attr('height',laneH);
-      fsvg.append('text').attr('class','arg-title').attr('x',padL).attr('y',y0+34).text(arg.title);
-      fsvg.append('text').attr('class','arg-note').attr('x',padL).attr('y',y0+52)
-        .text(arg.note);
-      // wrap note if long handled by keeping notes short
-      const baseX=padL+212, cy=y0+laneH/2+14;
-      const pts=arg.steps.map((s,i)=>({x:baseX+i*colW, y:cy, step:s}));
-      // edges
-      for(let i=0;i<pts.length-1;i++){
-        const a=pts[i],b=pts[i+1];
-        const isRej = b.step[1]==='antithesis';
-        fsvg.append('path').attr('class','flow-edge'+(isRej?' rej':''))
-          .attr('d',`M${a.x+78},${a.y-6} C${a.x+78+colW*0.4},${a.y-6} ${b.x-78-colW*0.4},${b.y-6} ${b.x-78},${b.y-6}`)
-          .attr('marker-end',isRej?'url(#far)':'url(#fa)');
-      }
-      // nodes
-      pts.forEach(p=>{
-        const c=cById[p.step[0]], role=p.step[1];
-        const gnode=fsvg.append('g').attr('class','fnode').attr('transform',`translate(${p.x},${p.y})`)
-          .style('cursor','pointer').on('click',(e)=>{e.stopPropagation();openConcept(c.id);});
-        gnode.append('circle').attr('r',7).attr('fill',c.color).attr('stroke','var(--void)').attr('stroke-width',1.5);
-        gnode.append('text').attr('class','role').attr('y',-16).attr('text-anchor','middle')
-          .attr('fill',ROLE_C[role]).text(ROLE[role]);
-        gnode.append('text').attr('class','label').attr('y',26).attr('text-anchor','middle').text(c.id);
-        gnode.append('text').attr('class','sub').attr('y',40).attr('text-anchor','middle')
-          .text(`${c.tradLabel} · ${eraTxt(c.era)}`);
-        (fNodePos[c.id]=fNodePos[c.id]||[]).push(gnode);
-      });
-    });
-    // time arrow
-    fsvg.append('text').attr('class','flow-axis').attr('x',padL+212).attr('y',H-22).text('EARLIER');
-    fsvg.append('text').attr('class','flow-axis').attr('x',W-padR).attr('y',H-22).attr('text-anchor','end').text('LATER →');
-    fsvg.append('line').attr('x1',padL+212).attr('y1',H-34).attr('x2',W-padR).attr('y2',H-34)
-      .attr('stroke','var(--rule)').attr('stroke-dasharray','2 6');
-    fsvg.on('click',()=>{ if(selected) closeDrawer(); });
-  }
-  function flowHighlight(id){
-    Object.entries(fNodePos).forEach(([cid,gs])=>{
-      gs.forEach(g=>g.style('opacity', !id?1:(cid===id||((adj.get(id)||[]).some(e=>e.other===cid))?1:0.25)));
-    });
-  }
-
   // ========== reading status (persisted) ==========
   const RKEY='aoi.reading.v1';
   let readStatus={}; try{ const r=JSON.parse(localStorage.getItem(RKEY)); readStatus=(r&&typeof r==='object'&&!Array.isArray(r))?r:{}; }catch(e){ readStatus={}; }
@@ -1812,48 +1669,6 @@
   function tlApplyFilter(){ if(!tlBuilt) return; tlNode.style('display',c=>passes(c)?null:'none');
     if(!selected) tlHighlight(null); }
 
-  // ========== ARGUMENTS (guided walk) ==========
-  let thrBuilt=false, thrI=0, thrStep=0;
-  const ROLE_NAME={thesis:'Thesis',antithesis:'Antithesis',synthesis:'Synthesis',response:'Response'};
-  const ROLE_COL={thesis:'var(--parchment)',antithesis:'var(--oppose)',synthesis:'var(--gold)',response:'var(--echo)'};
-  function buildThreads(){
-    if(thrBuilt) return; thrBuilt=true;
-    const list=document.getElementById('thr-list');
-    list.innerHTML=D.arguments.map((a,i)=>'<div class="thr-item'+(i===0?' on':'')+'" data-i="'+i+'" tabindex="0"><div class="tt">'+esc0(aTitle(a))+'</div><div class="nt">'+esc0(aNote(a))+'</div></div>').join('');
-    list.querySelectorAll('.thr-item').forEach(el=>{ const go=()=>{ thrI=+el.dataset.i; thrStep=0; renderThread(); };
-      el.onclick=go; el.onkeydown=e=>{ if(e.key==='Enter') go(); }; });
-    document.getElementById('thr-prev').onclick=()=>{ if(thrStep>0){ thrStep--; renderThread(); } };
-    document.getElementById('thr-next').onclick=()=>{ const a=D.arguments[thrI]; if(thrStep<a.steps.length-1){ thrStep++; renderThread(); } };
-    renderThread();
-  }
-  function whyText(a,i){ const role=a.steps[i][1], prev=stepName(a.steps[i-1][0]);
-    if(role==='antithesis') return T('The counter-move — it pushes back against {prev}.').replace('{prev}',prev);
-    if(role==='synthesis') return T('The resolution — it tries to hold the tension together.');
-    if(role==='response') return T('A reply in the same key, answering {prev} from another angle.').replace('{prev}',prev);
-    return ''; }
-  function renderThread(){
-    const a=D.arguments[thrI];
-    document.querySelectorAll('.thr-item').forEach(el=>el.classList.toggle('on',+el.dataset.i===thrI));
-    document.getElementById('thr-title').innerHTML=esc0(aTitle(a))+'<span class="note">'+esc0(aNote(a))+'</span>';
-    const rail=document.getElementById('thr-rail'); rail.innerHTML='';
-    a.steps.forEach((s,i)=>{ const c=cById[s[0]];
-      if(i){ const cn=document.createElement('div'); cn.className='thr-conn'+(s[1]==='antithesis'?' rej':''); rail.appendChild(cn); }
-      const d=document.createElement('div'); d.className='thr-dot'+(i===thrStep?' on':'')+(i<=thrStep?' done':'');
-      d.style.color=c?c.color:'var(--muted)';
-      const pip=document.createElement('div'); pip.className='pip'; pip.title=c?cName(c):stepName(s[0]);
-      pip.onclick=()=>{ thrStep=i; renderThread(); }; d.appendChild(pip); rail.appendChild(d); });
-    const s=a.steps[thrStep], c=cById[s[0]];
-    const st=document.getElementById('thr-step');
-    st.innerHTML='<div class="thr-role" style="color:'+ROLE_COL[s[1]]+'">'+esc0(T(ROLE_NAME[s[1]]))+'</div>'+
-      '<div class="thr-name" id="thr-open">'+esc0(c?cName(c):stepName(s[0]))+'</div>'+
-      '<div class="thr-meta">'+(c?esc0(cTrad(c))+' · '+eraTxt(c.era):'')+'</div>'+
-      '<div class="thr-gloss">'+(c?esc0(cGloss(c)):'')+'</div>'+
-      (thrStep>0?'<div class="thr-why">'+whyText(a,thrStep)+'</div>':'');
-    const op=document.getElementById('thr-open'); if(op&&c){ op.onclick=()=>openConcept(c.id); }
-    document.getElementById('thr-count').textContent=(thrStep+1)+' / '+a.steps.length;
-    setHash('/paths/'+thrI+'.'+thrStep);
-  }
-
   // ========== deep-link routing ==========
   let currentMode='questions', suppressHash=false;
   // search "locate in all tabs": persistent target (an idea + a bridged thinker);
@@ -1879,18 +1694,10 @@
     suppressHash=true;
     try{
       const mode=p[0];
-      // The Arguments tab keeps the /paths route. Accept the new /paths/<i>.<s>
-      // form plus legacy /paths/threads/<i>.<s>, /threads/<i>.<s>, and bare
-      // /journeys/* hashes (the Reading-journeys view was removed) so old deep
-      // links still land on the tab.
+      // The Arguments/Reading-journeys views were removed; redirect their legacy
+      // /paths, /threads and /journeys deep links to the default Questions tab.
       if(mode==='paths'||mode==='threads'||mode==='journeys'){
-        setMode('paths');
-        let arg=null;
-        if(mode==='threads'){ arg=p[1]; }
-        else if(mode==='paths'){ arg=(p[1]==='threads')?p[2]:p[1]; }
-        if(arg){ const seg=String(arg).split('.');
-          thrI=Math.max(0,Math.min(D.arguments.length-1,+seg[0]||0));
-          thrStep=Math.max(0,Math.min(D.arguments[thrI].steps.length-1,+seg[1]||0)); renderThread(); }
+        setMode('questions');
       } else {
         if(mode && views[mode]) setMode(mode);
         if(p[1]==='idea' && cById[p[2]]) openConcept(p[2]);
@@ -1901,7 +1708,7 @@
   }
 
   // ========== mode switching ==========
-  const views={questions:'m-questions',timeline:'m-timeline',paths:'m-paths',constellation:'m-constellation',lens:'m-lens'};
+  const views={questions:'m-questions',timeline:'m-timeline',constellation:'m-constellation',lens:'m-lens'};
   function setMode(mode){
     if(!views[mode]) mode='questions';
     currentMode=mode;
@@ -1910,13 +1717,11 @@
     Object.entries(views).forEach(([m,id])=>document.getElementById(id).classList.toggle('active',m===mode));
     document.getElementById('caption').innerHTML=caption(mode);
     if(mode==='timeline') buildTimeline();
-    if(mode==='paths'){ buildThreads(); renderThread(); }
     if(mode==='constellation') buildConstellation();
     if(mode==='lens') buildLens();
     applyFilters();
     if(selected) crossHighlight(selected);
-    // The Arguments tab writes its own detailed hash (/paths/<i>.<s>) via renderThread.
-    if(!selected && mode!=='paths') setHash('/'+mode);
+    if(!selected) setHash('/'+mode);
     locateInView(mode);   // re-locate the searched target in the new view
   }
   document.querySelectorAll('.switch button').forEach(b=>b.onclick=()=>setMode(b.dataset.mode));
@@ -1983,12 +1788,6 @@
     // dynamic surfaces
     document.getElementById('caption').innerHTML=caption(currentMode);
     tlRelabel(); lensRelabel(); conRelabel();
-    if(thrBuilt){
-      document.querySelectorAll('#thr-list .thr-item').forEach(el=>{ const a=D.arguments[+el.dataset.i]; if(!a) return;
-        const tt=el.querySelector('.tt'); if(tt) tt.textContent=aTitle(a);
-        const nt=el.querySelector('.nt'); if(nt) nt.textContent=aNote(a); });
-      renderThread();
-    }
     if(selected&&cById[selected]) openConcept(selected);
   }
   document.querySelectorAll('#lang-switch button').forEach(b=>b.onclick=()=>applyLang(b.dataset.lang));

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """The ideas themselves: concepts, the great questions they answer,
-the links between ideas, and the long dialectical arguments.
+and the links between ideas.
 Color is carried by QUESTION (the new organizing principle), not tradition."""
 
 import json
@@ -311,35 +311,6 @@ R = [
  ("Monadology","One Substance","rejects"),
 ]
 
-# ---- dialectical arguments: lanes of thesis -> antithesis -> synthesis ----
-# role: thesis / antithesis / synthesis / response
-ARG = [
- {"title":"Permanence vs. Flux","note":"Does anything stay the same, or is all becoming?",
-  "steps":[("Being is One","thesis"),("Everything Flows","antithesis"),
-           ("Process Reality","synthesis"),("Dependent Origination","response")]},
- {"title":"Reason vs. Experience","note":"Where does real knowledge come from?",
-  "steps":[("Rationalism","thesis"),("Empiricism","antithesis"),
-           ("Transcendental Idealism","synthesis")]},
- {"title":"Mind & Body","note":"What is the mind, and how does it relate to the body?",
-  "steps":[("Substance Dualism","thesis"),("Behaviorist Mind","antithesis"),
-           ("Functionalism","synthesis"),("Being-in-the-World","response")]},
- {"title":"Is There a Self?","note":"A famous convergence of East and West.",
-  "steps":[("Ātman = Brahman","thesis"),("Anattā (No-Self)","antithesis"),
-           ("Bundle Theory","response"),("Existential Self","synthesis")]},
- {"title":"Are We Free?","note":"The oldest standoff in ethics — now with a lab.",
-  "steps":[("Libertarian Free Will","thesis"),("Hard Determinism","antithesis"),
-           ("Compatibilism","synthesis")]},
- {"title":"Spirit vs. Matter in History","note":"What moves history forward?",
-  "steps":[("Absolute Idealism","thesis"),("Historical Materialism","antithesis"),
-           ("Power/Knowledge","response")]},
- {"title":"After God","note":"What happens to meaning when the Absolute withdraws?",
-  "steps":[("The Five Ways","thesis"),("The Death of God","antithesis"),
-           ("The Absurd","response"),("Logotherapy","synthesis")]},
- {"title":"The Cure for Suffering","note":"Extinguish desire — or affirm it?",
-  "steps":[("Four Noble Truths","thesis"),("Amor Fati","antithesis"),
-           ("Stoic Apatheia","response"),("Logotherapy","synthesis")]},
-]
-
 # ===================== build & validate =====================
 # "Contested" is scoped to claims presented in the register of established empirical
 # science that nonetheless lack consensus. It is deliberately NOT applied to doctrinal
@@ -376,12 +347,6 @@ def main():
     if miss:
         raise SystemExit("MISSING concept ids in links: " + ", ".join(sorted(miss)))
 
-    # validate arguments
-    for arg in ARG:
-        for cid, role in arg["steps"]:
-            if cid not in ids:
-                raise SystemExit(f"ARG references missing concept: {cid}")
-
     # degree
     deg = {c["id"]: 0 for c in concepts}
     for l in links:
@@ -396,7 +361,6 @@ def main():
                        "statusConf": STATUS[q[0]][2], "statusWhy": STATUS[q[0]][3]} for q in QUESTIONS],
         "concepts": concepts,
         "links": links,
-        "arguments": ARG,
     }
     with open("ideas.json", "w", encoding="utf-8") as f:
         json.dump(out, f, ensure_ascii=False)
@@ -404,7 +368,7 @@ def main():
     import collections
     by_t = collections.Counter(l["type"] for l in links)
     by_q = collections.Counter(c["q"] for c in concepts)
-    print(f"Concepts: {len(concepts)}  Links: {len(links)}  Arguments: {len(ARG)}")
+    print(f"Concepts: {len(concepts)}  Links: {len(links)}")
     print("Link types:", dict(by_t))
     print("Per question:", dict(by_q))
     iso = [c["id"] for c in concepts if deg[c["id"]] == 0]

@@ -139,20 +139,4 @@ NEW_R2 = [
 ]
 concepts.R.extend(NEW_R2)
 
-NEW_ARG2 = [
- {"title":"Is the Self a Performance?","note":"From staging, to self-exploitation, to a way out.",
-  "steps":[("The Presentation of Self","thesis"),("Society of the Spectacle","antithesis"),
-           ("The Burnout Society","response"),("Sitting in Forgetting","synthesis")]},
- {"title":"How Should We Meet Death?","note":"Three answers to mortality.",
-  "steps":[("Being-toward-Death","thesis"),("The Denial of Death","antithesis"),
-           ("The Art of Dying","synthesis")]},
-]
-concepts.ARG.extend(NEW_ARG2)
-
-# enrich the single free-will dialectic now that The Readiness Potential exists
-for _a in concepts.ARG:
-    if _a["title"] == "Are We Free?":
-        _a["steps"] = [("Libertarian Free Will","thesis"),("Hard Determinism","antithesis"),
-                       ("The Readiness Potential","response"),("Compatibilism","synthesis")]
-
 concepts.main()

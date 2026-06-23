@@ -170,22 +170,5 @@ NEW_R = [
 ]
 concepts.R.extend(NEW_R)
 
-# ---- new dialectical arguments ----
-NEW_ARG = [
- {"title":"What Is Consciousness?","note":"The defining puzzle of modern mind science.",
-  "steps":[("Materialism","thesis"),("The Hard Problem","antithesis"),
-           ("Panpsychism","response"),("The Embodied Mind","synthesis")]},
- {"title":"Where Does Meaning Come From?","note":"Given, or made by us?",
-  "steps":[("Inherent Purpose (Telos)","thesis"),("The Death of God","antithesis"),
-           ("Meaning Is Created","response"),("Logotherapy","synthesis")]},
- {"title":"How Do We Change?","note":"Three routes to transforming a mind.",
-  "steps":[("Behaviorist Mind","thesis"),("Cognitive Behavioral Therapy","antithesis"),
-           ("Mindfulness (MBSR)","synthesis")]},
- {"title":"Innate or Learned?","note":"Where does the mind's structure come from?",
-  "steps":[("Tabula Rasa","thesis"),("Universal Grammar","antithesis"),
-           ("Developmental Stages","synthesis")]},
-]
-concepts.ARG.extend(NEW_ARG)
-
 # ---- build & validate (reuses concepts.main on the mutated globals) ----
 concepts.main()

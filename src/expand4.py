@@ -166,29 +166,4 @@ NEW_R4 = [
 ]
 concepts.R.extend(NEW_R4)
 
-# ---- new dialectical threads carried by the literary canon ----
-NEW_ARG4 = [
- {"title":"The Burden of Freedom","note":"Is freedom a gift, or a weight we long to set down?",
-  "steps":[("Condemned to be Free","thesis"),("The Grand Inquisitor","antithesis"),
-           ("The Underground Man","response"),("Authenticity","synthesis")]},
- {"title":"Glory or Homecoming?","note":"What, in the end, does a mortal life add up to?",
-  "steps":[("The Heroic Code","thesis"),("The Nostos","antithesis"),
-           ("Mono no Aware","synthesis")]},
- {"title":"The Just Refusal","note":"When the order itself is unjust, what does conscience do?",
-  "steps":[("Antigone's Law","thesis"),("The Ministry of Truth","antithesis"),
-           ("The Ones Who Walk Away","response"),("Things Fall Apart","synthesis")]},
-]
-concepts.ARG.extend(NEW_ARG4)
-
-# weave the Grand Inquisitor into the existing "After God" thread, between the
-# Death of God and the Absurd — the literary bridge the author asked for.
-for _arg in concepts.ARG:
-    if _arg["title"] == "After God":
-        _steps = _arg["steps"]
-        for _i, (_cid, _role) in enumerate(_steps):
-            if _cid == "The Absurd":
-                _steps.insert(_i, ("The Grand Inquisitor", "response"))
-                break
-        break
-
 concepts.main()

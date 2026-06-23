@@ -47,11 +47,4 @@ NEW_R3 = [
 ]
 concepts.R.extend(NEW_R3)
 
-NEW_ARG3 = [
- {"title":"Turn Away, or Turn Toward?","note":"The book's own fault line: refusal versus relation.",
-  "steps":[("Cynic Self-Sufficiency","thesis"),("The Face of the Other","antithesis"),
-           ("Care Ethics","response"),("Engaged Buddhism","synthesis")]},
-]
-concepts.ARG.extend(NEW_ARG3)
-
 concepts.main()

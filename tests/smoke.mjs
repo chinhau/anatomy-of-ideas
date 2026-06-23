@@ -24,7 +24,7 @@ global.SVGElement=window.SVGElement; global.Element=window.Element; global.HTMLE
 global.localStorage=window.localStorage; global.location=window.location; global.history=window.history;
 window.d3=d3; window.matchMedia=()=>({matches:false,addEventListener(){}}); global.matchMedia=window.matchMedia;
 window.requestAnimationFrame=cb=>setTimeout(()=>cb(Date.now()),0);
-for(const id of ['m-questions','m-timeline','m-paths','m-constellation','m-lens']){const el=window.document.getElementById(id);
+for(const id of ['m-questions','m-timeline','m-constellation','m-lens']){const el=window.document.getElementById(id);
   Object.defineProperty(el,'clientWidth',{value:1180,configurable:true});Object.defineProperty(el,'clientHeight',{value:640,configurable:true});}
 window.Element.prototype.scrollIntoView=function(){};
 
@@ -60,8 +60,8 @@ eq($('.switch button.active')?.getAttribute('aria-selected'),'true','active tab 
 eq(window.getComputedStyle($('#empty-state')).display,'none','empty-state is display:none on load (not just [hidden])');
 
 // build every mode without throwing
-for(const mo of ['timeline','paths','constellation','lens','questions']) click($('.switch button[data-mode="'+mo+'"]'));
-console.log('5 modes built ok');
+for(const mo of ['timeline','constellation','lens','questions']) click($('.switch button[data-mode="'+mo+'"]'));
+console.log('4 modes built ok');
 
 // THRESHOLD / LANDING HERO: first-run welcome that names the feeling + honest scope.
 const gate=$('#gate');
@@ -160,23 +160,11 @@ assert($$('#tl-svg .tl-lane-lab').every(l=>l.style.fill===STINK[D.questions.find
   'lane label colour encodes epistemic status (not region/hue)');
 eq($$('#m-timeline .tl-stkey .row').length, 5, 'timeline legend keys all five status colours');
 
-// ARGUMENTS tab (formerly "Paths") — the dialectic walk fills the whole tab now
-// that the Reading-journeys view has been removed.
-click($('.switch button[data-mode="paths"]'));
-eq($('.switch button.active')?.dataset.mode, 'paths', 'Arguments tab activates');
-eq($('#thr-wrap').hasAttribute('hidden'), false, 'the Arguments walk is visible');
-assert(!$('#jrn-wrap'), 'the removed Reading-journeys pane is gone');
-assert(!$('#paths-journeys')&&!$('#paths-threads'), 'the old Paths sub-toggle is gone');
-eq($$('#thr-list .thr-item').length, D.arguments.length, 'one thread item per argument');
-const before=$('#thr-count').textContent; click($('#thr-next'));
-assert($('#thr-count').textContent!==before, 'Next advances the thread counter');
-assert($$('#thr-rail .thr-dot').length>0, 'thread rail has step dots');
-const stepName=$('#thr-open')||$('.thr-name');
-assert(stepName && stepName.textContent.trim().length>0, 'thread step shows a non-empty name');
-click($$('.thr-item')[3]);
-assert(($('#thr-title')?.textContent||'').length>0, 'clicking a thread sets its title');
+// ARGUMENTS tab removed: neither the tab, its pane, nor its data may survive.
+assert(!$('.switch button[data-mode="paths"]'), 'the Arguments (Paths) tab is gone');
+assert(!$('#m-paths')&&!$('#thr-wrap'), 'the Arguments walk pane is gone');
+assert(!('arguments' in D), 'arguments data is no longer baked into the build');
 assert(!('journeys' in D), 'journeys data is no longer baked into the build');
-esc();
 
 // FILTERS
 click($('#filt-btn'));
@@ -257,17 +245,13 @@ assert(($('#dr-foil')?.textContent||'').length>0, 'foil shown for a concept that
 // DEEP LINK
 openByName('Capitalist Realism');
 assert(/#\/questions\/idea\//.test(window.location.hash), 'opening a concept writes a deep-link hash');
-window.location.hash='#/paths/2.1';
-window.dispatchEvent(new window.window.HashChangeEvent('hashchange'));
-eq($('.switch button.active')?.dataset.mode, 'paths', 'hashchange routes to the Arguments view');
-eq($('#thr-wrap').hasAttribute('hidden'), false, 'a /paths hash lands on the Arguments walk');
-// legacy deep links (/paths/threads/i.s, /threads/i.s, /journeys/i) still route to Arguments
-window.location.hash='#/paths/threads/2.1';
-window.dispatchEvent(new window.window.HashChangeEvent('hashchange'));
-eq($('.switch button.active')?.dataset.mode, 'paths', 'legacy /paths/threads hash still routes to Arguments');
-window.location.hash='#/journeys/1';
-window.dispatchEvent(new window.window.HashChangeEvent('hashchange'));
-eq($('.switch button.active')?.dataset.mode, 'paths', 'legacy /journeys hash still routes to Arguments');
+// the Arguments view is gone: its legacy deep links (/paths, /threads, /journeys)
+// now redirect to the default Questions tab rather than crashing.
+for(const legacy of ['#/paths/2.1','#/paths/threads/2.1','#/threads/2.1','#/journeys/1']){
+  window.location.hash=legacy;
+  window.dispatchEvent(new window.window.HashChangeEvent('hashchange'));
+  eq($('.switch button.active')?.dataset.mode, 'questions', `legacy ${legacy} hash redirects to Questions`);
+}
 
 // ABOUT modal: opens, Esc closes, focus restored to the trigger
 click($('.switch button[data-mode="questions"]'));
