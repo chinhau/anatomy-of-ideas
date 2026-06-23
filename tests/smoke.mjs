@@ -24,7 +24,7 @@ global.SVGElement=window.SVGElement; global.Element=window.Element; global.HTMLE
 global.localStorage=window.localStorage; global.location=window.location; global.history=window.history;
 window.d3=d3; window.matchMedia=()=>({matches:false,addEventListener(){}}); global.matchMedia=window.matchMedia;
 window.requestAnimationFrame=cb=>setTimeout(()=>cb(Date.now()),0);
-for(const id of ['m-questions','m-timeline','m-web','m-threads','m-constellation','m-lens','m-journeys']){const el=window.document.getElementById(id);
+for(const id of ['m-questions','m-timeline','m-paths','m-constellation','m-lens']){const el=window.document.getElementById(id);
   Object.defineProperty(el,'clientWidth',{value:1180,configurable:true});Object.defineProperty(el,'clientHeight',{value:640,configurable:true});}
 window.Element.prototype.scrollIntoView=function(){};
 
@@ -54,8 +54,8 @@ eq($('.switch button.active')?.getAttribute('aria-selected'),'true','active tab 
 eq(window.getComputedStyle($('#empty-state')).display,'none','empty-state is display:none on load (not just [hidden])');
 
 // build every mode without throwing
-for(const mo of ['timeline','web','threads','constellation','lens','journeys','questions']) click($('.switch button[data-mode="'+mo+'"]'));
-console.log('7 modes built ok');
+for(const mo of ['timeline','paths','constellation','lens','questions']) click($('.switch button[data-mode="'+mo+'"]'));
+console.log('5 modes built ok');
 
 // LENS (Map VI): "Eleven Doors In" board → focus+context ego-graph
 click($('.switch button[data-mode="lens"]'));
@@ -111,8 +111,12 @@ eq($$('#tl-svg .tl-node').length, D.concepts.length, 'timeline renders one node 
 eq($$('#tl-svg .tl-lane').length, 4, 'timeline has 4 lanes');
 assert($$('#tl-svg .tl-tick').length>0, 'timeline has era ticks');
 
-// THREADS
-click($('.switch button[data-mode="threads"]'));
+// PATHS › Arguments (former Threads tab) — Paths opens on the Arguments pane by default
+click($('.switch button[data-mode="paths"]'));
+eq($('.switch button.active')?.dataset.mode, 'paths', 'Paths tab activates');
+eq($('#thr-wrap').hasAttribute('hidden'), false, 'Paths defaults to the Arguments pane');
+eq($('#jrn-wrap').hasAttribute('hidden'), true, 'the Reading-paths pane is hidden by default');
+assert($('#paths-threads').classList.contains('on'), 'the Arguments sub-toggle is active by default');
 eq($$('#thr-list .thr-item').length, D.arguments.length, 'one thread item per argument');
 const before=$('#thr-count').textContent; click($('#thr-next'));
 assert($('#thr-count').textContent!==before, 'Next advances the thread counter');
@@ -122,12 +126,15 @@ assert(stepName && stepName.textContent.trim().length>0, 'thread step shows a no
 click($$('.thr-item')[3]);
 assert(($('#thr-title')?.textContent||'').length>0, 'clicking a thread sets its title');
 
-// JOURNEYS (Map VII): curated paths whose every step id must resolve; selecting
-// one renders gateway + steps + claim connectors; the synthesis textarea persists.
+// PATHS › Journeys (former Journeys tab): curated paths whose every step id
+// must resolve; selecting one renders gateway + steps + claim connectors; the
+// synthesis textarea persists.
 assert(Array.isArray(D.journeys)&&D.journeys.length>=4, 'at least four curated journeys are baked into the data');
 const jIds=new Set(D.concepts.map(c=>c.id));
 assert(D.journeys.every(j=>jIds.has(j.gateway.id)&&j.steps.every(s=>jIds.has(s.id))), 'every journey gateway + step references a real concept');
-click($('.switch button[data-mode="journeys"]'));
+click($('.switch button[data-mode="paths"]')); click($('#paths-journeys')); // flip to the Reading-paths pane
+eq($('#jrn-wrap').hasAttribute('hidden'), false, 'the Reading-paths sub-toggle reveals the journeys pane');
+eq($('#thr-wrap').hasAttribute('hidden'), true, 'flipping to Journeys hides the Arguments pane');
 eq($$('#jrn-list .jrn-item').length, D.journeys.length, 'one journey item per curated path');
 assert($$('#jrn-stage .jrn-step').length === D.journeys[0].steps.length+1, 'journey stage renders the gateway plus each step');
 eq($$('#jrn-stage .jrn-claim').length, D.journeys[0].steps.length, 'a claim connector precedes every step after the gateway');
@@ -204,9 +211,15 @@ assert(($('#dr-foil')?.textContent||'').length>0, 'foil shown for a concept that
 // DEEP LINK
 openByName('Capitalist Realism');
 assert(/#\/questions\/idea\//.test(window.location.hash), 'opening a concept writes a deep-link hash');
-window.location.hash='#/threads/2.1';
+window.location.hash='#/paths/threads/2.1';
 window.dispatchEvent(new window.window.HashChangeEvent('hashchange'));
-eq($('.switch button.active')?.dataset.mode, 'threads', 'hashchange routes to threads mode');
+eq($('.switch button.active')?.dataset.mode, 'paths', 'hashchange routes to the Paths view');
+eq($('#thr-wrap').hasAttribute('hidden'), false, 'a /paths/threads hash lands on the Arguments pane');
+// legacy deep links (/journeys/i) still resolve into the merged Paths view
+window.location.hash='#/journeys/1';
+window.dispatchEvent(new window.window.HashChangeEvent('hashchange'));
+eq($('.switch button.active')?.dataset.mode, 'paths', 'legacy /journeys hash still routes to Paths');
+eq($('#jrn-wrap').hasAttribute('hidden'), false, 'a legacy /journeys hash lands on the Reading-paths pane');
 
 // ABOUT modal: opens, Esc closes, focus restored to the trigger
 click($('.switch button[data-mode="questions"]'));
@@ -255,7 +268,7 @@ eq(window.document.documentElement.lang, 'en', 'html lang returns to en');
 assert($('#about-mt-note').hasAttribute('hidden'), 'machine-assisted note hidden again in English');
 eq($('#m-questions .card .c-id')?.textContent, firstCardName, 'concept names restore on English (fallback round-trips)');
 
-// --- REGRESSION: lazy-built graph modes localise (timeline / web / constellation) ---
+// --- REGRESSION: lazy-built graph modes localise (timeline / lens / constellation) ---
 // The bug: a graph mode built for the FIRST time while the language was ALREADY
 // non-English shipped English node text. The build wrote raw ids and relied on a
 // later applyLang relabel that never re-fires for an already-active language.
@@ -271,7 +284,7 @@ eq($('#m-questions .card .c-id')?.textContent, firstCardName, 'concept names res
   global.localStorage=w.localStorage; global.location=w.location; global.history=w.history;
   w.d3=d3; w.matchMedia=()=>({matches:false,addEventListener(){}}); global.matchMedia=w.matchMedia;
   w.requestAnimationFrame=cb=>setTimeout(()=>cb(Date.now()),0);
-  for(const id of ['m-timeline','m-web','m-constellation']){const el=w.document.getElementById(id);
+  for(const id of ['m-timeline','m-lens','m-constellation']){const el=w.document.getElementById(id);
     Object.defineProperty(el,'clientWidth',{value:1180,configurable:true});Object.defineProperty(el,'clientHeight',{value:640,configurable:true});}
   w.Element.prototype.scrollIntoView=function(){};
   try{ new w.Function('d3','window','document',m)(d3,w,w.document); }
@@ -282,8 +295,9 @@ eq($('#m-questions .card .c-id')?.textContent, firstCardName, 'concept names res
   eq(w.document.documentElement.lang,'zh-Hant','fresh boot starts in zh when localStorage says so');
   click2(w.document.querySelector('.switch button[data-mode="timeline"]'));
   assert(q2('.tl-node text').some(t=>hasCJK(t.textContent)),'timeline built cold under zh shows localized concept names');
-  click2(w.document.querySelector('.switch button[data-mode="web"]'));
-  assert(q2('.wnode text').some(t=>hasCJK(t.textContent)),'idea web built cold under zh shows localized concept names');
+  click2(w.document.querySelector('.switch button[data-mode="lens"]'));
+  click2(q2('.lb-cell')[0]); // enter a door so the ego-graph builds cold under zh
+  assert(q2('#lens-svg g.lnode text').some(t=>hasCJK(t.textContent)),'idea lens built cold under zh shows localized concept names');
   click2(w.document.querySelector('.switch button[data-mode="constellation"]'));
   assert(q2('.cregion').some(t=>hasCJK(t.textContent)),'constellation built cold under zh shows localized region headings');
   assert(q2('.clegend .rg').some(t=>hasCJK(t.textContent)),'constellation legend headings localise under zh');

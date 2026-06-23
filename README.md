@@ -106,19 +106,27 @@ Two data layers, one viewer.
    vanilla JS + D3 v7, no framework. Cross-linking between layers is by normalized name match
    (with a small alias table and an unambiguous-surname fallback).
 
-### The five modes
+### The five views
 
 - **Questions** — the eleven great questions, with rival answers side by side.
 - **Timeline** — every idea at its era, in West/Psyche/East/Indigenous lanes; dot size = how
   many later ideas build on it; hover traces its kin as arcs.
-- **Idea Web** — the force-directed graph of concepts, coloured by question.
-- **Threads** — the 18 dialectics walked one move at a time (thesis → antithesis → synthesis).
-- **Constellation** — the original star-chart of thinkers and schools.
+- **Paths** — the curated-reading layer, with a sub-toggle: **Arguments** (the 18 dialectics
+  walked one move at a time, thesis → antithesis → synthesis) and **Journeys** (cross-tradition
+  reading paths — a gateway, a few steps, and a synthesis you finish yourself).
+- **Ideas** — the focus+context ego-graph: one idea at the centre, its kin around it; travel
+  neighbour to neighbour, roll the dice, or take a guided tour. Opens on the "Eleven Doors In" board.
+- **Thinkers** — the original star-chart of thinkers and schools.
+
+The tabs are peers, not a fixed sequence — there are no longer Roman numerals implying an order.
+The former **Idea Web** was retired (Ideas is the surviving node-link graph), and the former
+**Threads** and **Journeys** tabs were merged into **Paths**.
 
 Cross-cutting: a filter rail (question / region / era / reading status), a per-idea
 **reading tracker** (unread / reading / read, persisted in `localStorage`), an
 **"argues against"** foil on every dossier, and **deep-linkable URLs**
-(`#/timeline/idea/The-Burnout-Society`, `#/threads/2.1`).
+(`#/timeline/idea/The-Burnout-Society`, `#/paths/threads/2.1`; legacy `#/threads/2.1` and
+`#/journeys/1` still resolve).
 
 ---
 

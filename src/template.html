@@ -41,8 +41,6 @@
   .switch button:last-child{border-right:none;}
   .switch button:hover{color:var(--parchment);background:rgba(217,182,95,0.08);}
   .switch button.active{background:var(--gold);color:#1a1205;font-weight:500;}
-  .switch button .n{font-family:'Cormorant Garamond',serif;font-style:italic;
-    font-size:14px;margin-right:7px;opacity:0.8;}
   #search2{margin-left:auto;width:230px;background:var(--panel);border:1px solid var(--panel-edge);
     border-radius:2px;color:var(--parchment);font-size:12.5px;padding:8px 11px;outline:none;}
   #search2:focus{border-color:var(--gold);}
@@ -91,29 +89,6 @@
   .card.related.rej{box-shadow:0 0 0 1px var(--oppose),0 0 18px rgba(216,80,92,0.25);}
   .card.related.ech{box-shadow:0 0 0 1px var(--echo),0 0 18px rgba(95,199,184,0.25);}
   .card.sel{box-shadow:0 0 0 2px var(--gold),0 0 26px rgba(217,182,95,0.4);background:rgba(217,182,95,0.07);}
-
-  /* ===== MODE 2 : IDEA WEB ===== */
-  #m-web{inset:0;}
-  #web-svg{width:100%;height:100%;display:block;}
-  .wlink{fill:none;}
-  .wlink.builds{stroke:rgba(233,220,192,0.4);stroke-width:1.1;}
-  .wlink.rejects{stroke:var(--oppose);stroke-width:1;stroke-dasharray:3 4;opacity:0.6;}
-  .wlink.echoes{stroke:var(--echo);stroke-width:1;stroke-dasharray:1 5;opacity:0.75;}
-  .wnode{cursor:pointer;}
-  .wnode circle{stroke:var(--void);stroke-width:1.2px;}
-  .wnode text{font-size:10.5px;fill:var(--parchment);paint-order:stroke;
-    stroke:var(--void);stroke-width:3px;stroke-linejoin:round;pointer-events:none;opacity:0;
-    transition:opacity .2s;}
-  .wnode text.show{opacity:0.95;}
-  .wnode.faded{opacity:0.08;}
-  .wlink.faded{opacity:0.03 !important;}
-  .wlegend{position:absolute;bottom:16px;left:16px;background:var(--panel);
-    border:1px solid var(--panel-edge);border-radius:3px;padding:11px 14px;font-size:11px;
-    backdrop-filter:blur(6px);line-height:1.8;}
-  .wlegend .row{display:flex;align-items:center;gap:8px;}
-  .wlegend .ln{width:26px;height:0;border-top:2px solid;}
-  .web-hint{position:absolute;bottom:16px;right:16px;font-size:10.5px;color:var(--muted);
-    max-width:220px;text-align:right;line-height:1.5;}
 
   /* ===== MODE 3 : DIALECTIC FLOW ===== */
   #m-flow{overflow:auto;padding:6px 0 40px;}
@@ -336,6 +311,13 @@
   .jrn-item .tt{font-family:'Cormorant Garamond',serif;font-size:16px;color:var(--parchment);line-height:1.2;}
   .jrn-item .nt{font-size:11px;color:var(--muted);margin-top:3px;line-height:1.35;}
   #jrn-stage{flex:1;overflow-y:auto;padding:30px 40px 48px;min-width:0;}
+  /* Paths shell: seg toggle on top, the active pane fills the rest. The two
+     panes own [hidden]; an ID rule (#jrn-wrap{display:flex}) outranks the UA
+     [hidden]{display:none}, so we restate display:none for [hidden] explicitly. */
+  #m-paths.view.active{display:flex;flex-direction:column;}
+  #paths-seg{flex:none;align-self:flex-start;margin:12px 0 2px 16px;}
+  #m-paths #thr-wrap,#m-paths #jrn-wrap{height:auto;flex:1;min-height:0;}
+  #m-paths #thr-wrap[hidden],#m-paths #jrn-wrap[hidden]{display:none;}
   .jrn-h{font-family:'Cormorant Garamond',serif;font-size:27px;color:var(--gold);}
   .jrn-blurb{font-size:14px;font-style:italic;color:var(--parchment-dim);margin-top:4px;}
   .jrn-step{max-width:600px;}
@@ -380,11 +362,11 @@
   .rdim{opacity:.32 !important;}
 
   /* keyboard focus rings on interactive SVG nodes */
-  .wnode:focus,.tl-node:focus,.cnode:focus,.fnode:focus,
-  .wnode:focus-visible,.tl-node:focus-visible,.cnode:focus-visible,.fnode:focus-visible{outline:none;}
-  .wnode:focus circle,.tl-node:focus circle,.cnode:focus circle,.fnode:focus circle{
+  .tl-node:focus,.cnode:focus,.fnode:focus,
+  .tl-node:focus-visible,.cnode:focus-visible,.fnode:focus-visible{outline:none;}
+  .tl-node:focus circle,.cnode:focus circle,.fnode:focus circle{
     stroke:var(--gold);stroke-width:2.5px;}
-  .wnode:focus text,.tl-node:focus text,.cnode:focus text{opacity:.95 !important;}
+  .tl-node:focus text,.cnode:focus text{opacity:.95 !important;}
 
   /* empty-state (no ideas match filters) */
   #empty-state{position:absolute;inset:0;z-index:25;display:flex;flex-direction:column;
@@ -540,13 +522,11 @@
       <h1>The Anatomy of Ideas</h1>
     </div>
     <div class="switch" role="tablist" aria-label="Views">
-      <button data-mode="questions" class="active" role="tab" aria-selected="true"><span class="n">I</span><span data-i18n="Questions">Questions</span></button>
-      <button data-mode="timeline" role="tab" aria-selected="false"><span class="n">II</span><span data-i18n="Timeline">Timeline</span></button>
-      <button data-mode="web" role="tab" aria-selected="false"><span class="n">III</span><span data-i18n="Idea Web">Idea Web</span></button>
-      <button data-mode="threads" role="tab" aria-selected="false"><span class="n">IV</span><span data-i18n="Threads">Threads</span></button>
-      <button data-mode="constellation" role="tab" aria-selected="false"><span class="n">V</span><span data-i18n="Constellation">Constellation</span></button>
-      <button data-mode="lens" role="tab" aria-selected="false"><span class="n">VI</span><span data-i18n="Lens">Lens</span></button>
-      <button data-mode="journeys" role="tab" aria-selected="false"><span class="n">VII</span><span data-i18n="Journeys">Journeys</span></button>
+      <button data-mode="questions" class="active" role="tab" aria-selected="true"><span data-i18n="Questions">Questions</span></button>
+      <button data-mode="timeline" role="tab" aria-selected="false"><span data-i18n="Timeline">Timeline</span></button>
+      <button data-mode="paths" role="tab" aria-selected="false"><span data-i18n="Paths">Paths</span></button>
+      <button data-mode="lens" role="tab" aria-selected="false"><span data-i18n="Ideas">Ideas</span></button>
+      <button data-mode="constellation" role="tab" aria-selected="false"><span data-i18n="Thinkers">Thinkers</span></button>
     </div>
     <div id="lang-switch" role="group" aria-label="Language">
       <button data-lang="en" class="active" aria-pressed="true">EN</button>
@@ -661,16 +641,15 @@
       </div>
       <div class="con-hint" data-i18n="Every idea placed at its era, in the lane of its world. Hover to trace its kin; click for the full entry. Drag the era handles to narrow the centuries.">Every idea placed at its era, in the lane of its world. Hover to trace its kin; click for the full entry. Drag the era handles to narrow the centuries.</div>
     </section>
-    <section id="m-web" class="view">
-      <svg id="web-svg"></svg>
-      <div class="wlegend">
-        <div class="row"><span class="ln" style="border-color:rgba(233,220,192,.7)"></span><span data-i18n="builds on">builds on</span></div>
-        <div class="row"><span class="ln" style="border-color:var(--oppose);border-top-style:dashed"></span><span data-i18n="rejects / opposes">rejects / opposes</span></div>
-        <div class="row"><span class="ln" style="border-color:var(--echo);border-top-style:dotted"></span><span data-i18n="echoes across traditions">echoes across traditions</span></div>
+    <!-- Map "Paths": the curated-reading layer. Two near-twin views (dialectic
+         Arguments + cross-tradition Reading paths) merged behind one sub-toggle
+         so they read as one idea, not two competing tabs. (See the Idea Web,
+         removed in this redesign; Lens is the surviving node-link graph.) -->
+    <section id="m-paths" class="view">
+      <div id="paths-seg" class="lens-seg" role="group" aria-label="Paths mode">
+        <button id="paths-threads" class="on" data-i18n="Arguments">Arguments</button>
+        <button id="paths-journeys" data-i18n="Journeys">Journeys</button>
       </div>
-      <div class="web-hint" data-i18n-html="Colour marks the &lt;em&gt;question&lt;/em&gt; each idea answers. Hover to trace its kin; click for the full entry.">Colour marks the <em>question</em> each idea answers. Hover to trace its kin; click for the full entry.</div>
-    </section>
-    <section id="m-threads" class="view">
       <div id="thr-wrap">
         <nav id="thr-list" aria-label="Dialectic threads"></nav>
         <div id="thr-stage">
@@ -683,6 +662,10 @@
             <button id="thr-next" class="hbtn" data-i18n="Next ›">Next ›</button>
           </div>
         </div>
+      </div>
+      <div id="jrn-wrap" hidden>
+        <nav id="jrn-list" aria-label="Reading journeys"></nav>
+        <div id="jrn-stage"></div>
       </div>
     </section>
     <section id="m-constellation" class="view">
@@ -711,12 +694,6 @@
       </div>
       <div id="lens-cap"></div>
       <div id="lens-hint" class="con-hint" data-i18n="One idea at its centre, its kin around it. Click any neighbour to travel to it; roll the dice to wander; or take a guided tour through the lineage.">One idea at its centre, its kin around it. Click any neighbour to travel to it; roll the dice to wander; or take a guided tour through the lineage.</div>
-    </section>
-    <section id="m-journeys" class="view">
-      <div id="jrn-wrap">
-        <nav id="jrn-list" aria-label="Reading journeys"></nav>
-        <div id="jrn-stage"></div>
-      </div>
     </section>
 
     <div id="empty-state" hidden>
@@ -789,14 +766,17 @@
   const eraTxt = e => e<0 ? Math.abs(e)+' BCE' : (e<1000? e+' CE' : ''+e);
   const REL_LABEL = {builds:['Builds upon','b'], rejects:['Rejects / opposes','r'], echoes:['Echoes across traditions','e']};
 
+  // Captions key off the *mode*; the Paths view sets its own per-pane caption
+  // (threads / journeys) as you flip the sub-toggle. The old "Map I…VII" numbering
+  // was dropped with the tab numerals — the views are peers, not a fixed sequence.
   const CAPTIONS = {
-    questions:'<b>Map I</b> Eleven questions every tradition has wrestled with — and the rival answers, side by side. Click any answer to light up the ideas it builds on, rejects, or quietly echoes.',
-    timeline:'<b>Map II</b> Every idea placed at its era, in the lane of its world — West, Psyche or East. Size marks how many later ideas build on it; hover to trace its kin across the centuries.',
-    web:'<b>Map III</b> The ideas as a single web. Each star is a concept, colour-coded by the question it answers; the threads are the relationships between thoughts.',
-    threads:'<b>Map IV</b> Long arguments, walked one move at a time — thesis provokes antithesis provokes synthesis. Pick a thread on the left and step through it.',
-    constellation:'<b>Map V</b> The original constellation — every thinker and school as a star, clustered into the traditions of West, Psyche and East. Click a star to cross into the ideas they shaped.',
-    lens:'<b>Map VI</b> One idea at the centre, the thoughts it touches arranged around it. Travel from neighbour to neighbour, roll the dice to wander, or let a guided tour walk you through a lineage.',
-    journeys:'<b>Map VII</b> A few curated paths across the whole atlas — a gateway, a handful of steps, and a synthesis you finish yourself. The links between steps are claims to verify, not verdicts.'
+    questions:'<b>Questions</b> Eleven questions every tradition has wrestled with — and the rival answers, side by side. Click any answer to light up the ideas it builds on, rejects, or quietly echoes.',
+    timeline:'<b>Timeline</b> Every idea placed at its era, in the lane of its world — West, Psyche or East. Size marks how many later ideas build on it; hover to trace its kin across the centuries.',
+    paths:'<b>Paths</b> Two ways to walk the atlas: step through a long argument, or follow a curated reading path across traditions.',
+    threads:'<b>Arguments</b> Long arguments, walked one move at a time — thesis provokes antithesis provokes synthesis. Pick a thread on the left and step through it.',
+    journeys:'<b>Journeys</b> A few curated paths across the whole atlas — a gateway, a handful of steps, and a synthesis you finish yourself. The links between steps are claims to verify, not verdicts.',
+    constellation:'<b>Thinkers</b> The original constellation — every thinker and school as a star, clustered into the traditions of West, Psyche and East. Click a star to cross into the ideas they shaped.',
+    lens:'<b>Ideas</b> One idea at the centre, the thoughts it touches arranged around it. Travel from neighbour to neighbour, roll the dice to wander, or let a guided tour walk you through a lineage.'
   };
 
   // ---------- shared drawer ----------
@@ -901,103 +881,12 @@
         else el.classList.add('dim');
       });
     }
-    // mode-2 web
-    if(webBuilt) webHighlight(id);
     // mode-3 flow
     if(flowBuilt) flowHighlight(id);
     if(tlBuilt) tlHighlight(id);
   }
 
-  // ---------- MODE 2 : Idea Web (lazy) ----------
-  let webBuilt=false, wsim,wnode,wlink,wsvg,wzoom,wworld;
-  function buildWeb(){
-    if(webBuilt) return; webBuilt=true;
-    const host=document.getElementById('m-web');
-    let W=host.clientWidth, H=host.clientHeight;
-    wsvg=d3.select('#web-svg').attr('viewBox',`0 0 ${W} ${H}`);
-    const defs=wsvg.append('defs');
-    const g=defs.append('filter').attr('id','wglow').attr('x','-60%').attr('y','-60%').attr('width','220%').attr('height','220%');
-    g.append('feGaussianBlur').attr('stdDeviation','3').attr('result','b');
-    const me=g.append('feMerge'); me.append('feMergeNode').attr('in','b'); me.append('feMergeNode').attr('in','SourceGraphic');
-
-    wworld=wsvg.append('g');
-    const linkG=wworld.append('g'), nodeG=wworld.append('g');
-
-    // 8 question anchors around a ring
-    const n=D.questions.length, R=Math.min(W,H)*0.33;
-    const anchor={};
-    D.questions.forEach((q,i)=>{ const a=-Math.PI/2+i/n*2*Math.PI;
-      anchor[q.id]={x:W/2+Math.cos(a)*R, y:H/2+Math.sin(a)*R}; });
-
-    const nodes=D.concepts.map(c=>Object.assign({},c,{
-      r: 4+Math.sqrt(c.deg)*1.3,
-      x:anchor[c.q].x+(Math.random()-.5)*120, y:anchor[c.q].y+(Math.random()-.5)*120}));
-    const nById={}; nodes.forEach(nn=>nById[nn.id]=nn);
-    const links=D.links.map(l=>({source:l.source,target:l.target,type:l.type}));
-
-    wsim=d3.forceSimulation(nodes)
-      .force('link',d3.forceLink(links).id(d=>d.id).distance(l=>l.type==='echoes'?120:l.type==='rejects'?105:55).strength(l=>l.type==='builds'?0.5:0.12))
-      .force('charge',d3.forceManyBody().strength(-120).distanceMax(360))
-      .force('collide',d3.forceCollide().radius(d=>d.r+5))
-      .force('x',d3.forceX(d=>anchor[d.q].x).strength(0.14))
-      .force('y',d3.forceY(d=>anchor[d.q].y).strength(0.14));
-
-    wlink=linkG.selectAll('path').data(links).join('path').attr('class',l=>'wlink '+l.type);
-    wnode=nodeG.selectAll('g').data(nodes).join('g').attr('class','wnode')
-      .attr('tabindex',0).attr('role','button')
-      .attr('aria-label',d=>d.id+(qById[d.q]?' — '+qById[d.q].label:''))
-      .call(d3.drag()
-        .on('start',(e,d)=>{if(!e.active)wsim.alphaTarget(.25).restart();d.fx=d.x;d.fy=d.y;})
-        .on('drag',(e,d)=>{d.fx=e.x;d.fy=e.y;})
-        .on('end',(e,d)=>{if(!e.active)wsim.alphaTarget(0);d.fx=null;d.fy=null;}));
-    wnode.append('circle').attr('r',d=>d.r).attr('fill',d=>d.color);
-    wnode.append('text').attr('x',d=>d.r+3).attr('y',4).text(d=>d.id)
-      .attr('class',d=>d.deg>=6?'show':'');
-    wnode.append('title').text(d=>d.id);
-    wnode.on('mouseenter',(e,d)=>{ if(!selected) webHighlight(d.id); })
-         .on('mouseleave',()=>{ if(!selected) webHighlight(null); })
-         .on('focus',(e,d)=>{ if(!selected) webHighlight(d.id); })
-         .on('blur',()=>{ if(!selected) webHighlight(null); })
-         .on('keydown',(e,d)=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); e.stopPropagation(); openConcept(d.id); } })
-         .on('click',(e,d)=>{ e.stopPropagation(); openConcept(d.id); });
-
-    wsim.on('tick',()=>{
-      wlink.attr('d',l=>{const s=l.source,t=l.target,dx=t.x-s.x,dy=t.y-s.y,dr=Math.hypot(dx,dy)||1;
-        const ux=dx/dr,uy=dy/dr,ex=t.x-ux*(t.r+2),ey=t.y-uy*(t.r+2);
-        return `M${s.x},${s.y}Q${(s.x+ex)/2-uy*dr*.08},${(s.y+ey)/2+ux*dr*.08} ${ex},${ey}`;});
-      wnode.attr('transform',d=>`translate(${d.x},${d.y})`);
-    });
-    if(reduce){ wsim.stop(); for(let i=0;i<240;i++) wsim.tick(); wsim.on('tick')(); }
-
-    wzoom=d3.zoom().scaleExtent([0.3,5]).on('zoom',e=>{
-      wworld.attr('transform',e.transform);
-      wnode.selectAll('text').classed('show',function(d){return d.deg>=6 || e.transform.k>1.8;});
-    });
-    wsvg.call(wzoom).on('click',()=>{ if(selected) closeDrawer(); });
-    window._webById=nById;
-    webRelabel(); // a lazy build under a non-EN language ships English text; localise now
-    setTimeout(()=>fitWeb(W,H,nodes),reduce?0:1400);
-  }
-  function fitWeb(W,H,nodes){
-    const xs=nodes.map(n=>n.x),ys=nodes.map(n=>n.y),p=60;
-    const x0=Math.min(...xs),x1=Math.max(...xs),y0=Math.min(...ys),y1=Math.max(...ys);
-    const k=Math.min((W-p*2)/(x1-x0),(H-p*2)/(y1-y0),1.1);
-    const tr=d3.zoomIdentity.translate(W/2-k*(x0+x1)/2,H/2-k*(y0+y1)/2).scale(k);
-    (reduce?wsvg:wsvg.transition().duration(800)).call(wzoom.transform,tr);
-  }
-  function webHighlight(id){
-    if(!wnode) return;
-    if(!id){ wnode.classed('faded',false); wlink.classed('faded',false);
-      wnode.selectAll('text').classed('show',function(d){return d.deg>=6;});
-      wnode.select('circle').attr('filter',null); return; }
-    const keep=neighborSet(id);
-    wnode.classed('faded',d=>!keep.has(d.id));
-    wnode.selectAll('text').classed('show',d=>keep.has(d.id));
-    wlink.classed('faded',l=>!((l.source.id||l.source)===id||(l.target.id||l.target)===id));
-    wnode.select('circle').attr('filter',d=>d.id===id?'url(#wglow)':null);
-  }
-
-  // ---------- MODE VI : Idea Lens — focus+context, guided tour & random walk (lazy) ----------
+  // ---------- MODE : Idea Lens — focus+context, guided tour & random walk (lazy) ----------
   let lensBuilt=false, lsvg, lworld, llinkG, lnodeG, lensFocus=null, lensMode='explore';
   let tourPath=[], tourIdx=0, tourTimer=null;
   let lensTrail=[], trailExpanded=false;  // the path of concepts walked in Explore (each {id, rel})
@@ -1034,7 +923,7 @@
   function paintLensBoard(){
     const host=document.getElementById('lens-board'); if(!host) return;
     const t=host.querySelector('[data-lb="title"]'); if(t) t.textContent=T('Eleven doors in');
-    const s=host.querySelector('[data-lb="sub"]'); if(s) s.textContent=T('One way into each of the eleven questions. Pick a door to drop into the web of ideas around it.');
+    const s=host.querySelector('[data-lb="sub"]'); if(s) s.textContent=T('One way into each of the eleven questions. Pick a door to drop into the field of ideas around it.');
     host.querySelectorAll('.lb-cell').forEach(cell=>{
       const q=qById[cell.dataset.qid], c=cById[cell.dataset.cid]; if(!q||!c) return;
       cell.setAttribute('aria-label',qLabel(q)+' — '+cName(c));
@@ -1414,9 +1303,6 @@
       D.concepts.filter(c=>c.q===q.id).forEach(c=>{ const el=cardEls[c.id]; if(!el) return;
         const ok=passes(c); el.style.display=ok?'':'none'; if(ok)vis++; });
       const band=document.querySelector('.band[data-q="'+q.id+'"]'); if(band) band.style.display=vis?'':'none'; });
-    if(webBuilt&&wnode){ wnode.style('display',d=>passes(d)?null:'none');
-      if(wlink) wlink.style('display',l=>{ const s=cById[(l.source&&l.source.id)||l.source], t=cById[(l.target&&l.target.id)||l.target];
-        return passes(s)&&passes(t)?null:'none'; }); }
     if(tlBuilt) tlApplyFilter();
     if(lensBuilt&&currentMode==='lens'&&lensFocus&&!lensBoardOn) focusLens(lensFocus,null,{trail:'none'});
     const fb=document.getElementById('filt-btn'); if(fb) fb.classList.toggle('on',filterActive());
@@ -1571,6 +1457,24 @@
   function tlApplyFilter(){ if(!tlBuilt) return; tlNode.style('display',c=>passes(c)?null:'none');
     if(!selected) tlHighlight(null); }
 
+  // ========== PATHS: Arguments (Threads) + Reading paths (Journeys) ==========
+  // One tab, two near-twin curated-reading views behind a sub-toggle. setPathsPane
+  // shows the active pane, builds it lazily, and sets the per-pane caption + hash.
+  let pathsPane='threads';
+  function setPathsPane(pane){
+    pathsPane=(pane==='journeys')?'journeys':'threads';
+    const onThreads=pathsPane==='threads';
+    const tBtn=document.getElementById('paths-threads'), jBtn=document.getElementById('paths-journeys');
+    if(tBtn) tBtn.classList.toggle('on',onThreads);
+    if(jBtn) jBtn.classList.toggle('on',!onThreads);
+    const tw=document.getElementById('thr-wrap'), jw=document.getElementById('jrn-wrap');
+    if(tw) tw.toggleAttribute('hidden',!onThreads);
+    if(jw) jw.toggleAttribute('hidden',onThreads);
+    document.getElementById('caption').innerHTML=caption(onThreads?'threads':'journeys');
+    if(onThreads){ buildThreads(); renderThread(); }
+    else { buildJourneys(); renderJourney(); }
+  }
+
   // ========== THREADS (guided walk) ==========
   let thrBuilt=false, thrI=0, thrStep=0;
   const ROLE_NAME={thesis:'Thesis',antithesis:'Antithesis',synthesis:'Synthesis',response:'Response'};
@@ -1610,10 +1514,10 @@
       (thrStep>0?'<div class="thr-why">'+whyText(a,thrStep)+'</div>':'');
     const op=document.getElementById('thr-open'); if(op&&c){ op.onclick=()=>openConcept(c.id); }
     document.getElementById('thr-count').textContent=(thrStep+1)+' / '+a.steps.length;
-    setHash('/threads/'+thrI+'.'+thrStep);
+    setHash('/paths/threads/'+thrI+'.'+thrStep);
   }
 
-  // ========== JOURNEYS (Map VII) ==========
+  // ========== JOURNEYS (Paths › Reading paths) ==========
   // Curated cross-cutting paths: a gateway, steps, and a synthesis the reader
   // finishes. The connector between two steps reports the atlas's typed link as a
   // *claim to verify*, never a verdict — and says so plainly when no link exists.
@@ -1667,7 +1571,7 @@
     if(ta) ta.oninput=()=>{ const v=ta.value; if(v.trim()) jSyn[j.title]=v; else delete jSyn[j.title];
       try{ localStorage.setItem(JKEY,JSON.stringify(jSyn)); }catch(e){}
       const sv=document.getElementById('jrn-saved'); if(sv) sv.textContent=v.trim()?T('Saved'):''; };
-    setHash('/journeys/'+jrnI);
+    setHash('/paths/journeys/'+jrnI);
   }
 
   // ========== deep-link routing ==========
@@ -1680,19 +1584,31 @@
     suppressHash=true;
     try{
       const mode=p[0];
-      if(mode && views[mode]) setMode(mode);
-      if(p[1]==='idea' && cById[p[2]]) openConcept(p[2]);
-      else if(mode==='lens' && p[1] && cById[p[1]]){ buildLens(); showLensGraph(); lensFocus=p[1]; focusLens(p[1],null,{trail:'reset'}); }
-      else if(p[1]==='person' && aById[p[2]]){ setMode('constellation'); openPerson(p[2]); }
-      else if(mode==='threads' && p[1]){ const seg=p[1].split('.'); buildThreads();
-        thrI=Math.max(0,Math.min(D.arguments.length-1,+seg[0]||0));
-        thrStep=Math.max(0,Math.min(D.arguments[thrI].steps.length-1,+seg[1]||0)); renderThread(); }
-      else if(mode==='journeys' && p[1]){ buildJourneys(); selectJourney(+p[1]||0); }
+      // Paths absorbed the former Threads & Journeys tabs. Accept the new
+      // /paths/<pane>/<arg> form AND the legacy /threads/i.s and /journeys/i
+      // hashes so old deep links keep resolving.
+      if(mode==='paths'||mode==='threads'||mode==='journeys'){
+        setMode('paths');
+        let pane='threads', arg=null;
+        if(mode==='threads'){ arg=p[1]; }
+        else if(mode==='journeys'){ pane='journeys'; arg=p[1]; }
+        else { pane=(p[1]==='journeys')?'journeys':'threads'; arg=p[2]; }
+        setPathsPane(pane);
+        if(pane==='threads'&&arg){ const seg=arg.split('.');
+          thrI=Math.max(0,Math.min(D.arguments.length-1,+seg[0]||0));
+          thrStep=Math.max(0,Math.min(D.arguments[thrI].steps.length-1,+seg[1]||0)); renderThread(); }
+        else if(pane==='journeys'&&arg){ selectJourney(+arg||0); }
+      } else {
+        if(mode && views[mode]) setMode(mode);
+        if(p[1]==='idea' && cById[p[2]]) openConcept(p[2]);
+        else if(mode==='lens' && p[1] && cById[p[1]]){ buildLens(); showLensGraph(); lensFocus=p[1]; focusLens(p[1],null,{trail:'reset'}); }
+        else if(p[1]==='person' && aById[p[2]]){ setMode('constellation'); openPerson(p[2]); }
+      }
     }catch(e){} suppressHash=false; return true;
   }
 
   // ========== mode switching ==========
-  const views={questions:'m-questions',timeline:'m-timeline',web:'m-web',threads:'m-threads',constellation:'m-constellation',lens:'m-lens',journeys:'m-journeys'};
+  const views={questions:'m-questions',timeline:'m-timeline',paths:'m-paths',constellation:'m-constellation',lens:'m-lens'};
   function setMode(mode){
     if(!views[mode]) mode='questions';
     currentMode=mode;
@@ -1700,17 +1616,21 @@
       b.classList.toggle('active',on); b.setAttribute('aria-selected',on?'true':'false'); });
     Object.entries(views).forEach(([m,id])=>document.getElementById(id).classList.toggle('active',m===mode));
     document.getElementById('caption').innerHTML=caption(mode);
-    if(mode==='web') buildWeb();
     if(mode==='timeline') buildTimeline();
-    if(mode==='threads') buildThreads();
+    if(mode==='paths') setPathsPane(pathsPane);   // builds both panes + sets the per-pane caption/hash
     if(mode==='constellation') buildConstellation();
     if(mode==='lens') buildLens();
-    if(mode==='journeys') buildJourneys();
     applyFilters();
     if(selected) crossHighlight(selected);
-    if(!selected && mode!=='threads' && mode!=='journeys') setHash('/'+mode);
+    // Paths writes its own detailed hash (/paths/<pane>/<arg>) via setPathsPane.
+    if(!selected && mode!=='paths') setHash('/'+mode);
   }
   document.querySelectorAll('.switch button').forEach(b=>b.onclick=()=>setMode(b.dataset.mode));
+  document.getElementById('paths-threads').onclick=()=>setPathsPane('threads');
+  document.getElementById('paths-journeys').onclick=()=>setPathsPane('journeys');
+  // Idea-clicks used to land in the Idea Web; with the Web removed, Lens is the
+  // surviving node-link graph — jump straight to the idea's ego-graph.
+  function showIdeaInLens(id){ setMode('lens'); buildLens(); showLensGraph(); lensFocus=id; focusLens(id,null,{trail:'reset'}); }
 
   // keyboard: Esc closes drawer/filters, "/" focuses search
   document.addEventListener('keydown',e=>{
@@ -1723,10 +1643,6 @@
   // ========== language switching ==========
   const HTML_LANG={en:'en',zh:'zh-Hant',ru:'ru'};
   // Relabel the lazily-built graphs in place (preserve node positions / sim state).
-  function webRelabel(){ if(!webBuilt||!wnode) return;
-    wnode.select('text').text(d=>cName(d));
-    wnode.select('title').text(d=>cName(d));
-    wnode.attr('aria-label',d=>cName(d)+(qById[d.q]?' — '+qLabel(qById[d.q]):'')); }
   function tlRelabel(){ if(!tlBuilt||!tlNode) return;
     tlNode.select('text').text(c=>cName(c));
     tlNode.select('title').text(c=>cName(c));
@@ -1767,7 +1683,7 @@
     document.querySelectorAll('#flt-q .flt-row').forEach(r=>{ const nm=r.querySelector('.nm'); if(nm){ const q=qById[r.dataset.q]; if(q) nm.textContent=qLabel(q); } });
     // dynamic surfaces
     document.getElementById('caption').innerHTML=caption(currentMode);
-    webRelabel(); tlRelabel(); lensRelabel(); conRelabel();
+    tlRelabel(); lensRelabel(); conRelabel();
     if(thrBuilt){
       document.querySelectorAll('#thr-list .thr-item').forEach(el=>{ const a=D.arguments[+el.dataset.i]; if(!a) return;
         const tt=el.querySelector('.tt'); if(tt) tt.textContent=aTitle(a);
@@ -1804,7 +1720,7 @@
         `<span class="q">${h.tag}</span>`;
       el.onclick=()=>{ r2.classList.remove('open'); s2.value=h.id;
         if(h.kind==='idea'){
-          if(document.getElementById('m-constellation').classList.contains('active')) setMode('web');
+          if(document.getElementById('m-constellation').classList.contains('active')) showIdeaInLens(h.id);
           openConcept(h.id);
           if(document.getElementById('m-questions').classList.contains('active'))
             cardEls[h.id].scrollIntoView({behavior:reduce?'auto':'smooth',block:'center'});
@@ -1900,7 +1816,7 @@
     const link=e.target.closest('.chip.link');
     if(link){ setMode('constellation'); focusPerson(link.dataset.aid); return; }
     const idea=e.target.closest('.idea-chip');
-    if(idea){ conSelected=null; setMode('web'); openConcept(idea.dataset.cid); }
+    if(idea){ conSelected=null; showIdeaInLens(idea.dataset.cid); openConcept(idea.dataset.cid); }
   });
 
   // ---- the star-chart itself ----
