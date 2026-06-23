@@ -2,7 +2,7 @@
 """Build index.html (at the repo root) from src/.
 
 Pipeline (deterministic, no network):
-  1. expand15.py — applies rounds 1–15 (… + philosophy of language + Cārvāka/Māori/Andean), writes src/ideas.json
+  1. expand16.py — applies rounds 1–16 (… + Cārvāka/Māori/Andean + metaethics), writes src/ideas.json
   2. merge.py    — attaches ranked thinkers + readings, validates full coverage
   3. inject      — splices src/ideas.json + src/atlas_graph.json + the vendored D3/fonts
                    into src/template.html (escaping </ so embedded blobs can't close their
@@ -17,7 +17,7 @@ import subprocess, sys, pathlib
 
 ROOT = pathlib.Path(__file__).resolve().parent
 SRC  = ROOT / "src"
-CHECK = "--check" in sys.argv  # build to a string and compare; never write
+CHECK = "--check" in sys.argv  # compare a fresh in-memory build to index.html; mutates nothing
 
 def run(script):
     if not CHECK:
@@ -27,7 +27,7 @@ def run(script):
 
 def build_html():
     if not CHECK: print("1/3  Building ideas dataset…")
-    run("expand15.py")
+    run("expand16.py")
     if not CHECK: print("2/3  Attaching readings + validating…")
     run("merge.py")
     if not CHECK: print("3/3  Injecting data + vendored assets into template…")
@@ -49,7 +49,19 @@ if CHECK:
     # Build-in-sync guard: regenerate the artifact from src/ in memory and compare
     # to the committed index.html. Catches the "edited the template but forgot to
     # rebuild" drift (notably from concurrent sessions sharing the working tree).
-    fresh = build_html()
+    #
+    # The expand/merge pipeline rewrites src/ideas.json as a side effect, so
+    # snapshot and restore it — `--check` must leave the tracked tree untouched
+    # (it runs in CI and on shared working trees, where a stray write is a bug).
+    ideas_path = SRC / "ideas.json"
+    snapshot = ideas_path.read_bytes() if ideas_path.exists() else None
+    try:
+        fresh = build_html()
+    finally:
+        if snapshot is not None:
+            ideas_path.write_bytes(snapshot)
+        elif ideas_path.exists():
+            ideas_path.unlink()
     current = out.read_text(encoding="utf-8") if out.exists() else ""
     if fresh != current:
         n = min(len(fresh), len(current))

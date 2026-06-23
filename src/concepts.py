@@ -5,7 +5,7 @@ Color is carried by QUESTION (the new organizing principle), not tradition."""
 
 import json
 
-# ---- the eight perennial questions (the spine) ----
+# ---- the eleven great questions (the spine) ----
 # qid, label, hue, one-line framing
 QUESTIONS = [
     ("real",  "What is real?",            "#C99A33", "Metaphysics — the nature of being itself."),

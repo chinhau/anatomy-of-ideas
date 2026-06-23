@@ -6,6 +6,7 @@
 //   2. i18n coverage   — every UI string used (data-i18n + T('…')) has zh + ru
 //   3. routes resolve  — every tab slug and deep-link lands on the right view
 //   4. counts in sync  — the hard-coded copy numbers match the actual dataset
+//   5. doc counts      — README + MISSION cite the current idea count, not a stale one
 //
 import { JSDOM } from 'jsdom'; import * as d3 from 'd3'; import fs from 'fs';
 
@@ -64,6 +65,19 @@ assert(new RegExp(`\\b${conceptCount}\\s+ideas\\b`).test(metaDesc), `meta descri
 assert(gateCount.includes(`>${qCount}</b>`), `gate shows ${qCount} questions (dataset count)`);
 assert(gateCount.includes(`>${atlasCount}</b>`), `gate shows ${atlasCount} thinkers (atlas node count)`);
 assert(gateCount.includes(`>${yearsComma}</b>`), `gate shows ${yearsComma} years (maxEra−minEra)`);
+
+// ───────────────────────── 5. doc counts in sync ─────────────────────────
+// The living docs cite the idea count in prose, and no build step regenerates
+// them — so they silently drift (README read "269", MISSION "263" while the
+// dataset had already moved to ${conceptCount}). Guard the headline number so a
+// round bump can't ship a doc that contradicts the app. Dated audit records
+// (docs/CONCEPT-GAPS.md, the *-CRITIQUE.md panels) are point-in-time snapshots
+// and are intentionally NOT checked.
+const ideasRe=new RegExp(`\\b${conceptCount}\\s+ideas\\b`);
+for(const f of ['README.md','docs/MISSION.md']){
+  const txt=fs.readFileSync(f,'utf8');
+  assert(ideasRe.test(txt), `${f} cites the current idea count ("${conceptCount} ideas")`);
+}
 
 // ───────────────────────── 3. routes resolve ─────────────────────────
 // Boot the real app in jsdom and drive the hash router: every tab slug and the
