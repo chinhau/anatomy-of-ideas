@@ -44,6 +44,12 @@ const esc=()=>window.document.dispatchEvent(new window.window.KeyboardEvent('key
 const D=JSON.parse($('#ideas-data').textContent);
 assert(D.concepts.length>=160,'ideas data present');
 
+// PHILOSOPHY OF LANGUAGE: the linguistic turn gives `know` a language home (T2 #4).
+const langIds=['Sense and Reference','On Denoting','Naming and Necessity','How to Do Things with Words','Speaker Meaning','Arbitrariness of the Sign'];
+const langCs=D.concepts.filter(c=>langIds.includes(c.id));
+eq(langCs.length,6,'all six philosophy-of-language ideas are present');
+assert(langCs.every(c=>c.q==='know'),'philosophy of language lives under the know question');
+
 // init state
 eq($('.switch button.active')?.dataset.mode,'questions','init mode is questions');
 eq($('.switch button.active')?.getAttribute('aria-selected'),'true','active tab aria-selected');
@@ -154,12 +160,13 @@ assert($$('#tl-svg .tl-lane-lab').every(l=>l.style.fill===STINK[D.questions.find
   'lane label colour encodes epistemic status (not region/hue)');
 eq($$('#m-timeline .tl-stkey .row').length, 5, 'timeline legend keys all five status colours');
 
-// PATHS › Arguments (former Threads tab) — Paths opens on the Arguments pane by default
+// ARGUMENTS tab (formerly "Paths") — the dialectic walk fills the whole tab now
+// that the Reading-journeys view has been removed.
 click($('.switch button[data-mode="paths"]'));
-eq($('.switch button.active')?.dataset.mode, 'paths', 'Paths tab activates');
-eq($('#thr-wrap').hasAttribute('hidden'), false, 'Paths defaults to the Arguments pane');
-eq($('#jrn-wrap').hasAttribute('hidden'), true, 'the Reading-paths pane is hidden by default');
-assert($('#paths-threads').classList.contains('on'), 'the Arguments sub-toggle is active by default');
+eq($('.switch button.active')?.dataset.mode, 'paths', 'Arguments tab activates');
+eq($('#thr-wrap').hasAttribute('hidden'), false, 'the Arguments walk is visible');
+assert(!$('#jrn-wrap'), 'the removed Reading-journeys pane is gone');
+assert(!$('#paths-journeys')&&!$('#paths-threads'), 'the old Paths sub-toggle is gone');
 eq($$('#thr-list .thr-item').length, D.arguments.length, 'one thread item per argument');
 const before=$('#thr-count').textContent; click($('#thr-next'));
 assert($('#thr-count').textContent!==before, 'Next advances the thread counter');
@@ -168,26 +175,7 @@ const stepName=$('#thr-open')||$('.thr-name');
 assert(stepName && stepName.textContent.trim().length>0, 'thread step shows a non-empty name');
 click($$('.thr-item')[3]);
 assert(($('#thr-title')?.textContent||'').length>0, 'clicking a thread sets its title');
-
-// PATHS › Journeys (former Journeys tab): curated paths whose every step id
-// must resolve; selecting one renders gateway + steps + claim connectors; the
-// synthesis textarea persists.
-assert(Array.isArray(D.journeys)&&D.journeys.length>=4, 'at least four curated journeys are baked into the data');
-const jIds=new Set(D.concepts.map(c=>c.id));
-assert(D.journeys.every(j=>jIds.has(j.gateway.id)&&j.steps.every(s=>jIds.has(s.id))), 'every journey gateway + step references a real concept');
-click($('.switch button[data-mode="paths"]')); click($('#paths-journeys')); // flip to the Reading-paths pane
-eq($('#jrn-wrap').hasAttribute('hidden'), false, 'the Reading-paths sub-toggle reveals the journeys pane');
-eq($('#thr-wrap').hasAttribute('hidden'), true, 'flipping to Journeys hides the Arguments pane');
-eq($$('#jrn-list .jrn-item').length, D.journeys.length, 'one journey item per curated path');
-assert($$('#jrn-stage .jrn-step').length === D.journeys[0].steps.length+1, 'journey stage renders the gateway plus each step');
-eq($$('#jrn-stage .jrn-claim').length, D.journeys[0].steps.length, 'a claim connector precedes every step after the gateway');
-const ta=$('#jrn-syn-ta'); assert(ta, 'journey shows a synthesis textarea');
-ta.value='my synthesis'; ta.dispatchEvent(new window.window.Event('input',{bubbles:true}));
-assert(/my synthesis/.test(window.localStorage.getItem('aoi.journeys.v1')||''), 'synthesis text persists to localStorage');
-click($$('#jrn-list .jrn-item')[1]);
-assert($('#jrn-stage .jrn-h')?.textContent===D.journeys[1].title, 'selecting another journey swaps the stage to its title');
-click($('#jrn-stage .jrn-name')); // open the gateway concept
-assert($('#drawer').classList.contains('open'), 'clicking a journey step opens its concept drawer');
+assert(!('journeys' in D), 'journeys data is no longer baked into the build');
 esc();
 
 // FILTERS
@@ -269,15 +257,17 @@ assert(($('#dr-foil')?.textContent||'').length>0, 'foil shown for a concept that
 // DEEP LINK
 openByName('Capitalist Realism');
 assert(/#\/questions\/idea\//.test(window.location.hash), 'opening a concept writes a deep-link hash');
+window.location.hash='#/paths/2.1';
+window.dispatchEvent(new window.window.HashChangeEvent('hashchange'));
+eq($('.switch button.active')?.dataset.mode, 'paths', 'hashchange routes to the Arguments view');
+eq($('#thr-wrap').hasAttribute('hidden'), false, 'a /paths hash lands on the Arguments walk');
+// legacy deep links (/paths/threads/i.s, /threads/i.s, /journeys/i) still route to Arguments
 window.location.hash='#/paths/threads/2.1';
 window.dispatchEvent(new window.window.HashChangeEvent('hashchange'));
-eq($('.switch button.active')?.dataset.mode, 'paths', 'hashchange routes to the Paths view');
-eq($('#thr-wrap').hasAttribute('hidden'), false, 'a /paths/threads hash lands on the Arguments pane');
-// legacy deep links (/journeys/i) still resolve into the merged Paths view
+eq($('.switch button.active')?.dataset.mode, 'paths', 'legacy /paths/threads hash still routes to Arguments');
 window.location.hash='#/journeys/1';
 window.dispatchEvent(new window.window.HashChangeEvent('hashchange'));
-eq($('.switch button.active')?.dataset.mode, 'paths', 'legacy /journeys hash still routes to Paths');
-eq($('#jrn-wrap').hasAttribute('hidden'), false, 'a legacy /journeys hash lands on the Reading-paths pane');
+eq($('.switch button.active')?.dataset.mode, 'paths', 'legacy /journeys hash still routes to Arguments');
 
 // ABOUT modal: opens, Esc closes, focus restored to the trigger
 click($('.switch button[data-mode="questions"]'));

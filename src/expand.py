@@ -62,7 +62,7 @@ NEW_C = [
  ("Mystical Union (Fana)","trans","isl",1250,"The self dissolves; lover and Beloved become one.",["Rumi","Ibn Arabi"]),
  # ---- ISLAMIC & MYSTICAL, plus other gaps ----
  ("Unity of Being","abs","isl",1230,"All that exists is one divine reality; creation is God's self-disclosure.",["Ibn Arabi"]),
- ("The Flying Man","self","isl",1020,"Floating, senseless, you would still know you exist — the self is no mere body.",["Avicenna"]),
+ ("The Flying Man","mind","isl",1020,"Floating, senseless, you would still know you exist — the self is no mere body.",["Avicenna"]),
  ("Faith Beyond Reason","know","isl",1095,"Reason cannot reach the deepest truths; even cause and effect rest on God's will.",["Al-Ghazali"]),
  ("Language Games","know","ana",1953,"Words mean by their use in forms of life, not by mirroring the world.",["Ludwig Wittgenstein"]),
  ("Pragmatism","know","pra",1907,"True ideas are the ones that work — that pay their way in experience.",["William James","Dewey"]),

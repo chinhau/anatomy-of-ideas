@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Anatomy of Ideas — the great questions humans keep asking</title>
-<meta name="description" content="An interactive atlas of the great questions humans keep asking: 263 ideas across eleven great questions, cross-linked to a 425-star constellation of the thinkers who shaped them. You're not the first to wonder.">
+<meta name="description" content="An interactive atlas of the great questions humans keep asking: 269 ideas across eleven great questions, cross-linked to a 425-star constellation of the thinkers who shaped them. You're not the first to wonder.">
 <meta property="og:type" content="website">
 <meta property="og:title" content="The Anatomy of Ideas — the great questions humans keep asking">
-<meta property="og:description" content="An interactive atlas of philosophy, psychology and consciousness — 263 ideas, eleven great questions, 425 thinkers and schools. You're not the first to wonder.">
+<meta property="og:description" content="An interactive atlas of philosophy, psychology and consciousness — 269 ideas, eleven great questions, 425 thinkers and schools. You're not the first to wonder.">
 <meta name="twitter:card" content="summary">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23070b16'/%3E%3Cg fill='%23d9b65f'%3E%3Ccircle cx='16' cy='16' r='2.6'/%3E%3Ccircle cx='8' cy='9' r='1.4'/%3E%3Ccircle cx='24' cy='8' r='1.4'/%3E%3Ccircle cx='25' cy='23' r='1.4'/%3E%3Ccircle cx='7' cy='24' r='1.4'/%3E%3C/g%3E%3C/svg%3E">
 <style>__FONTS_CSS__</style>
@@ -33,7 +33,8 @@
     position:relative;z-index:10;}
   header::after{content:'';position:absolute;left:22px;right:22px;bottom:2px;height:1px;
     background:rgba(217,182,95,0.14);}
-  .brand{display:flex;align-items:center;gap:13px;}
+  .brand{display:flex;align-items:center;gap:13px;cursor:pointer;}
+  .brand:hover h1{color:var(--gold);}
   .brand-mark{width:34px;height:34px;flex:none;}
   .brand-mark svg{width:100%;height:100%;display:block;}
   .brand-mark path,.brand-mark circle{fill:none;stroke:var(--gold);stroke-width:0.6;opacity:0.8;
@@ -390,49 +391,9 @@
   #thr-nav{display:flex;align-items:center;gap:16px;margin-top:24px;}
   #thr-count{font-size:12px;color:var(--muted);}
 
-  /* ===== MODE VII : JOURNEYS ===== */
-  #jrn-wrap{display:flex;height:100%;}
-  #jrn-list{flex:none;width:250px;border-right:1px solid var(--rule);overflow-y:auto;padding:14px 0;}
-  .jrn-item{padding:10px 18px;cursor:pointer;border-left:2px solid transparent;transition:all .15s;}
-  .jrn-item:hover{background:rgba(217,182,95,.06);}
-  .jrn-item.on{background:rgba(217,182,95,.12);border-left-color:var(--gold);}
-  .jrn-item .tt{font-family:'Cormorant Garamond',serif;font-size:16px;color:var(--parchment);line-height:1.2;}
-  .jrn-item .nt{font-size:11px;color:var(--muted);margin-top:3px;line-height:1.35;}
-  #jrn-stage{flex:1;overflow-y:auto;padding:30px 40px 48px;min-width:0;}
-  /* Paths shell: seg toggle on top, the active pane fills the rest. The two
-     panes own [hidden]; an ID rule (#jrn-wrap{display:flex}) outranks the UA
-     [hidden]{display:none}, so we restate display:none for [hidden] explicitly. */
+  /* Arguments shell: the threads pane fills the whole tab. */
   #m-paths.view.active{display:flex;flex-direction:column;}
-  #paths-seg{flex:none;align-self:flex-start;margin:12px 0 2px 16px;}
-  #m-paths #thr-wrap,#m-paths #jrn-wrap{height:auto;flex:1;min-height:0;}
-  #m-paths #thr-wrap[hidden],#m-paths #jrn-wrap[hidden]{display:none;}
-  .jrn-h{font-family:'Cormorant Garamond',serif;font-size:27px;color:var(--gold);}
-  .jrn-blurb{font-size:14px;font-style:italic;color:var(--parchment-dim);margin-top:4px;}
-  .jrn-step{max-width:600px;}
-  .jrn-claim{display:flex;align-items:baseline;gap:9px;margin:14px 0 14px 6px;padding-left:14px;
-    border-left:2px solid var(--panel-edge);font-size:12px;line-height:1.5;color:var(--parchment-dim);}
-  .jrn-claim.builds{border-left-color:rgba(233,220,192,.5);}
-  .jrn-claim.rejects{border-left-color:var(--oppose);}
-  .jrn-claim.echoes{border-left-color:var(--echo);}
-  .jrn-claim.none{border-left-style:dashed;}
-  .jrn-claim .tag{flex:none;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
-    padding-top:1px;}
-  .jrn-gate{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-top:24px;}
-  .jrn-num{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);font-weight:500;margin-top:22px;}
-  .jrn-name{font-family:'Cormorant Garamond',serif;font-size:23px;color:var(--parchment);margin:5px 0 2px;
-    cursor:pointer;display:inline-block;}
-  .jrn-name:hover{color:var(--gold);}
-  .jrn-meta{font-size:12px;color:var(--muted);margin-bottom:9px;}
-  .jrn-gloss{font-size:15px;line-height:1.6;color:var(--parchment);}
-  .jrn-why{font-size:13px;line-height:1.55;color:var(--parchment-dim);margin-top:9px;}
-  .jrn-syn{margin-top:34px;padding-top:22px;border-top:1px solid var(--rule);max-width:600px;}
-  .jrn-syn .jrn-gate{margin-top:0;}
-  .jrn-syn p{font-size:15px;line-height:1.6;color:var(--parchment);font-style:italic;margin:8px 0 12px;}
-  .jrn-syn textarea{width:100%;min-height:96px;resize:vertical;background:var(--void);color:var(--parchment);
-    border:1px solid var(--panel-edge);border-radius:5px;padding:11px 13px;font-family:inherit;font-size:14px;
-    line-height:1.55;box-sizing:border-box;}
-  .jrn-syn textarea:focus{outline:none;border-color:var(--gold);}
-  .jrn-saved{font-size:11px;color:var(--muted);margin-top:6px;height:14px;}
+  #m-paths #thr-wrap{height:auto;flex:1;min-height:0;}
 
   /* ---------- drawer: foil + reading status ---------- */
   .dr-qstatus{display:flex;align-items:baseline;gap:6px;margin-top:6px;font-size:11px;cursor:help;}
@@ -625,8 +586,8 @@
   .gate-seal .seal-pin{fill:var(--gold);stroke:none;opacity:1;}
   .gate-eyebrow{font-size:10.5px;letter-spacing:0.42em;text-transform:uppercase;
     color:var(--gold);opacity:.82;animation:gate-rise .8s .06s ease both;}
-  .gate-line{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(32px,6vw,52px);
-    line-height:1.06;margin:14px 0 0;letter-spacing:0.01em;color:var(--parchment);
+  .gate-line{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(22px,5.2vw,46px);
+    line-height:1.06;margin:14px 0 0;letter-spacing:0.01em;color:var(--parchment);white-space:nowrap;
     animation:gate-rise .8s .12s ease both;}
   .gate-sub{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(15px,2.4vw,19px);
     line-height:1.5;color:var(--parchment-dim);margin:18px 0 0;max-width:30em;
@@ -670,7 +631,7 @@
     </div>
   </div>
   <header>
-    <div class="brand">
+    <div class="brand" id="brand" role="button" tabindex="0" aria-label="Back to the landing page" title="Back to the landing page">
       <span class="brand-mark" id="brand-mark" aria-hidden="true"></span>
       <div class="brand-text">
         <div class="eyebrow" data-i18n="You're not the first to wonder">You're not the first to wonder</div>
@@ -680,7 +641,7 @@
     <div class="switch" role="tablist" aria-label="Views">
       <button data-mode="questions" class="active" role="tab" aria-selected="true"><span data-i18n="Questions">Questions</span></button>
       <button data-mode="timeline" role="tab" aria-selected="false"><span data-i18n="Timeline">Timeline</span></button>
-      <button data-mode="paths" role="tab" aria-selected="false"><span data-i18n="Paths">Paths</span></button>
+      <button data-mode="paths" role="tab" aria-selected="false"><span data-i18n="Arguments">Arguments</span></button>
       <button data-mode="lens" role="tab" aria-selected="false"><span data-i18n="Ideas">Ideas</span></button>
       <button data-mode="constellation" role="tab" aria-selected="false"><span data-i18n="Thinkers">Thinkers</span></button>
     </div>
@@ -797,15 +758,11 @@
       </div>
       <div class="con-hint" data-i18n="One lane per great question, in fixed order. Colour marks where the thinking stands; the band shows when a question was actually asked — its height is how often, not an even spread to now. A thin band can mean real quiet or a gap in this atlas.">One lane per great question, in fixed order. Colour marks where the thinking stands; the band shows when a question was actually asked — its height is how often, not an even spread to now. A thin band can mean real quiet or a gap in this atlas.</div>
     </section>
-    <!-- Map "Paths": the curated-reading layer. Two near-twin views (dialectic
-         Arguments + cross-tradition Reading paths) merged behind one sub-toggle
-         so they read as one idea, not two competing tabs. (See the Idea Web,
-         removed in this redesign; Lens is the surviving node-link graph.) -->
+    <!-- Map "Arguments": the dialectic layer. Long arguments walked one move at a
+         time — thesis provokes antithesis provokes synthesis. (The cross-tradition
+         Reading-journeys view was removed in this redesign; Lens is the surviving
+         node-link graph.) -->
     <section id="m-paths" class="view">
-      <div id="paths-seg" class="lens-seg" role="group" aria-label="Paths mode">
-        <button id="paths-threads" class="on" data-i18n="Arguments">Arguments</button>
-        <button id="paths-journeys" data-i18n="Journeys">Journeys</button>
-      </div>
       <div id="thr-wrap">
         <nav id="thr-list" aria-label="Dialectic threads"></nav>
         <div id="thr-stage">
@@ -818,10 +775,6 @@
             <button id="thr-next" class="hbtn" data-i18n="Next ›">Next ›</button>
           </div>
         </div>
-      </div>
-      <div id="jrn-wrap" hidden>
-        <nav id="jrn-list" aria-label="Reading journeys"></nav>
-        <div id="jrn-stage"></div>
       </div>
     </section>
     <section id="m-constellation" class="view">
@@ -955,13 +908,6 @@
   const qWhy     = q => (LANG==='en'?undefined:pick(((I18N.questions||{})[q.id]||{}).statusWhy)) || q.statusWhy;
   const aTitle = a => (LANG==='en'?undefined:pick(((I18N.arguments||{})[a.title]||{}).title)) || a.title;
   const aNote  = a => (LANG==='en'?undefined:pick(((I18N.arguments||{})[a.title]||{}).note))  || a.note;
-  // journeys are keyed by their English title; storage stays keyed on j.title too
-  const J18    = j => (I18N.journeys||{})[j.title]||{};
-  const jTitle = j => (LANG==='en'?undefined:pick(J18(j).title))     || j.title;
-  const jBlurb = j => (LANG==='en'?undefined:pick(J18(j).blurb))     || j.blurb;
-  const jFraming = j => (LANG==='en'?undefined:pick(J18(j).framing)) || j.gateway.framing;
-  const jSynth = j => (LANG==='en'?undefined:pick(J18(j).synthesis)) || j.synthesis;
-  const jWhy   = (j,id,why) => (LANG==='en'?undefined:pick((J18(j).steps||{})[id])) || why;
   // a step name is usually a concept id; translate via concept name, else step table
   const stepName = s => (cById[s] ? cName(cById[s]) : ((LANG==='en'?undefined:pick((I18N.steps||{})[s])) || s));
   const caption  = m => (LANG==='en'?undefined:pick((I18N.captions||{})[m])) || (CAPTIONS[m]||'');
@@ -979,15 +925,12 @@
   const eraTxt = e => e<0 ? Math.abs(e)+' BCE' : (e<1000? e+' CE' : ''+e);
   const REL_LABEL = {builds:['Builds upon','b'], rejects:['Rejects / opposes','r'], echoes:['Echoes across traditions','e']};
 
-  // Captions key off the *mode*; the Paths view sets its own per-pane caption
-  // (threads / journeys) as you flip the sub-toggle. The old "Map I…VII" numbering
-  // was dropped with the tab numerals — the views are peers, not a fixed sequence.
+  // Captions key off the *mode*. The old "Map I…VII" numbering was dropped with
+  // the tab numerals — the views are peers, not a fixed sequence.
   const CAPTIONS = {
     questions:'<b>Questions</b> Eleven questions every tradition has wrestled with — and the rival answers, side by side. Click any answer to light up the ideas it builds on, rejects, or quietly echoes.',
     timeline:'<b>Timeline</b> One lane per great question, in fixed order. Colour marks where the thinking stands; the band shows when it was actually asked — its height is how often, not an even spread to now. Hover an idea to trace its kin.',
-    paths:'<b>Paths</b> Two ways to walk the atlas: step through a long argument, or follow a curated reading path across traditions.',
-    threads:'<b>Arguments</b> Long arguments, walked one move at a time — thesis provokes antithesis provokes synthesis. Pick a thread on the left and step through it.',
-    journeys:'<b>Journeys</b> A few curated paths across the whole atlas — a gateway, a handful of steps, and a synthesis you finish yourself. The links between steps are claims to verify, not verdicts.',
+    paths:'<b>Arguments</b> Long arguments, walked one move at a time — thesis provokes antithesis provokes synthesis. Pick a thread on the left and step through it.',
     constellation:'<b>Thinkers</b> The original constellation — every thinker and school as a star, clustered into the traditions of West, Psyche and East. Click a star to cross into the ideas they shaped.',
     lens:'<b>Ideas</b> One idea at the centre, the thoughts it touches arranged around it. Travel from neighbour to neighbour, roll the dice to wander, or let a guided tour walk you through a lineage.'
   };
@@ -1754,25 +1697,7 @@
   function tlApplyFilter(){ if(!tlBuilt) return; tlNode.style('display',c=>passes(c)?null:'none');
     if(!selected) tlHighlight(null); }
 
-  // ========== PATHS: Arguments (Threads) + Reading paths (Journeys) ==========
-  // One tab, two near-twin curated-reading views behind a sub-toggle. setPathsPane
-  // shows the active pane, builds it lazily, and sets the per-pane caption + hash.
-  let pathsPane='threads';
-  function setPathsPane(pane){
-    pathsPane=(pane==='journeys')?'journeys':'threads';
-    const onThreads=pathsPane==='threads';
-    const tBtn=document.getElementById('paths-threads'), jBtn=document.getElementById('paths-journeys');
-    if(tBtn) tBtn.classList.toggle('on',onThreads);
-    if(jBtn) jBtn.classList.toggle('on',!onThreads);
-    const tw=document.getElementById('thr-wrap'), jw=document.getElementById('jrn-wrap');
-    if(tw) tw.toggleAttribute('hidden',!onThreads);
-    if(jw) jw.toggleAttribute('hidden',onThreads);
-    document.getElementById('caption').innerHTML=caption(onThreads?'threads':'journeys');
-    if(onThreads){ buildThreads(); renderThread(); }
-    else { buildJourneys(); renderJourney(); }
-  }
-
-  // ========== THREADS (guided walk) ==========
+  // ========== ARGUMENTS (guided walk) ==========
   let thrBuilt=false, thrI=0, thrStep=0;
   const ROLE_NAME={thesis:'Thesis',antithesis:'Antithesis',synthesis:'Synthesis',response:'Response'};
   const ROLE_COL={thesis:'var(--parchment)',antithesis:'var(--oppose)',synthesis:'var(--gold)',response:'var(--echo)'};
@@ -1811,64 +1736,7 @@
       (thrStep>0?'<div class="thr-why">'+whyText(a,thrStep)+'</div>':'');
     const op=document.getElementById('thr-open'); if(op&&c){ op.onclick=()=>openConcept(c.id); }
     document.getElementById('thr-count').textContent=(thrStep+1)+' / '+a.steps.length;
-    setHash('/paths/threads/'+thrI+'.'+thrStep);
-  }
-
-  // ========== JOURNEYS (Paths › Reading paths) ==========
-  // Curated cross-cutting paths: a gateway, steps, and a synthesis the reader
-  // finishes. The connector between two steps reports the atlas's typed link as a
-  // *claim to verify*, never a verdict — and says so plainly when no link exists.
-  const JKEY='aoi.journeys.v1';
-  let jSyn={}; try{ const r=JSON.parse(localStorage.getItem(JKEY)); jSyn=(r&&typeof r==='object'&&!Array.isArray(r))?r:{}; }catch(e){ jSyn={}; }
-  const CLAIM={
-    builds:['Builds on','Claim to verify: the atlas links these as “builds on.” Read both — does the lineage run the way you would expect?'],
-    rejects:['Rejects','Claim to verify: the atlas marks these as opposed. Read both — is the quarrel real, or do they talk past each other?'],
-    echoes:['Echoes','Claim to verify: the atlas hears an echo across traditions. Read both — true resonance, or coincidence?']
-  };
-  function journeyClaim(prevId,curId){
-    const e=(adj.get(prevId)||[]).find(x=>x.other===curId);
-    if(!e) return {cls:'none',tag:T('No link'),txt:T('The atlas draws no line between these — decide for yourself whether one belongs.')};
-    const c=CLAIM[e.type]; return {cls:e.type,tag:T(c[0]),txt:T(c[1])};
-  }
-  let jrnBuilt=false, jrnI=0;
-  function buildJourneys(){
-    if(jrnBuilt) return; jrnBuilt=true;
-    const list=document.getElementById('jrn-list');
-    list.innerHTML=(D.journeys||[]).map((j,i)=>'<div class="jrn-item'+(i===0?' on':'')+'" data-i="'+i+'" tabindex="0" role="button"><div class="tt">'+esc0(jTitle(j))+'</div><div class="nt">'+esc0(jBlurb(j))+'</div></div>').join('');
-    list.querySelectorAll('.jrn-item').forEach(el=>{ const go=()=>selectJourney(+el.dataset.i);
-      el.onclick=go; el.onkeydown=e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); go(); } }; });
-    renderJourney();
-  }
-  function selectJourney(i){ jrnI=Math.max(0,Math.min((D.journeys||[]).length-1,i)); renderJourney(); }
-  function jStep(label,gate,id,why){ const c=cById[id];
-    return '<div class="jrn-step">'+
-      '<div class="'+(gate?'jrn-gate':'jrn-num')+'">'+esc0(label)+'</div>'+
-      '<div class="jrn-name" data-id="'+esc0(id)+'" tabindex="0" role="button">'+esc0(c?cName(c):id)+'</div>'+
-      '<div class="jrn-meta">'+(c?esc0(cTrad(c))+' · '+eraTxt(c.era):'')+'</div>'+
-      '<div class="jrn-gloss">'+(c?esc0(cGloss(c)):'')+'</div>'+
-      (why?'<div class="jrn-why">'+esc0(why)+'</div>':'')+'</div>'; }
-  function renderJourney(){
-    const J=D.journeys||[]; if(!J.length) return; const j=J[jrnI];
-    document.querySelectorAll('.jrn-item').forEach(el=>el.classList.toggle('on',+el.dataset.i===jrnI));
-    const seq=[j.gateway.id, ...j.steps.map(s=>s.id)];
-    let html='<div class="jrn-h">'+esc0(jTitle(j))+'</div><div class="jrn-blurb">'+esc0(jBlurb(j))+'</div>';
-    html+=jStep(T('Start here'),true,j.gateway.id,jFraming(j));
-    j.steps.forEach((s,k)=>{ const cl=journeyClaim(seq[k],seq[k+1]);
-      html+='<div class="jrn-claim '+cl.cls+'"><span class="tag">'+esc0(cl.tag)+'</span><span>'+esc0(cl.txt)+'</span></div>';
-      html+=jStep(T('Step')+' '+(k+1),false,s.id,jWhy(j,s.id,s.why)); });
-    const saved=jSyn[j.title]||'';
-    html+='<div class="jrn-syn"><div class="jrn-gate">'+esc0(T('Synthesis — your turn'))+'</div>'+
-      '<p>'+esc0(jSynth(j))+'</p>'+
-      '<textarea id="jrn-syn-ta" aria-label="'+esc0(T('Your synthesis'))+'" placeholder="'+esc0(T('Write your own answer…'))+'">'+esc0(saved)+'</textarea>'+
-      '<div class="jrn-saved" id="jrn-saved">'+(saved?esc0(T('Saved')):'')+'</div></div>';
-    const stage=document.getElementById('jrn-stage'); stage.innerHTML=html; stage.scrollTop=0;
-    stage.querySelectorAll('.jrn-name').forEach(el=>{ const go=()=>openConcept(el.dataset.id);
-      el.onclick=go; el.onkeydown=e=>{ if(e.key==='Enter'){ go(); } }; });
-    const ta=document.getElementById('jrn-syn-ta');
-    if(ta) ta.oninput=()=>{ const v=ta.value; if(v.trim()) jSyn[j.title]=v; else delete jSyn[j.title];
-      try{ localStorage.setItem(JKEY,JSON.stringify(jSyn)); }catch(e){}
-      const sv=document.getElementById('jrn-saved'); if(sv) sv.textContent=v.trim()?T('Saved'):''; };
-    setHash('/paths/journeys/'+jrnI);
+    setHash('/paths/'+thrI+'.'+thrStep);
   }
 
   // ========== deep-link routing ==========
@@ -1896,20 +1764,18 @@
     suppressHash=true;
     try{
       const mode=p[0];
-      // Paths absorbed the former Threads & Journeys tabs. Accept the new
-      // /paths/<pane>/<arg> form AND the legacy /threads/i.s and /journeys/i
-      // hashes so old deep links keep resolving.
+      // The Arguments tab keeps the /paths route. Accept the new /paths/<i>.<s>
+      // form plus legacy /paths/threads/<i>.<s>, /threads/<i>.<s>, and bare
+      // /journeys/* hashes (the Reading-journeys view was removed) so old deep
+      // links still land on the tab.
       if(mode==='paths'||mode==='threads'||mode==='journeys'){
         setMode('paths');
-        let pane='threads', arg=null;
+        let arg=null;
         if(mode==='threads'){ arg=p[1]; }
-        else if(mode==='journeys'){ pane='journeys'; arg=p[1]; }
-        else { pane=(p[1]==='journeys')?'journeys':'threads'; arg=p[2]; }
-        setPathsPane(pane);
-        if(pane==='threads'&&arg){ const seg=arg.split('.');
+        else if(mode==='paths'){ arg=(p[1]==='threads')?p[2]:p[1]; }
+        if(arg){ const seg=String(arg).split('.');
           thrI=Math.max(0,Math.min(D.arguments.length-1,+seg[0]||0));
           thrStep=Math.max(0,Math.min(D.arguments[thrI].steps.length-1,+seg[1]||0)); renderThread(); }
-        else if(pane==='journeys'&&arg){ selectJourney(+arg||0); }
       } else {
         if(mode && views[mode]) setMode(mode);
         if(p[1]==='idea' && cById[p[2]]) openConcept(p[2]);
@@ -1929,18 +1795,16 @@
     Object.entries(views).forEach(([m,id])=>document.getElementById(id).classList.toggle('active',m===mode));
     document.getElementById('caption').innerHTML=caption(mode);
     if(mode==='timeline') buildTimeline();
-    if(mode==='paths') setPathsPane(pathsPane);   // builds both panes + sets the per-pane caption/hash
+    if(mode==='paths'){ buildThreads(); renderThread(); }
     if(mode==='constellation') buildConstellation();
     if(mode==='lens') buildLens();
     applyFilters();
     if(selected) crossHighlight(selected);
-    // Paths writes its own detailed hash (/paths/<pane>/<arg>) via setPathsPane.
+    // The Arguments tab writes its own detailed hash (/paths/<i>.<s>) via renderThread.
     if(!selected && mode!=='paths') setHash('/'+mode);
     locateInView(mode);   // re-locate the searched target in the new view
   }
   document.querySelectorAll('.switch button').forEach(b=>b.onclick=()=>setMode(b.dataset.mode));
-  document.getElementById('paths-threads').onclick=()=>setPathsPane('threads');
-  document.getElementById('paths-journeys').onclick=()=>setPathsPane('journeys');
   // Idea-clicks used to land in the Idea Web; with the Web removed, Lens is the
   // surviving node-link graph — jump straight to the idea's ego-graph.
   function showIdeaInLens(id){ setMode('lens'); buildLens(); showLensGraph(); lensFocus=id; focusLens(id,null,{trail:'reset'}); }
@@ -2010,12 +1874,6 @@
         const nt=el.querySelector('.nt'); if(nt) nt.textContent=aNote(a); });
       renderThread();
     }
-    if(jrnBuilt){
-      document.querySelectorAll('#jrn-list .jrn-item').forEach(el=>{ const j=D.journeys[+el.dataset.i]; if(!j) return;
-        const tt=el.querySelector('.tt'); if(tt) tt.textContent=jTitle(j);
-        const nt=el.querySelector('.nt'); if(nt) nt.textContent=jBlurb(j); });
-      renderJourney();
-    }
     if(selected&&cById[selected]) openConcept(selected);
   }
   document.querySelectorAll('#lang-switch button').forEach(b=>b.onclick=()=>applyLang(b.dataset.lang));
@@ -2040,6 +1898,13 @@
     gate.classList.add('closing');
     setTimeout(()=>{ gate.hidden=true; gate.classList.remove('closing'); },480);
   }
+  function openGate(){
+    if(!gate.hidden) return;
+    gate.querySelector('.gate-seal').innerHTML=sealMarkup();
+    gate.classList.remove('closing');
+    gate.hidden=false;
+    document.getElementById('gate-enter').focus();
+  }
   if(!gateSeen && !hadHash){
     gate.querySelector('.gate-seal').innerHTML=sealMarkup();
     gate.hidden=false;
@@ -2048,6 +1913,11 @@
   document.getElementById('gate-enter').onclick=closeGate;
   document.getElementById('gate-skip').onclick=closeGate;
   gate.addEventListener('keydown',e=>{ if(e.key==='Escape') closeGate(); });
+  const brandEl=document.getElementById('brand');
+  if(brandEl){
+    brandEl.addEventListener('click',openGate);
+    brandEl.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); openGate(); } });
+  }
 
   // ---------- search ----------
   const s2=document.getElementById('search2'), r2=document.getElementById('res2');

@@ -2,7 +2,7 @@
 """Build index.html (at the repo root) from src/.
 
 Pipeline (deterministic, no network):
-  1. expand13.py — applies rounds 1–13 (… + the core backfill + Sikh/Sāṃkhya/Iqbal), writes src/ideas.json
+  1. expand14.py — applies rounds 1–14 (… + Sikh/Sāṃkhya/Iqbal + philosophy of language), writes src/ideas.json
   2. merge.py    — attaches ranked thinkers + readings, validates full coverage
   3. inject      — splices src/ideas.json + src/atlas_graph.json + the vendored D3/fonts
                    into src/template.html (escaping </ so embedded blobs can't close their
@@ -23,7 +23,7 @@ def run(script):
     subprocess.run([sys.executable, script], cwd=SRC, check=True)
 
 print("1/3  Building ideas dataset…")
-run("expand13.py")
+run("expand14.py")
 print("2/3  Attaching readings + validating…")
 run("merge.py")
 
