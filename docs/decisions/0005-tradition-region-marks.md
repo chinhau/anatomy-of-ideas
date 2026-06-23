@@ -1,4 +1,4 @@
-# ADR 0004 — Tradition marks become region marks
+# ADR 0005 — Tradition marks become region marks
 
 **Status:** Accepted · **Date:** 2026-06-23
 · Downstream of [ADR 0003](0003-hermetic-codex-art-direction.md) and `docs/DESIGN-TASTE.md`.
