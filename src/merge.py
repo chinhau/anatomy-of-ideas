@@ -15,7 +15,8 @@ from readings_extra11 import EXTRA11 as _EX11
 from readings_extra12 import EXTRA12 as _EX12
 from readings_extra13 import EXTRA13 as _EX13
 from readings_extra14 import EXTRA14 as _EX14
-RD = {**_RD, **_EX, **_EX2, **_EX3, **_EX4, **_EX5, **_EX6, **_EX7, **_EX8, **_EX9, **_EX10, **_EX11, **_EX12, **_EX13, **_EX14}
+from readings_extra15 import EXTRA15 as _EX15
+RD = {**_RD, **_EX, **_EX2, **_EX3, **_EX4, **_EX5, **_EX6, **_EX7, **_EX8, **_EX9, **_EX10, **_EX11, **_EX12, **_EX13, **_EX14, **_EX15}
 
 ideas = json.load(open('ideas.json', encoding='utf-8'))
 ids = {c['id'] for c in ideas['concepts']}
