@@ -1400,7 +1400,7 @@
   // ========== filters ==========
   function regionOf(c){ const t=c.trad;
     if(t==='psy'||t==='cog'||t==='csn') return 'Psyche';
-    if(t==='ind'||t==='bud'||t==='chn'||t==='jpn'||t==='kor') return 'East';
+    if(t==='ind'||t==='bud'||t==='chn'||t==='jpn'||t==='kor'||t==='skh') return 'East';
     if(t==='afr'||t==='nam'||t==='abo'||t==='nah') return 'Indigenous';
     return 'West'; }
   const ERAS=D.concepts.map(c=>c.era), ERA_MIN=Math.min(...ERAS), ERA_MAX=Math.max(...ERAS);
