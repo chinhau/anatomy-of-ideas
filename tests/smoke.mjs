@@ -103,6 +103,14 @@ eq($('#lens-board').hidden, false, 'home button returns to the Eleven Doors boar
 click($('.switch button[data-mode="lens"]')); click($('#lens-explore'));
 click($('#lens-cap .lc-open'));
 assert($('#drawer').classList.contains('open'), 'lens "open full entry" opens the shared dossier');
+// regression: with the dossier open, clicking a neighbour must keep the side panel
+// in sync (it used to recentre the ring but leave the panel on the previous idea).
+const lensDrBefore=$('#dr-name').textContent;
+const lensNb=$$('#lens-svg g.lnode:not(.focus)')[0];
+assert(!!lensNb, 'lens graph has a neighbour to navigate to');
+click(lensNb);
+eq($('#dr-name').textContent, $('#lens-svg g.lnode.focus text')?.textContent, 'open dossier follows the lens focus to the clicked neighbour');
+assert($('#dr-name').textContent!==lensDrBefore, 'the synced dossier actually changed concepts');
 esc(); click($('.switch button[data-mode="questions"]'));
 
 // TIMELINE

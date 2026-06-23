@@ -4937,6 +4937,11 @@
 
     renderTrail();
     narrate(c,rel);
+    // If the dossier is already open, keep it synced as you navigate the graph —
+    // otherwise clicking a neighbour recentres the ring but leaves the side panel
+    // stuck on the previously opened idea. Restore the canonical /lens/<id> hash
+    // afterwards (openConcept writes the /lens/idea/<id> form).
+    if(selected && selected!==id){ openConcept(id); setHash('/lens/'+encodeURIComponent(id)); }
   }
 
   // The breadcrumb rail — one line of the path you walked. Past chips rewind on click;
