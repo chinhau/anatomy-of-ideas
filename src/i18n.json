@@ -1,69 +1,1808 @@
 {
   "ui": {
-    "A Companion to the Constellation": { "zh": "星圖伴讀" },
-    "Questions": { "zh": "問題" },
-    "Timeline": { "zh": "年表" },
-    "Idea Web": { "zh": "觀念網絡" },
-    "Threads": { "zh": "論辯" },
-    "Constellation": { "zh": "星圖" },
-    "Lens": { "zh": "透鏡" },
-    "Filters": { "zh": "篩選" },
-    "How to read this": { "zh": "如何閱讀" },
-    "Find a concept…": { "zh": "尋找觀念…" },
-    "Reading status": { "zh": "閱讀狀態" },
-    "Era": { "zh": "年代" },
-    "Question": { "zh": "問題" },
-    "Tradition region": { "zh": "傳統區域" },
-    "Reset all": { "zh": "全部重設" },
-    "Reset filters": { "zh": "重設篩選" },
-    "No ideas match these filters.": { "zh": "沒有觀念符合這些篩選條件。" },
-    "builds on": { "zh": "承襲自" },
-    "rejects / opposes": { "zh": "反對／駁斥" },
-    "rejects": { "zh": "駁斥" },
-    "echoes": { "zh": "呼應" },
-    "echoes across traditions": { "zh": "跨傳統的呼應" },
-    "related": { "zh": "相關" },
-    "size = ideas built on it": { "zh": "大小＝承襲它的觀念數" },
-    "Explore": { "zh": "探索" },
-    "Guided tour": { "zh": "導覽" },
-    "🎲 Random walk": { "zh": "🎲 隨機漫步" },
-    "‹ Prev": { "zh": "‹ 上一步" },
-    "Next ›": { "zh": "下一步 ›" },
-    "Play": { "zh": "播放" },
-    "Pause": { "zh": "暫停" },
-    "You followed": { "zh": "你循著" },
-    "Open full entry →": { "zh": "閱讀完整條目 →" },
-    "Principal thinkers": { "zh": "主要思想家" },
-    "Essential readings": { "zh": "必讀文獻" },
-    "— ranked by influence": { "zh": "— 依影響力排序" },
-    "Primary source": { "zh": "原始文獻" },
-    "Argues against:": { "zh": "反對：" },
-    "The counter-move — it pushes back against {prev}.": { "zh": "反制之舉——它回擊{prev}。" },
-    "The resolution — it tries to hold the tension together.": { "zh": "化解之道——它試圖調和其中的張力。" },
-    "A reply in the same key, answering {prev} from another angle.": { "zh": "以同一基調的回應，從另一角度回答{prev}。" },
-    "unread": { "zh": "未讀" },
-    "reading": { "zh": "閱讀中" },
-    "read": { "zh": "已讀" },
-    "West": { "zh": "西方" },
-    "Psyche": { "zh": "心靈" },
-    "East": { "zh": "東方" },
-    "Colour marks the <em>question</em> each idea answers. Hover to trace its kin; click for the full entry.": { "zh": "顏色標示每個觀念所回應的<em>問題</em>。游標懸停以追溯其脈絡；點擊以閱讀完整條目。" },
-    "Every idea placed at its era, in the lane of its world. Hover to trace its kin; click for the full entry. Drag the era handles to narrow the centuries.": { "zh": "每個觀念皆置於其年代，落在所屬世界的軌道上。游標懸停以追溯其同類；點擊以閱讀完整條目；拖曳年代滑桿以縮窄世紀範圍。" },
-    "The original star-chart of thinkers & schools, clustered into West, Psyche & East. Hover to trace a lineage; click a star to see who they were — and the ideas they shaped.": { "zh": "思想家與學派的原初星圖，分群為西方、心靈與東方三大傳統。游標懸停以追溯傳承；點擊星辰以認識其人——以及他們所塑造的觀念。" },
-    "One idea at its centre, its kin around it. Click any neighbour to travel to it; roll the dice to wander; or take a guided tour through the lineage.": { "zh": "一個觀念居於中心，與之相連的思想環繞四周。點擊任一鄰點以前往；擲骰隨機漫遊；或讓導覽帶你走過一條思想脈絡。" }
+    "A Companion to the Constellation": {
+      "zh": "星圖伴讀"
+    },
+    "Questions": {
+      "zh": "問題"
+    },
+    "Timeline": {
+      "zh": "年表"
+    },
+    "Idea Web": {
+      "zh": "觀念網絡"
+    },
+    "Threads": {
+      "zh": "論辯"
+    },
+    "Constellation": {
+      "zh": "星圖"
+    },
+    "Lens": {
+      "zh": "透鏡"
+    },
+    "Filters": {
+      "zh": "篩選"
+    },
+    "How to read this": {
+      "zh": "如何閱讀"
+    },
+    "Find a concept…": {
+      "zh": "尋找觀念…"
+    },
+    "Reading status": {
+      "zh": "閱讀狀態"
+    },
+    "Era": {
+      "zh": "年代"
+    },
+    "Question": {
+      "zh": "問題"
+    },
+    "Tradition region": {
+      "zh": "傳統區域"
+    },
+    "Reset all": {
+      "zh": "全部重設"
+    },
+    "Reset filters": {
+      "zh": "重設篩選"
+    },
+    "No ideas match these filters.": {
+      "zh": "沒有觀念符合這些篩選條件。"
+    },
+    "builds on": {
+      "zh": "承襲自"
+    },
+    "rejects / opposes": {
+      "zh": "反對／駁斥"
+    },
+    "rejects": {
+      "zh": "駁斥"
+    },
+    "echoes": {
+      "zh": "呼應"
+    },
+    "echoes across traditions": {
+      "zh": "跨傳統的呼應"
+    },
+    "related": {
+      "zh": "相關"
+    },
+    "size = ideas built on it": {
+      "zh": "大小＝承襲它的觀念數"
+    },
+    "Explore": {
+      "zh": "探索"
+    },
+    "Guided tour": {
+      "zh": "導覽"
+    },
+    "🎲 Random walk": {
+      "zh": "🎲 隨機漫步"
+    },
+    "‹ Prev": {
+      "zh": "‹ 上一步"
+    },
+    "Next ›": {
+      "zh": "下一步 ›"
+    },
+    "Play": {
+      "zh": "播放"
+    },
+    "Pause": {
+      "zh": "暫停"
+    },
+    "You followed": {
+      "zh": "你循著"
+    },
+    "Open full entry →": {
+      "zh": "閱讀完整條目 →"
+    },
+    "Principal thinkers": {
+      "zh": "主要思想家"
+    },
+    "Essential readings": {
+      "zh": "必讀文獻"
+    },
+    "— ranked by influence": {
+      "zh": "— 依影響力排序"
+    },
+    "Primary source": {
+      "zh": "原始文獻"
+    },
+    "Argues against:": {
+      "zh": "反對："
+    },
+    "The counter-move — it pushes back against {prev}.": {
+      "zh": "反制之舉——它回擊{prev}。"
+    },
+    "The resolution — it tries to hold the tension together.": {
+      "zh": "化解之道——它試圖調和其中的張力。"
+    },
+    "A reply in the same key, answering {prev} from another angle.": {
+      "zh": "以同一基調的回應，從另一角度回答{prev}。"
+    },
+    "unread": {
+      "zh": "未讀"
+    },
+    "reading": {
+      "zh": "閱讀中"
+    },
+    "read": {
+      "zh": "已讀"
+    },
+    "West": {
+      "zh": "西方"
+    },
+    "Psyche": {
+      "zh": "心靈"
+    },
+    "East": {
+      "zh": "東方"
+    },
+    "Colour marks the <em>question</em> each idea answers. Hover to trace its kin; click for the full entry.": {
+      "zh": "顏色標示每個觀念所回應的<em>問題</em>。游標懸停以追溯其脈絡；點擊以閱讀完整條目。"
+    },
+    "Every idea placed at its era, in the lane of its world. Hover to trace its kin; click for the full entry. Drag the era handles to narrow the centuries.": {
+      "zh": "每個觀念皆置於其年代，落在所屬世界的軌道上。游標懸停以追溯其同類；點擊以閱讀完整條目；拖曳年代滑桿以縮窄世紀範圍。"
+    },
+    "The original star-chart of thinkers & schools, clustered into West, Psyche & East. Hover to trace a lineage; click a star to see who they were — and the ideas they shaped.": {
+      "zh": "思想家與學派的原初星圖，分群為西方、心靈與東方三大傳統。游標懸停以追溯傳承；點擊星辰以認識其人——以及他們所塑造的觀念。"
+    },
+    "One idea at its centre, its kin around it. Click any neighbour to travel to it; roll the dice to wander; or take a guided tour through the lineage.": {
+      "zh": "一個觀念居於中心，與之相連的思想環繞四周。點擊任一鄰點以前往；擲骰隨機漫遊；或讓導覽帶你走過一條思想脈絡。"
+    },
+    "The non-English text is a machine-assisted translation — proper names, technical terms, and the framing may not be exact. Corrections welcome.": {
+      "zh": "非英文文字為機器輔助翻譯——專有名詞、技術術語與措辭未必精確。歡迎指正。"
+    }
   },
-  "questions": {},
-  "concepts": {},
-  "arguments": {},
-  "tradLabels": {},
+  "questions": {
+    "real": {
+      "label": {
+        "zh": "什麼是真實？"
+      },
+      "framing": {
+        "zh": "形上學——存在本身的本質。"
+      }
+    },
+    "know": {
+      "label": {
+        "zh": "我能知道什麼？"
+      },
+      "framing": {
+        "zh": "知識論——知識的來源與界限。"
+      }
+    },
+    "mind": {
+      "label": {
+        "zh": "心智如何運作？"
+      },
+      "framing": {
+        "zh": "心智與意識——知覺、認知、覺察。"
+      }
+    },
+    "self": {
+      "label": {
+        "zh": "自我是什麼？"
+      },
+      "framing": {
+        "zh": "心智與身份——所謂「我」究竟是什麼，若它存在的話。"
+      }
+    },
+    "live": {
+      "label": {
+        "zh": "我該如何生活？"
+      },
+      "framing": {
+        "zh": "倫理學——美好的人生與正當的行動。"
+      }
+    },
+    "just": {
+      "label": {
+        "zh": "何謂公正的社會？"
+      },
+      "framing": {
+        "zh": "政治哲學——權力、正義與正當的秩序。"
+      }
+    },
+    "free": {
+      "label": {
+        "zh": "意志自由嗎？"
+      },
+      "framing": {
+        "zh": "自由與決定論——我們是否是自身行為的作者。"
+      }
+    },
+    "peace": {
+      "label": {
+        "zh": "我們為何受苦？"
+      },
+      "framing": {
+        "zh": "解脫——苦的根源與通往安寧之道。"
+      }
+    },
+    "mean": {
+      "label": {
+        "zh": "什麼使人生值得活？"
+      },
+      "framing": {
+        "zh": "意義——目的、價值、何者重要。"
+      }
+    },
+    "trans": {
+      "label": {
+        "zh": "我們如何轉化？"
+      },
+      "framing": {
+        "zh": "轉化——心智如何改變、療癒與覺醒。"
+      }
+    },
+    "abs": {
+      "label": {
+        "zh": "是否存在一個絕對？"
+      },
+      "framing": {
+        "zh": "神聖者、存在的根基、終極實在。"
+      }
+    }
+  },
+  "concepts": {
+    "Theory of Forms": {
+      "name": {
+        "zh": "理型論"
+      },
+      "gloss": {
+        "zh": "真實的實在是永恆而完美的理型；可見的世界只是它們的影子。"
+      }
+    },
+    "Hylomorphism": {
+      "name": {
+        "zh": "形質論"
+      },
+      "gloss": {
+        "zh": "每個實體都是被形式所塑造的質料；實在就在此處，而非在理型的天界。"
+      }
+    },
+    "Atomism": {
+      "name": {
+        "zh": "原子論"
+      },
+      "gloss": {
+        "zh": "萬物皆是在虛空中運動的原子；沒有目的，只有物質與空間。"
+      }
+    },
+    "Being is One": {
+      "name": {
+        "zh": "存在是一"
+      },
+      "gloss": {
+        "zh": "變化是幻象；真正存在者乃是單一、永恆而不變的。"
+      }
+    },
+    "Everything Flows": {
+      "name": {
+        "zh": "萬物流轉"
+      },
+      "gloss": {
+        "zh": "一切皆在生成；你無法兩次踏入同一條河流。"
+      }
+    },
+    "Materialism": {
+      "name": {
+        "zh": "唯物論"
+      },
+      "gloss": {
+        "zh": "唯有物理性的物質存在；心智與精神不過是運動中的物質。"
+      }
+    },
+    "Idealism": {
+      "name": {
+        "zh": "觀念論"
+      },
+      "gloss": {
+        "zh": "存在即是被感知；實在從根本上是心靈的，而非物質的。"
+      }
+    },
+    "Absolute Idealism": {
+      "name": {
+        "zh": "絕對觀念論"
+      },
+      "gloss": {
+        "zh": "實在是透過歷史認識自身的精神（Geist）。"
+      }
+    },
+    "One Substance": {
+      "name": {
+        "zh": "唯一實體"
+      },
+      "gloss": {
+        "zh": "神與自然是同一個無限的實體；萬物皆是它的樣態。"
+      }
+    },
+    "Process Reality": {
+      "name": {
+        "zh": "歷程實在論"
+      },
+      "gloss": {
+        "zh": "實在的基本單位是事件與生成，而非靜止的事物。"
+      }
+    },
+    "Śūnyatā (Emptiness)": {
+      "name": {
+        "zh": "空性"
+      },
+      "gloss": {
+        "zh": "沒有任何事物具有固有、獨立的存在；一切皆空無固定本質。"
+      }
+    },
+    "Dependent Origination": {
+      "name": {
+        "zh": "緣起"
+      },
+      "gloss": {
+        "zh": "沒有事物獨立自存；每一物皆依條件而生起。"
+      }
+    },
+    "Brahman": {
+      "name": {
+        "zh": "梵"
+      },
+      "gloss": {
+        "zh": "單一不二的絕對者貫穿一切；多重世界只是表象（摩耶）。"
+      }
+    },
+    "The Dao": {
+      "name": {
+        "zh": "道"
+      },
+      "gloss": {
+        "zh": "一個不可言說的本源與規律流貫萬物；一旦命名便已偏失。"
+      }
+    },
+    "Yin–Yang / Qi": {
+      "name": {
+        "zh": "陰陽／氣"
+      },
+      "gloss": {
+        "zh": "實在是互補兩極與生命能量的動態交織。"
+      }
+    },
+    "Monadology": {
+      "name": {
+        "zh": "單子論"
+      },
+      "gloss": {
+        "zh": "實在由無數沒有窗戶的心靈（單子）組成，依預定和諧而運作。"
+      }
+    },
+    "Allegory of the Cave": {
+      "name": {
+        "zh": "洞穴寓言"
+      },
+      "gloss": {
+        "zh": "我們把影子誤認為實在；知識是朝向光明的痛苦轉身。"
+      }
+    },
+    "Rationalism": {
+      "name": {
+        "zh": "理性主義"
+      },
+      "gloss": {
+        "zh": "通往確定知識之路是理性，而非感官。"
+      }
+    },
+    "Empiricism": {
+      "name": {
+        "zh": "經驗主義"
+      },
+      "gloss": {
+        "zh": "一切知識始於感官經驗；心智起初是空白的。"
+      }
+    },
+    "The Cogito": {
+      "name": {
+        "zh": "我思"
+      },
+      "gloss": {
+        "zh": "我能懷疑一切，唯獨無法懷疑那懷疑本身；「我思故我在」。"
+      }
+    },
+    "Tabula Rasa": {
+      "name": {
+        "zh": "白板"
+      },
+      "gloss": {
+        "zh": "心智在出生時是一塊白板，由經驗書寫其上。"
+      }
+    },
+    "Skepticism": {
+      "name": {
+        "zh": "懷疑論"
+      },
+      "gloss": {
+        "zh": "懸置判斷；確定性無法企及，安寧就在於不去執取它。"
+      }
+    },
+    "Transcendental Idealism": {
+      "name": {
+        "zh": "先驗觀念論"
+      },
+      "gloss": {
+        "zh": "我們永遠無法認識物自身，只能認識一個由心智範疇所塑造的世界。"
+      }
+    },
+    "Falsifiability": {
+      "name": {
+        "zh": "可證偽性"
+      },
+      "gloss": {
+        "zh": "唯有當某種可能的觀察足以反駁它時，一個主張才算科學。"
+      }
+    },
+    "Paradigm Shifts": {
+      "name": {
+        "zh": "典範轉移"
+      },
+      "gloss": {
+        "zh": "科學是經由革命而非穩定累積來改變的；不同框架彼此不可通約。"
+      }
+    },
+    "Verification Principle": {
+      "name": {
+        "zh": "證實原則"
+      },
+      "gloss": {
+        "zh": "一個陳述唯有能被經驗證實，或屬於邏輯，才有意義。"
+      }
+    },
+    "Two Truths": {
+      "name": {
+        "zh": "二諦"
+      },
+      "gloss": {
+        "zh": "既有世俗的日常真理，也有究竟真理；二者皆不可缺。"
+      }
+    },
+    "Pramāṇa": {
+      "name": {
+        "zh": "量（知識的依據）"
+      },
+      "gloss": {
+        "zh": "知識有其有效來源：現量、比量、譬喻量、聖言量。"
+      }
+    },
+    "Anekāntavāda": {
+      "name": {
+        "zh": "多面論（非一面性）"
+      },
+      "gloss": {
+        "zh": "真理是多面的；每個主張都是片面的，從某一立場看才為真。"
+      }
+    },
+    "The Immortal Soul": {
+      "name": {
+        "zh": "不朽的靈魂"
+      },
+      "gloss": {
+        "zh": "自我是一個不死的靈魂，暫時寄寓於身體之中。"
+      }
+    },
+    "Substance Dualism": {
+      "name": {
+        "zh": "實體二元論"
+      },
+      "gloss": {
+        "zh": "心與身是兩種不同的實體；思考的自我是非物質的。"
+      }
+    },
+    "Ātman = Brahman": {
+      "name": {
+        "zh": "梵我合一"
+      },
+      "gloss": {
+        "zh": "你最深處的真我與絕對者同一；「汝即彼」。"
+      }
+    },
+    "Anattā (No-Self)": {
+      "name": {
+        "zh": "無我"
+      },
+      "gloss": {
+        "zh": "沒有恆常的自我——只有不斷變化的歷程聚合。"
+      }
+    },
+    "Bundle Theory": {
+      "name": {
+        "zh": "知覺束論"
+      },
+      "gloss": {
+        "zh": "自我不過是流變中的知覺之束；找不到持存的「我」。"
+      }
+    },
+    "The Unconscious": {
+      "name": {
+        "zh": "潛意識"
+      },
+      "gloss": {
+        "zh": "心智大部分隱而不顯；我們被看不見的力量所驅動。"
+      }
+    },
+    "Collective Unconscious": {
+      "name": {
+        "zh": "集體潛意識"
+      },
+      "gloss": {
+        "zh": "在個人心靈之下，潛藏著一層共有的普遍原型。"
+      }
+    },
+    "Behaviorist Mind": {
+      "name": {
+        "zh": "行為主義的心智"
+      },
+      "gloss": {
+        "zh": "拋開內在的自我；只研究可觀察的行為與制約。"
+      }
+    },
+    "Functionalism": {
+      "name": {
+        "zh": "功能論"
+      },
+      "gloss": {
+        "zh": "心智即心智所為；心智狀態是功能性的角色，而非某種材質。"
+      }
+    },
+    "Existential Self": {
+      "name": {
+        "zh": "存在主義的自我"
+      },
+      "gloss": {
+        "zh": "存在先於本質；沒有固定的自我——我們透過抉擇造就自己。"
+      }
+    },
+    "Being-in-the-World": {
+      "name": {
+        "zh": "在世存有"
+      },
+      "gloss": {
+        "zh": "自我不是我們內部的某物，而是我們具身的、涉入事物之中的存有。"
+      }
+    },
+    "The Mirror Stage": {
+      "name": {
+        "zh": "鏡像階段"
+      },
+      "gloss": {
+        "zh": "「我」是由外部形成的——來自一個影像與他者的凝視。"
+      }
+    },
+    "Relational Self": {
+      "name": {
+        "zh": "關係性自我"
+      },
+      "gloss": {
+        "zh": "一個人是由其角色與關係構成的，而非孤立於內。"
+      }
+    },
+    "Self-Actualization": {
+      "name": {
+        "zh": "自我實現"
+      },
+      "gloss": {
+        "zh": "自我是一項工程；健康就是成為自己所能成為的一切。"
+      }
+    },
+    "Eudaimonia": {
+      "name": {
+        "zh": "幸福（圓滿）"
+      },
+      "gloss": {
+        "zh": "美好的人生是透過德行與理性的踐行而臻於繁盛。"
+      }
+    },
+    "The Golden Mean": {
+      "name": {
+        "zh": "中庸之道"
+      },
+      "gloss": {
+        "zh": "德行居於兩極之間——勇敢介於怯懦與魯莽之間。"
+      }
+    },
+    "Stoic Virtue": {
+      "name": {
+        "zh": "斯多噶的德行"
+      },
+      "gloss": {
+        "zh": "依循理性與自然而活；唯有德行才是真正的善。"
+      }
+    },
+    "Epicurean Pleasure": {
+      "name": {
+        "zh": "伊比鳩魯的快樂"
+      },
+      "gloss": {
+        "zh": "善是正確理解的快樂——寧靜與沒有痛苦。"
+      }
+    },
+    "Categorical Imperative": {
+      "name": {
+        "zh": "定言令式"
+      },
+      "gloss": {
+        "zh": "只依你願人人都遵循的準則而行；以人為目的。"
+      }
+    },
+    "Utilitarianism": {
+      "name": {
+        "zh": "效益主義"
+      },
+      "gloss": {
+        "zh": "正當的行為為最大多數人帶來最大的幸福。"
+      }
+    },
+    "Ren & Li": {
+      "name": {
+        "zh": "仁與禮"
+      },
+      "gloss": {
+        "zh": "透過禮的得宜與正當的關係，涵養仁。"
+      }
+    },
+    "Wu Wei": {
+      "name": {
+        "zh": "無為"
+      },
+      "gloss": {
+        "zh": "行而不強求；順應自然之流，而非與之抗爭。"
+      }
+    },
+    "Ahimsa": {
+      "name": {
+        "zh": "不害（非暴力）"
+      },
+      "gloss": {
+        "zh": "在行為、言語與意念上，對一切眾生皆不施暴力。"
+      }
+    },
+    "Master & Slave Morality": {
+      "name": {
+        "zh": "主人道德與奴隸道德"
+      },
+      "gloss": {
+        "zh": "承襲的道德是奴隸的反叛；重估價值，創造你自己的價值。"
+      }
+    },
+    "Authenticity": {
+      "name": {
+        "zh": "本真性"
+      },
+      "gloss": {
+        "zh": "活得好，就是承擔你的自由，拒絕「自欺」——對自由的逃避。"
+      }
+    },
+    "Care Ethics": {
+      "name": {
+        "zh": "關懷倫理"
+      },
+      "gloss": {
+        "zh": "道德生長自關係與關懷，而非抽象的規則。"
+      }
+    },
+    "Philosopher-Kings": {
+      "name": {
+        "zh": "哲學王"
+      },
+      "gloss": {
+        "zh": "公正的城邦由認識善者統治；各部分各安其位。"
+      }
+    },
+    "Social Contract": {
+      "name": {
+        "zh": "社會契約"
+      },
+      "gloss": {
+        "zh": "正當的權威奠基於被治者之間的協議。"
+      }
+    },
+    "Leviathan": {
+      "name": {
+        "zh": "利維坦"
+      },
+      "gloss": {
+        "zh": "若無強大的主權者，人生便是所有人對所有人的戰爭。"
+      }
+    },
+    "Natural Rights": {
+      "name": {
+        "zh": "自然權利"
+      },
+      "gloss": {
+        "zh": "人人皆有生命、自由與財產的權利，國家必須加以保護。"
+      }
+    },
+    "The General Will": {
+      "name": {
+        "zh": "公意"
+      },
+      "gloss": {
+        "zh": "正當性源於人民朝向共同善的集體意志。"
+      }
+    },
+    "Historical Materialism": {
+      "name": {
+        "zh": "歷史唯物論"
+      },
+      "gloss": {
+        "zh": "歷史由圍繞生產資料的階級鬥爭所推動。"
+      }
+    },
+    "Justice as Fairness": {
+      "name": {
+        "zh": "作為公平的正義"
+      },
+      "gloss": {
+        "zh": "在對自身處境的「無知之幕」後選擇正義原則。"
+      }
+    },
+    "Power/Knowledge": {
+      "name": {
+        "zh": "權力／知識"
+      },
+      "gloss": {
+        "zh": "權力與知識彼此生產；規訓塑造了現代的主體。"
+      }
+    },
+    "Legalism": {
+      "name": {
+        "zh": "法家"
+      },
+      "gloss": {
+        "zh": "秩序來自嚴明、公正的法律與清楚的賞罰。"
+      }
+    },
+    "Government by Virtue": {
+      "name": {
+        "zh": "德治"
+      },
+      "gloss": {
+        "zh": "統治者應以道德典範領導；人民順從德行，而非武力。"
+      }
+    },
+    "Mohist Universal Love": {
+      "name": {
+        "zh": "墨家兼愛"
+      },
+      "gloss": {
+        "zh": "對所有人無差別的關懷帶來最大的社會利益。"
+      }
+    },
+    "Satyagraha": {
+      "name": {
+        "zh": "真理堅持（非暴力抗爭）"
+      },
+      "gloss": {
+        "zh": "非暴力的抵抗——真理的力量——作為政治變革的手段。"
+      }
+    },
+    "Hard Determinism": {
+      "name": {
+        "zh": "強決定論"
+      },
+      "gloss": {
+        "zh": "每個事件皆有其因；自由意志是我們無法逃脫的幻象。"
+      }
+    },
+    "Libertarian Free Will": {
+      "name": {
+        "zh": "自由意志論"
+      },
+      "gloss": {
+        "zh": "我們擁有真正的、未被決定的自由，能夠選擇另一種可能。"
+      }
+    },
+    "Compatibilism": {
+      "name": {
+        "zh": "相容論"
+      },
+      "gloss": {
+        "zh": "自由就是依自己的慾望而行——與因果完全相容。"
+      }
+    },
+    "Amor Fati": {
+      "name": {
+        "zh": "熱愛命運"
+      },
+      "gloss": {
+        "zh": "有些事在我們掌握之中，有些則否；熱愛你的命運，調順你的意志。"
+      }
+    },
+    "Karma": {
+      "name": {
+        "zh": "業"
+      },
+      "gloss": {
+        "zh": "行為自有其果；你受自身行為所縛，卻也對其負有道德責任。"
+      }
+    },
+    "Pre-established Harmony": {
+      "name": {
+        "zh": "預定和諧"
+      },
+      "gloss": {
+        "zh": "心與身並不相互作用；神事先使二者同步。"
+      }
+    },
+    "Condemned to be Free": {
+      "name": {
+        "zh": "被判處自由"
+      },
+      "gloss": {
+        "zh": "我們「被判處自由」——徹底地承擔責任，無從推諉。"
+      }
+    },
+    "Eternal Recurrence": {
+      "name": {
+        "zh": "永恆回歸"
+      },
+      "gloss": {
+        "zh": "活得彷彿你必須永遠重歷每一刻；意願它，便得自由。"
+      }
+    },
+    "Illusion of the Doer": {
+      "name": {
+        "zh": "行動者的幻象"
+      },
+      "gloss": {
+        "zh": "那種作為獨立行動者的感覺，本身就是幻象（摩耶）的一部分。"
+      }
+    },
+    "Four Noble Truths": {
+      "name": {
+        "zh": "四聖諦"
+      },
+      "gloss": {
+        "zh": "人生有苦；苦的起因是渴愛；苦可以止息；有道通向解脫。"
+      }
+    },
+    "Nirvana": {
+      "name": {
+        "zh": "涅槃"
+      },
+      "gloss": {
+        "zh": "渴愛的熄滅；從輪迴之苦中解脫。"
+      }
+    },
+    "The Eightfold Path": {
+      "name": {
+        "zh": "八正道"
+      },
+      "gloss": {
+        "zh": "一條切實的道路——正見、正思惟、正語、正業等——通往離苦。"
+      }
+    },
+    "Non-Attachment": {
+      "name": {
+        "zh": "無執著"
+      },
+      "gloss": {
+        "zh": "當我們停止攀緣變動之物時，苦便鬆開了它的箝制。"
+      }
+    },
+    "Samsara & Moksha": {
+      "name": {
+        "zh": "輪迴與解脫"
+      },
+      "gloss": {
+        "zh": "被縛於生死輪迴之中，靈魂尋求解脫——回歸絕對者。"
+      }
+    },
+    "Stoic Apatheia": {
+      "name": {
+        "zh": "斯多噶的不動心"
+      },
+      "gloss": {
+        "zh": "安寧是從破壞性激情中解脫；掌控判斷，接納既成之事。"
+      }
+    },
+    "Ataraxia": {
+      "name": {
+        "zh": "心靈寧靜"
+      },
+      "gloss": {
+        "zh": "寧靜——一種不可動搖的平靜——是人類至高的善。"
+      }
+    },
+    "Denial of the Will": {
+      "name": {
+        "zh": "否定意志"
+      },
+      "gloss": {
+        "zh": "人生是受盲目意志驅使的苦難；解脫來自否定那意志。"
+      }
+    },
+    "The Absurd": {
+      "name": {
+        "zh": "荒謬"
+      },
+      "gloss": {
+        "zh": "人生沒有既定的意義；我們透過反抗並依然全然地活著而獲得安寧。"
+      }
+    },
+    "Logotherapy": {
+      "name": {
+        "zh": "意義治療"
+      },
+      "gloss": {
+        "zh": "只要有一個「為何」，我們幾乎能承受任何「如何」；意義是絕望的解藥。"
+      }
+    },
+    "Flow": {
+      "name": {
+        "zh": "心流"
+      },
+      "gloss": {
+        "zh": "最深的福祉降臨於為其自身而投入的、技藝純熟的行動中。"
+      }
+    },
+    "The Unmoved Mover": {
+      "name": {
+        "zh": "不動的推動者"
+      },
+      "gloss": {
+        "zh": "運動的鏈條需要一個推動一切而自身不動的第一因。"
+      }
+    },
+    "The One": {
+      "name": {
+        "zh": "太一"
+      },
+      "gloss": {
+        "zh": "一切實在皆從單一不可言說的本源「太一」流溢而出，並渴望回歸。"
+      }
+    },
+    "The Ontological Argument": {
+      "name": {
+        "zh": "本體論論證"
+      },
+      "gloss": {
+        "zh": "神是無可設想更偉大者——因此神必然存在。"
+      }
+    },
+    "The Five Ways": {
+      "name": {
+        "zh": "五路論證"
+      },
+      "gloss": {
+        "zh": "五條理性的途徑——從運動、原因、偶然性——論證至神。"
+      }
+    },
+    "Pantheism": {
+      "name": {
+        "zh": "泛神論"
+      },
+      "gloss": {
+        "zh": "神並不在世界之外；神即是世界，「神即自然」。"
+      }
+    },
+    "Pascal's Wager": {
+      "name": {
+        "zh": "帕斯卡的賭注"
+      },
+      "gloss": {
+        "zh": "理性無法決定神是否存在，故權衡這場賭局——信仰是較安全的押注。"
+      }
+    },
+    "Via Negativa": {
+      "name": {
+        "zh": "否定之路"
+      },
+      "gloss": {
+        "zh": "絕對者超越言語；我們只能說神「不是」什麼。"
+      }
+    },
+    "The Death of God": {
+      "name": {
+        "zh": "上帝之死"
+      },
+      "gloss": {
+        "zh": "「上帝已死」——價值的絕對根基已然崩塌；如今當如何？"
+      }
+    },
+    "Non-Theistic Absolute": {
+      "name": {
+        "zh": "非神論的絕對"
+      },
+      "gloss": {
+        "zh": "終極實在（空性）並非造物之神，而是固定根基的闕如。"
+      }
+    },
+    "Stream of Consciousness": {
+      "name": {
+        "zh": "意識流"
+      },
+      "gloss": {
+        "zh": "意識不是一串環節，而是一條連續流動的河。"
+      }
+    },
+    "The Hard Problem": {
+      "name": {
+        "zh": "困難問題"
+      },
+      "gloss": {
+        "zh": "為何竟有任何被感受到的經驗？為何內在並非一片黑暗？"
+      }
+    },
+    "What It Is Like": {
+      "name": {
+        "zh": "「身處其中的感受」"
+      },
+      "gloss": {
+        "zh": "若身處某狀態之中有某種感受，這狀態便是有意識的。"
+      }
+    },
+    "Panpsychism": {
+      "name": {
+        "zh": "泛心論"
+      },
+      "gloss": {
+        "zh": "心靈一路向下貫穿；經驗是物質的一項基本特徵。"
+      }
+    },
+    "Integrated Information": {
+      "name": {
+        "zh": "整合資訊論"
+      },
+      "gloss": {
+        "zh": "托諾尼的理論：意識即整合的資訊——一個系統愈是統整，它便愈有感受。"
+      }
+    },
+    "The Intentional Stance": {
+      "name": {
+        "zh": "意向立場"
+      },
+      "gloss": {
+        "zh": "把一個心智當作具有信念與慾望的理性行動者，以預測它。"
+      }
+    },
+    "Strange Loop": {
+      "name": {
+        "zh": "奇異迴圈"
+      },
+      "gloss": {
+        "zh": "「我」是大腦為模擬自身而旋繞出的一個自我指涉的迴圈。"
+      }
+    },
+    "The Embodied Mind": {
+      "name": {
+        "zh": "具身心智"
+      },
+      "gloss": {
+        "zh": "認知是由一個應對其世界的活體所施行的，而非在顱內運算出來的。"
+      }
+    },
+    "Universal Grammar": {
+      "name": {
+        "zh": "普遍語法"
+      },
+      "gloss": {
+        "zh": "我們天生具有一套深層語法；語言是展開的，而非僅靠習得。"
+      }
+    },
+    "Dual-Process Mind": {
+      "name": {
+        "zh": "雙歷程心智"
+      },
+      "gloss": {
+        "zh": "兩套系統替我們思考——一套快速直覺，一套緩慢審慎。"
+      }
+    },
+    "Neutral Monism": {
+      "name": {
+        "zh": "中立一元論"
+      },
+      "gloss": {
+        "zh": "心與物是同一種中立、更基本之物的兩種排列。"
+      }
+    },
+    "Developmental Stages": {
+      "name": {
+        "zh": "發展階段"
+      },
+      "gloss": {
+        "zh": "兒童的心智透過不同的成長階段建構出實在。"
+      }
+    },
+    "Cybernetics & Feedback": {
+      "name": {
+        "zh": "控制論與回饋"
+      },
+      "gloss": {
+        "zh": "心智與機器同樣藉由回饋與校正的迴路來導航。"
+      }
+    },
+    "The Butterfly Dream": {
+      "name": {
+        "zh": "莊周夢蝶"
+      },
+      "gloss": {
+        "zh": "我是夢見自己變成蝴蝶的人，還是夢見自己是人的蝴蝶？"
+      }
+    },
+    "Meaning Is Created": {
+      "name": {
+        "zh": "意義是被創造的"
+      },
+      "gloss": {
+        "zh": "沒有意義是被授予的；我們透過抉擇與籌劃鍛造意義。"
+      }
+    },
+    "Inherent Purpose (Telos)": {
+      "name": {
+        "zh": "固有目的（目的因）"
+      },
+      "gloss": {
+        "zh": "每一物都有其目的，一個它所朝向的歸宿；美好的人生實現我們的目的。"
+      }
+    },
+    "Ikigai": {
+      "name": {
+        "zh": "生き甲斐（活著的意義）"
+      },
+      "gloss": {
+        "zh": "一個「存在的理由」——日復一日感到生命值得醒來。"
+      }
+    },
+    "Positive Psychology": {
+      "name": {
+        "zh": "正向心理學"
+      },
+      "gloss": {
+        "zh": "不僅研究疾病，也研究繁盛——投入、關係、意義。"
+      }
+    },
+    "The Examined Life": {
+      "name": {
+        "zh": "受檢視的人生"
+      },
+      "gloss": {
+        "zh": "「未經檢視的人生不值得活」——透過自我省察而獲得意義。"
+      }
+    },
+    "Cognitive Behavioral Therapy": {
+      "name": {
+        "zh": "認知行為療法"
+      },
+      "gloss": {
+        "zh": "改變想法便能改變感受；重新加工扭曲的信念。"
+      }
+    },
+    "Mindfulness (MBSR)": {
+      "name": {
+        "zh": "正念（減壓療法）"
+      },
+      "gloss": {
+        "zh": "不加評判的當下覺察，從佛教帶入醫學。"
+      }
+    },
+    "Acceptance & Commitment": {
+      "name": {
+        "zh": "接納與承諾"
+      },
+      "gloss": {
+        "zh": "停止與內在經驗搏鬥；接納它，並依你的價值而行。"
+      }
+    },
+    "Individuation": {
+      "name": {
+        "zh": "個體化"
+      },
+      "gloss": {
+        "zh": "透過將陰影與潛意識整合入自我而臻於完整。"
+      }
+    },
+    "Yoga: Stilling the Mind": {
+      "name": {
+        "zh": "瑜伽：止息心念"
+      },
+      "gloss": {
+        "zh": "瑜伽是止息心念的波動，釋放純粹的覺知。"
+      }
+    },
+    "Sudden Awakening": {
+      "name": {
+        "zh": "頓悟"
+      },
+      "gloss": {
+        "zh": "開悟並非循序漸進地掙得，而是當下豁然開朗。"
+      }
+    },
+    "Self-Cultivation": {
+      "name": {
+        "zh": "自我修養"
+      },
+      "gloss": {
+        "zh": "心本已知善；成長是把那份知打磨成行動。"
+      }
+    },
+    "Integral Theory": {
+      "name": {
+        "zh": "整合理論"
+      },
+      "gloss": {
+        "zh": "同時跨越階段、狀態與觀點來描繪人的成長。"
+      }
+    },
+    "Mystical Union (Fana)": {
+      "name": {
+        "zh": "神秘合一（法那）"
+      },
+      "gloss": {
+        "zh": "自我消融；愛者與被愛者合而為一。"
+      }
+    },
+    "Unity of Being": {
+      "name": {
+        "zh": "存有的統一"
+      },
+      "gloss": {
+        "zh": "一切存在皆是同一個神聖的實在；造化是神的自我顯現。"
+      }
+    },
+    "The Flying Man": {
+      "name": {
+        "zh": "飛人"
+      },
+      "gloss": {
+        "zh": "漂浮著、毫無感官，你依然會知道自己存在——自我絕非僅是身體。"
+      }
+    },
+    "Faith Beyond Reason": {
+      "name": {
+        "zh": "超越理性的信仰"
+      },
+      "gloss": {
+        "zh": "理性無法觸及最深的真理；連因果都仰賴神的意志。"
+      }
+    },
+    "Language Games": {
+      "name": {
+        "zh": "語言遊戲"
+      },
+      "gloss": {
+        "zh": "詞語的意義來自它們在生活形式中的用法，而非來自映照世界。"
+      }
+    },
+    "Pragmatism": {
+      "name": {
+        "zh": "實用主義"
+      },
+      "gloss": {
+        "zh": "真的觀念是那些行得通的——在經驗中能償付其代價的。"
+      }
+    },
+    "Evolution by Natural Selection": {
+      "name": {
+        "zh": "天擇演化"
+      },
+      "gloss": {
+        "zh": "沒有設計者的設計：生命的複雜性源於變異與選擇。"
+      }
+    },
+    "Political Realism": {
+      "name": {
+        "zh": "政治現實主義"
+      },
+      "gloss": {
+        "zh": "政治運轉靠的是權力，而非虔敬；君主必須駕馭命運與力量。"
+      }
+    },
+    "Qualified Non-Dualism": {
+      "name": {
+        "zh": "限定不二論"
+      },
+      "gloss": {
+        "zh": "世界與靈魂是神真實的部分——是一，卻非無差別。"
+      }
+    },
+    "Society of the Spectacle": {
+      "name": {
+        "zh": "景觀社會"
+      },
+      "gloss": {
+        "zh": "現代生活被影像所中介；我們曾經生活之處，如今只是觀看再現。"
+      }
+    },
+    "The Burnout Society": {
+      "name": {
+        "zh": "倦怠社會"
+      },
+      "gloss": {
+        "zh": "不再受外部規訓，我們剝削自己——還稱之為自由。"
+      }
+    },
+    "The Presentation of Self": {
+      "name": {
+        "zh": "自我的呈現"
+      },
+      "gloss": {
+        "zh": "日常生活是劇場；自我是為觀眾上演的一場展演。"
+      }
+    },
+    "Simulacra & Hyperreality": {
+      "name": {
+        "zh": "擬像與超真實"
+      },
+      "gloss": {
+        "zh": "沒有原本的複本；地圖已取代了疆域。"
+      }
+    },
+    "One-Dimensional Man": {
+      "name": {
+        "zh": "單向度的人"
+      },
+      "gloss": {
+        "zh": "消費社會製造虛假的需求，並悄然吸納一切異議。"
+      }
+    },
+    "Capitalist Realism": {
+      "name": {
+        "zh": "資本主義現實主義"
+      },
+      "gloss": {
+        "zh": "想像世界末日，竟比想像資本主義的終結更容易。"
+      }
+    },
+    "Bullshit Jobs": {
+      "name": {
+        "zh": "狗屁工作"
+      },
+      "gloss": {
+        "zh": "整個職業生涯感覺毫無意義——工作淪為道德與社會的展演。"
+      }
+    },
+    "The Human Condition": {
+      "name": {
+        "zh": "人的境況"
+      },
+      "gloss": {
+        "zh": "勞動、工作與行動——以及現代「製作」對公共生活的遮蔽。"
+      }
+    },
+    "Cynic Self-Sufficiency": {
+      "name": {
+        "zh": "犬儒的自足"
+      },
+      "gloss": {
+        "zh": "把慾望削減到極致，不欠社會分毫，像陽光下的狗一樣自由。"
+      }
+    },
+    "Live Unnoticed": {
+      "name": {
+        "zh": "隱而生活"
+      },
+      "gloss": {
+        "zh": "「隱而活」——退出追逐地位的競賽。"
+      }
+    },
+    "Self-Reliance": {
+      "name": {
+        "zh": "自立"
+      },
+      "gloss": {
+        "zh": "信任自我勝過群眾；退入自然以聆聽自己的聲音。"
+      }
+    },
+    "Sitting in Forgetting": {
+      "name": {
+        "zh": "坐忘"
+      },
+      "gloss": {
+        "zh": "坐忘——「坐而忘」形與心，直到與道合一。"
+      }
+    },
+    "To Have or To Be": {
+      "name": {
+        "zh": "佔有還是存在"
+      },
+      "gloss": {
+        "zh": "兩種生活模式：攫取佔有，或單純地存在。"
+      }
+    },
+    "Being-toward-Death": {
+      "name": {
+        "zh": "向死存有"
+      },
+      "gloss": {
+        "zh": "直面自身的死亡，將一段人生從群眾中喚回本真。"
+      }
+    },
+    "The Denial of Death": {
+      "name": {
+        "zh": "否認死亡"
+      },
+      "gloss": {
+        "zh": "文明是一套對抗必死之恐懼的龐大防衛機制。"
+      }
+    },
+    "The Art of Dying": {
+      "name": {
+        "zh": "死亡的藝術"
+      },
+      "gloss": {
+        "zh": "以覺知迎接死亡這一過渡——生死之間的中陰。"
+      }
+    },
+    "The Chinese Room": {
+      "name": {
+        "zh": "中文房間"
+      },
+      "gloss": {
+        "zh": "執行一套程式並非理解；語法永遠累加不出意義。"
+      }
+    },
+    "The Ego Tunnel": {
+      "name": {
+        "zh": "自我隧道"
+      },
+      "gloss": {
+        "zh": "梅辛格主張從沒有人擁有過自我——只有一個大腦誤認為自我的透明模型。"
+      }
+    },
+    "Controlled Hallucination": {
+      "name": {
+        "zh": "受控的幻覺"
+      },
+      "gloss": {
+        "zh": "知覺是大腦最佳的猜測——一場被感官所約束的幻覺。"
+      }
+    },
+    "Global Workspace": {
+      "name": {
+        "zh": "全域工作空間"
+      },
+      "gloss": {
+        "zh": "意識是從一個中央舞台向整個大腦廣播的資訊。"
+      }
+    },
+    "Identity Is Not What Matters": {
+      "name": {
+        "zh": "同一性並非要緊之事"
+      },
+      "gloss": {
+        "zh": "要緊的是心理上的連續性，而非某個關於「我」的深層事實。"
+      }
+    },
+    "Analytic Idealism": {
+      "name": {
+        "zh": "分析觀念論"
+      },
+      "gloss": {
+        "zh": "在卡斯特魯普的觀念論中，實在從根本上是心靈的；物質是心靈從外部看起來的樣子。"
+      }
+    },
+    "The Case Against Reality": {
+      "name": {
+        "zh": "反對實在的主張"
+      },
+      "gloss": {
+        "zh": "霍夫曼的介面理論：演化為適存而非真理調校了知覺，故時空或許只是我們的介面。"
+      }
+    },
+    "The Divided Brain": {
+      "name": {
+        "zh": "分裂的大腦"
+      },
+      "gloss": {
+        "zh": "兩個半球提供了關注世界的兩種方式——而我們的方式失了衡。"
+      }
+    },
+    "Shared Fictions": {
+      "name": {
+        "zh": "共有的虛構"
+      },
+      "gloss": {
+        "zh": "金錢、國家與權利都是故事——讓陌生人得以合作的虛構。"
+      }
+    },
+    "Gender Performativity": {
+      "name": {
+        "zh": "性別操演"
+      },
+      "gloss": {
+        "zh": "性別不是你之所是，而是你反覆所為——一場背後沒有行動者的展演。"
+      }
+    },
+    "Choiceless Awareness": {
+      "name": {
+        "zh": "無揀擇的覺知"
+      },
+      "gloss": {
+        "zh": "自由是沒有觀察者的觀察——無方法、無道路、無上師。"
+      }
+    },
+    "The Readiness Potential": {
+      "name": {
+        "zh": "準備電位"
+      },
+      "gloss": {
+        "zh": "大腦在我們感到「決定」之前就已悸動——不過這是否注定自由意志仍有爭議，舒爾格便將其讀為單純的雜訊累積。"
+      }
+    },
+    "The Extinction of Experience": {
+      "name": {
+        "zh": "經驗的滅絕"
+      },
+      "gloss": {
+        "zh": "螢幕化的生活稀釋了具身的、面對面的經驗，以及由其孕育的自我。"
+      }
+    },
+    "The Face of the Other": {
+      "name": {
+        "zh": "他者的面容"
+      },
+      "gloss": {
+        "zh": "倫理始於他者的面容——一種先於自我的無限訴求。"
+      }
+    },
+    "I and Thou": {
+      "name": {
+        "zh": "我與你"
+      },
+      "gloss": {
+        "zh": "與世界相遇的兩種方式：疏離的「我—它」，或全心全意的「我—你」。"
+      }
+    },
+    "Attention & Unselfing": {
+      "name": {
+        "zh": "專注與去我"
+      },
+      "gloss": {
+        "zh": "善是那種耐心而慈愛的專注，在真實面前消解我們的自我。"
+      }
+    },
+    "The Capabilities Approach": {
+      "name": {
+        "zh": "能力取向"
+      },
+      "gloss": {
+        "zh": "以人們實際能夠去做與成為什麼，來衡量正義。"
+      }
+    },
+    "Modern Virtue Ethics": {
+      "name": {
+        "zh": "當代德行倫理學"
+      },
+      "gloss": {
+        "zh": "二十世紀對品格的復興，重於規則與後果。"
+      }
+    },
+    "Engaged Buddhism": {
+      "name": {
+        "zh": "入世佛教"
+      },
+      "gloss": {
+        "zh": "慈悲向外轉化——為受苦的世界服務的禪修。"
+      }
+    }
+  },
+  "arguments": {
+    "Permanence vs. Flux": {
+      "title": {
+        "zh": "恆常與流變"
+      },
+      "note": {
+        "zh": "是否有任何事物保持不變，抑或一切皆在生成之中？"
+      }
+    },
+    "Reason vs. Experience": {
+      "title": {
+        "zh": "理性與經驗"
+      },
+      "note": {
+        "zh": "真正的知識從何而來？"
+      }
+    },
+    "Mind & Body": {
+      "title": {
+        "zh": "心與身"
+      },
+      "note": {
+        "zh": "心智是什麼，又如何與身體相關？"
+      }
+    },
+    "Is There a Self?": {
+      "title": {
+        "zh": "是否有自我？"
+      },
+      "note": {
+        "zh": "東方與西方的著名匯合。"
+      }
+    },
+    "Are We Free?": {
+      "title": {
+        "zh": "我們自由嗎？"
+      },
+      "note": {
+        "zh": "倫理學中最古老的對峙——如今多了實驗室的加入。"
+      }
+    },
+    "Spirit vs. Matter in History": {
+      "title": {
+        "zh": "歷史中的精神與物質"
+      },
+      "note": {
+        "zh": "是什麼推動歷史向前？"
+      }
+    },
+    "After God": {
+      "title": {
+        "zh": "神之後"
+      },
+      "note": {
+        "zh": "當絕對者隱退，意義將何去何從？"
+      }
+    },
+    "The Cure for Suffering": {
+      "title": {
+        "zh": "苦的解藥"
+      },
+      "note": {
+        "zh": "熄滅慾望——抑或肯定它？"
+      }
+    },
+    "What Is Consciousness?": {
+      "title": {
+        "zh": "意識是什麼？"
+      },
+      "note": {
+        "zh": "現代心智科學的核心謎題。"
+      }
+    },
+    "Where Does Meaning Come From?": {
+      "title": {
+        "zh": "意義從何而來？"
+      },
+      "note": {
+        "zh": "是被給予的，還是我們所造就的？"
+      }
+    },
+    "How Do We Change?": {
+      "title": {
+        "zh": "我們如何改變？"
+      },
+      "note": {
+        "zh": "轉化心智的三條路徑。"
+      }
+    },
+    "Innate or Learned?": {
+      "title": {
+        "zh": "天生還是習得？"
+      },
+      "note": {
+        "zh": "心智的結構從何而來？"
+      }
+    },
+    "Is the Self a Performance?": {
+      "title": {
+        "zh": "自我是一場展演嗎？"
+      },
+      "note": {
+        "zh": "從舞台展演，到自我剝削，再到一條出路。"
+      }
+    },
+    "How Should We Meet Death?": {
+      "title": {
+        "zh": "我們該如何面對死亡？"
+      },
+      "note": {
+        "zh": "對於必死的三種回答。"
+      }
+    },
+    "Turn Away, or Turn Toward?": {
+      "title": {
+        "zh": "轉身離去，還是轉身面向？"
+      },
+      "note": {
+        "zh": "本書自身的斷層線：拒斥與關係。"
+      }
+    }
+  },
+  "tradLabels": {
+    "19th C.": {
+      "zh": "十九世紀"
+    },
+    "American Transcendentalism": {
+      "zh": "美國超驗主義"
+    },
+    "Analytic": {
+      "zh": "分析哲學"
+    },
+    "Ancient Greek": {
+      "zh": "古希臘"
+    },
+    "Buddhist": {
+      "zh": "佛教"
+    },
+    "Chinese": {
+      "zh": "中國"
+    },
+    "Cognitive Science": {
+      "zh": "認知科學"
+    },
+    "Consciousness Studies": {
+      "zh": "意識研究"
+    },
+    "Continental": {
+      "zh": "歐陸哲學"
+    },
+    "Critical Theory": {
+      "zh": "批判理論"
+    },
+    "Early Modern": {
+      "zh": "近代早期"
+    },
+    "Enlightenment": {
+      "zh": "啟蒙時代"
+    },
+    "Ethics": {
+      "zh": "倫理學"
+    },
+    "Hellenistic": {
+      "zh": "希臘化時期"
+    },
+    "Indian": {
+      "zh": "印度"
+    },
+    "Islamic Golden Age": {
+      "zh": "伊斯蘭黃金時代"
+    },
+    "Japanese": {
+      "zh": "日本"
+    },
+    "Medieval": {
+      "zh": "中世紀"
+    },
+    "Phenomenology": {
+      "zh": "現象學"
+    },
+    "Pragmatism": {
+      "zh": "實用主義"
+    },
+    "Psychology": {
+      "zh": "心理學"
+    },
+    "Science": {
+      "zh": "科學"
+    },
+    "Sociology": {
+      "zh": "社會學"
+    },
+    "Systems & Cybernetics": {
+      "zh": "系統論與控制論"
+    }
+  },
   "captions": {
-    "questions": { "zh": "<b>地圖一</b> 十一個每個傳統都曾苦思的問題——以及針鋒相對的答案，並列呈現。點擊任一答案，照亮它所承襲、駁斥或悄然呼應的觀念。" },
-    "timeline": { "zh": "<b>地圖二</b> 每個觀念皆置於其年代，落在所屬世界的軌道上——西方、心靈或東方。大小標示後世有多少觀念承襲它；游標懸停以追溯其同類跨越世紀。" },
-    "web": { "zh": "<b>地圖三</b> 將眾觀念視為單一網絡。每顆星是一個觀念，依其所回應的問題標以顏色；絲線則是思想之間的關係。" },
-    "threads": { "zh": "<b>地圖四</b> 漫長的論辯，一步一步走過——正題引出反題，反題引出合題。在左側挑選一條脈絡，逐步推演。" },
-    "constellation": { "zh": "<b>地圖五</b> 最初的星圖——每位思想家與學派皆為一顆星，分群為西方、心靈與東方的傳統。點擊星辰，跨入他們所塑造的觀念。" },
-    "lens": { "zh": "<b>地圖六</b> 一個觀念居於中心，與之相連的思想環繞四周。從鄰點漫遊至鄰點、擲骰隨機探索，或讓導覽帶你走過一條思想脈絡。" }
+    "questions": {
+      "zh": "<b>地圖一</b> 十一個每個傳統都曾苦思的問題——以及針鋒相對的答案，並列呈現。點擊任一答案，照亮它所承襲、駁斥或悄然呼應的觀念。"
+    },
+    "timeline": {
+      "zh": "<b>地圖二</b> 每個觀念皆置於其年代，落在所屬世界的軌道上——西方、心靈或東方。大小標示後世有多少觀念承襲它；游標懸停以追溯其同類跨越世紀。"
+    },
+    "web": {
+      "zh": "<b>地圖三</b> 將眾觀念視為單一網絡。每顆星是一個觀念，依其所回應的問題標以顏色；絲線則是思想之間的關係。"
+    },
+    "threads": {
+      "zh": "<b>地圖四</b> 漫長的論辯，一步一步走過——正題引出反題，反題引出合題。在左側挑選一條脈絡，逐步推演。"
+    },
+    "constellation": {
+      "zh": "<b>地圖五</b> 最初的星圖——每位思想家與學派皆為一顆星，分群為西方、心靈與東方的傳統。點擊星辰，跨入他們所塑造的觀念。"
+    },
+    "lens": {
+      "zh": "<b>地圖六</b> 一個觀念居於中心，與之相連的思想環繞四周。從鄰點漫遊至鄰點、擲骰隨機探索，或讓導覽帶你走過一條思想脈絡。"
+    }
   },
   "steps": {},
-  "about": {}
+  "about": {
+    "zh": "<div class=\"sub\">漫遊之前，先讀一段</div>\n<h2 id=\"about-title\">如何閱讀</h2>\n<p>這是<b>一幅地圖，繪自單一視角</b>——並非中立的概覽。它在性情上偏向那些講求超脫與退隱的傳統（斯多噶、佛教、道家）；主張入世、關係與關懷的對立論點雖在，卻較為單薄。請把它當作一個可供爭辯的觀點，而非可供順從的權威。</p>\n<p>觀念之間的<b>連結——「承襲」、「駁斥」、「呼應」——都是詮釋性的。</b>它們是作者對思想如何相互關聯的解讀，持平的學者或會做出不同的連結。每則條目上「反對」的對照靶子是有益的挑釁，並非主張兩位思想家視彼此為對手。</p>\n<h3>這些論辯仍在進行，尚未定論</h3>\n<p>此處若干觀念是置於真正的對手之間呈現的，少數更是其領域中的<b>少數派或具爭議的立場</b>——當你開啟條目時會標以「具爭議」標籤。意識的本質（整合資訊論、全域工作空間論、幻覺論與觀念論等理論）、觀念論與唯物論之爭，以及意志的自由，都是未決的問題。本圖凡陳述其一，皆是選邊站，而非報告共識。</p>\n<h3>它所略去的</h3>\n<p>涵蓋並不均衡，有些缺漏更是徹底的：</p>\n<ul>\n  <li><b>女性約佔思想家的百分之七</b>——一種結構性的代表不足。</li>\n  <li><b>非洲、拉丁美洲、原住民與韓國思想在觀念層面上幾乎缺席</b>；日本思想亦僅勉強現身。</li>\n  <li>它偏重西方與南亞的源流，古代與現代多於中世紀。</li>\n</ul>\n<p>各項事實——年代、歸屬、書名——已在全圖範圍內核對，但錯誤仍會殘存。若你發現一處，請視之為地圖之誤，而非疆域之誤，並<a href=\"https://github.com/chinhau/anatomy-of-ideas/issues\">告訴我</a>。</p>\n<p class=\"about-note\">最適合在桌機或平板上探索——這些地圖是圍繞寬闊的畫布而建，小手機螢幕會顯得侷促。</p>"
+  }
 }
