@@ -86,9 +86,34 @@
   .q-title{font-family:'Cormorant Garamond',serif;font-size:27px;font-weight:500;line-height:1.04;
     margin:5px 0 6px;}
   .q-frame{font-size:12px;color:var(--parchment-dim);line-height:1.5;max-width:220px;}
-  .q-frame::first-letter{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:2em;
-    line-height:0.74;float:left;color:var(--vermilion);margin:3px 6px -1px 0;}
   .q-bar{height:3px;width:46px;margin-top:11px;border-radius:2px;}
+  /* ---- epistemic-status badge (the 5-state spine) ---- */
+  .q-status{display:flex;align-items:baseline;gap:6px;margin-top:13px;font-size:11px;
+    letter-spacing:0.02em;line-height:1.3;cursor:help;}
+  .qs-mark{font-size:12px;line-height:1;color:var(--st);flex:none;transform:translateY(1px);}
+  .qs-label{color:var(--st);font-weight:500;}
+  .qs-conf{color:var(--muted);font-size:9.5px;letter-spacing:0.13em;text-transform:uppercase;}
+  .q-why{font-size:11px;color:var(--parchment-dim);line-height:1.5;max-width:220px;margin-top:5px;
+    border-left:1px solid var(--st);padding-left:8px;opacity:0.9;}
+  .qs-residue{color:var(--muted);font-size:10.5px;margin-top:5px;}
+  .qs-residue .rm{color:var(--st2);}
+  /* state inks — gold reserved for "live rivals" (the mission's heartbeat) */
+  [data-state="handed-off"]{--st:#5fc7b8;}
+  [data-state="hardened"]{--st:#86c08a;}
+  [data-state="live-rivals"]{--st:#d9b65f;}
+  [data-state="open"]{--st:#c3c7cf;}
+  [data-state="dissolved"]{--st:#9aa3bd;}
+  [data-res="handed-off"]{--st2:#5fc7b8;}[data-res="hardened"]{--st2:#86c08a;}
+  [data-res="live-rivals"]{--st2:#d9b65f;}[data-res="open"]{--st2:#c3c7cf;}
+  [data-res="dissolved"]{--st2:#9aa3bd;}
+  /* legend / key above the bands */
+  .q-key{margin:6px 26px 2px;padding:13px 16px;border:1px solid var(--rule);border-radius:4px;
+    background:rgba(255,255,255,0.012);}
+  .q-key-h{font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:var(--muted);margin-bottom:9px;}
+  .q-key-row{display:flex;flex-wrap:wrap;gap:7px 16px;}
+  .q-key-item{display:flex;align-items:baseline;gap:6px;font-size:11px;color:var(--parchment-dim);}
+  .q-key-item b{color:var(--st);font-weight:500;}
+  .q-key-note{font-size:11px;color:var(--muted);line-height:1.55;margin-top:10px;font-style:italic;}
   .cards{display:flex;flex-wrap:wrap;gap:9px;}
   .card{position:relative;width:206px;background:rgba(255,255,255,0.018);border:1px solid var(--rule);
     border-left-width:3px;border-radius:3px;padding:11px 12px;cursor:pointer;transition:all .16s;}
@@ -402,6 +427,8 @@
   .jrn-saved{font-size:11px;color:var(--muted);margin-top:6px;height:14px;}
 
   /* ---------- drawer: foil + reading status ---------- */
+  .dr-qstatus{display:flex;align-items:baseline;gap:6px;margin-top:6px;font-size:11px;cursor:help;}
+  .dr-qstatus:empty{display:none;}
   .dr-status{display:flex;gap:6px;margin-top:12px;}
   .dr-status button{flex:1;font-size:10px;letter-spacing:.06em;text-transform:uppercase;
     padding:6px 4px;border:1px solid var(--rule);background:transparent;color:var(--parchment-dim);
@@ -767,6 +794,7 @@
         <button id="drclose" aria-label="Close details">×</button>
         <div class="dr-figure" id="dr-figure"></div>
         <div class="dr-q" id="dr-q"></div>
+        <div class="dr-qstatus" id="dr-qstatus"></div>
         <h2 id="dr-name"></h2>
         <div class="dr-meta" id="dr-meta"></div>
         <div class="dr-status" id="dr-status"></div>
@@ -823,6 +851,24 @@
   const qById = {}; D.questions.forEach(q=>qById[q.id]=q);
   const cById = {}; D.concepts.forEach(c=>cById[c.id]=c);
 
+  // ---- the 5-state epistemic taxonomy (see docs/MISSION.md) ----
+  // Each state carries a colour (gold is reserved for "live rivals", the
+  // mission's heartbeat) and a glyph, so the signal survives without colour.
+  const STATES={
+    'handed-off': {glyph:'\u2192', label:'Handed off to science',
+      defn:'The empirical core migrated to a science that now constrains it; a metaphysical residue can remain.'},
+    'hardened':   {glyph:'\u25C6', label:'Hardened within a frame',
+      defn:'A durable consensus formed inside a frame; some sub-questions are genuinely closed.'},
+    'live-rivals':{glyph:'\u21C4', label:'Live rivals',
+      defn:'Mature, articulate positions that argue on and have not converged.'},
+    'open':       {glyph:'\u25CB', label:'Perennially open',
+      defn:'Resists resolution in principle; the map takes no side.'},
+    'dissolved':  {glyph:'\u223F', label:'Reframed, not answered',
+      defn:'The question was recast rather than settled; what counts as the question shifted.'}
+  };
+  const stLabel = id => T((STATES[id]||{}).label||'');
+  const stDefn  = id => T((STATES[id]||{}).defn||'');
+
   // ========== i18n (EN / zh-Hant / ru) ==========
   // Translations are an overlay keyed by the stable English keys; English ids
   // stay the data keys (deep-links + cross-linking unaffected). Missing strings
@@ -838,6 +884,7 @@
   const cTrad  = c => (LANG==='en'?undefined:pick((I18N.tradLabels||{})[c.tradLabel])) || c.tradLabel;
   const qLabel   = q => (LANG==='en'?undefined:pick(((I18N.questions||{})[q.id]||{}).label))   || q.label;
   const qFraming = q => (LANG==='en'?undefined:pick(((I18N.questions||{})[q.id]||{}).framing)) || q.framing;
+  const qWhy     = q => (LANG==='en'?undefined:pick(((I18N.questions||{})[q.id]||{}).statusWhy)) || q.statusWhy;
   const aTitle = a => (LANG==='en'?undefined:pick(((I18N.arguments||{})[a.title]||{}).title)) || a.title;
   const aNote  = a => (LANG==='en'?undefined:pick(((I18N.arguments||{})[a.title]||{}).note))  || a.note;
   // journeys are keyed by their English title; storage stays keyed on j.title too
@@ -885,6 +932,13 @@
     document.getElementById('dr-figure').innerHTML='';
     drSeal(false);
     document.getElementById('dr-q').innerHTML=`<span class="dot" style="background:${q.hue}"></span>${esc0(qLabel(q))}`;
+    const dqs=document.getElementById('dr-qstatus');
+    if(dqs){ const st=STATES[q.status]||{};
+      dqs.dataset.state=q.status||'';
+      dqs.title=stDefn(q.status)+(q.statusWhy?' — '+qWhy(q):'');
+      dqs.innerHTML=q.status?`<span class="qs-mark" aria-hidden="true">${st.glyph||''}</span>`+
+        `<span class="qs-label">${esc0(stLabel(q.status))}</span>`+
+        `<span class="qs-conf">${q.statusConf==='contested'?T('contested'):T('clear')}</span>`:''; }
     document.getElementById('dr-name').textContent=cName(c);
     document.getElementById('dr-meta').textContent=`${cTrad(c)} · ${eraTxt(c.era)}`;
     document.getElementById('dr-gloss').textContent=cGloss(c);
@@ -942,7 +996,30 @@
   let selected=null;
 
   // ---------- MODE 1 : Great Questions ----------
+  function statusBlock(q){
+    const st=STATES[q.status]||{}; if(!q.status) return '';
+    return `<div class="q-status" data-state="${q.status}" title="${esc0(stDefn(q.status))}">`+
+        `<span class="qs-mark" aria-hidden="true">${st.glyph||''}</span>`+
+        `<span class="qs-label">${esc0(stLabel(q.status))}</span>`+
+        `<span class="qs-conf">${q.statusConf==='contested'?T('contested'):T('clear')}</span>`+
+      `</div>`+
+      `<div class="q-why">${esc0(qWhy(q))}</div>`+
+      (q.statusResidue?`<div class="qs-residue" data-res="${q.statusResidue}">`+
+        `${T('Live residue')}: <span class="rm">${esc0(stLabel(q.statusResidue))}</span></div>`:'');
+  }
+  function buildQKey(){
+    const order=['handed-off','hardened','live-rivals','open','dissolved'];
+    const items=order.map(id=>`<span class="q-key-item" data-state="${id}" title="${esc0(stDefn(id))}">`+
+      `<span class="qs-mark" aria-hidden="true">${STATES[id].glyph}</span><b>${esc0(stLabel(id))}</b></span>`).join('');
+    return `<div class="q-key">`+
+      `<div class="q-key-h" data-i18n="Where the thinking stands">Where the thinking stands</div>`+
+      `<div class="q-key-row">${items}</div>`+
+      `<div class="q-key-note" data-i18n="One map, from one vantage — these are honest judgements of where each question rests, not the last word. Hover a state for what it means.">`+
+      `One map, from one vantage — these are honest judgements of where each question rests, not the last word. Hover a state for what it means.</div>`+
+      `</div>`;
+  }
   const mQ=document.getElementById('m-questions');
+  mQ.insertAdjacentHTML('beforeend', buildQKey());
   const cardEls={};
   D.questions.forEach(q=>{
     const band=document.createElement('div'); band.className='band'; band.dataset.q=q.id;
@@ -950,15 +1027,15 @@
     side.innerHTML=`<div class="q-tag">${esc0(qLabel(q).replace(/[?？]/,''))}</div>`+
       `<div class="q-title">${esc0(qLabel(q))}</div>`+
       `<div class="q-frame">${esc0(qFraming(q))}</div>`+
-      `<div class="q-bar" style="background:${q.hue}"></div>`;
+      `<div class="q-bar" style="background:${q.hue}"></div>`+
+      statusBlock(q);
     const cards=document.createElement('div'); cards.className='cards';
     D.concepts.filter(c=>c.q===q.id).sort((a,b)=>a.era-b.era).forEach(c=>{
       const el=document.createElement('div'); el.className='card'+(c.contested?' contested':'');
       el.style.borderLeftColor=c.color;
-      const mark=c.contested?` <span class="c-contested" title="Contested — actively debated">†</span>`:'';
       el.innerHTML=`<div class="c-glyph" aria-hidden="true"></div>`+
         `<div class="c-id">${esc0(cName(c))}</div>`+
-        `<div class="c-trad">${esc0(cTrad(c))} · ${eraTxt(c.era)}${mark}</div>`+
+        `<div class="c-trad">${esc0(cTrad(c))} · ${eraTxt(c.era)}</div>`+
         `<div class="c-gloss">${esc0(cGloss(c))}</div>`;
       el.onclick=(e)=>{ e.stopPropagation(); openConcept(c.id); };
       cards.appendChild(el); cardEls[c.id]=el;
@@ -1814,11 +1891,16 @@
     D.questions.forEach(q=>{ const band=mQ.querySelector('.band[data-q="'+q.id+'"]'); if(!band) return;
       const t=band.querySelector('.q-tag'); if(t) t.textContent=qLabel(q).replace(/[?？]/,'');
       const ti=band.querySelector('.q-title'); if(ti) ti.textContent=qLabel(q);
-      const fr=band.querySelector('.q-frame'); if(fr) fr.textContent=qFraming(q); });
+      const fr=band.querySelector('.q-frame'); if(fr) fr.textContent=qFraming(q);
+      const sl=band.querySelector('.qs-label'); if(sl) sl.textContent=stLabel(q.status);
+      const sc=band.querySelector('.qs-conf'); if(sc) sc.textContent=q.statusConf==='contested'?T('contested'):T('clear');
+      const sw=band.querySelector('.q-why'); if(sw) sw.textContent=qWhy(q);
+      const rl=band.querySelector('.qs-residue');
+      if(rl && q.statusResidue){ rl.childNodes[0].textContent=T('Live residue')+': ';
+        const rm=rl.querySelector('.rm'); if(rm) rm.textContent=stLabel(q.statusResidue); } });
     D.concepts.forEach(c=>{ const el=cardEls[c.id]; if(!el) return;
       const id=el.querySelector('.c-id'); if(id) id.textContent=cName(c);
-      const tr=el.querySelector('.c-trad'); if(tr){ const mk=c.contested?' <span class="c-contested" title="Contested — actively debated">†</span>':'';
-        tr.innerHTML=`${esc0(cTrad(c))} · ${eraTxt(c.era)}${mk}`; }
+      const tr=el.querySelector('.c-trad'); if(tr) tr.textContent=cTrad(c)+' · '+eraTxt(c.era);
       const gl=el.querySelector('.c-gloss'); if(gl) gl.textContent=cGloss(c); });
     // Filter rail: relabel pills/rows in place (preserve on/off state)
     document.querySelectorAll('#flt-read .flt-pill, #flt-region .flt-pill').forEach(p=>{ p.textContent=T(p.dataset.s); });

@@ -323,6 +323,66 @@
     "Japanese & Korean": {
       "zh": "日本與韓國",
       "ru": "Японская и корейская"
+    },
+    "Handed off to science": {
+      "zh": "已交予科學",
+      "ru": "Передано науке"
+    },
+    "Hardened within a frame": {
+      "zh": "在框架內已成定論",
+      "ru": "Затвердело в рамках"
+    },
+    "Live rivals": {
+      "zh": "並立的對手",
+      "ru": "Живые соперники"
+    },
+    "Perennially open": {
+      "zh": "始終敞開",
+      "ru": "Вечно открыт"
+    },
+    "Reframed, not answered": {
+      "zh": "被重構，而非解答",
+      "ru": "Переосмыслен, а не решён"
+    },
+    "The empirical core migrated to a science that now constrains it; a metaphysical residue can remain.": {
+      "zh": "其經驗核心已移交給某門科學，並受其約束；形上學的餘留仍可能存在。",
+      "ru": "Эмпирическое ядро перешло к науке, которая теперь его ограничивает; метафизический остаток может сохраняться."
+    },
+    "A durable consensus formed inside a frame; some sub-questions are genuinely closed.": {
+      "zh": "在某一框架內形成了穩固的共識；部分子問題確實已被解決。",
+      "ru": "Внутри рамок сложился прочный консенсус; некоторые подвопросы действительно закрыты."
+    },
+    "Mature, articulate positions that argue on and have not converged.": {
+      "zh": "成熟而清晰的各種立場持續爭辯，尚未趨於一致。",
+      "ru": "Зрелые, чётко сформулированные позиции продолжают спорить и не сошлись."
+    },
+    "Resists resolution in principle; the map takes no side.": {
+      "zh": "原則上無法被解決；本圖不選邊站。",
+      "ru": "В принципе не поддаётся разрешению; карта не встаёт ни на чью сторону."
+    },
+    "The question was recast rather than settled; what counts as the question shifted.": {
+      "zh": "問題被重新表述，而非被解決；何謂這個問題本身已然改變。",
+      "ru": "Вопрос был переформулирован, а не решён; изменилось само то, что считается вопросом."
+    },
+    "contested": {
+      "zh": "有爭議",
+      "ru": "оспаривается"
+    },
+    "clear": {
+      "zh": "明確",
+      "ru": "ясно"
+    },
+    "Live residue": {
+      "zh": "仍存的餘留",
+      "ru": "Живой остаток"
+    },
+    "Where the thinking stands": {
+      "zh": "思考行至何處",
+      "ru": "Где находится мысль"
+    },
+    "One map, from one vantage — these are honest judgements of where each question rests, not the last word. Hover a state for what it means.": {
+      "zh": "一張地圖，出自一個視角——這些是對每個問題現狀的誠實判斷，而非定論。將游標停在某個狀態上可見其釋義。",
+      "ru": "Одна карта, с одной точки зрения — это честные суждения о том, где покоится каждый вопрос, а не последнее слово. Наведите курсор на состояние, чтобы увидеть пояснение."
     }
   },
   "questions": {

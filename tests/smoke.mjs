@@ -57,6 +57,19 @@ eq(window.getComputedStyle($('#empty-state')).display,'none','empty-state is dis
 for(const mo of ['timeline','paths','constellation','lens','questions']) click($('.switch button[data-mode="'+mo+'"]'));
 console.log('5 modes built ok');
 
+// EPISTEMIC STATUS (the 5-state spine): data integrity + Questions-tab surface
+const STATE_IDS=['handed-off','hardened','live-rivals','open','dissolved'];
+eq(D.questions.every(q=>STATE_IDS.includes(q.status)), true, 'every question carries a valid 5-state status');
+eq(D.questions.every(q=>['clear','contested'].includes(q.statusConf)), true, 'every question has a clear/contested confidence flag');
+eq(D.questions.every(q=>q.statusResidue===null||STATE_IDS.includes(q.statusResidue)), true, 'residue, when present, is a valid state');
+eq(D.questions.every(q=>typeof q.statusWhy==='string'&&q.statusWhy.length>0), true, 'every question has a rationale');
+eq(D.questions.every(q=>!/\(\w+ \d{3,4}\)/.test(q.statusWhy)), true, 'rationales name no single thinker+date as having settled it');
+click($('.switch button[data-mode="questions"]'));
+eq($$('#m-questions .band .q-status').length, 11, 'all eleven question bands show an epistemic-status badge');
+eq($$('#m-questions .band .q-status').every(s=>STATE_IDS.includes(s.dataset.state)), true, 'each badge carries its state on data-state');
+eq($$('.q-key-item').length, 5, 'the legend keys all five states');
+assert(($('.q-key-note')?.textContent||'').includes('one vantage'), 'legend states the honesty caveat ("one map, from one vantage")');
+
 // LENS (Map VI): "Eleven Doors In" board → focus+context ego-graph
 click($('.switch button[data-mode="lens"]'));
 eq($('.switch button.active')?.dataset.mode, 'lens', 'lens tab activates');

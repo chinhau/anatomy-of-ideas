@@ -18,6 +18,41 @@ QUESTIONS = [
     ("abs",   "Is there an Absolute?",    "#7C8BD6", "The divine, the ground of being, ultimate reality."),
 ]
 
+# ---- where human thought actually is on each question (the epistemic spine) ----
+# Per the 5-state taxonomy in docs/MISSION.md, reviewed by a 4-agent panel
+# (epistemics / even-handedness / working-scientist / red-team) on 2026-06-23.
+# Each question carries a PRIMARY state + an optional RESIDUE state (the part the
+# primary call leaves live), a confidence flag, and a move-based rationale that
+# names no single thinker as having "settled" it. This is one map, from one
+# vantage — see the honesty notes in docs/MISSION.md.
+#   states: handed-off | hardened | live-rivals | open | dissolved
+#   conf:   clear | contested
+# qid -> (status, residue|None, conf, why)
+STATUS = {
+ "real":  ("handed-off",  "live-rivals", "contested",
+           "Physics and cosmology now constrain what can be real; the realism-vs-anti-realism question stays live."),
+ "know":  ("hardened",    "open",        "contested",
+           "Formal limits genuinely closed sub-questions and naive foundationalism was abandoned — but justification debates stay live."),
+ "mind":  ("handed-off",  "open",        "contested",
+           "Science took over large parts of the mechanics; much of higher cognition, and the hard problem, survive the handoff."),
+ "self":  ("live-rivals", "dissolved",   "contested",
+           "A deflationary turn reframes the substantial self as a useful fiction; substance-self traditions hold the question wide open."),
+ "live":  ("live-rivals", None,          "clear",
+           "Virtue, duty, and consequence are mature, articulate, non-converging camps."),
+ "just":  ("live-rivals", None,          "clear",
+           "Liberal, libertarian, communitarian, and capability views are a stable, informed disagreement."),
+ "free":  ("live-rivals", "open",        "contested",
+           "Compatibilist, libertarian, and hard-determinist camps persist; the underlying metaphysics resists resolution in principle."),
+ "peace": ("handed-off",  "live-rivals", "contested",
+           "The mechanisms of suffering were handed to medicine and psychology; read as the problem of evil, the question stays live."),
+ "mean":  ("open",        None,          "contested",
+           "An evaluative, first-person residue that empirical work cannot absorb."),
+ "trans": ("live-rivals", "open",        "contested",
+           "Clinical methods of change are tested but contested; the contemplative ends of transformation stay open."),
+ "abs":   ("open",        None,          "clear",
+           "Resists resolution in principle; the map takes no side."),
+}
+
 # tradition badge codes (for a small label only) reuse the atlas inks loosely
 TRAD = {
     "grk":"Ancient Greek","hel":"Hellenistic","med":"Medieval","mod":"Early Modern",
@@ -356,7 +391,9 @@ def main():
         c["deg"] = deg[c["id"]]
 
     out = {
-        "questions": [{"id": q[0], "label": q[1], "hue": q[2], "framing": q[3]} for q in QUESTIONS],
+        "questions": [{"id": q[0], "label": q[1], "hue": q[2], "framing": q[3],
+                       "status": STATUS[q[0]][0], "statusResidue": STATUS[q[0]][1],
+                       "statusConf": STATUS[q[0]][2], "statusWhy": STATUS[q[0]][3]} for q in QUESTIONS],
         "concepts": concepts,
         "links": links,
         "arguments": ARG,
