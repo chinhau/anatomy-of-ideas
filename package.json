@@ -6,7 +6,8 @@
   "description": "An interactive atlas of the great questions humans keep asking — 269 ideas across eleven great questions, cross-linked to a 425-star constellation of thinkers and schools.",
   "scripts": {
     "build": "python3 build.py",
-    "test": "node tests/smoke.mjs"
+    "build:check": "python3 build.py --check",
+    "test": "node tests/smoke.mjs && node tests/freshness.mjs && python3 build.py --check"
   },
   "devDependencies": {
     "d3": "^7.8.5",
