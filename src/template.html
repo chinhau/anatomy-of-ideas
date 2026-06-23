@@ -414,6 +414,15 @@
   #dr-contested[hidden]{display:none;}
   #dr-contested .tag{flex:none;font-size:9px;letter-spacing:0.14em;text-transform:uppercase;
     color:var(--oppose);font-weight:600;margin-top:1px;}
+  /* practice / exercise badge — a discipline you DO, not only a thesis you hold.
+     Its own dusty-verdigris ink: gold is reserved for live-rivals status, vermilion
+     for contested, affirm/echo for relations — so this stands clear of all of them. */
+  #dr-practice{display:flex;gap:9px;align-items:flex-start;margin:0 0 16px;padding:9px 12px;
+    border:1px solid rgba(150,168,138,0.42);border-left-width:3px;border-radius:3px;
+    background:rgba(150,168,138,0.07);font-size:11.5px;line-height:1.45;color:var(--parchment-dim);}
+  #dr-practice[hidden]{display:none;}
+  #dr-practice .tag{flex:none;font-size:9px;letter-spacing:0.14em;text-transform:uppercase;
+    color:#aac08f;font-weight:600;margin-top:1px;}
 
   /* "How to read this" panel */
   #about-overlay{position:fixed;inset:0;z-index:60;background:rgba(4,7,14,0.78);
@@ -822,6 +831,7 @@
       <div class="dr-body">
         <p class="dr-gloss" id="dr-gloss"></p>
         <div id="dr-contested" hidden><span class="tag">Contested</span><span>A minority or actively disputed position in its field — presented here among genuine rivals, not as consensus.</span></div>
+        <div id="dr-practice" hidden><span class="tag" data-i18n="Practice">Practice</span><span data-i18n="A discipline you perform, not only a thesis you hold — here the teaching is the exercise itself.">A discipline you perform, not only a thesis you hold — here the teaching is the exercise itself.</span></div>
         <div id="dr-foil"></div>
         <div id="dr-thinkers"></div>
         <div id="dr-readings"></div>
@@ -947,6 +957,7 @@
     document.getElementById('dr-meta').textContent=`${cTrad(c)} · ${eraTxt(c.era)}`;
     document.getElementById('dr-gloss').textContent=cGloss(c);
     const cbadge=document.getElementById('dr-contested'); if(cbadge) cbadge.toggleAttribute('hidden',!c.contested);
+    const pbadge=document.getElementById('dr-practice'); if(pbadge) pbadge.toggleAttribute('hidden',!c.practice);
     const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
     const tw=document.getElementById('dr-thinkers');
     tw.innerHTML = (c.thinkers&&c.thinkers.length)
@@ -2124,6 +2135,7 @@
     });
     document.getElementById('dr-foil').innerHTML=''; document.getElementById('dr-status').innerHTML='';
     const cbadge=document.getElementById('dr-contested'); if(cbadge) cbadge.setAttribute('hidden','');
+    const pbadge=document.getElementById('dr-practice'); if(pbadge) pbadge.setAttribute('hidden','');
     drawer.classList.add('open'); selected=null; conHighlight(id);
     setHash('/'+modeSlug('constellation')+'/person/'+encodeURIComponent(id));
   }

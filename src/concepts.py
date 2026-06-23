@@ -318,6 +318,22 @@ R = [
 # tradition badge instead, so the tag fires the same way across every tradition.
 CONTESTED = {"Integrated Information","The Ego Tunnel","Analytic Idealism","The Case Against Reality","The Readiness Potential","Global Workspace"}
 
+# "Practice" marks a concept carried by a real exercise you *perform* — a discipline,
+# not only a thesis you assert. The criterion is the tradition's practice, not the
+# gloss's grammar: it fires even where a concept is phrased doctrinally (the Stoic
+# entries name Hadot's askēsis — the dichotomy of control, the view from above), so
+# the West's practice-philosophy is not flattened into mere doctrine. The sole
+# principled exclusion is a path that rejects method by definition (Choiceless
+# Awareness). This restores the method/doctrine distinction the atlas otherwise loses.
+PRACTICE = {
+    "Hesychasm (The Jesus Prayer)","The Spiritual Exercises","Dzogchen (The Great Perfection)",
+    "The Four Foundations of Mindfulness","Dhikr (Remembrance)","The Eightfold Path",
+    "Mindfulness (MBSR)","Yoga: Stilling the Mind","Self-Cultivation","Sitting in Forgetting",
+    "Ren & Li","Sudden Enlightenment, Gradual Cultivation","Stoic Virtue","Stoic Apatheia",
+    "Amor Fati","Wu Wei","The Examined Life","Attention & Unselfing","Engaged Buddhism",
+    "Non-Attachment",
+}
+
 def main():
     qids = {q[0] for q in QUESTIONS}
     qhue = {q[0]: q[2] for q in QUESTIONS}
@@ -333,6 +349,7 @@ def main():
             "id": cid, "q": qid, "trad": trad, "tradLabel": TRAD.get(trad, trad),
             "era": era, "gloss": gloss, "thinkers": thinkers, "color": qhue[qid],
             "contested": cid in CONTESTED,
+            "practice": cid in PRACTICE,
         })
 
     ids = {c["id"] for c in concepts}

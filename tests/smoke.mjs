@@ -50,6 +50,16 @@ const langCs=D.concepts.filter(c=>langIds.includes(c.id));
 eq(langCs.length,6,'all six philosophy-of-language ideas are present');
 assert(langCs.every(c=>c.q==='know'),'philosophy of language lives under the know question');
 
+// PRACTICE-AS-A-VERB: concepts carried by an exercise you perform get a practice flag (T3).
+const practiceCs=D.concepts.filter(c=>c.practice);
+assert(practiceCs.length>=18,'the practice-as-a-verb set is marked on the concepts');
+assert(D.concepts.find(c=>c.id==='Dhikr (Remembrance)')?.practice===true,'a contemplative practice (Dhikr) carries the practice flag');
+assert(D.concepts.find(c=>c.id==='Stoic Virtue')?.practice===true,'the widened criterion marks Stoic askēsis (Stoic Virtue) as a practice');
+assert(D.concepts.find(c=>c.id==='Choiceless Awareness')?.practice!==true,'a path that rejects method (Choiceless Awareness) is NOT marked a practice');
+assert(D.concepts.find(c=>c.id==='Materialism')?.practice!==true,'a pure thesis (Materialism) is not marked a practice');
+const drPrac=$('#dr-practice');
+assert(drPrac && drPrac.hasAttribute('hidden'),'the practice badge exists in the dossier and starts hidden');
+
 // init state
 eq($('.switch button.active')?.dataset.mode,'questions','init mode is questions');
 eq($('.switch button.active')?.getAttribute('aria-selected'),'true','active tab aria-selected');
