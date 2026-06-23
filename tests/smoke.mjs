@@ -62,8 +62,12 @@ click($('.switch button[data-mode="lens"]'));
 eq($('.switch button.active')?.dataset.mode, 'lens', 'lens tab activates');
 eq($('#lens-board').hidden, false, 'lens opens on the Eleven Doors board');
 eq($$('.lb-cell').length, 11, 'board shows eleven question doors (one per question)');
+// the board is one screen, one verb: graph-only chrome must be hidden on it
+eq($('#lens-ctrl').style.display, 'none', 'graph control bar is hidden on the board');
+eq($('#lens-hint').style.display, 'none', 'graph hint is hidden on the board');
 click($$('.lb-cell')[0]); // enter through the first door
 eq($('#lens-board').hidden, true, 'choosing a door dismisses the board');
+assert($('#lens-ctrl').style.display!=='none', 'control bar returns inside the graph');
 eq($('#lens-home').hidden, false, 'the "Doors" home button appears once inside the graph');
 assert($$('#lens-svg g.lnode').length>1, 'lens renders a focus node plus neighbours');
 eq($$('#lens-svg g.lnode.focus').length, 1, 'exactly one focus node at the centre');

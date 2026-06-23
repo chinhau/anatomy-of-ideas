@@ -566,7 +566,7 @@
       <svg id="lens-svg"></svg>
       <div id="lens-board" hidden></div>
       <div id="lens-ctrl">
-        <button id="lens-home" class="hbtn" hidden data-i18n="⌂ Doors">⌂ Doors</button>
+        <button id="lens-home" class="hbtn" hidden data-i18n="‹ Doors">‹ Doors</button>
         <div class="lens-seg" role="group" aria-label="Lens mode">
           <button id="lens-explore" class="on" data-i18n="Explore">Explore</button>
           <button id="lens-tour" data-i18n="Guided tour">Guided tour</button>
@@ -580,7 +580,7 @@
         </span>
       </div>
       <div id="lens-cap"></div>
-      <div class="con-hint" data-i18n="One idea at its centre, its kin around it. Click any neighbour to travel to it; roll the dice to wander; or take a guided tour through the lineage.">One idea at its centre, its kin around it. Click any neighbour to travel to it; roll the dice to wander; or take a guided tour through the lineage.</div>
+      <div id="lens-hint" class="con-hint" data-i18n="One idea at its centre, its kin around it. Click any neighbour to travel to it; roll the dice to wander; or take a guided tour through the lineage.">One idea at its centre, its kin around it. Click any neighbour to travel to it; roll the dice to wander; or take a guided tour through the lineage.</div>
     </section>
 
     <div id="empty-state" hidden>
@@ -906,6 +906,10 @@
     document.getElementById('lens-board').hidden=false;
     document.getElementById('lens-svg').style.visibility='hidden';
     document.getElementById('lens-cap').style.visibility='hidden';
+    // The board is one screen with one verb (pick a door): hide the graph-only
+    // control bar and the graph hint so they can't compete or mislead.
+    document.getElementById('lens-ctrl').style.display='none';
+    const hint=document.getElementById('lens-hint'); if(hint) hint.style.display='none';
     document.getElementById('lens-home').hidden=true;
     document.getElementById('lens-tour-nav').hidden=true;
     document.getElementById('lens-explore').classList.add('on');
@@ -917,6 +921,8 @@
     document.getElementById('lens-board').hidden=true;
     document.getElementById('lens-svg').style.visibility='';
     document.getElementById('lens-cap').style.visibility='';
+    document.getElementById('lens-ctrl').style.display='';
+    const hint=document.getElementById('lens-hint'); if(hint) hint.style.display='';
     document.getElementById('lens-home').hidden=false;
   }
   // Enter the lens through a chosen door: switch to explore mode without rendering
@@ -990,7 +996,9 @@
     lkA.transition().duration(dur).attr('d',d=>edgePath(d.s,d.t));
 
     const nd=lnodeG.selectAll('g.lnode').data(nodes,d=>d.id);
-    nd.exit().transition().duration(dur).style('opacity',0).remove();
+    // A node that's leaving is no longer the focus: drop its highlight immediately
+    // so only the current focus ever carries .focus (and it fades out cleanly).
+    nd.exit().classed('focus',false).classed('dimf',false).transition().duration(dur).style('opacity',0).remove();
     const enter=nd.enter().append('g').attr('class','lnode').attr('tabindex',0).attr('role','button')
       .attr('transform',`translate(${cx},${cy})`).style('opacity',0);
     enter.append('circle'); enter.append('text').attr('text-anchor','middle');
