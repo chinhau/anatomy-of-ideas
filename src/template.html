@@ -111,9 +111,27 @@
     display:flex;flex-direction:column;box-shadow:-20px 0 60px rgba(0,0,0,.5);}
   #drawer.open{transform:translateX(0);}
   .dr-head{padding:24px 24px 16px;border-bottom:1px solid var(--rule);position:relative;}
+  .dr-head::after{content:'';display:block;clear:both;}
   .dr-q{font-size:10px;letter-spacing:0.22em;text-transform:uppercase;display:flex;align-items:center;
     gap:7px;margin-bottom:8px;}
   .dr-q .dot{width:9px;height:9px;border-radius:50%;}
+  /* illuminated-initial figure: a duotone portrait (thinker) or region sigil (school)
+     in the same arched niche, framed by one hairline stroke in the region colour. */
+  .dr-figure{--reg:var(--gold);float:left;width:84px;margin:2px 14px 6px 0;}
+  .dr-figure:empty{display:none;}
+  .dr-fig-wrap{position:relative;width:84px;height:104px;border-radius:42px 42px 5px 5px;
+    box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--reg) 55%, transparent),
+               0 0 0 1px rgba(217,182,95,0.10);overflow:hidden;}
+  .dr-fig-wrap::after{content:'';position:absolute;inset:0;pointer-events:none;border-radius:inherit;
+    background:linear-gradient(180deg,transparent 58%,var(--void-2) 98%);}
+  .portrait{--p-bri:1;--p-con:1;width:100%;height:100%;display:block;object-fit:cover;object-position:50% 22%;
+    -webkit-mask:radial-gradient(120% 80% at 50% 6%,#000 62%,transparent 100%);
+            mask:radial-gradient(120% 80% at 50% 6%,#000 62%,transparent 100%);
+    filter:brightness(var(--p-bri)) contrast(var(--p-con)) url(#cameo);}
+  .dr-sigil{width:100%;height:100%;display:block;}
+  .dr-sigil path,.dr-sigil circle{fill:none;stroke:var(--reg);stroke-width:1.1;
+    stroke-linecap:round;stroke-linejoin:round;opacity:0.8;
+    filter:drop-shadow(0 0 5px color-mix(in srgb,var(--reg) 40%, transparent));}
   .dr-head h2{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:28px;line-height:1.05;margin:0;}
   .dr-meta{font-size:11px;color:var(--muted);margin-top:7px;}
   .dr-body{padding:18px 24px 50px;overflow-y:auto;}
@@ -259,8 +277,9 @@
   /* ---------- timeline ---------- */
   #tl-svg{width:100%;height:100%;display:block;cursor:grab;}
   #tl-svg .tl-lane{stroke:var(--rule);stroke-width:1;stroke-dasharray:2 5;opacity:.6;}
-  #tl-svg .tl-lane-lab{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:15px;
-    fill:var(--gold);opacity:.7;}
+  #tl-svg .tl-lane-lab{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:12.5px;
+    fill:var(--gold);opacity:.85;}
+  #tl-svg .tl-now{stroke:var(--gold);stroke-width:1;stroke-dasharray:2 4;opacity:.35;}
   #tl-svg .tl-axis{stroke:var(--rule);stroke-width:1;}
   #tl-svg .tl-tick{font-size:10px;fill:var(--muted);letter-spacing:.08em;}
   #tl-svg .tl-edge{fill:none;stroke:rgba(233,220,192,.4);stroke-width:.8;pointer-events:none;}
@@ -722,6 +741,34 @@
         <div id="dr-rels"></div>
       </div>
     </aside>
+
+    <!-- Gilded-cameo duotone filter: collapses any source portrait (bust / oil / engraving)
+         onto the void→bronze→parchment→gold palette so every figure reads as one illuminated object. -->
+    <svg width="0" height="0" aria-hidden="true" style="position:absolute"><defs>
+      <filter id="cameo" x="-12%" y="-12%" width="124%" height="128%" color-interpolation-filters="sRGB">
+        <feColorMatrix type="matrix" in="SourceGraphic" result="lum"
+          values="0.30 0.59 0.11 0 0  0.30 0.59 0.11 0 0  0.30 0.59 0.11 0 0  0 0 0 1 0"/>
+        <feComponentTransfer in="lum" result="lev">
+          <feFuncR type="linear" slope="1.35" intercept="-0.16"/>
+          <feFuncG type="linear" slope="1.35" intercept="-0.16"/>
+          <feFuncB type="linear" slope="1.35" intercept="-0.16"/>
+        </feComponentTransfer>
+        <feComponentTransfer in="lev" result="duo">
+          <feFuncR type="table" tableValues="0.027 0.066 0.52 0.91 0.96"/>
+          <feFuncG type="table" tableValues="0.043 0.106 0.40 0.86 0.78"/>
+          <feFuncB type="table" tableValues="0.086 0.227 0.27 0.75 0.42"/>
+        </feComponentTransfer>
+        <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="7" result="n"/>
+        <feColorMatrix in="n" type="matrix" result="ng"
+          values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.05 0"/>
+        <feComposite in="ng" in2="duo" operator="in" result="grain"/>
+        <feBlend in="duo" in2="grain" mode="overlay" result="grained"/>
+        <feGaussianBlur in="grained" stdDeviation="5" result="halo"/>
+        <feColorMatrix in="halo" type="matrix" result="goldhalo"
+          values="0 0 0 0 0.851  0 0 0 0 0.714  0 0 0 0 0.373  0 0 0 0.42 0"/>
+        <feMerge><feMergeNode in="goldhalo"/><feMergeNode in="grained"/></feMerge>
+      </filter>
+    </defs></svg>
   </div>
 
 <script id="ideas-data" type="application/json">__IDEAS_JSON__</script>
@@ -795,6 +842,7 @@
   function openConcept(id){
     const c=cById[id]; if(!c) return;
     const q=qById[c.q];
+    document.getElementById('dr-figure').innerHTML='';
     document.getElementById('dr-q').innerHTML=`<span class="dot" style="background:${q.hue}"></span>${esc0(qLabel(q))}`;
     document.getElementById('dr-name').textContent=cName(c);
     document.getElementById('dr-meta').textContent=`${cTrad(c)} · ${eraTxt(c.era)}`;
@@ -1424,21 +1472,36 @@
     const W=Math.max(host.clientWidth,900), H=Math.max(host.clientHeight,560);
     tlsvg=d3.select('#tl-svg').attr('viewBox','0 0 '+W+' '+H).attr('width',W).attr('height',H);
     tlWorld=tlsvg.append('g');
-    const padL=64,padR=40,padT=44,padB=52, plotW=W-padL-padR;
-    const lanes=['West','Psyche','East','Indigenous'], laneBand=(H-padT-padB)/lanes.length, laneY={};
-    lanes.forEach((l,i)=>laneY[l]=padT+(i+0.5)*laneBand);
+    const padL=170,padR=40,padT=30,padB=52, plotW=W-padL-padR;
+    // One lane per great question, ordered by recurrence: the questions present in the
+    // most distinct era-buckets sit on top (longest era-span breaks ties). This turns
+    // "asked over and over, across every age" into the literal silhouette of the chart.
+    const EB=[0,1000,1500,1800,1900];
+    const bucketOf=era=>{ let i=0; while(i<EB.length&&era>=EB[i]) i++; return i; };
+    const qStat={}; D.questions.forEach(q=>qStat[q.id]={b:new Set(),lo:Infinity,hi:-Infinity});
+    D.concepts.forEach(c=>{ const s=qStat[c.q]; if(!s) return; s.b.add(bucketOf(c.era)); s.lo=Math.min(s.lo,c.era); s.hi=Math.max(s.hi,c.era); });
+    const lanes=D.questions.slice().sort((a,b)=>{ const sa=qStat[a.id],sb=qStat[b.id];
+      return (sb.b.size-sa.b.size) || ((sb.hi-sb.lo)-(sa.hi-sa.lo)); });
+    const laneBand=(H-padT-padB)/lanes.length, laneY={};
+    lanes.forEach((q,i)=>laneY[q.id]=padT+(i+0.5)*laneBand);
     const fr=[0,0.12,0.28,0.42,0.58,0.74,1];
     const x=d3.scaleLinear().domain([-600,0,1000,1500,1800,1900,2025])
       .range(fr.map(f=>padL+plotW*f)).clamp(true);
-    lanes.forEach(l=>{ tlWorld.append('line').attr('class','tl-lane').attr('x1',padL).attr('x2',W-padR).attr('y1',laneY[l]).attr('y2',laneY[l]);
-      tlWorld.append('text').attr('class','tl-lane-lab').attr('x',padL-8).attr('y',laneY[l]-laneBand*0.42).attr('text-anchor','end').text(l); });
+    // per-question lane: faint baseline tinted with the question's hue + a left-gutter label
+    lanes.forEach(q=>{ tlWorld.append('line').attr('class','tl-lane').attr('x1',padL).attr('x2',W-padR)
+        .attr('y1',laneY[q.id]).attr('y2',laneY[q.id]).attr('stroke',q.hue).style('opacity',.45);
+      tlWorld.append('text').attr('class','tl-lane-lab').attr('data-q',q.id)
+        .attr('x',padL-12).attr('y',laneY[q.id]).attr('dy','.32em').attr('text-anchor','end')
+        .attr('fill',q.hue).text(qLabel(q)); });
     tlWorld.append('line').attr('class','tl-axis').attr('x1',padL).attr('x2',W-padR).attr('y1',H-padB).attr('y2',H-padB);
     [[-500,'500 BCE'],[0,'1 CE'],[1000,'1000'],[1500,'1500'],[1800,'1800'],[1900,'1900'],[2020,'now']].forEach(t=>{
       tlWorld.append('line').attr('class','tl-axis').attr('x1',x(t[0])).attr('x2',x(t[0])).attr('y1',H-padB).attr('y2',H-padB+5).style('opacity',.5);
       tlWorld.append('text').attr('class','tl-tick').attr('x',x(t[0])).attr('y',H-padB+18).attr('text-anchor','middle').text(t[1]); });
+    // "now" accent — every question's beats run right up to the present
+    tlWorld.append('line').attr('class','tl-now').attr('x1',x(2025)).attr('x2',x(2025)).attr('y1',padT-4).attr('y2',H-padB);
     tlArc=tlWorld.append('g');
-    D.concepts.forEach(c=>{ const lane=regionOf(c); const j=((hashId(c.id)%100)/100-0.5)*laneBand*0.74;
-      tlPos[c.id]={x:x(c.era), y:laneY[lane]+j}; });
+    D.concepts.forEach(c=>{ const j=((hashId(c.id)%100)/100-0.5)*laneBand*0.58;
+      tlPos[c.id]={x:x(c.era), y:(laneY[c.q]!=null?laneY[c.q]:padT)+j}; });
     tlNode=tlWorld.append('g').selectAll('g').data(D.concepts).join('g')
       .attr('class','tl-node').attr('transform',c=>'translate('+tlPos[c.id].x+','+tlPos[c.id].y+')')
       .attr('tabindex',0).attr('role','button')
@@ -1675,7 +1738,7 @@
     tlNode.select('text').text(c=>cName(c));
     tlNode.select('title').text(c=>cName(c));
     tlNode.attr('aria-label',c=>cName(c)+' — '+cTrad(c)+', '+eraTxt(c.era));
-    if(tlWorld) tlWorld.selectAll('.tl-lane-lab').text(function(){ return T(this.textContent.trim()); }); }
+    if(tlWorld) tlWorld.selectAll('.tl-lane-lab').text(function(){ const q=qById[this.dataset.q]; return q?qLabel(q):T(this.textContent.trim()); }); }
   // Declared up here (not in the constellation section below) so the bootstrap
   // applyLang(LANG) -> conRelabel() call is past their temporal dead zone.
   let conBuilt=false, conLeg=null;
@@ -1812,10 +1875,41 @@
     return null; }
 
   // ---- person / school dossier (shares the drawer) ----
+  // Public-domain portraits, keyed by atlas node id. Any source (bust / oil / engraving)
+  // is unified by the #cameo duotone filter. {bri,con} tune input exposure per image.
+  const PORTRAITS={
+    'Aristotle':{src:'media/portraits/aristotle.jpg',bri:1.18,con:1.05},
+    'Confucius':{src:'media/portraits/confucius.jpg',bri:1.0,con:1.12},
+    'Mary Wollstonecraft':{src:'media/portraits/wollstonecraft.jpg',bri:0.95,con:1.12},
+  };
+  // Austere single-stroke region sigils (the fallback for anyone without a portrait,
+  // and the standing mark for schools, which have no face). viewBox 0 0 60 60.
+  const REGION_SIGIL={
+    West:'<path d="M13 33 A18 18 0 0 1 47 33"/><circle cx="30" cy="40" r="2.4"/>',
+    Psyche:'<path d="M22 14 A17 17 0 1 0 41 44 A21 21 0 0 1 22 14 Z"/><circle cx="30" cy="31" r="2"/>',
+    East:'<circle cx="30" cy="30" r="16"/>',
+    _:'<path d="M30 14 L33 27 L46 30 L33 33 L30 46 L27 33 L14 30 L27 27 Z"/>'
+  };
+  function drFigure(n,g){
+    const reg=g.region, regColor=g.color;
+    const p=n.type!=='school'?PORTRAITS[n.id]:null;
+    let inner;
+    if(p){
+      inner=`<div class="dr-fig-wrap"><img class="portrait" alt="" loading="lazy"`+
+            ` style="--p-bri:${p.bri||1};--p-con:${p.con||1}" src="${p.src}"></div>`;
+    }else{
+      const sig=REGION_SIGIL[reg]||REGION_SIGIL._;
+      inner=`<div class="dr-fig-wrap"><svg class="dr-sigil" viewBox="0 0 60 60" aria-hidden="true">${sig}</svg></div>`;
+    }
+    const fig=document.getElementById('dr-figure');
+    fig.style.setProperty('--reg',regColor);
+    fig.innerHTML=inner;
+  }
   function openPerson(id){
     const n=aById[id]; if(!n)return; const g=aGroup[n.group];
     const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
     const regName={West:'Occident',Psyche:'Psyche',East:'Orient'}[g.region]||g.region;
+    drFigure(n,g);
     document.getElementById('dr-q').innerHTML=`<span class="dot" style="background:${g.color}"></span>${esc(g.label)}`;
     document.getElementById('dr-name').textContent=n.id;
     document.getElementById('dr-meta').textContent=

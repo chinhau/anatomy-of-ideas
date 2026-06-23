@@ -108,7 +108,8 @@ esc(); click($('.switch button[data-mode="questions"]'));
 // TIMELINE
 click($('.switch button[data-mode="timeline"]'));
 eq($$('#tl-svg .tl-node').length, D.concepts.length, 'timeline renders one node per concept');
-eq($$('#tl-svg .tl-lane').length, 4, 'timeline has 4 lanes');
+eq($$('#tl-svg .tl-lane').length, D.questions.length, 'timeline has one lane per great question');
+eq($$('#tl-svg .tl-lane-lab').length, D.questions.length, 'each question lane is labelled');
 assert($$('#tl-svg .tl-tick').length>0, 'timeline has era ticks');
 
 // PATHS › Arguments (former Threads tab) — Paths opens on the Arguments pane by default
