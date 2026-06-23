@@ -91,9 +91,19 @@ findings + concrete fixes + a 3-sentence verdict**, and **no edits**.
    discipline, texture-vs-glow, region/metal-ink taxonomy.
 4. **Steve Jobs / restraint** — holistic taste & busyness; names what to CUT;
    defends the *one thing* the product is and whether every element serves it.
+5. **Storyboard / user-journey critic** — judges the *end-to-end journey*, not the
+   pixels: narrative coherence, onboarding/legibility (is the first-contact point
+   right? are tooltips enough?), friction & failure points (empty states, mobile,
+   "why does this element mean *that*?"), and the emotional arc. Brief it with §1
+   *and the data model* — it earns its keep by catching when a planned ornament
+   duplicates an existing encoding or rests on a taxonomy the data won't support
+   (it reshaped ADR 0005: it killed the 6-bespoke-tradition-mark plan before a
+   line was written). Run it **before** implementing, alongside or ahead of the
+   four visual agents.
 
-> Cadence: run all four in parallel, then **the maintainer synthesizes** — the
-> Jobs pass is a foil, not an auto-merge.
+> Cadence: run the visual agents in parallel; run the storyboard critic before
+> implementing. Then **the maintainer synthesizes** — the Jobs pass is a foil,
+> not an auto-merge.
 
 ---
 
