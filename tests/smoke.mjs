@@ -80,7 +80,6 @@ eq($('#gate .gate-line')?.dataset.i18n, "You're not the first to wonder", 'gate 
 const gcount=$('#gate .gate-count')?.textContent||'';
 assert(/11/.test(gcount)&&/425/.test(gcount)&&/4,?399/.test(gcount), 'gate shows the honest anchor count (11 questions / 425 thinkers / 4,399 years)');
 assert(!/263/.test($('#gate .gate-inner')?.textContent||''), 'gate does NOT lead with the 263-ideas number');
-assert(/2375|BCE/.test($('#gate .gate-span')?.dataset.i18n||''), 'gate states the honest span (2375 BCE → 2024)');
 click($('#gate-enter')); // cross the threshold
 eq(window.localStorage.getItem('aoi.entered'),'1','crossing the threshold records the first run so the gate stays dismissed');
 assert(gate.classList.contains('closing')||gate.hidden, 'crossing the threshold dismisses the gate');

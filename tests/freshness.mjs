@@ -59,14 +59,11 @@ const yearsComma=years.toLocaleString('en-US');
 const between=(s,a,b)=>{ const i=s.indexOf(a); if(i<0) return ''; const j=s.indexOf(b,i+a.length); return j<0?'':s.slice(i,j); };
 const metaDesc=(html.match(/name="description"\s+content="([^"]*)"/)||[])[1]||'';
 const gateCount=between(html,'class="gate-count"','</div>');
-const gateSpan=htmlUnescape(between(html,'class="gate-span"','</div>'));
 
 assert(new RegExp(`\\b${conceptCount}\\s+ideas\\b`).test(metaDesc), `meta description says "${conceptCount} ideas" (dataset count)`);
 assert(gateCount.includes(`>${qCount}</b>`), `gate shows ${qCount} questions (dataset count)`);
 assert(gateCount.includes(`>${atlasCount}</b>`), `gate shows ${atlasCount} thinkers (atlas node count)`);
 assert(gateCount.includes(`>${yearsComma}</b>`), `gate shows ${yearsComma} years (maxEra−minEra)`);
-assert(gateSpan.includes(`${absMin} BCE`), `gate span opens at ${absMin} BCE (earliest era)`);
-assert(gateSpan.includes(`${maxEra}`), `gate span closes at ${maxEra} (latest era)`);
 
 // ───────────────────────── 3. routes resolve ─────────────────────────
 // Boot the real app in jsdom and drive the hash router: every tab slug and the

@@ -796,9 +796,6 @@
     color:var(--parchment);line-height:1;font-style:normal;}
   .gate-count .gc i{font-size:10px;letter-spacing:0.16em;text-transform:uppercase;
     color:var(--muted);font-style:normal;}
-  .gate-span{font-size:11px;letter-spacing:0.2em;color:var(--parchment-dim);margin:14px 0 0;
-    padding-top:13px;border-top:1px solid var(--rule);width:fit-content;padding-left:26px;padding-right:26px;
-    animation:gate-rise .8s .34s ease both;}
   .gate-enter{margin:34px 0 0;background:var(--gold);color:#1a1205;border:none;border-radius:3px;
     font-family:'Inter';font-size:13px;letter-spacing:0.12em;text-transform:uppercase;font-weight:500;
     padding:13px 34px;cursor:pointer;transition:transform .15s ease,background .15s ease,box-shadow .15s ease;
@@ -817,11 +814,10 @@
       <h2 class="gate-line" id="gate-line" data-i18n="You're not the first to wonder">You're not the first to wonder</h2>
       <p class="gate-sub" data-i18n="For some four thousand years, the same few questions keep returning. This is one map of them — drawn from a single vantage, and offered to argue with.">For some four thousand years, the same few questions keep returning. This is one map of them — drawn from a single vantage, and offered to argue with.</p>
       <div class="gate-count">
-        <span class="gc"><b>11</b><i data-i18n="questions">questions</i></span>
+        <span class="gc"><b>11</b><i data-i18n="great questions">great questions</i></span>
         <span class="gc"><b>425</b><i data-i18n="thinkers">thinkers</i></span>
         <span class="gc"><b>4,399</b><i data-i18n="years">years</i></span>
       </div>
-      <div class="gate-span" data-i18n="2375 BCE → 2024">2375 BCE → 2024</div>
       <button id="gate-enter" class="gate-enter" data-i18n="Begin Wondering">Begin Wondering</button>
     </div>
   </div>
@@ -8789,6 +8785,10 @@
       "zh": "大哉問",
       "ru": "вопросов"
     },
+    "great questions": {
+      "zh": "大哉問",
+      "ru": "великих вопросов"
+    },
     "thinkers": {
       "zh": "思想家",
       "ru": "мыслителей"
@@ -8796,10 +8796,6 @@
     "years": {
       "zh": "年",
       "ru": "лет"
-    },
-    "2375 BCE → 2024": {
-      "zh": "公元前 2375 → 2024",
-      "ru": "2375 до н. э. → 2024"
     },
     "Begin Wondering": {
       "zh": "開始思索",
