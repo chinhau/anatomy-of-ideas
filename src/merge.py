@@ -12,7 +12,8 @@ from readings_extra8 import EXTRA8 as _EX8
 from readings_extra9 import EXTRA9 as _EX9
 from readings_extra10 import EXTRA10 as _EX10
 from readings_extra11 import EXTRA11 as _EX11
-RD = {**_RD, **_EX, **_EX2, **_EX3, **_EX4, **_EX5, **_EX6, **_EX7, **_EX8, **_EX9, **_EX10, **_EX11}
+from readings_extra12 import EXTRA12 as _EX12
+RD = {**_RD, **_EX, **_EX2, **_EX3, **_EX4, **_EX5, **_EX6, **_EX7, **_EX8, **_EX9, **_EX10, **_EX11, **_EX12}
 
 ideas = json.load(open('ideas.json', encoding='utf-8'))
 ids = {c['id'] for c in ideas['concepts']}
@@ -39,6 +40,20 @@ for c in ideas['concepts']:
         {"author": a, "title": t, "year": y, "kind": k, "note": n}
         for (a, t, y, k, n) in ordered
     ]
+
+# Derived "works the atlas keeps returning to": readings that land on two or more
+# concepts. Pure aggregation — no editorial weighting, it just surfaces the texts
+# the map leans on. Sorted by reach, then author, so the order is stable.
+from collections import defaultdict
+_occ = defaultdict(list)
+for c in ideas['concepts']:
+    for r in c['readings']:
+        _occ[(r['author'], r['title'], r['year'])].append(c['id'])
+ideas['recurring'] = sorted(
+    ({"author": a, "title": t, "year": y, "count": len(cs), "concepts": sorted(cs)}
+     for (a, t, y), cs in _occ.items() if len(cs) >= 2),
+    key=lambda r: (-r['count'], r['author']),
+)
 
 json.dump(ideas, open('ideas.json','w',encoding='utf-8'), ensure_ascii=False)
 

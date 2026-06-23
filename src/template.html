@@ -385,6 +385,25 @@
   #about-close{position:absolute;top:14px;right:16px;background:none;border:none;color:var(--muted);
     font-size:24px;cursor:pointer;line-height:1;}
   #about-close:hover{color:var(--gold);}
+  .begin-list{display:flex;flex-direction:column;gap:1px;margin:2px 0 4px;}
+  .begin-i{display:block;width:100%;text-align:left;background:transparent;border:none;
+    border-left:2px solid var(--rule);padding:7px 0 7px 12px;cursor:pointer;
+    transition:border-color .15s,background .15s;}
+  .begin-i:hover{border-left-color:var(--gold);background:rgba(217,182,95,.05);}
+  .begin-i .bi-c{display:block;font-family:'Cormorant Garamond',serif;font-size:16px;
+    color:var(--parchment);line-height:1.2;}
+  .begin-i .bi-bk{display:block;font-size:11px;color:var(--muted);margin-top:1px;}
+  .begin-i .bi-why{display:block;font-size:12px;color:var(--parchment-dim);
+    font-style:italic;margin-top:2px;}
+  .recur-list{display:flex;flex-direction:column;gap:0;margin:2px 0 4px;}
+  .recur-i{display:flex;align-items:baseline;gap:9px;padding:3.5px 0;
+    border-bottom:1px solid rgba(255,255,255,.04);font-size:12.5px;}
+  .recur-i:last-child{border-bottom:none;}
+  .recur-i .rc-n{flex:0 0 18px;text-align:right;color:var(--gold);font-size:11px;
+    font-variant-numeric:tabular-nums;}
+  .recur-i .rc-t{color:var(--parchment);}
+  .recur-i .rc-a{color:var(--muted);margin-left:auto;padding-left:10px;
+    font-size:11px;white-space:nowrap;}
 
   /* ===== MODE VI : IDEA LENS ===== */
   #m-lens{inset:0;}
@@ -555,6 +574,17 @@
         <a href="https://github.com/chinhau/anatomy-of-ideas/issues">tell me</a>.</p>
       <p class="about-note">Best explored on a desktop or tablet — the maps are built around a
         wide canvas, and a small phone screen will feel cramped.</p>
+
+      <h3>Where to begin</h3>
+      <p>If the whole map feels like too many doors at once, here is <b>one suggested way in</b>
+        — ten texts, each opening a different question. It is the maintainer's pick, not a canon;
+        argue with it, and click any one to meet the idea it carries.</p>
+      <div id="about-begin" class="begin-list"></div>
+
+      <h3>Works this atlas keeps returning to</h3>
+      <p>Not a ranking, and nothing hand-chosen — just the texts that turn up on more than one
+        idea, counted automatically. The map leans on these whether it means to or not.</p>
+      <div id="about-recurring" class="recur-list"></div>
       </div>
       <p class="about-note" id="about-mt-note" data-i18n="The non-English text is a machine-assisted translation — proper names, technical terms, and the framing may not be exact. Corrections welcome." hidden>The non-English text is a machine-assisted translation — proper names, technical terms, and the framing may not be exact. Corrections welcome.</p>
     </div>
@@ -1400,6 +1430,43 @@
     if(e.shiftKey&&document.activeElement===first){ e.preventDefault(); last.focus(); }
     else if(!e.shiftKey&&document.activeElement===last){ e.preventDefault(); first.focus(); } });
 
+  // "Where to begin": one hand-picked door per question, grounded in real
+  // concepts (ids must match) so each opens its drawer. Editorial, deliberately
+  // a *suggestion* — the recurring list below it is the derived counterpart.
+  const BEGIN=[
+    ['Stoic Virtue', 'the calm at the centre of how to live'],
+    ['The Dao', 'the Eastern road into letting things be'],
+    ['Anattā (No-Self)', 'the self, taken apart'],
+    ['Ren & Li', 'the case for relation and engagement'],
+    ['Eudaimonia', 'the Greek question of a life that goes well'],
+    ['Social Contract', 'where the authority over us comes from'],
+    ['Karma', 'action, freedom and consequence'],
+    ['The Absurd', 'meaning, when the universe stays silent'],
+    ['Meaning Is Created', 'making your own sense of it'],
+    ['Woman as the Other', 'who the map has too often left out'],
+  ];
+  function renderBegin(){
+    const wrap=document.getElementById('about-begin'); if(!wrap) return; wrap.innerHTML='';
+    BEGIN.forEach(([id,why])=>{ const c=cById[id]; if(!c) return;
+      const lead=c.readings&&c.readings[0];
+      const b=document.createElement('button'); b.type='button'; b.className='begin-i';
+      b.innerHTML=`<span class="bi-c">${esc0(cName(c))}</span>`+
+        (lead?`<span class="bi-bk">${esc0(lead.author)} — ${esc0(lead.title)}</span>`:'')+
+        `<span class="bi-why">${esc0(why)}</span>`;
+      b.onclick=()=>{ closeAbout(); openConcept(id); };
+      wrap.appendChild(b); });
+  }
+  function renderRecurring(){
+    const wrap=document.getElementById('about-recurring'); if(!wrap) return; wrap.innerHTML='';
+    (D.recurring||[]).forEach(r=>{ const it=document.createElement('div'); it.className='recur-i';
+      it.innerHTML=`<span class="rc-n">${r.count}×</span>`+
+        `<span class="rc-t">${esc0(r.title)}</span>`+
+        `<span class="rc-a">${esc0(r.author)}</span>`;
+      wrap.appendChild(it); });
+  }
+  // (renderBegin/renderRecurring are invoked from applyLang, which re-renders the
+  // About body and runs at init — see below.)
+
   // ========== TIMELINE ==========
   let tlBuilt=false, tlsvg, tlWorld, tlArc, tlNode, tlPos={};
   const buildsIn={}; D.links.forEach(l=>{ if(l.type==='builds') buildsIn[l.target]=(buildsIn[l.target]||0)+1; });
@@ -1570,6 +1637,10 @@
     const ab=(I18N.about||{})[lang];
     const ac=document.getElementById('about-content'); if(ac) ac.innerHTML=(lang!=='en'&&ab)?ab:ABOUT_EN;
     const mt=document.getElementById('about-mt-note'); if(mt) mt.toggleAttribute('hidden',lang==='en');
+    // The about-content swap above blew away the rendered lists, so repopulate
+    // them. (Translated about blocks omit these containers, so non-English just
+    // no-ops — the gateways + recurring works are an English-only surface.)
+    renderBegin(); renderRecurring();
     // Questions: relabel bands + cards in place (keeps cardEls refs + filter display)
     D.questions.forEach(q=>{ const band=mQ.querySelector('.band[data-q="'+q.id+'"]'); if(!band) return;
       const t=band.querySelector('.q-tag'); if(t) t.textContent=qLabel(q).replace(/[?？]/,'');

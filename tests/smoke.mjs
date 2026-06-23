@@ -195,6 +195,20 @@ click($('.switch button[data-mode="questions"]'));
 const aboutBtn=$('#about-btn'); aboutBtn.focus(); click(aboutBtn);
 assert($('#about-overlay').classList.contains('open'), 'About panel opens');
 assert($('#about-overlay').getAttribute('aria-modal')==='true', 'About panel is aria-modal');
+// PR2: "Where to begin" gateways + derived "recurring works" live in the About
+// panel. The derived list is baked by merge.py (count>=2, reach-sorted); the
+// curated gateways must all resolve to real concepts and open the drawer.
+assert(Array.isArray(D.recurring)&&D.recurring.length>=10, 'derived recurring-works list is baked into the data');
+assert(D.recurring.every(r=>r.count>=2), 'every recurring work spans at least two concepts');
+assert(D.recurring.every((r,i,a)=>i===0||a[i-1].count>=r.count), 'recurring works are sorted by reach (count, descending)');
+const beginBtns=$$('#about-begin .begin-i');
+assert(beginBtns.length===10, 'ten curated "where to begin" gateways render');
+eq($$('#about-recurring .recur-i').length, D.recurring.length, 'recurring list renders one row per derived work');
+click(beginBtns[0]); // closes About, opens the gateway concept's drawer
+assert(!$('#about-overlay').classList.contains('open'), 'clicking a gateway closes the About panel');
+assert($('#drawer').classList.contains('open'), 'clicking a gateway opens its concept drawer');
+esc(); // shut the drawer before re-testing About Esc below
+aboutBtn.focus(); click(aboutBtn);
 esc();
 assert(!$('#about-overlay').classList.contains('open'), 'Esc closes the About panel');
 eq(window.document.activeElement, aboutBtn, 'focus returns to the About trigger on close');
