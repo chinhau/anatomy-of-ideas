@@ -63,23 +63,35 @@ eq($('.switch button.active')?.dataset.mode, 'lens', 'lens tab activates');
 eq($('#lens-board').hidden, false, 'lens opens on the Eleven Doors board');
 eq($$('.lb-cell').length, 11, 'board shows eleven question doors (one per question)');
 // the board is one screen, one verb: graph-only chrome must be hidden on it
-eq($('#lens-ctrl').style.display, 'none', 'graph control bar is hidden on the board');
+eq($('#lens-top').style.display, 'none', 'graph top chrome (control bar + trail) is hidden on the board');
 eq($('#lens-hint').style.display, 'none', 'graph hint is hidden on the board');
 click($$('.lb-cell')[0]); // enter through the first door
 eq($('#lens-board').hidden, true, 'choosing a door dismisses the board');
-assert($('#lens-ctrl').style.display!=='none', 'control bar returns inside the graph');
+assert($('#lens-top').style.display!=='none', 'top chrome returns inside the graph');
 eq($('#lens-home').hidden, false, 'the "Doors" home button appears once inside the graph');
 assert($$('#lens-svg g.lnode').length>1, 'lens renders a focus node plus neighbours');
 eq($$('#lens-svg g.lnode.focus').length, 1, 'exactly one focus node at the centre');
+// entering through a door starts a fresh path — a single step shows no rail yet
+eq($('#lens-trail').hidden, true, 'breadcrumb rail is hidden at the path start (one concept)');
 const lensName0=$('#lens-cap .lc-name')?.textContent||'';
 assert(lensName0.length>0, 'lens caption names the focal idea');
 const focusName0=$('#lens-svg g.lnode.focus text')?.textContent;
 click($$('#lens-svg g.lnode')[1]); // travel to a neighbour
 assert($('#lens-svg g.lnode.focus text')?.textContent!==focusName0, 'clicking a neighbour re-centres the lens');
+// now the path has two concepts — the breadcrumb rail appears
+eq($('#lens-trail').hidden, false, 'breadcrumb rail appears once you have walked a step');
+eq($$('#lens-trail .lt-chip').length, 2, 'rail shows both concepts of the path');
+assert($('#lens-trail .lt-chip.cur')?.textContent!==focusName0, 'current chip names where you are now, not where you started');
+eq($$('#lens-trail .lt-chip.cur').length, 1, 'exactly one chip marked current');
 click($('#lens-random')); // serendipity dice — must keep a valid focus
 eq($$('#lens-svg g.lnode.focus').length, 1, 'random walk keeps a single focus');
-// guided tour
+assert($$('#lens-trail .lt-chip').length>=2, 'random walk extends the path');
+// rewind by clicking the first breadcrumb chip → back to the start, rail collapses
+click($$('#lens-trail .lt-chip')[0]);
+eq($('#lens-trail').hidden, true, 'clicking the first chip rewinds the path to a single concept');
+// guided tour (the rail is an Explore-mode notion; it hides in Tour)
 click($('#lens-tour'));
+eq($('#lens-trail').hidden, true, 'breadcrumb rail is hidden during the guided tour');
 assert(!$('#lens-tour-nav').hasAttribute('hidden'), 'guided tour reveals the step controls');
 assert(/^1\s*\/\s*\d+/.test($('#lens-count').textContent), 'tour starts at step 1 / N');
 const tourBefore=$('#lens-count').textContent; click($('#lens-next'));
