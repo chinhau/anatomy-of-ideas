@@ -9,8 +9,8 @@ raw framing and converged on the reframing below.
 
 ## The one sentence
 
-> **Every question you think is yours, humans have been asking for 2,500 years —
-> come see how far we've actually got.**
+> **Every question you think is yours, humans have kept asking for 2,500 years —
+> come see where it stands now.**
 
 The feeling it should leave: *you're not the first to wonder.* Not awe at how
 much we know — relief that the 3 a.m. thought puts you inside a long
@@ -18,8 +18,8 @@ conversation, standing at a real frontier rather than alone in the dark.
 
 ## North-star mission
 
-This atlas exists to show, **honestly**, how far human thought has actually
-travelled on the great questions we keep asking — what has quietly settled, what
+This atlas exists to show, **honestly**, where human thought actually stands on
+the great questions we keep asking — what has quietly settled, what
 we've only *sharpened*, and what stays genuinely open. It maps 263 ideas across
 eleven such questions and 2,500 years for the curious non-specialist (and the
 philosophy-literate skeptic), so a reader leaves seeing the inquiry as a

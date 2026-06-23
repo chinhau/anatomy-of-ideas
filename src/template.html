@@ -37,8 +37,8 @@
   .brand:hover h1{color:var(--gold);}
   .brand-mark{width:34px;height:34px;flex:none;}
   .brand-mark svg{width:100%;height:100%;display:block;}
-  .brand-mark path,.brand-mark circle{fill:none;stroke:var(--gold);stroke-width:0.6;opacity:0.8;
-    filter:drop-shadow(0 0 3px rgba(217,182,95,0.25));}
+  .brand-mark path,.brand-mark circle{fill:none;stroke:var(--gold);stroke-width:0.6;opacity:0.8;}
+  .brand-mark svg{filter:drop-shadow(0 0.5px 0 rgba(0,0,0,0.55));}
   .brand-mark .seal-pin{fill:var(--gold);stroke:none;opacity:1;}
   .brand .eyebrow{font-size:10px;letter-spacing:0.42em;text-transform:uppercase;
     color:var(--gold);opacity:0.82;}
@@ -613,34 +613,32 @@
   .gate-seal{width:72px;height:72px;display:block;margin-bottom:22px;opacity:.9;
     animation:gate-rise .8s ease both;}
   .gate-seal svg{width:100%;height:100%;display:block;}
-  .gate-seal path,.gate-seal circle{fill:none;stroke:var(--gold);stroke-width:0.5;opacity:.8;
-    filter:drop-shadow(0 0 4px rgba(217,182,95,0.28));}
+  .gate-seal path,.gate-seal circle{fill:none;stroke:var(--gold);stroke-width:0.6;opacity:.8;}
+  .gate-seal svg{filter:drop-shadow(0 0.6px 0 rgba(0,0,0,0.55));}
   .gate-seal .seal-pin{fill:var(--gold);stroke:none;opacity:1;}
   .gate-eyebrow{font-size:10.5px;letter-spacing:0.42em;text-transform:uppercase;
     color:var(--gold);opacity:.82;animation:gate-rise .8s .06s ease both;}
-  .gate-line{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(22px,5.2vw,46px);
-    line-height:1.06;margin:14px 0 0;letter-spacing:0.01em;color:var(--parchment);white-space:nowrap;
+  .gate-line{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:clamp(30px,6.4vw,58px);
+    line-height:1.0;margin:14px 0 0;letter-spacing:0.01em;color:var(--parchment);max-width:15ch;
     animation:gate-rise .8s .12s ease both;}
   .gate-sub{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(15px,2.4vw,19px);
     line-height:1.5;color:var(--parchment-dim);margin:18px 0 0;max-width:30em;
     animation:gate-rise .8s .2s ease both;}
   .gate-count{display:flex;gap:34px;margin:30px 0 0;animation:gate-rise .8s .28s ease both;}
   .gate-count .gc{display:flex;flex-direction:column;align-items:center;gap:3px;}
-  .gate-count .gc b{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:30px;
+  .gate-count .gc b{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:26px;
     color:var(--parchment);line-height:1;font-style:normal;}
   .gate-count .gc i{font-size:10px;letter-spacing:0.16em;text-transform:uppercase;
     color:var(--muted);font-style:normal;}
   .gate-span{font-size:11px;letter-spacing:0.2em;color:var(--parchment-dim);margin:14px 0 0;
-    padding-top:13px;border-top:1px solid var(--rule);width:200px;
+    padding-top:13px;border-top:1px solid var(--rule);width:fit-content;padding-left:26px;padding-right:26px;
     animation:gate-rise .8s .34s ease both;}
   .gate-enter{margin:34px 0 0;background:var(--gold);color:#1a1205;border:none;border-radius:3px;
     font-family:'Inter';font-size:13px;letter-spacing:0.12em;text-transform:uppercase;font-weight:500;
-    padding:13px 34px;cursor:pointer;transition:transform .18s ease,box-shadow .18s ease;
-    box-shadow:0 0 0 rgba(217,182,95,0);animation:gate-rise .8s .42s ease both;}
-  .gate-enter:hover{transform:translateY(-1px);box-shadow:0 6px 22px rgba(217,182,95,0.22);}
-  .gate-skip{margin:14px 0 0;background:none;border:none;color:var(--muted);font-size:11.5px;
-    letter-spacing:0.08em;cursor:pointer;padding:6px 12px;animation:gate-rise .8s .48s ease both;}
-  .gate-skip:hover{color:var(--parchment-dim);}
+    padding:13px 34px;cursor:pointer;transition:transform .15s ease,background .15s ease,box-shadow .15s ease;
+    animation:gate-rise .8s .42s ease both;}
+  .gate-enter:hover{background:#cfa84e;box-shadow:inset 0 0 0 1px rgba(26,18,5,0.35);}
+  .gate-enter:active{transform:translateY(1px);box-shadow:inset 0 1px 3px rgba(0,0,0,0.4);}
   @keyframes gate-rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
   @media (max-width:560px){.gate-count{gap:22px}.gate-count .gc b{font-size:24px}}
 </style>
@@ -658,8 +656,7 @@
         <span class="gc"><b>4,399</b><i data-i18n="years">years</i></span>
       </div>
       <div class="gate-span" data-i18n="2375 BCE → 2024">2375 BCE → 2024</div>
-      <button id="gate-enter" class="gate-enter" data-i18n="Enter the atlas">Enter the atlas</button>
-      <button id="gate-skip" class="gate-skip" data-i18n="Skip">Skip</button>
+      <button id="gate-enter" class="gate-enter" data-i18n="Begin Wondering">Begin Wondering</button>
     </div>
   </div>
   <header>
@@ -735,8 +732,13 @@
           <b>Hermetic &amp; Esoteric</b> current (As Above So Below, Gnosis, alchemy, the Perennial
           Philosophy) is included as historically influential — mapped, not endorsed; like every
           religious and metaphysical claim here, it is disclosed by its tradition badge rather than
-          singled out for a warning. <b>Genuinely oral and shamanic cosmologies remain largely absent</b>, since
-          the sources we could cite honestly are still thin.</li>
+          singled out for a warning. <b>Genuinely oral and shamanic cosmologies remain largely absent — and that
+          absence is the map's own edge, not theirs.</b> This atlas admits an idea only with a
+          named author and a dated text; that bar keeps the honesty tight, but it is also a
+          <i>literacy filter</i>. Traditions carried in speech, song, ritual and apprenticeship
+          leave no dated treatise to cite, so the very rule that protects the rest of the map
+          cannot see them — they are missing because of where this map draws its line, not
+          because the thinking is thin.</li>
         <li>It remains weighted toward Western and South-Asian sources.</li>
       </ul>
       <p>The facts — datings, attributions, titles — have been checked across the whole atlas,
@@ -2001,7 +2003,7 @@
   // ---------- threshold / landing hero ----------
   // A thin first-run welcome: it names the feeling and the honest scope, then
   // hands you a deliberate gesture across the threshold. Shown once (unless a
-  // deep link already aimed you somewhere); dismissable by Enter, Skip or Esc.
+  // deep link already aimed you somewhere); dismissable by the button or Esc.
   const gate=document.getElementById('gate');
   let gateSeen=false; try{ gateSeen=localStorage.getItem('aoi.entered')==='1'; }catch(e){}
   function closeGate(){
@@ -2024,7 +2026,6 @@
     document.getElementById('gate-enter').focus();
   }
   document.getElementById('gate-enter').onclick=closeGate;
-  document.getElementById('gate-skip').onclick=closeGate;
   gate.addEventListener('keydown',e=>{ if(e.key==='Escape') closeGate(); });
   const brandEl=document.getElementById('brand');
   if(brandEl){
@@ -2147,10 +2148,11 @@
       for(let i=0;i<=steps;i++){const t=i/steps*Math.PI*2,rr=R+amp*Math.cos(petals*t+phase);
         d+=(i?'L':'M')+(cx+Math.cos(t)*rr).toFixed(2)+' '+(cy+Math.sin(t)*rr).toFixed(2);}
       return d+'Z';};
+    // 11-petal rosette: one lobe per great question (the spine of the atlas).
     return `<svg viewBox="0 0 40 40" aria-hidden="true">`+
       `<circle cx="20" cy="20" r="18.6"/>`+
-      `<path d="${rosette(14,2.4,12,0)}"/>`+
-      `<path d="${rosette(14,2.4,12,Math.PI/12)}"/>`+
+      `<path d="${rosette(14,2.4,11,0)}"/>`+
+      `<path d="${rosette(14,2.4,11,Math.PI/11)}"/>`+
       `<circle cx="20" cy="20" r="6.2"/>`+
       `<circle class="seal-pin" cx="20" cy="20" r="1.9"/></svg>`;
   }
