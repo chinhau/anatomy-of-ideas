@@ -243,6 +243,82 @@
   "‹ Doors": {
    "zh": "‹ 諸門",
    "ru": "‹ Двери"
+  },
+  "Occident": {
+   "zh": "西方",
+   "ru": "Запад"
+  },
+  "Orient": {
+   "zh": "東方",
+   "ru": "Восток"
+  },
+  "Ancient Greek": {
+   "zh": "古希臘",
+   "ru": "Древнегреческая"
+  },
+  "Hellenistic & Roman": {
+   "zh": "希臘化與羅馬",
+   "ru": "Эллинистическая и римская"
+  },
+  "Medieval, Islamic & Jewish": {
+   "zh": "中世紀、伊斯蘭與猶太",
+   "ru": "Средневековая, исламская и еврейская"
+  },
+  "Rationalism & Empiricism": {
+   "zh": "理性主義與經驗主義",
+   "ru": "Рационализм и эмпиризм"
+  },
+  "Enlightenment & German Idealism": {
+   "zh": "啟蒙運動與德國觀念論",
+   "ru": "Просвещение и немецкий идеализм"
+  },
+  "19th-Century Currents": {
+   "zh": "十九世紀思潮",
+   "ru": "Течения XIX века"
+  },
+  "Phenomenology & Existentialism": {
+   "zh": "現象學與存在主義",
+   "ru": "Феноменология и экзистенциализм"
+  },
+  "Analytic Philosophy": {
+   "zh": "分析哲學",
+   "ru": "Аналитическая философия"
+  },
+  "Continental & Critical Theory": {
+   "zh": "歐陸與批判理論",
+   "ru": "Континентальная и критическая теория"
+  },
+  "American Pragmatism": {
+   "zh": "美國實用主義",
+   "ru": "Американский прагматизм"
+  },
+  "Psychology — Psychoanalytic": {
+   "zh": "心理學——精神分析",
+   "ru": "Психология — психоанализ"
+  },
+  "Psychology — Behaviorist & Cognitive": {
+   "zh": "心理學——行為主義與認知",
+   "ru": "Психология — бихевиоризм и когнитивизм"
+  },
+  "Psychology — Humanistic & Existential": {
+   "zh": "心理學——人本與存在主義",
+   "ru": "Психология — гуманистическая и экзистенциальная"
+  },
+  "Indian Philosophy": {
+   "zh": "印度哲學",
+   "ru": "Индийская философия"
+  },
+  "Buddhist Philosophy": {
+   "zh": "佛教哲學",
+   "ru": "Буддийская философия"
+  },
+  "Chinese Philosophy": {
+   "zh": "中國哲學",
+   "ru": "Китайская философия"
+  },
+  "Japanese & Korean": {
+   "zh": "日本與韓國",
+   "ru": "Японская и корейская"
   }
  },
  "questions": {

@@ -255,6 +255,40 @@ eq(window.document.documentElement.lang, 'en', 'html lang returns to en');
 assert($('#about-mt-note').hasAttribute('hidden'), 'machine-assisted note hidden again in English');
 eq($('#m-questions .card .c-id')?.textContent, firstCardName, 'concept names restore on English (fallback round-trips)');
 
+// --- REGRESSION: lazy-built graph modes localise (timeline / web / constellation) ---
+// The bug: a graph mode built for the FIRST time while the language was ALREADY
+// non-English shipped English node text. The build wrote raw ids and relied on a
+// later applyLang relabel that never re-fires for an already-active language.
+// Boot a fresh app straight into 繁中, build each graph cold, and assert the
+// rendered SVG text is localized (concept nodes carry zh names; the constellation
+// localises its region headings + legend — thinker names stay as proper nouns).
+{
+  const dom2=new JSDOM(html,{pretendToBeVisual:true,url:'https://example.org/app'});
+  const w=dom2.window;
+  w.localStorage.setItem('aoi.lang','zh'); // app reads this at init -> boots in zh
+  global.window=w; global.document=w.document;
+  global.SVGElement=w.SVGElement; global.Element=w.Element; global.HTMLElement=w.HTMLElement;
+  global.localStorage=w.localStorage; global.location=w.location; global.history=w.history;
+  w.d3=d3; w.matchMedia=()=>({matches:false,addEventListener(){}}); global.matchMedia=w.matchMedia;
+  w.requestAnimationFrame=cb=>setTimeout(()=>cb(Date.now()),0);
+  for(const id of ['m-timeline','m-web','m-constellation']){const el=w.document.getElementById(id);
+    Object.defineProperty(el,'clientWidth',{value:1180,configurable:true});Object.defineProperty(el,'clientHeight',{value:640,configurable:true});}
+  w.Element.prototype.scrollIntoView=function(){};
+  try{ new w.Function('d3','window','document',m)(d3,w,w.document); }
+  catch(e){ console.error('SETUP2 ERR:',e.message,e.stack.split('\n')[1]); process.exit(1); }
+  const q2=s=>[...w.document.querySelectorAll(s)];
+  const click2=el=>el&&el.dispatchEvent(new w.MouseEvent('click',{bubbles:true}));
+  const hasCJK=s=>/[\u4e00-\u9fff]/.test(s||'');
+  eq(w.document.documentElement.lang,'zh-Hant','fresh boot starts in zh when localStorage says so');
+  click2(w.document.querySelector('.switch button[data-mode="timeline"]'));
+  assert(q2('.tl-node text').some(t=>hasCJK(t.textContent)),'timeline built cold under zh shows localized concept names');
+  click2(w.document.querySelector('.switch button[data-mode="web"]'));
+  assert(q2('.wnode text').some(t=>hasCJK(t.textContent)),'idea web built cold under zh shows localized concept names');
+  click2(w.document.querySelector('.switch button[data-mode="constellation"]'));
+  assert(q2('.cregion').some(t=>hasCJK(t.textContent)),'constellation built cold under zh shows localized region headings');
+  assert(q2('.clegend .rg').some(t=>hasCJK(t.textContent)),'constellation legend headings localise under zh');
+}
+
 console.log(`SMOKE OK — ${PASS} assertions passed.`);
 // Do NOT force exit. The known async d3-zoom error is swallowed by the
 // uncaughtException handler above; the process then exits 0 on its own. Any

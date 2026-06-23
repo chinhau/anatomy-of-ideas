@@ -975,6 +975,7 @@
     });
     wsvg.call(wzoom).on('click',()=>{ if(selected) closeDrawer(); });
     window._webById=nById;
+    webRelabel(); // a lazy build under a non-EN language ships English text; localise now
     setTimeout(()=>fitWeb(W,H,nodes),reduce?0:1400);
   }
   function fitWeb(W,H,nodes){
@@ -1555,6 +1556,7 @@
       .on('click',(e,c)=>{ e.stopPropagation(); openConcept(c.id); });
     const zoom=d3.zoom().scaleExtent([0.6,6]).on('zoom',e=>tlWorld.attr('transform',e.transform));
     tlsvg.call(zoom).on('dblclick.zoom',null).on('click',()=>{ if(selected) closeDrawer(); });
+    tlRelabel(); // a lazy build under a non-EN language ships English text; localise now
     tlApplyFilter();
   }
   function tlArcPath(a,b){ const mx=(a.x+b.x)/2, my=(a.y+b.y)/2-Math.min(120,Math.abs(a.x-b.x)*0.35+30);
@@ -1730,6 +1732,9 @@
     tlNode.select('title').text(c=>cName(c));
     tlNode.attr('aria-label',c=>cName(c)+' — '+cTrad(c)+', '+eraTxt(c.era));
     if(tlWorld) tlWorld.selectAll('.tl-lane-lab').text(function(){ return T(this.textContent.trim()); }); }
+  // Declared up here (not in the constellation section below) so the bootstrap
+  // applyLang(LANG) -> conRelabel() call is past their temporal dead zone.
+  let conBuilt=false, conLeg=null;
   function applyLang(lang){
     if(!LANGS.includes(lang)) lang='en';
     LANG=lang; try{ localStorage.setItem('aoi.lang',lang); }catch(e){}
@@ -1762,7 +1767,7 @@
     document.querySelectorAll('#flt-q .flt-row').forEach(r=>{ const nm=r.querySelector('.nm'); if(nm){ const q=qById[r.dataset.q]; if(q) nm.textContent=qLabel(q); } });
     // dynamic surfaces
     document.getElementById('caption').innerHTML=caption(currentMode);
-    webRelabel(); tlRelabel(); lensRelabel();
+    webRelabel(); tlRelabel(); lensRelabel(); conRelabel();
     if(thrBuilt){
       document.querySelectorAll('#thr-list .thr-item').forEach(el=>{ const a=D.arguments[+el.dataset.i]; if(!a) return;
         const tt=el.querySelector('.tt'); if(tt) tt.textContent=aTitle(a);
@@ -1899,7 +1904,19 @@
   });
 
   // ---- the star-chart itself ----
-  let conBuilt=false, conSelected=null, csim, cnode, clink, csvg, czoom, cworld, conNodes=[];
+  let conSelected=null, csim, cnode, clink, csvg, czoom, cworld, conNodes=[];
+  // Constellation legend markup, built so it can be regenerated on a language switch.
+  // Region headings + period labels localise via T(); thinker/school names are proper
+  // nouns the dataset doesn't translate, so they stay as authored.
+  function conLegendHTML(){ let html='';
+    [['West','Occident'],['Psyche','Psyche'],['East','Orient']].forEach(([reg,label])=>{
+      const codes=aOrder.filter(c=>aGroup[c].region===reg); if(!codes.length)return;
+      html+=`<div class="rg">${esc0(T(label))}</div>`;
+      codes.forEach(c=>{const g=aGroup[c];html+=`<div class="lr"><span class="sw" style="background:${g.color}"></span>${esc0(T(g.label))}</div>`;});});
+    return html; }
+  function conRelabel(){ if(!conBuilt) return;
+    if(cworld) cworld.selectAll('.cregion').text(function(){ return T(this.getAttribute('data-reg')); });
+    if(conLeg) conLeg.innerHTML=conLegendHTML(); }
   function buildConstellation(){
     if(conBuilt) return; conBuilt=true;
     const host=document.getElementById('m-constellation');
@@ -1927,7 +1944,7 @@
       const codes=aOrder.filter(c=>aGroup[c].region===key); if(!codes.length)return;
       const mid=codes.map(c=>aAngle[c]).reduce((a,b)=>a+b,0)/codes.length;
       regG.append('text').attr('class','cregion').attr('x',cx+Math.cos(mid)*R*1.46)
-        .attr('y',cy+Math.sin(mid)*R*1.46+7).text(label);});
+        .attr('y',cy+Math.sin(mid)*R*1.46+7).attr('data-reg',label).text(T(label));});
     const nodes=A.nodes.map(n=>Object.assign({},n,{
       r:(n.type==='school'?5:3)+Math.sqrt(n.deg||1)*1.05+(n.big?2.2:0),
       x:cx+Math.cos(aAngle[n.group])*R*(0.55+Math.random()*0.5)+(Math.random()-.5)*60,
@@ -1978,12 +1995,8 @@
     csvg.call(czoom).on('dblclick.zoom',null)
       .on('click',()=>{if(conSelected){conSelected=null;closeDrawer();}});
     // compact tradition legend
-    const leg=document.createElement('div'); leg.className='clegend'; let html='';
-    [['West','Occident'],['Psyche','Psyche'],['East','Orient']].forEach(([reg,label])=>{
-      const codes=aOrder.filter(c=>aGroup[c].region===reg); if(!codes.length)return;
-      html+=`<div class="rg">${label}</div>`;
-      codes.forEach(c=>{const g=aGroup[c];html+=`<div class="lr"><span class="sw" style="background:${g.color}"></span>${g.label}</div>`;});});
-    leg.innerHTML=html; host.appendChild(leg);
+    conLeg=document.createElement('div'); conLeg.className='clegend';
+    conLeg.innerHTML=conLegendHTML(); host.appendChild(conLeg);
     setTimeout(()=>fitCon(W,H),reduce?0:1600);
   }
   function fitCon(W,H){ if(!conNodes.length)return; const p=70;
