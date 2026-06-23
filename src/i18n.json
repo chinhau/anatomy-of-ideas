@@ -387,6 +387,38 @@
     "Lane colour = status": {
       "zh": "軌道顏色＝狀態",
       "ru": "Цвет полосы = состояние"
+    },
+    "An atlas of the great questions": {
+      "zh": "大哉問的地圖集",
+      "ru": "Атлас великих вопросов"
+    },
+    "For some four thousand years, the same few questions keep returning. This is one map of them — drawn from a single vantage, and offered to argue with.": {
+      "zh": "四千年來，同樣的幾個問題不斷重返。這是它們的一幅地圖——出自單一視角，供你辯詰。",
+      "ru": "Уже четыре тысячи лет возвращаются одни и те же немногие вопросы. Это одна их карта — нарисованная с единственной точки зрения и предложенная для спора."
+    },
+    "questions": {
+      "zh": "大哉問",
+      "ru": "вопросов"
+    },
+    "thinkers": {
+      "zh": "思想家",
+      "ru": "мыслителей"
+    },
+    "years": {
+      "zh": "年",
+      "ru": "лет"
+    },
+    "2375 BCE → 2024": {
+      "zh": "公元前 2375 → 2024",
+      "ru": "2375 до н. э. → 2024"
+    },
+    "Enter the atlas": {
+      "zh": "進入地圖集",
+      "ru": "Войти в атлас"
+    },
+    "Skip": {
+      "zh": "略過",
+      "ru": "Пропустить"
     }
   },
   "questions": {
