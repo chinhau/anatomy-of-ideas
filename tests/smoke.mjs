@@ -309,6 +309,10 @@ click($('#lang-switch button[data-lang="zh"]'));
 eq($('#lang-switch button.active')?.dataset.lang, 'zh', 'clicking 繁 makes Traditional Chinese active');
 eq(window.document.documentElement.lang, 'zh-Hant', 'html lang switches to zh-Hant');
 assert(!$('#about-mt-note').hasAttribute('hidden'), 'machine-assisted note shows for a non-English language');
+// statusWhy now ships zh/ru: the rendered rationale must differ from the English source.
+const qwhyZh=$('#m-questions .q-why')?.textContent||'';
+assert(qwhyZh.length>0 && !D.questions.some(q=>q.statusWhy===qwhyZh),
+  'question status rationale is translated in zh (not the English fallback)');
 click($('#lang-switch button[data-lang="ru"]'));
 eq($('#lang-switch button.active')?.dataset.lang, 'ru', 'clicking RU makes Russian active');
 click($('#lang-switch button[data-lang="en"]'));
