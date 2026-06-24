@@ -117,6 +117,86 @@ PASSAGES = {
   },
 ],
 
+# Free will / The Readiness Potential — a live-rivals pair on an OPEN question.
+# Libet reads the early brain signal as the act being initiated BEFORE we are aware
+# of deciding (the famous threat to free will); Schurger's accumulator model rebuts
+# it — the readiness potential is spontaneous noise crossing a threshold, so at that
+# moment there is no decision yet to "precede" awareness. Two contending readings of
+# the same data, not one verdict. Both in-copyright-fair-use prose (journal
+# sentences), verbatim-verified against PubMed (Libet) and the open PNAS text
+# (Schurger). Contested ⇒ the pair is required, never a lone passage.
+"The Readiness Potential": [
+  {
+    "text": "It is concluded that cerebral initiation of a spontaneous, freely "
+            "voluntary act can begin unconsciously, that is, before there is any "
+            "(at least recallable) subjective awareness that a 'decision' to act "
+            "has already been initiated cerebrally.",
+    "author": "Benjamin Libet",
+    "work": "Time of Conscious Intention to Act in Relation to Onset of Cerebral "
+            "Activity (Readiness-Potential)",
+    "translator": "",
+    "edition_year": "1983",
+    "locator": "Brain 106, pp. 623\u2013642 (conclusion)",
+    "source": "Libet, Gleason, Wright & Pearl, Brain 106 (1983)",
+    "source_url": "https://pubmed.ncbi.nlm.nih.gov/6640273/",
+    "rights": "in-copyright-fair-use",
+    "book_url": "",
+  },
+  {
+    "text": "The reason we do not experience the urge to move as having happened "
+            "earlier than about 200 ms before movement onset is simply because, at "
+            "that time, the neural decision to move (crossing the decision "
+            "threshold) has not yet been made.",
+    "author": "Aaron Schurger",
+    "work": "An accumulator model for spontaneous neural activity prior to "
+            "self-initiated movement",
+    "translator": "",
+    "edition_year": "2012",
+    "locator": "PNAS 109, pp. E2904\u2013E2913",
+    "source": "Schurger, Sitt & Dehaene, PNAS 109 (2012)",
+    "source_url": "https://www.pnas.org/doi/10.1073/pnas.1210467109",
+    "rights": "in-copyright-fair-use",
+    "book_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3479453/",
+  },
+],
+
+# The self / The Ego Tunnel — a live-rivals pair on an OPEN question. Metzinger:
+# the self is a transparent model the organism looks THROUGH and mistakes for
+# reality (nobody ever had a self). Zahavi rebuts it — experience is always FOR a
+# subject, comes with a first-personal point of view, so a minimal experiential
+# self is built into consciousness, not an illusion. Both in-copyright-fair-use
+# prose, verbatim-verified against full texts. Contested ⇒ the pair is required.
+"The Ego Tunnel": [
+  {
+    "text": "The Ego is a transparent mental image: You \u2014 the physical person "
+            "as a whole \u2014 look right through it. You do not see it. But you "
+            "see with it.",
+    "author": "Thomas Metzinger",
+    "work": "The Ego Tunnel: The Science of the Mind and the Myth of the Self",
+    "translator": "",
+    "edition_year": "2009",
+    "locator": "Introduction",
+    "source": "Thomas Metzinger, The Ego Tunnel (Basic Books, 2009)",
+    "source_url": "https://search.worldcat.org/isbn/9780465020690",
+    "rights": "in-copyright-fair-use",
+    "book_url": "",
+  },
+  {
+    "text": "Rather, experiences are necessarily like something for a subject, they "
+            "necessarily involve a point of view \u2013 they come with perspectival "
+            "ownership.",
+    "author": "Dan Zahavi",
+    "work": "We and I",
+    "translator": "",
+    "edition_year": "2023",
+    "locator": "The Philosopher (essay)",
+    "source": "Dan Zahavi, 'We and I', The Philosopher",
+    "source_url": "https://www.thephilosopher1923.org/post/we-and-i",
+    "rights": "in-copyright-fair-use",
+    "book_url": "https://www.thephilosopher1923.org/post/we-and-i",
+  },
+],
+
 }
 
 if __name__ == "__main__":

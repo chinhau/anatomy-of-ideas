@@ -103,6 +103,44 @@ satisfied.
 - **Book pointer:** archive.org scan (free full text — a genuine "go read it"
   pointer, not a sales link).
 
+### The Readiness Potential — Libet vs Schurger (a live-rivals pair on free will)
+The first **contested-concept** pair (concept `contested=True`, question status
+`live-rivals`), so plural-or-none **requires** two rivals or none. Both are
+in-copyright journal prose shipped as bounded-B fair-use (single sentences,
+attributed, no affiliate link). Scope note: contested *scientific* concepts are the
+feature's weakest fit (Phase 0: passages win where the prose IS the datum), so only
+the two that touch an existential ache — free will here, the self below — were
+shipped; IIT, Global Workspace, Analytic Idealism and The Case Against Reality stay
+**none** by design.
+- **Passage 1 (thesis — the threat):** "It is concluded that cerebral initiation of
+  a spontaneous, freely voluntary act can begin unconsciously…" *Benjamin Libet,*
+  *Time of Conscious Intention to Act…* (*Brain* 106, **1983**, pp. 623–642).
+  Byte-verified against the PubMed abstract (<https://pubmed.ncbi.nlm.nih.gov/6640273/>).
+- **Passage 2 (rebuttal):** "The reason we do not experience the urge to move…is
+  simply because, at that time, the neural decision to move (crossing the decision
+  threshold) has not yet been made." *Aaron Schurger,* accumulator model (*PNAS* 109,
+  **2012**, E2904–E2913). Byte-verified against the open-access PNAS/PMC full text
+  (<https://pmc.ncbi.nlm.nih.gov/articles/PMC3479453/>).
+- **Rights:** both **in-copyright-fair-use**; Schurger's book pointer is the free PMC
+  full text, Libet's is none (paywalled journal).
+
+### The Ego Tunnel — Metzinger vs Zahavi (a live-rivals pair on the self)
+The second contested pair (question status `live-rivals`). Both in-copyright prose,
+verbatim-verified against full texts.
+- **Passage 1 (thesis):** "The Ego is a transparent mental image: You — the physical
+  person as a whole — look right through it. You do not see it. But you see with it."
+  *Thomas Metzinger,* *The Ego Tunnel* (Basic Books, **2009**), Introduction.
+  Byte-verified against the full text; edition pointer is the WorldCat record
+  (<https://search.worldcat.org/isbn/9780465020690>).
+- **Passage 2 (rebuttal):** "Rather, experiences are necessarily like something for a
+  subject, they necessarily involve a point of view – they come with perspectival
+  ownership." *Dan Zahavi,* "We and I," *The Philosopher*. Byte-verified against the
+  live essay (<https://www.thephilosopher1923.org/post/we-and-i>), which is also the
+  free book pointer. (The line Zahavi quotes about "the utter elimination of
+  experience" is **Joseph Margolis'**, not Zahavi's — verified and not attributed to
+  Zahavi.)
+- **Rights:** both **in-copyright-fair-use**.
+
 ## Deferred (authored-but-not-shipped)
 
 _(none)_
