@@ -190,6 +190,8 @@
     --void:#070b16; --void-2:#0e1530;
     --parchment:#e9dcc0; --parchment-dim:#b6ad96; --muted:#9aa3bd;
     --rule:#2a3354; --gold:#d9b65f; --oppose:#c75a45; --echo:#7da0e0;
+    /* --echo-t: lighter azurite for echo as small TEXT; full --echo stays on strokes */
+    --echo-t:#9db8ee;
     --affirm:var(--parchment-dim); --silver:#c3c7cf; --vermilion:#b8472f; --ink:#7a6038;
     --panel:rgba(11,17,34,0.9); --panel-edge:rgba(217,182,95,0.28);
     --hatch:repeating-linear-gradient(45deg,rgba(195,199,207,0.045) 0 0.5px,transparent 0.5px 5px);
@@ -299,7 +301,7 @@
     font-size:14px;line-height:1;opacity:0;pointer-events:none;transition:opacity .16s;}
   .card.related .c-glyph{opacity:0.9;color:var(--affirm);}
   .card.related.rej .c-glyph{color:var(--oppose);}
-  .card.related.ech .c-glyph{color:var(--echo);}
+  .card.related.ech .c-glyph{color:var(--echo-t);}
   .card::before{content:'';position:absolute;inset:3px;border:0.5px solid rgba(195,199,207,0.07);
     border-radius:2px;pointer-events:none;}
 
@@ -377,7 +379,7 @@
   .reading .nt{font-size:11.5px;color:var(--muted);margin-top:5px;line-height:1.45;}
   .rel-h{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;margin:14px 0 6px;
     padding-bottom:4px;border-bottom:1px solid var(--rule);}
-  .rel-h.b{color:var(--affirm);} .rel-h.r{color:var(--oppose);} .rel-h.e{color:var(--echo);}
+  .rel-h.b{color:var(--affirm);} .rel-h.r{color:var(--oppose);} .rel-h.e{color:var(--echo-t);}
   .rel-i{display:flex;align-items:center;gap:8px;padding:4px 0;font-size:13px;cursor:pointer;}
   .rel-i:hover{color:var(--gold);}
   .rel-i .dot{width:7px;height:7px;border-radius:50%;flex:none;}
@@ -654,7 +656,7 @@
   .lt-sep{color:var(--muted);opacity:0.5;user-select:none;flex:none;}
   .lt-sep.b{color:var(--gold);opacity:0.75;}
   .lt-sep.r{color:var(--oppose);opacity:0.75;}
-  .lt-sep.e{color:var(--echo);opacity:0.8;}
+  .lt-sep.e{color:var(--echo-t);opacity:0.8;}
   .lt-ell{background:none;border:none;cursor:pointer;color:var(--muted);font:inherit;padding:0 2px;flex:none;}
   .lt-ell:hover{color:var(--parchment);}
   .lens-seg{display:flex;background:rgba(255,255,255,0.04);border-radius:20px;padding:2px;}
