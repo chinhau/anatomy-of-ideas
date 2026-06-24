@@ -111,10 +111,11 @@ findings + concrete fixes + a 3-sentence verdict**, and **no edits**.
 ## 5. Convergent verdict (audit 2026-06-23 · status refreshed 2026-06-23)
 
 Four agents above, run independently, agreed on the same handful of things. This
-was our punch-list of where the build *drifts from the taste*. **Status refreshed
-2026-06-23** as the fixes landed: four of the seven items are now resolved (two
-of them by palette/engraving work that post-dated the audit) and are marked
-**✓ DONE** below — treat the remaining three **⬜ OPEN** items as the live TODO.
+was our punch-list of where the build *drifts from the taste*. **All seven items
+are now resolved** (status refreshed 2026-06-23; several were closed by
+palette/engraving/structure work that post-dated the audit). The list is kept
+below as a worked record of the taste in action — each item ✓ DONE with the
+commit or current-state evidence — rather than a live TODO.
 
 - **✓ Gold leak — DONE.** The flagged section labels (`.dr-sec`, `#about-panel h3`,
   `.flt-sec`, `.dr-think b`, …) were already on `--ink` in HEAD; the second-tier
@@ -133,14 +134,16 @@ of them by palette/engraving work that post-dated the audit) and are marked
   `#c75a45` / azurite `#7da0e0` (the "teal" the audit flagged is gone) / neutral
   parchment-dim; the 5-state status inks are mineral (raw sienna / amethyst / gold /
   silver / muted — see §3). No bootstrap red/teal/green remains anywhere.
-- **⬜ SMP alchemical door-glyphs will tofu off-macOS.** Six Deck-of-Doors signs are
-  Plane-1 codepoints with no coverage in EB Garamond/Inter and an uncontrolled
-  fallback → render as inline SVG (same engraving logic) or retreat to BMP.
-- **⬜ The `↯` "opposes" mark misreads as lightning** and is inconsistent with the
-  dossier's own `↔ / → / ←` grammar → reuse the directional arrows or a struck bar.
-- **⬜ The status badge is the heartbeat — and it's diluted.** Strip `.q-status` to
-  glyph + label + state ink; cut the `qs-residue` second-colour line and the
-  `qs-conf` micro-caption that double the colour load in the busiest column.
+- **✓ SMP door-glyphs avoided — DONE.** The Deck-of-Doors signs never reach a
+  font: each renders as **inline SVG** (`.lb-glyph`, `viewBox="0 0 24 24"`,
+  `stroke:currentColor`) and the petal-count device as the `.lb-rose` SVG rosette
+  — pure engraving logic, no Plane-1 codepoints to tofu.
+- **✓ The `↯` lightning mark is gone — DONE.** The opposes relation now reads as
+  `≠` on cards and follows the dossier's own `↔ / → / ←` grammar in the relations
+  list (`↔` for echoes, directional `→ / ←` otherwise). No zigzag glyph remains.
+- **✓ Status badge stripped — DONE.** `.q-status` is now just `qs-mark` (glyph) +
+  `qs-label` + state ink; the `qs-residue` second-colour line and the `qs-conf`
+  micro-caption are gone, so the busiest column carries one colour, not three.
 - **✓ Garnish ornaments cut — DONE (`27d05b1`).** The three guardrail-1 failures —
   the `⁂` dossier colophon, the second `.dr-seal` wax seal (a duplicate of the
   masthead rosette), and the spinning `.rdie` die — were removed outright. (This
