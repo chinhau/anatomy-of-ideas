@@ -1,6 +1,6 @@
 # The Anatomy of Ideas
 
-An interactive atlas of philosophy, psychology, and consciousness. **289 ideas** across
+An interactive atlas of philosophy, psychology, and consciousness. **293 ideas** across
 **eleven great questions**, cross-linked to a **425-star constellation** of the thinkers and
 schools that shaped them. It is *idea-centric* rather than name-centric: the unit is the
 concept, and people orbit the concepts they originated.
