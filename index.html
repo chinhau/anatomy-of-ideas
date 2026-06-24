@@ -729,7 +729,10 @@
   .lb-rose circle,.lb-rose path,.lb-rose line{fill:none;stroke:var(--hue,#9aa3bd);stroke-width:.5;opacity:.5;
     transition:opacity .3s;}
   .lb-card.is-active .lb-rose circle,.lb-card.is-active .lb-rose path,.lb-card.is-active .lb-rose line{opacity:.85;}
-  .lb-glyph{position:relative;font-size:23px;line-height:1;color:var(--parchment);}
+  .lb-glyph{position:relative;width:26px;height:26px;color:var(--parchment);overflow:visible;}
+  .lb-glyph path,.lb-glyph circle,.lb-glyph line{fill:none;stroke:currentColor;stroke-width:1.4;
+    stroke-linecap:round;stroke-linejoin:round;}
+  .lb-glyph .lb-fl{fill:currentColor;stroke:none;}
   .lb-door{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:600;line-height:1.1;margin-top:2px;}
   /* the gloss stays furled until a card is lifted, so the resting fan reads as faces, not text */
   .lb-gloss{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:12px;
@@ -12177,10 +12180,24 @@
     ['trans','Mindfulness (MBSR)'],['abs','The Five Ways']
   ];
   // One alchemical / astrological correspondence per question — a fixed mapping
-  // (the question's standing "sign"), engraved as a monochrome text glyph (VS15
-  // forces text, never emoji). Stable datum per door, never fortune-telling.
-  const DOOR_SIGN={real:'🜃\uFE0E',know:'☿\uFE0E',mind:'🜁\uFE0E',self:'☽\uFE0E',live:'♎\uFE0E',
-    just:'♄\uFE0E',free:'🜍\uFE0E',peace:'🜄\uFE0E',mean:'☉\uFE0E',trans:'🜔\uFE0E',abs:'🜀\uFE0E'};
+  // (the question's standing "sign"). Drawn as inline-SVG sigils (24×24, engraved
+  // hairlines like the rosette) rather than Unicode: the six alchemical signs live
+  // in the SMP "Alchemical Symbols" block with no coverage in Cormorant/Inter, so a
+  // text glyph tofus off-macOS. Stable datum per door, never fortune-telling.
+  //   real Earth · know Mercury · mind Air · self Moon · live Libra · just Saturn
+  //   free Sulfur · peace Water · mean Sun · trans Salt · abs Quintessence
+  const DOOR_SIGN={
+    real:'<path d="M5 7H19L12 20Z"/><line x1="8.2" y1="13" x2="15.8" y2="13"/>',
+    know:'<path d="M9 5Q12 8.5 15 5"/><circle cx="12" cy="11" r="3.2"/><line x1="12" y1="14.2" x2="12" y2="21"/><line x1="9" y1="18" x2="15" y2="18"/>',
+    mind:'<path d="M5 18H19L12 5Z"/><line x1="8.8" y1="11" x2="15.2" y2="11"/>',
+    self:'<path d="M15 4A8 8 0 1 0 15 20A6.2 6.2 0 1 1 15 4Z"/>',
+    live:'<path d="M5 12H9A3 3 0 0 1 15 12H19"/><line x1="5" y1="17" x2="19" y2="17"/>',
+    just:'<path d="M6 7H12"/><path d="M9 5V14Q9 19 14 18"/>',
+    free:'<path d="M6 11H18L12 3Z"/><line x1="12" y1="11" x2="12" y2="21"/><line x1="8" y1="16.5" x2="16" y2="16.5"/>',
+    peace:'<path d="M5 8H19L12 20Z"/>',
+    mean:'<circle cx="12" cy="12" r="8"/><circle class="lb-fl" cx="12" cy="12" r="1.5"/>',
+    trans:'<circle cx="12" cy="12" r="8"/><line x1="4" y1="12" x2="20" y2="12"/>',
+    abs:'<circle cx="12" cy="12" r="8"/>'};
   // Fan geometry: eleven cards spread like a hand of tarot. FAN_STEP = tilt between
   // adjacent cards; the gap and arc dip are derived from the live container width so
   // the spread always fits. slotOf maps each card -> its position in the fan (left to
@@ -12354,7 +12371,7 @@
       const count=D.concepts.filter(x=>x.q===q.id).length, sign=DOOR_SIGN[q.id]||'';
       card.setAttribute('aria-label',qLabel(q)+' \u2014 '+cName(c));
       card.innerHTML='<span class="lb-q"><span class="lb-dot"></span>'+esc0(qLabel(q).replace(/[?\uFF1F]/,''))+'</span>'+
-        '<div class="lb-device">'+doorDevice(count)+'<span class="lb-glyph">'+sign+'</span></div>'+
+        '<div class="lb-device">'+doorDevice(count)+'<svg class="lb-glyph" viewBox="0 0 24 24" aria-hidden="true">'+sign+'</svg></div>'+
         '<div class="lb-door">'+esc0(cName(c))+'</div>'+
         '<div class="lb-gloss">'+esc0(cGloss(c))+'</div>'+
         '<div class="lb-foot">\u2042</div>';
