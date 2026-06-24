@@ -568,11 +568,20 @@
 
   /* ---------- timeline ---------- */
   #tl-svg{width:100%;height:100%;display:block;cursor:grab;}
-  #tl-svg .tl-lane{stroke:var(--rule);stroke-width:1;stroke-dasharray:2 5;opacity:.6;}
+  #tl-svg .tl-lane{stroke:var(--rule);stroke-width:1;stroke-dasharray:2 5;opacity:.5;}
   #tl-svg .tl-lane-lab{font-family:'EB Garamond',serif;font-style:italic;font-size:12.5px;
-    fill:var(--gold);opacity:.85;}
-  #tl-svg .tl-now{stroke:var(--gold);stroke-width:1;stroke-dasharray:2 4;opacity:.35;}
-  #tl-svg .tl-band{fill-opacity:.15;stroke-width:1;stroke-opacity:.5;pointer-events:none;}
+    fill:var(--parchment-dim);opacity:.9;}
+  #tl-svg .tl-now{stroke:var(--rule);stroke-width:1;stroke-dasharray:2 4;opacity:.55;}
+  /* engraved ridge: hairline contour over a faint ink wash — line, not glow */
+  #tl-svg .tl-band{fill-opacity:.12;stroke-width:1.1;stroke-opacity:.85;pointer-events:none;}
+  #tl-svg .tl-frame{fill:none;stroke:var(--rule);stroke-width:1;opacity:.55;}
+  #tl-svg .tl-era-div{stroke:var(--rule);stroke-dasharray:1 4;opacity:.4;}
+  #tl-svg .tl-cartouche{font-size:9.5px;letter-spacing:.22em;fill:var(--ink);
+    text-transform:uppercase;text-anchor:middle;pointer-events:none;}
+  #tl-svg .tl-openmark{font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;
+    opacity:.8;text-anchor:end;pointer-events:none;}
+  #tl-svg .tl-lanehit{fill:transparent;cursor:pointer;}
+  #tl-svg .tl-lanehit:hover{fill:var(--parchment);fill-opacity:.025;}
   .wlegend{position:absolute;bottom:16px;left:16px;background:var(--panel);border:1px solid var(--panel-edge);
     border-radius:4px;padding:10px 13px;font-size:10.5px;color:var(--parchment-dim);line-height:1.5;z-index:5;max-width:210px;}
   .wlegend .row{display:flex;align-items:center;gap:7px;padding:1.5px 0;}
@@ -1083,7 +1092,7 @@
         <div class="row"><span class="ln" style="border-color:var(--echo);border-top-style:dotted"></span><span data-i18n="echoes">echoes</span></div>
         <div class="row" style="margin-top:6px;opacity:.7" data-i18n="size = ideas built on it">size = ideas built on it</div>
       </div>
-      <div class="con-hint" data-i18n="One lane per great question, in fixed order. Colour marks where the thinking stands; the band shows when a question was actually asked — its height is how often, not an even spread to now. A thin band can mean real quiet or a gap in this atlas.">One lane per great question, in fixed order. Colour marks where the thinking stands; the band shows when a question was actually asked — its height is how often, not an even spread to now. A thin band can mean real quiet or a gap in this atlas.</div>
+      <div class="con-hint" data-i18n="Each ridge shows when a question was actually being asked — floored to where this atlas holds ideas, never an even spread to now. Time is compressed so recent centuries stay legible; colour marks where the thinking stands today. Click a lane to surface its ideas; a thin ridge can mean real quiet or a gap in this atlas.">Each ridge shows when a question was actually being asked — floored to where this atlas holds ideas, never an even spread to now. Time is compressed so recent centuries stay legible; colour marks where the thinking stands today. Click a lane to surface its ideas; a thin ridge can mean real quiet or a gap in this atlas.</div>
     </section>
     <section id="m-constellation" class="view">
       <svg id="con-svg"></svg>
@@ -12301,7 +12310,7 @@
   // the tab numerals — the views are peers, not a fixed sequence.
   const CAPTIONS = {
     questions:'<b>Questions</b> Eleven questions every tradition has wrestled with — and the rival answers, side by side. Click any answer to light up the ideas it builds on, rejects, or quietly echoes.',
-    timeline:'<b>Timeline</b> One lane per great question, in fixed order. Colour marks where the thinking stands; the band shows when it was actually asked — its height is how often, not an even spread to now. Hover an idea to trace its kin.',
+    timeline:'<b>Timeline</b> One lane per great question, in fixed order. The ridge shows <i>when</i> a question was actually being asked — taller where ideas cluster, floored to where this atlas holds them, never an even spread to now. Time is compressed: recent centuries are stretched to stay legible. Colour marks where the thinking stands <i>today</i>. Click a lane to surface its ideas.',
     constellation:'<b>Thinkers</b> The original constellation — every thinker and school as a star, clustered into the traditions of West, Psyche and East. Click a star to cross into the ideas they shaped.',
     lens:'<b>Concepts</b> One idea at the centre, the thoughts it touches arranged around it. Travel from neighbour to neighbour, roll the dice to wander, or let a guided tour walk you through a lineage.'
   };
@@ -13141,12 +13150,12 @@
     const W=Math.max(host.clientWidth,900), H=Math.max(host.clientHeight,560);
     tlsvg=d3.select('#tl-svg').attr('viewBox','0 0 '+W+' '+H).attr('width',W).attr('height',H);
     tlWorld=tlsvg.append('g');
-    const padL=170,padR=40,padT=30,padB=52, plotW=W-padL-padR;
+    const padL=170,padR=40,padT=44,padB=52, plotW=W-padL-padR, plotR=W-padR;
     // FIXED lane order — the canonical question order, NOT sorted by recurrence.
     // (Recurrence-ordering implied a false perennity: a question crowded into the
     // last two centuries was drawn with the same "top-to-now" silhouette as one
     // genuinely asked in every age. Lane colour now encodes epistemic STATUS, and
-    // the per-lane density band shows WHEN a question was actually asked.)
+    // the per-lane ridge shows WHEN a question was actually asked.)
     const lanes=D.questions.slice();
     const laneBand=(H-padT-padB)/lanes.length, laneY={};
     lanes.forEach((q,i)=>laneY[q.id]=padT+(i+0.5)*laneBand);
@@ -13154,43 +13163,72 @@
     const x=d3.scaleLinear().domain([-600,0,1000,1500,1800,1900,2025])
       .range(fr.map(f=>padL+plotW*f)).clamp(true);
     const inkOf=q=>(STATES[q.status]||{}).ink||q.hue;
-    // per-lane temporal density (a Gaussian KDE in screen space, normalised against
-    // ONE global maximum so a crowded lane stands taller: band height = recurrence,
-    // band shape = WHEN it was asked — not an even spread to the present).
-    const NS=140, BW=Math.max(14,plotW*0.022);
-    const laneXs={}; lanes.forEach(q=>laneXs[q.id]=[]);
-    D.concepts.forEach(c=>{ if(laneXs[c.q]) laneXs[c.q].push(x(c.era)); });
+    // ----- codex frame + era cartouches (the warp made legible) -----
+    tlWorld.append('rect').attr('class','tl-frame')
+      .attr('x',padL).attr('y',padT-8).attr('width',plotW).attr('height',(H-padB)-(padT-8));
+    [[-600,476,'Antiquity'],[476,1500,'Medieval'],[1500,2025,'Modern']].forEach((e,i)=>{
+      if(i>0) tlWorld.append('line').attr('class','tl-era-div')
+        .attr('x1',x(e[0])).attr('x2',x(e[0])).attr('y1',padT-8).attr('y2',H-padB);
+      tlWorld.append('text').attr('class','tl-cartouche')
+        .attr('x',(x(e[0])+x(e[1]))/2).attr('y',padT-16).text(e[2]); });
+    // ----- per-lane temporal ridge (Gaussian KDE in screen space) -----
+    // Honesty: each ridge is FLOORED to the lane's real era support — the KDE tail
+    // is clamped to zero before the first idea and after the last, so a lane never
+    // implies thinking in a century where this atlas holds none. Height is the
+    // count-shape (where ideas cluster), normalised to ONE global max so a busy
+    // lane stands taller; it is NOT an even spread to the present.
+    const NS=160, BW=Math.max(14,plotW*0.022);
+    const laneXs={}, laneEras={};
+    lanes.forEach(q=>{ laneXs[q.id]=[]; laneEras[q.id]=[]; });
+    D.concepts.forEach(c=>{ if(laneXs[c.q]){ laneXs[c.q].push(x(c.era)); laneEras[c.q].push(c.era); } });
+    const support={};
+    lanes.forEach(q=>{ const xs=laneXs[q.id]; support[q.id]=xs.length?[Math.min.apply(null,xs),Math.max.apply(null,xs)]:null; });
     const dens={}; let gmax=0;
-    lanes.forEach(q=>{ const xs=laneXs[q.id], row=[];
+    lanes.forEach(q=>{ const xs=laneXs[q.id], sup=support[q.id], row=[];
       for(let i=0;i<NS;i++){ const px=padL+plotW*i/(NS-1); let s=0;
-        for(let k=0;k<xs.length;k++){ const u=(px-xs[k])/BW; s+=Math.exp(-0.5*u*u); }
+        if(sup && px>=sup[0]-0.5 && px<=sup[1]+0.5){
+          for(let k=0;k<xs.length;k++){ const u=(px-xs[k])/BW; s+=Math.exp(-0.5*u*u); } }
         row.push([px,s]); if(s>gmax) gmax=s; }
       dens[q.id]=row; });
-    const dScale=d3.scaleLinear().domain([0,gmax||1]).range([0,laneBand*0.80]);
+    const dScale=d3.scaleLinear().domain([0,gmax||1]).range([0,laneBand*0.82]);
     const area=d3.area().x(p=>p[0]).y0(0).y1(p=>-dScale(p[1])).curve(d3.curveBasis);
-    // baseline + density band + left-gutter label, all coloured by epistemic status
+    // baseline + ridge + left-gutter label, all coloured by epistemic status
     lanes.forEach(q=>{ const ink=inkOf(q), y=laneY[q.id];
-      tlWorld.append('path').attr('class','tl-band').attr('transform','translate(0,'+y+')')
+      tlWorld.append('line').attr('class','tl-lane').attr('data-q',q.id).attr('x1',padL).attr('x2',plotR)
+        .attr('y1',y).attr('y2',y).style('stroke',ink);
+      tlWorld.append('path').attr('class','tl-band').attr('data-q',q.id).attr('transform','translate(0,'+y+')')
         .attr('d',area(dens[q.id])).style('fill',ink).style('stroke',ink);
-      tlWorld.append('line').attr('class','tl-lane').attr('x1',padL).attr('x2',W-padR)
-        .attr('y1',y).attr('y2',y).style('stroke',ink).style('opacity',.55);
       tlWorld.append('text').attr('class','tl-lane-lab').attr('data-q',q.id)
         .attr('x',padL-12).attr('y',y).attr('dy','.32em').attr('text-anchor','end')
         .style('fill',ink).text(qLabel(q)); });
-    tlWorld.append('line').attr('class','tl-axis').attr('x1',padL).attr('x2',W-padR).attr('y1',H-padB).attr('y2',H-padB);
+    tlWorld.append('line').attr('class','tl-axis').attr('x1',padL).attr('x2',plotR).attr('y1',H-padB).attr('y2',H-padB);
     [[-500,'500 BCE'],[0,'1 CE'],[1000,'1000'],[1500,'1500'],[1800,'1800'],[1900,'1900'],[2020,'now']].forEach(t=>{
       tlWorld.append('line').attr('class','tl-axis').attr('x1',x(t[0])).attr('x2',x(t[0])).attr('y1',H-padB).attr('y2',H-padB+5).style('opacity',.5);
       tlWorld.append('text').attr('class','tl-tick').attr('x',x(t[0])).attr('y',H-padB+18).attr('text-anchor','middle').text(t[1]); });
-    // "now" accent — every question's beats run right up to the present
-    tlWorld.append('line').attr('class','tl-now').attr('x1',x(2025)).attr('x2',x(2025)).attr('y1',padT-4).attr('y2',H-padB);
+    // "now" rule — every ridge runs up to the present (engraved hairline, not gold)
+    tlWorld.append('line').attr('class','tl-now').attr('x1',x(2025)).attr('x2',x(2025)).attr('y1',padT-8).attr('y2',H-padB);
+    // ----- opening beat: mark the oldest question still genuinely OPEN -----
+    let oldestOpen=null, oldestEra=Infinity;
+    lanes.forEach(q=>{ if(q.status!=='open') return; const es=laneEras[q.id]; if(!es.length) return;
+      const m=Math.min.apply(null,es); if(m<oldestEra){ oldestEra=m; oldestOpen=q; } });
+    if(oldestOpen){ const ink=inkOf(oldestOpen);
+      tlWorld.append('text').attr('class','tl-openmark').attr('data-q',oldestOpen.id).attr('data-era',oldestEra)
+        .attr('x',plotR-4).attr('y',laneY[oldestOpen.id]-laneBand*0.30)
+        .style('fill',ink).text(T('still open since')+' '+eraTxt(oldestEra)); }
+    // ----- lane hit-areas: click a lane to solo it (under the dots, over the ridges) -----
+    tlWorld.append('g').selectAll('rect').data(lanes).join('rect')
+      .attr('class','tl-lanehit').attr('data-q',q=>q.id)
+      .attr('x',padL).attr('y',q=>laneY[q.id]-laneBand/2).attr('width',plotW).attr('height',laneBand)
+      .on('click',(e,q)=>{ e.stopPropagation(); tlSetSolo(tlSolo===q.id?null:q.id,{dots:true}); });
     tlArc=tlWorld.append('g');
-    // dots sit just BELOW the baseline (the density band rises above it), so the
-    // two honesty layers — the count-shape band and the individual ideas — don't collide.
+    // ----- per-idea dots — surfaced only when a lane is soloed (focus+context) -----
+    // At rest the ridge IS the view; the scatter of individual ideas is detail you
+    // pull up by clicking a lane, then click an idea to open it.
     D.concepts.forEach(c=>{ const j=((hashId(c.id)%100)/100)*laneBand*0.34;
       tlPos[c.id]={x:x(c.era), y:(laneY[c.q]!=null?laneY[c.q]:padT)+6+j}; });
     tlNode=tlWorld.append('g').selectAll('g').data(D.concepts).join('g')
       .attr('class','tl-node').attr('transform',c=>'translate('+tlPos[c.id].x+','+tlPos[c.id].y+')')
-      .attr('tabindex',0).attr('role','button')
+      .attr('tabindex',-1).attr('role','button')
       .attr('aria-label',c=>c.id+' — '+c.tradLabel+', '+eraTxt(c.era));
     tlNode.append('circle').attr('r',c=>3+Math.min(buildsIn[c.id]||0,6)).attr('fill',c=>inkOf(qById[c.q]));
     tlNode.append('text').attr('x',c=>6+Math.min(buildsIn[c.id]||0,6)).attr('y',3).text(c=>c.id);
@@ -13201,12 +13239,27 @@
       .on('blur',()=>{ if(!selected) tlHighlight(null); })
       .on('keydown',(e,c)=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); e.stopPropagation(); openConcept(c.id); } })
       .on('click',(e,c)=>{ e.stopPropagation(); openConcept(c.id); });
-    const zoom=d3.zoom().scaleExtent([0.6,6]).on('zoom',e=>tlWorld.attr('transform',e.transform));
-    tlsvg.call(zoom).on('dblclick.zoom',null).on('click',()=>{ if(selected) closeDrawer(); });
+    // X-only scrub: lanes stay vertically anchored; pan/zoom rides the time axis.
+    const zoom=d3.zoom().scaleExtent([0.8,6])
+      .on('zoom',e=>tlWorld.attr('transform','translate('+e.transform.x+',0) scale('+e.transform.k+')'));
+    tlsvg.call(zoom).on('dblclick.zoom',null)
+      .on('click',()=>{ if(tlSolo!=null) tlSetSolo(null); else if(selected) closeDrawer(); });
     buildTlStatusKey(host);
     tlRelabel(); // a lazy build under a non-EN language ships English text; localise now
     tlApplyFilter();
   }
+  // solo state: which lane is foregrounded, and whether its dots are surfaced.
+  let tlSolo=null, tlSoloDots=false;
+  function tlNodeVisible(c){ return passes(c) && tlSoloDots && c.q===tlSolo; }
+  function tlRefreshNodes(){ if(!tlNode) return;
+    tlNode.style('display',c=>tlNodeVisible(c)?null:'none').attr('tabindex',c=>tlNodeVisible(c)?0:-1); }
+  function tlSetSolo(qid,opts){ opts=opts||{}; if(!tlBuilt) return;
+    tlSolo=qid; tlSoloDots=qid!=null && opts.dots!==false;
+    tlWorld.selectAll('.tl-band,.tl-lane,.tl-lane-lab,.tl-openmark')
+      .style('opacity',function(){ const q=this.getAttribute('data-q');
+        return (tlSolo==null||q===tlSolo)?null:0.18; });
+    tlWorld.selectAll('.tl-lanehit').classed('on',function(){ return this.getAttribute('data-q')===tlSolo; });
+    tlRefreshNodes(); if(!selected) tlHighlight(null); }
   function buildTlStatusKey(host){
     const wl=host.querySelector('.wlegend'); if(!wl||wl.querySelector('.tl-stkey')) return;
     const order=['handed-off','hardened','live-rivals','open','dissolved'];
@@ -13225,7 +13278,7 @@
     (adj.get(id)||[]).forEach(e=>{ const a=tlPos[id], b=tlPos[e.other]; if(!a||!b||!passes(cById[e.other])) return;
       tlArc.append('path').attr('class','tl-edge'+(e.type==='rejects'?' rej':e.type==='echoes'?' ech':''))
         .attr('d',tlArcPath(a,b)); }); }
-  function tlApplyFilter(){ if(!tlBuilt) return; tlNode.style('display',c=>passes(c)?null:'none');
+  function tlApplyFilter(){ if(!tlBuilt) return; tlRefreshNodes();
     if(!selected) tlHighlight(null); }
 
   // ========== deep-link routing ==========
@@ -13238,7 +13291,8 @@
       if(locIdea&&cardEls[locIdea]){ crossHighlight(locIdea);
         cardEls[locIdea].scrollIntoView({behavior:reduce?'auto':'smooth',block:'center'}); }
     } else if(mode==='timeline'){
-      if(locIdea){ buildTimeline(); tlHighlight(locIdea); }
+      if(locIdea){ buildTimeline(); const lc=cById[locIdea];
+        if(lc) tlSetSolo(lc.q,{dots:true}); tlHighlight(locIdea); }
     } else if(mode==='lens'){
       if(locIdea){ buildLens(); showLensGraph(); focusLens(locIdea,null,{trail:'reset'}); }
     } else if(mode==='constellation'){
@@ -13310,6 +13364,7 @@
     tlNode.select('title').text(c=>cName(c));
     tlNode.attr('aria-label',c=>cName(c)+' — '+cTrad(c)+', '+eraTxt(c.era));
     if(tlWorld) tlWorld.selectAll('.tl-lane-lab').text(function(){ const q=qById[this.dataset.q]; return q?qLabel(q):T(this.textContent.trim()); });
+    if(tlWorld) tlWorld.selectAll('.tl-openmark').text(function(){ return T('still open since')+' '+eraTxt(+this.dataset.era); });
     document.querySelectorAll('#m-timeline .tl-stkey .stl').forEach(el=>{ el.textContent=stLabel(el.dataset.st); }); }
   // Declared up here (not in the constellation section below) so the bootstrap
   // applyLang(LANG) -> conRelabel() call is past their temporal dead zone.
