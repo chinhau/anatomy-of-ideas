@@ -205,12 +205,25 @@ past the guardrail.
 - **Ban "answer / encapsulates / the answer"** from UI copy and from the data
   field name. Frame as **recognition, not resolution** — *"others have stood where
   you stand; here is how one of them saw it."*
-- **Plural-or-none for unsettled concepts.** A single passage is permitted only
-  for `handed-off` / `hardened` concepts. For `live-rivals` / `open` / `dissolved`
-  concepts, ship **≥2 genuinely rival passages or none** — never one passage that
-  smuggles a verdict. (The PD pilot above is mostly literary/`mean`, chosen partly
-  to sidestep this on day one; the rule binds the moment the feature meets a
-  contested concept.)
+- **Plural-or-none for unsettled concepts — refined to recognition-vs-verdict.**
+  For `live-rivals` / `open` / `dissolved` concepts, a passage that *argues a
+  contested thesis* must ship **≥2 genuinely rival passages or none** — never one
+  passage that smuggles a verdict. A single passage is permitted on such a concept
+  **only** when it states no contested thesis: a *phenomenological observation /
+  recognition* ("here is how this felt from the inside"), not an argued position.
+  REFINEMENT (2026-06-24, from the cooling-week read): the original rule said
+  single-passage-only-for-`handed-off`/`hardened`, but that conflates two things.
+  Homer / The Heroic Code *argues* that glory redeems a mortal life (Sarpedon),
+  so on an `open` question it needed its rival — **added Achilles' Book IX rejection
+  (a life outweighs all Troy's treasure), now a true 2-passage pair.** Tolstoy /
+  Ivan Ilyich's Caius syllogism makes *no* claim about what life is for; it records
+  the moment one's own death stops being an abstraction — recognition, not verdict —
+  so it **stands alone honestly**. The test is: *would a reasonable rival passage
+  contradict this one?* If yes → pair or cut. If it only deepens (no contrary
+  position exists) → solo is fine. This stays an **authoring discipline** (the
+  machine half enforces only `contested ⇒ ≥2 or none`, since "argues a thesis" is
+  not mechanically decidable). (The PD pilot is mostly literary/`mean`; the rule
+  binds the moment a passage argues a contested position.)
 - **The passage inherits its concept's 5-state badge** inline, so an `open`
   passage visibly reads as unsettled.
 - **Barnum check is an authoring discipline, not a shipped badge.** Cut any

@@ -287,6 +287,16 @@ assert(!$('#dr-passage').hasAttribute('hidden'),'a concept with a passage reveal
 eq(window.getComputedStyle($('#dr-passage')).display!=='none',true,'the revealed passage is actually displayed');
 assert($('#dr-passage .pq')!=null && $('#dr-passage .pq').textContent.trim().length>0,'the passage text renders');
 assert($('#dr-passage .pcol')!=null,'the passage carries a provenance colophon');
+// RIVAL DIVIDER: a concept with N>=2 passages renders N-1 dividers between them
+// (a single passage renders none), so a pair reads as a contention not one quote.
+const pairC=D.concepts.find(c=>(c.passages||[]).length>=2);
+if(pairC){ openByName(pairC.id);
+  eq($$('#dr-passage .pq').length, pairC.passages.length, 'every rival passage in the pair renders');
+  eq($$('#dr-passage .prival').length, pairC.passages.length-1, 'a rival divider sits between each pair of passages');
+  assert($$('#dr-passage .prival')[0].textContent.trim().length>0, 'the rival divider carries a label'); }
+const soloC=D.concepts.find(c=>(c.passages||[]).length===1);
+if(soloC){ openByName(soloC.id);
+  eq($$('#dr-passage .prival').length, 0, 'a single passage renders no rival divider'); }
 const noPassage=D.concepts.find(c=>!(c.passages&&c.passages.length));
 openByName(noPassage.id);
 assert($('#dr-passage').hasAttribute('hidden'),'a concept with no passage hides the block (no empty slot)');

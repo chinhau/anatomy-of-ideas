@@ -187,6 +187,12 @@
   .dr-passage .pbook{display:inline-block;margin-top:7px;font-size:11.5px;
     color:var(--parchment);text-decoration:none;border-bottom:1px solid var(--ink);}
   .dr-passage .pbook:hover{border-bottom-color:var(--parchment);}
+  /* rival divider between >=2 passages: reuses the "rejects / opposes" grammar
+     (dashed vermilion line + vermilion label) so the pair reads as a contention. */
+  .dr-passage .prival{display:flex;align-items:center;gap:11px;margin:19px 0;
+    font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--oppose);}
+  .dr-passage .prival::before,.dr-passage .prival::after{content:'';flex:1;
+    border-top:1px dashed var(--oppose);opacity:0.6;}
   .dr-think{font-size:11.5px;color:var(--parchment-dim);margin-bottom:20px;}
   .dr-think b{color:var(--ink);font-weight:500;letter-spacing:0.1em;text-transform:uppercase;
     font-size:9.5px;display:block;margin-bottom:4px;}
@@ -1047,7 +1053,10 @@
           : '';
         return `<blockquote class="pq">${esc(p.text)}</blockquote>`+
                `<div class="pcol">${cite}</div>${book}`;
-      }).join('<div style="height:18px"></div>');
+      // Between rivals (a concept ships >=2 passages or none on an unsettled
+      // question), a dashed-vermilion divider — the atlas's existing "rejects /
+      // opposes" grammar — so the pair reads as a contention, not one long quote.
+      }).join(`<div class="prival">${esc0(T('rival reading'))}</div>`);
     } else {
       pw.innerHTML='';
     }

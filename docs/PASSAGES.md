@@ -30,20 +30,34 @@ This is risk analysis, not legal advice.
   falsifiable claim. Specificity over comfort.
 - **Recognition, not resolution:** never frame a passage as "the answer." Plural-
   or-none on contested concepts (enforced in code).
+- **Plural-or-none, refined to recognition-vs-verdict** (ADR 0006, 2026-06-24).
+  On an unsettled (`open` / `live-rivals` / `dissolved`) concept, a passage that
+  *argues a contested thesis* needs **≥2 rival passages or none**; a passage that
+  states **no** contested thesis — a phenomenological observation / recognition —
+  may stand alone. The authoring test: *would a reasonable rival passage contradict
+  this one?* Yes → pair or cut; only-deepens → solo is honest. (The machine half
+  enforces just `contested ⇒ ≥2 or none`; "argues a thesis" is not mechanizable.)
+  Worked example: Homer's Sarpedon argues glory redeems a short life → paired with
+  Achilles' rejection. Tolstoy's Caius syllogism claims nothing about life's worth
+  → stands alone.
 
 ## Ledger
 
-### The Heroic Code — Homer
-- **Passage:** "My good friend, if, when we were once out of this fight… either win
-  glory for ourselves, or yield it to another." (Sarpedon to Glaucus.)
-- **Translator / edition:** Samuel Butler, prose translation, **1898**.
-- **Locator:** *The Iliad*, Book XII.
-- **Rights:** **PD** (US public domain; pre-1930 author *and* pre-1930 translation).
-- **Source / scan:** Project Gutenberg #2199 — <https://www.gutenberg.org/ebooks/2199>;
-  plain text <https://www.gutenberg.org/cache/epub/2199/pg2199.txt>.
-- **Verification:** byte-matched against the Gutenberg #2199 plain text (the run of
-  lines beginning "My good friend, if, when we were once out of this fight").
-  66 words. Verified 2026-06-23.
+### The Heroic Code — Homer (a TRUE 2-rival pair on an `open` question)
+This concept ships **two rival passages** — the code affirmed, then rejected —
+because a single one argued a verdict on an open question (see the recognition-vs-
+verdict rule above). Both Samuel Butler prose, **1898**, **PD**, from Project
+Gutenberg #2199 (<https://www.gutenberg.org/ebooks/2199>; plain text
+<https://www.gutenberg.org/cache/epub/2199/pg2199.txt>).
+- **Passage 1 (affirms):** "My good friend, if, when we were once out of this
+  fight… either win glory for ourselves, or yield it to another." *Locator:* Book
+  XII, Sarpedon to Glaucus. 66 words. Byte-matched 2026-06-23.
+- **Passage 2 (rejects):** "My life is more to me than all the wealth of Ilius…
+  but when his life has once left him it can neither be bought nor harried back
+  again." *Locator:* Book IX, Achilles to the embassy. 80 words. Byte-matched
+  2026-06-24 against the Gutenberg #2199 plain text (and confirmed against the live
+  gutenberg.org cache that "and a man buy both tripods" is Butler's archaic
+  phrasing, not an OCR artifact).
 - **Book pointer:** Gutenberg ebook page (free full text — a genuine "go read it"
   pointer, not a sales link).
 
