@@ -526,11 +526,7 @@
     #lens-trail{font-size:11px;padding:4px 11px;gap:6px;}
     .lt-chip.cur{font-size:14px;}
   }
-  @media (prefers-reduced-motion:reduce){*{transition:none !important;animation:none !important;}
-    /* One scoped exception: the reshuffle's opacity-only dissolve. A cross-fade is
-       the accepted reduced-motion substitute for a motion transition (no travel, no
-       spin, no scale — nothing vestibular), so the deck still visibly re-settles. */
-    .lb-card.rm-dissolve{transition:opacity .3s ease !important;}}
+  @media (prefers-reduced-motion:reduce){*{transition:none !important;animation:none !important;}}
   .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
     clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0;}
   /* ---------- header extras ---------- */
@@ -782,7 +778,8 @@
   .lb-card::after{content:"";position:absolute;inset:9px;border:1px solid var(--panel-edge);
     border-radius:1px;pointer-events:none;}
   .lb-card.is-active{box-shadow:0 10px 26px -14px rgba(0,0,0,.85);}
-  .lb-card.is-active::before{opacity:.9;border-color:var(--gold);}
+  /* hover/focus only brings a card forward — no gild; gold is reserved for the drawn card */
+  .lb-card.is-active::before{opacity:.7;}
   .lb-card:focus{outline:none;}
   /* gold focus ring on any keyboard-focused card — not gated on .is-active, so the
      ring still shows while a deal/riffle animation has setActive() suppressed */
@@ -808,18 +805,67 @@
   .lb-gloss{font-family:'EB Garamond',serif;font-style:italic;font-size:12px;
     color:var(--muted);line-height:1.36;margin-top:7px;max-width:24ch;
     max-height:0;opacity:0;overflow:hidden;transition:max-height .4s ease,opacity .3s ease;}
-  .lb-card.is-active .lb-gloss{max-height:96px;opacity:1;}
   .lb-foot{margin-top:auto;padding-top:8px;color:var(--parchment-dim);opacity:.5;font-size:12px;letter-spacing:.3em;}
-  /* riffle control: a single hairline button that gathers and re-deals the fan */
-  .lb-nav{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:20px;}
-  .lb-riffle{display:inline-flex;align-items:center;gap:9px;background:none;
+  /* hover/focus brings a card forward in the resting fan; the draw flow dims the rest */
+  #lens-deck:not(.casting):not(.revealed) .lb-card:hover{z-index:40 !important;}
+  /* ---- the cast: ten unchosen plates recede toward an indigo hairline; one is drawn ---- */
+  #lens-deck.casting .lb-card:not(.chosen),
+  #lens-deck.revealed .lb-card:not(.chosen){filter:saturate(.32) brightness(.7);opacity:.42;}
+  #lens-deck.casting .lb-card:not(.chosen)::before,
+  #lens-deck.revealed .lb-card:not(.chosen)::before{border-color:var(--rule);opacity:.5;}
+  /* the drawn plate, settled centre-stage as a catalogue plate — gold lands only here */
+  .lb-card.chosen{z-index:60 !important;cursor:default;box-shadow:0 14px 34px -16px rgba(0,0,0,.9);}
+  .lb-card.chosen::before{opacity:.95;border-color:var(--gold);}
+  .lb-card.chosen .lb-rose circle,.lb-card.chosen .lb-rose path,.lb-card.chosen .lb-rose line{opacity:.9;stroke-width:.7;}
+  .lb-card.chosen .lb-gloss{max-height:110px;opacity:1;}
+  /* controls: a quiet shuffle text-link, a binding stitch, the cue, then the primary draw plate */
+  .lb-nav{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;margin-top:8px;
+    transition:opacity .35s ease;}
+  .lb-nav::before{content:"";width:46px;height:1px;background:var(--panel-edge);margin-bottom:18px;}
+  .lb-cue{font-size:11.5px;color:var(--muted);letter-spacing:.02em;margin-bottom:15px;text-align:center;}
+  .lb-cue em{font-style:italic;color:var(--parchment-dim);}
+  /* primary draw — a small catalogue plate, not a SaaS pill: squared, double-ruled, ink not gold */
+  .lb-lot{position:relative;display:inline-flex;align-items:center;justify-content:center;background:none;
     border:1px solid var(--panel-edge);color:var(--parchment);font-family:inherit;font-size:12px;
-    letter-spacing:.16em;text-transform:uppercase;padding:9px 18px;border-radius:24px;cursor:pointer;
-    transition:border-color .16s,color .16s;}
-  .lb-riffle:hover{border-color:var(--gold);color:var(--gold);}
-  .lb-riffle:focus-visible{outline:none;box-shadow:0 0 0 2px var(--gold);}
-  .lb-riffle .rsuit{font-size:14px;transition:transform .4s ease;}
-  .lb-riffle:hover .rsuit{transform:rotate(-18deg);}
+    letter-spacing:.22em;text-transform:uppercase;padding:12px 28px;border-radius:3px;cursor:pointer;
+    transition:border-color .16s,color .16s,transform .08s;}
+  .lb-lot::after{content:"";position:absolute;inset:3px;border:1px solid var(--panel-edge);
+    border-radius:2px;opacity:.45;pointer-events:none;}
+  .lb-lot:hover{border-color:var(--parchment-dim);color:var(--parchment);}
+  .lb-lot:active{transform:translateY(1px);}
+  .lb-lot:focus-visible{outline:none;box-shadow:0 0 0 2px var(--gold);}
+  /* shuffle as a quiet text link, tied to the deck and clearly below the primary in weight */
+  .lb-shuffle{display:inline-flex;align-items:center;gap:7px;background:none;border:none;color:var(--muted);
+    font-family:inherit;font-size:11px;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;
+    padding:6px 4px;margin-bottom:16px;transition:color .16s;}
+  .lb-shuffle:hover{color:var(--parchment-dim);}
+  .lb-shuffle .sh-i{width:15px;height:15px;display:inline-block;}
+  .lb-shuffle .sh-i rect{fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;}
+  .lb-shuffle:focus-visible{outline:none;box-shadow:0 0 0 2px var(--gold);border-radius:2px;}
+  /* ---- the reveal bar (confirm beat): appears once a card is drawn ---- */
+  .lb-reveal{display:none;flex-direction:column;align-items:center;gap:14px;margin-top:24px;
+    opacity:0;transition:opacity .4s ease .15s;}
+  .lb-reveal.show{display:flex;opacity:1;}
+  .rv-line{font-family:'EB Garamond',serif;font-size:17px;color:var(--parchment-dim);text-align:center;}
+  .rv-line em{font-style:italic;color:var(--parchment);}
+  .rv-acts{display:flex;flex-direction:column;align-items:center;gap:12px;margin-top:2px;}
+  .rv-enter{display:inline-flex;align-items:center;gap:9px;background:none;border:1px solid var(--gold);
+    color:var(--gold);font-family:inherit;font-size:12px;letter-spacing:.22em;text-transform:uppercase;
+    padding:12px 26px;border-radius:3px;cursor:pointer;transition:background .16s,color .16s;}
+  .rv-enter:hover{background:rgba(217,182,95,.12);}
+  .rv-enter:focus-visible{outline:none;box-shadow:0 0 0 2px var(--gold);}
+  .rv-again{background:none;border:none;color:var(--muted);font-family:inherit;font-size:11px;
+    letter-spacing:.14em;text-transform:uppercase;cursor:pointer;padding:6px 4px;
+    border-bottom:1px solid transparent;transition:color .16s,border-color .16s;}
+  .rv-again:hover{color:var(--parchment-dim);border-color:var(--panel-edge);}
+  /* dismiss — only shown while a drawn card is on the table */
+  .lb-close{position:absolute;top:24px;right:26px;z-index:70;display:none;
+    width:34px;height:34px;line-height:1;background:none;border:1px solid var(--panel-edge);
+    border-radius:50%;color:var(--muted);font-size:20px;cursor:pointer;
+    transition:color .16s,border-color .16s;}
+  .lb-close.show{display:block;}
+  .lb-close:hover{color:var(--parchment);border-color:var(--parchment-dim);}
+  .lb-close:focus-visible{outline:none;box-shadow:0 0 0 2px var(--gold);}
   @media (max-width:560px){
     #lens-deck{height:clamp(320px,46vh,400px);}
     .lb-card{width:clamp(128px,38vw,168px);margin-left:calc(clamp(128px,38vw,168px) / -2);}
@@ -8703,21 +8749,37 @@
       "zh": "十一張問題牌組成的一手牌",
       "ru": "Рука из одиннадцати карт-вопросов"
     },
-    "Riffle the deck": {
+    "Shuffle the deck": {
       "zh": "洗牌",
-      "ru": "Перетасовать"
+      "ru": "Перетасовать колоду"
     },
-    "Let the cards choose": {
-      "zh": "讓紙牌抉擇",
-      "ru": "Пусть карты выберут"
+    "Draw a card": {
+      "zh": "抽一張牌",
+      "ru": "Вытянуть карту"
+    },
+    "Draw again": {
+      "zh": "再抽一次",
+      "ru": "Вытянуть снова"
+    },
+    "The card drawn": {
+      "zh": "抽得的牌",
+      "ru": "Вытянутая карта"
+    },
+    "Enter": {
+      "zh": "進入",
+      "ru": "Войти"
+    },
+    "Click any question to enter": {
+      "zh": "點選任一問題即可進入",
+      "ru": "Нажмите на любой вопрос, чтобы войти"
+    },
+    "or draw one at random": {
+      "zh": "或隨機抽取一張",
+      "ru": "или вытяните наугад"
     },
     "Deck reshuffled": {
       "zh": "已重新洗牌",
       "ru": "Колода перетасована"
-    },
-    "The cards chose for you": {
-      "zh": "紙牌為你選定",
-      "ru": "Карты выбрали за вас"
     },
     "‹ Cards": {
       "zh": "‹ 紙牌",
@@ -8911,9 +8973,9 @@
       "zh": "從何處開始？",
       "ru": "С чего мы начнём?"
     },
-    "Eleven great questions, each behind a door. Lift a card to step into its ideas — or let the cards choose.": {
-      "zh": "十一個大哉問，各藏於一扇門後。掀起一張牌，步入它的思想——或讓紙牌為你抽選。",
-      "ru": "Одиннадцать великих вопросов, каждый за своей дверью. Поднимите карту, чтобы войти в её идеи, — или позвольте картам выбрать."
+    "Eleven great questions, each a door into the atlas.": {
+      "zh": "十一個大哉問，每一個都是通往這部星圖集的一扇門。",
+      "ru": "Одиннадцать великих вопросов — каждый дверь в атлас."
     }
   },
   "questions": {
@@ -12442,11 +12504,12 @@
     mean:'<circle cx="12" cy="12" r="8"/><circle class="lb-fl" cx="12" cy="12" r="1.5"/>',
     trans:'<circle cx="12" cy="12" r="8"/><line x1="4" y1="12" x2="20" y2="12"/>',
     abs:'<circle cx="12" cy="12" r="8"/>'};
-  // Fan geometry: eleven cards spread like a hand of tarot. FAN_STEP = tilt between
-  // adjacent cards; the gap and arc dip are derived from the live container width so
-  // the spread always fits. slotOf maps each card -> its position in the fan (left to
-  // right); riffling permutes it. activeIdx is the lifted (hovered/focused) card.
-  const FAN_STEP=4;
+  // Fan geometry: eleven cards splayed like a held hand into a half-circle, each
+  // pivoting around a shared point well below the deck. ARC_STEP = degrees between
+  // adjacent cards; the pivot radius is derived from the live width so the arc always
+  // fits. slotOf maps each card -> its position in the fan (left to right); riffling
+  // permutes it. activeIdx is the brought-forward (hovered/focused) card.
+  const ARC_STEP=10;
   let lensBoardOn=false, activeIdx=-1, slotOf=[], fanAnim=false;
 
   function lensSize(){ const h=document.getElementById('m-lens');
@@ -12474,16 +12537,24 @@
     const host=document.getElementById('lens-board');
     host.innerHTML='<div class="lb-head"><div class="lb-title" data-lb="title"></div>'+
       '<div class="lb-sub" data-lb="sub"></div></div>'+
+      '<button class="lb-close" id="lb-close" type="button" aria-label="Back to the deck" title="Back to the deck">\u00d7</button>'+
       '<div id="lens-deck" role="group"></div>'+
       '<div class="lb-nav">'+
-        '<button class="lb-riffle" id="lb-riffle" type="button">'+
-        '<span class="rsuit" aria-hidden="true">\u2042</span>'+
-        '<span data-i18n="Riffle the deck">Riffle the deck</span></button>'+
-        '<button class="lb-riffle" id="lb-draw" type="button">'+
-        '<svg class="rdraw" viewBox="0 0 24 24" width="13" height="13" aria-hidden="true">'+
-          '<rect x="6.5" y="3" width="11" height="18" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.3"/>'+
-          '<circle cx="12" cy="12" r="1.7" fill="currentColor"/></svg>'+
-        '<span data-i18n="Let the cards choose">Let the cards choose</span></button>'+
+        '<button class="lb-shuffle" id="lb-shuffle" type="button" title="Shuffle the deck">'+
+          '<svg class="sh-i" viewBox="0 0 24 24" aria-hidden="true">'+
+            '<rect x="4" y="7" width="9" height="13" rx="1.3" transform="rotate(-9 8.5 13.5)"/>'+
+            '<rect x="11" y="4" width="9" height="13" rx="1.3" transform="rotate(9 15.5 10.5)"/></svg>'+
+          '<span data-i18n="Shuffle the deck">Shuffle the deck</span></button>'+
+        '<div class="lb-cue" data-lb="cue"></div>'+
+        '<button class="lb-lot" id="lb-draw" type="button" title="Draw a card at random">'+
+          '<span data-i18n="Draw a card">Draw a card</span></button>'+
+      '</div>'+
+      '<div class="lb-reveal" id="lb-reveal">'+
+        '<div class="rv-line"><span data-lb="rvlead"></span> \u2014 <em data-lb="rvname"></em></div>'+
+        '<div class="rv-acts">'+
+          '<button class="rv-enter" id="lb-enter" type="button"></button>'+
+          '<button class="rv-again" id="lb-again" type="button" data-i18n="Draw again">Draw again</button>'+
+        '</div>'+
       '</div>'+
       '<div id="lb-live" class="sr-only" role="status" aria-live="polite"></div>';
     const deck=host.querySelector('#lens-deck');
@@ -12510,31 +12581,35 @@
       next=Math.max(0,Math.min(cards.length-1,next));
       const ni=slotOf.indexOf(next); if(ni>=0&&cards[ni]) cards[ni].focus();
     });
-    host.querySelector('#lb-riffle').onclick=()=>riffleDeck();
+    host.querySelector('#lb-shuffle').onclick=()=>{
+      if(!fanAnim&&!deck.classList.contains('casting')&&!deck.classList.contains('revealed')) riffleDeck(); };
     host.querySelector('#lb-draw').onclick=()=>drawForMe();
+    host.querySelector('#lb-enter').onclick=()=>{ const c=deck.querySelector('.lb-card.chosen'); if(c) enterDoor(c.dataset.cid,c); };
+    host.querySelector('#lb-again').onclick=()=>{ resetDraw(); setTimeout(drawForMe,260); };
+    host.querySelector('#lb-close').onclick=()=>resetDraw();
+    // Esc dismisses a drawn card back to the deck (board-only, while a lot is on the table)
+    document.addEventListener('keydown',e=>{
+      if(e.key==='Escape'&&lensBoardOn&&(deck.classList.contains('revealed')||deck.classList.contains('casting'))) resetDraw(); });
     activeIdx=-1;
     paintLensBoard();
   }
-  // Geometry for one fan slot (0..n-1). The centre slot sits upright at the origin;
-  // the rest tilt and slide outward, dipping into a shallow smile arc. Gap and arc
-  // derive from the live deck width so eleven cards always fit edge to edge.
-  function fanGeo(slot,n,deck){
-    const mid=(n-1)/2, d=slot-mid;
-    const c0=deck.querySelector('.lb-card'), cw=c0?c0.offsetWidth:180;
-    const gap=Math.min(64,Math.max(24,(deck.clientWidth-cw)/Math.max(1,n-1)));
-    return {x:d*gap, y:Math.abs(d)*gap*0.34, rot:d*FAN_STEP, z:slot};
-  }
-  // Place every card at its fan slot; the active card lifts clear of the spread,
-  // straightens a little, gilds, and rises above the rest.
+  // The shared pivot point (in deck-local px, below the cards) the half-circle fan
+  // rotates around. Derived from the live width so the arc always fits the deck.
+  function fanPivot(deck){ return Math.max(420, deck.clientWidth*0.66); }
+  // Lay the fan as a half-circle: each card rotates ARC_STEP degrees from its
+  // neighbour around the shared pivot, like a held hand. The drawn (.chosen) card is
+  // positioned by the draw flow, so layout leaves it untouched. The active
+  // (hovered/focused) card keeps its angle but rides above the rest.
   function layoutFan(){
     const deck=document.getElementById('lens-deck'); if(!deck) return;
-    const cards=deck.querySelectorAll('.lb-card'), n=cards.length;
+    const cards=deck.querySelectorAll('.lb-card'), n=cards.length, mid=(n-1)/2;
+    const pivot=fanPivot(deck);
     cards.forEach((card,i)=>{
-      const g=fanGeo(slotOf[i],n,deck), active=(i===activeIdx);
-      let {x,y,rot,z}=g, sc=1;
-      if(active){ y-=36; rot*=0.34; sc=1.07; z=100; }
-      card.style.transform='translate('+x.toFixed(1)+'px,'+y.toFixed(1)+'px) rotate('+rot.toFixed(2)+'deg) scale('+sc+')';
-      card.style.zIndex=z;
+      if(card.classList.contains('chosen')) return;
+      const dd=slotOf[i]-mid, active=(i===activeIdx);
+      card.style.transformOrigin='50% '+pivot+'px';
+      card.style.transform='rotate('+(dd*ARC_STEP).toFixed(2)+'deg)';
+      card.style.zIndex=active?60:slotOf[i];
       card.classList.toggle('is-active',active);
     });
   }
@@ -12551,12 +12626,15 @@
     cards.map((c,i)=>[slotOf[i],c]).sort((a,b)=>a[0]-b[0]).forEach(([,c])=>deck.appendChild(c));
     slotOf=cards.map((_,i)=>i); activeIdx=-1; layoutFan();
   }
-  // Collapse every card to a centred stack with a little jitter (the gathered deck).
+  // Gather every card to a squared centre stack (rotate 0 around the shared pivot),
+  // keeping the transform-origin constant with layoutFan so deal/gather never jumps.
   function stackCards(){
     const deck=document.getElementById('lens-deck'); if(!deck) return;
+    const pivot=fanPivot(deck);
     deck.querySelectorAll('.lb-card').forEach((card,i)=>{
       card.classList.remove('is-active'); card.style.zIndex=i;
-      card.style.transform='translate(0,6px) rotate('+(((i%2)?1:-1)*1.4).toFixed(1)+'deg)';
+      card.style.transformOrigin='50% '+pivot+'px';
+      card.style.transform='rotate(0deg)';
     });
   }
   // Deal from the gathered stack out into the fan, staggered slot by slot. Reduced
@@ -12574,64 +12652,83 @@
       setTimeout(()=>{ cards.forEach(c=>c.style.transitionDelay=''); syncDomToFan(); }, 42*cards.length+650);
     });
   }
-  // Riffle: gather the fan, give it two quick interleaving cuts, then deal it back
-  // out into a freshly shuffled order. Reduced motion just re-lays the new order.
-  // Optional `then` fires once the new order has settled (used by "Let the cards
-  // choose" to draw a card after the riffle); plain riffle-button calls omit it.
+  // Shuffle the deck: gather the fan to a squared centre stack, randomise the order
+  // (Fisher-Yates) under cover, then deal it back out into the new order. Reduced
+  // motion / jsdom skip the motion and re-lay the shuffled fan at once. Optional
+  // `then` fires once the new order has settled (the draw uses it to pick a card
+  // after a shuffle); the plain shuffle button omits it.
   function riffleDeck(then){
     const deck=document.getElementById('lens-deck'); if(!deck||fanAnim) return;
-    for(let i=slotOf.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [slotOf[i],slotOf[j]]=[slotOf[j],slotOf[i]]; }
-    activeIdx=-1;
-    // Announce the re-deal for screen-reader (and reduced-motion) users — the shuffle
-    // is otherwise silent. Cleared first so identical text still re-fires politely.
-    // A draw (then) carries its own announcement, so stay quiet to avoid talking over it.
-    const live=document.getElementById('lb-live');
-    if(live&&!then){ live.textContent=''; setTimeout(()=>{ live.textContent=T('Deck reshuffled'); }, 60); }
     const cards=deck.querySelectorAll('.lb-card');
-    if(reduce){
-      // jsdom / no rAF → instant reorder; real reduced-motion browser → opacity-only
-      // cross-dissolve: dim the fan, reorder under cover, fade back in slot-staggered.
-      if(typeof requestAnimationFrame!=='function'){ layoutFan(); syncDomToFan(); if(then) then(); return; }
-      fanAnim=true;
-      cards.forEach(c=>{ c.classList.add('rm-dissolve'); c.style.transitionDelay='0ms'; c.style.opacity='.12'; });
-      setTimeout(()=>{
-        layoutFan();                                         // reorder at the opacity trough
-        cards.forEach((c,i)=>{ c.style.transitionDelay=(slotOf[i]*42)+'ms'; c.style.opacity='1'; });
-        setTimeout(()=>{ cards.forEach(c=>{ c.classList.remove('rm-dissolve'); c.style.transitionDelay=''; c.style.opacity=''; });
-          fanAnim=false; syncDomToFan(); if(then) then(); }, 42*cards.length+360);
-      }, 260);
-      return;
+    activeIdx=-1;
+    const shuffle=()=>{ for(let i=slotOf.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [slotOf[i],slotOf[j]]=[slotOf[j],slotOf[i]]; } };
+    // Announce the re-deal for screen-reader users; a draw (then) carries its own line.
+    const announce=()=>{ const live=document.getElementById('lb-live');
+      if(live&&!then){ live.textContent=''; setTimeout(()=>{ live.textContent=T('Deck reshuffled'); }, 60); } };
+    if(reduce||typeof requestAnimationFrame!=='function'){
+      shuffle(); layoutFan(); syncDomToFan(); announce(); if(then) then(); return;
     }
     fanAnim=true;
-    cards.forEach((c,i)=>{ c.style.transitionDelay=(i*10)+'ms'; });
-    stackCards();                                            // gather
-    setTimeout(()=>{ cards.forEach((c,i)=>{ const s=(i%2)?1:-1;
-      c.style.transitionDelay='0ms'; c.style.transform='translate('+(s*30)+'px,0) rotate('+(s*4)+'deg)'; }); }, 300);
-    setTimeout(()=>stackCards(), 470);                       // square the deck
+    cards.forEach(c=>{ c.style.transition='transform .26s cubic-bezier(.4,0,.4,1)'; });
+    stackCards();                                            // gather to a centred stack
     setTimeout(()=>{
-      cards.forEach((c,i)=>{ c.style.transitionDelay=(slotOf[i]*42)+'ms'; });
+      shuffle();                                             // randomise under cover
+      cards.forEach(c=>{ c.style.transition='transform .44s cubic-bezier(.32,.06,.2,1)'; });
       layoutFan();                                           // deal the new order
-      setTimeout(()=>{ cards.forEach(c=>c.style.transitionDelay=''); fanAnim=false; syncDomToFan(); if(then) then(); }, 42*cards.length+650);
-    }, 640);
+      announce();
+      setTimeout(()=>{ cards.forEach(c=>{ c.style.transition=''; }); fanAnim=false; syncDomToFan(); if(then) then(); }, 480);
+    }, 290);
   }
-  // "Let the cards choose": riffle the deck the maintainer wanted, then lift one card
-  // at random and, after a beat to register the pick, step through it — a draw made
-  // for you. The pick happens only once the fan has settled (fanAnim cleared).
+  // "Draw a card": pick one plate at random and settle it centre-stage as a catalogue
+  // plate (gold lands only here); the other ten recede toward an indigo hairline. After
+  // a beat the reveal bar offers a confirm — the lot is accepted by Enter, never opened
+  // automatically — or "Draw again" / dismiss. A held breath, then the choice is yours.
   function drawForMe(){
     const deck=document.getElementById('lens-deck'); if(!deck||fanAnim) return;
-    riffleDeck(()=>{
-      const cards=deck.querySelectorAll('.lb-card');
-      const pick=Math.floor(Math.random()*cards.length), card=cards[pick]; if(!card) return;
-      setActive(pick);                                       // lift + gild the drawn card
-      const live=document.getElementById('lb-live');
-      if(live){ live.textContent=''; setTimeout(()=>{ live.textContent=T('The cards chose for you')+' \u2014 '+cName(cById[card.dataset.cid]); }, 60); }
-      setTimeout(()=>enterDoor(card.dataset.cid,card), reduce?450:900);
-    });
+    if(deck.classList.contains('casting')||deck.classList.contains('revealed')) return;
+    const cards=deck.querySelectorAll('.lb-card');
+    const pick=Math.floor(Math.random()*cards.length), card=cards[pick]; if(!card) return;
+    const c=cById[card.dataset.cid]; if(!c) return;
+    deck.classList.add('casting');
+    const nav=document.querySelector('#lens-board .lb-nav');
+    if(nav){ nav.style.opacity='0'; nav.style.pointerEvents='none'; }
+    const cl=document.getElementById('lb-close'); if(cl) cl.classList.add('show');
+    activeIdx=-1;
+    card.classList.add('chosen');
+    card.style.transition=reduce?'none':'transform .45s cubic-bezier(.34,1.2,.32,1),box-shadow .3s ease';
+    card.style.transform='translateY(-8px) rotate(0deg) scale(1.16)';   // settle upright, centre, lifted
+    card.style.zIndex=60;
+    const live=document.getElementById('lb-live');
+    if(live){ live.textContent=''; setTimeout(()=>{ live.textContent=T('The card drawn')+' \u2014 '+cName(c); }, 60); }
+    const reveal=()=>{
+      deck.classList.remove('casting'); deck.classList.add('revealed');
+      const rv=document.getElementById('lb-reveal'); if(!rv) return;
+      const nm=rv.querySelector('[data-lb="rvname"]'); if(nm) nm.textContent=cName(c);
+      const enter=document.getElementById('lb-enter');
+      if(enter){ enter.textContent=T('Enter')+' \u2018'+cName(c)+'\u2019'; rv.classList.add('show'); enter.focus(); }
+      else rv.classList.add('show');
+    };
+    if(reduce) reveal(); else setTimeout(reveal,470);
+  }
+  // Dismiss a drawn card: clear the cast, re-show the controls, and re-lay the fan.
+  function resetDraw(){
+    const deck=document.getElementById('lens-deck'); if(!deck) return;
+    deck.classList.remove('revealed','casting');
+    const rv=document.getElementById('lb-reveal'); if(rv) rv.classList.remove('show');
+    const cl=document.getElementById('lb-close'); if(cl) cl.classList.remove('show');
+    const c=deck.querySelector('.lb-card.chosen');
+    if(c){ c.classList.remove('chosen'); c.style.transition=''; }
+    const nav=document.querySelector('#lens-board .lb-nav');
+    if(nav){ nav.style.opacity=''; nav.style.pointerEvents=''; }
+    activeIdx=-1; layoutFan();
   }
   function paintLensBoard(){
     const host=document.getElementById('lens-board'); if(!host) return;
     const t=host.querySelector('[data-lb="title"]'); if(t) t.textContent=T('Where will we begin?');
-    const s=host.querySelector('[data-lb="sub"]'); if(s) s.textContent=T('Eleven great questions, each behind a door. Lift a card to step into its ideas — or let the cards choose.');
+    const s=host.querySelector('[data-lb="sub"]'); if(s) s.textContent=T('Eleven great questions, each a door into the atlas.');
+    const cue=host.querySelector('[data-lb="cue"]');
+    if(cue) cue.innerHTML=esc0(T('Click any question to enter'))+' \u2014 <em>'+esc0(T('or draw one at random'))+'</em>';
+    const rvlead=host.querySelector('[data-lb="rvlead"]'); if(rvlead) rvlead.textContent=T('The card drawn');
     const dk=host.querySelector('#lens-deck'); if(dk) dk.setAttribute('aria-label',T('A hand of eleven question cards'));
     host.querySelectorAll('.lb-card').forEach(card=>{
       const q=qById[card.dataset.qid], c=cById[card.dataset.cid]; if(!q||!c) return;
@@ -12659,7 +12756,8 @@
     document.getElementById('lens-explore').classList.add('on');
     document.getElementById('lens-tour').classList.remove('on');
     lensMode='explore'; setHash('/'+modeSlug('lens'));
-    activeIdx=-1; dealFan();   // deal the fan in fresh each time the board appears
+    resetDraw();               // clear any drawn-card state left from a previous visit
+    activeIdx=-1; dealFan();    // deal the fan in fresh each time the board appears
   }
   function showLensGraph(){
     lensBoardOn=false;
