@@ -2,8 +2,11 @@
 
 **Status:** Accepted (scope + guardrails) · **Date:** 2026-06-23
 · **Option A (note upgrades) shipped 2026-06-23 as `12234f7`** — see the Update
-section at the foot of this file. The PD passage pilot itself is **not built**;
-the ache wall and Option B remain deferred.
+section at the foot of this file.
+· **AMENDED 2026-06-23 to "bounded B"** — the maintainer accepted a bounded
+in-copyright risk-acceptance; the PD-only stance below is relaxed (not removed) by
+the *Amendment — bounded B* section, which now governs the source policy. The
+passage pilot is **being built** on that basis.
 · Downstream of `docs/MISSION.md` (the honesty bar + 5-state epistemic spine) and
 `docs/DESIGN-TASTE.md` (engraving-not-glow, restraint-as-luxury, guardrail 1:
 *ornament must encode a real datum*).
@@ -63,6 +66,46 @@ Two analysis rounds shaped the design:
    user-actionable datum (guardrail 1), and optimise for a *screenshot*, not
    *reading*. The "ache wall" as a front door is a mood-intake gate that quiet-site
    readers skip.
+
+## Amendment — "bounded B" (2026-06-23, governs source policy)
+
+The deferred "Goodreads-norm" question (below) was taken up early and **decided**.
+After a paragraph-by-paragraph risk assessment, the maintainer accepted a **bounded
+in-copyright risk-acceptance ("bounded B")** so the pilot is not strangled by
+PD-sourcing friction. This **overrides** the "PD-only / in-copyright → paraphrase"
+rules wherever they conflict; everything else in this ADR (honesty guardrails,
+passage-first placement, gated render, the per-passage blind-test ship-gate) stands
+unchanged. The four bounds:
+
+1. **In-copyright *prose* passages are allowed:** ≤~100 words, historically
+   **attributed**, and with **full provenance recorded** (author · work ·
+   translator/edition · year · source · locator). The point is fair-use-shaped
+   excerpting of a paragraph from a full-length book, with a pointer back to it —
+   not anthologising the heart of a short work.
+2. **Hard-exclude the high-risk buckets → these stay paraphrase-or-PD only:**
+   song **lyrics**, **full poems / haiku** (a 3-line work quoted whole is the whole
+   work — factor 3), **litigious estates** (e.g. Joyce historically, Beckett,
+   Salinger), and **current commercial translations** still actively marketed. When
+   in doubt, paraphrase + pointer.
+3. **Takedown/opt-out + no commercial sheen:** ship a visible **takedown/opt-out
+   policy** and honour requests promptly; **no affiliate links** beside any quoted
+   text (the book pointer stays a quiet, non-monetised link). This keeps factor 4
+   (market effect) and the commercial-use sub-factor pointing our way.
+4. **The code gate moves from "PD URL" to "provenance + rights tier."** The
+   smoke-test no longer requires `source_url ∈ {gutenberg, archive}` or
+   `edition_year < 1930`. Instead each passage carries a **`rights` field ∈
+   {`PD`, `in-copyright-fair-use`}**; the test asserts **all provenance fields are
+   present & non-empty** and that `rights` is one of the two allowed values. PD
+   passages still record a byte-matched scan URL; in-copyright passages record the
+   edition + locator they were transcribed from.
+
+**Why bounded, not open B:** the concentrated legal risk lives in the excluded
+buckets (whole short works, lyrics, litigious estates), not in a single attributed
+prose paragraph lifted from a 300-page book with a buy-pointer and a takedown path —
+that is squarely the Goodreads/Marginalian norm. Bounding those buckets out keeps
+the realistic statutory-damage tail near zero while removing the PD-only
+bottleneck. This is risk analysis, not legal advice; a marquee in-copyright author
+still warrants a one-time attorney read before launch.
 
 ## Decision
 
@@ -149,13 +192,13 @@ fight is sidestepped, not fought):
   `contested` for now. Accepted for the pilot; building the full 5-state badge is
   not a prerequisite (and would be its own decision).
 
-### The in-copyright "Goodreads-norm" question is deferred, not decided
-The debate's loosen-vs-strict axis (whether to post short attributed *in-copyright*
-quotes, as people do on Goodreads) is **left open on purpose** — it is untestable
-in the abstract and Phase 1's literary-PD scope means we may never need it. Revisit
-it **only** if we later crave a living thinker's exact words, and then only as an
-explicit, recorded **risk-acceptance** (no DMCA safe harbor for a hand-curator;
-statutory-damage tail risk; aphoristic works fail factor 3), never as a quiet drift
+### The in-copyright "Goodreads-norm" question — DECIDED as bounded B
+~~Deferred, not decided.~~ **Resolved 2026-06-23:** see the *Amendment — bounded B*
+section near the top. The loosen-vs-strict axis was taken up early and settled as a
+**bounded** risk-acceptance: in-copyright *prose* paragraphs are allowed under the
+four bounds (≤~100 words, attributed, provenance recorded, excluded buckets +
+takedown + no affiliate links), rather than left open. The risk-acceptance is
+explicit and recorded here, exactly as this section required — not a quiet drift
 past the guardrail.
 
 ### Honesty guardrails (load-bearing)
@@ -222,10 +265,12 @@ genuinely value it. The single load-bearing gate: **every passage must beat its
 note in a blind forced-choice, or it is cut** — the note already exists at ~2% of
 the cost, so a passage that merely ties is pure overhead.
 
-**Per-passage ship-gate (all must hold):**
-- PD edition **≤1930 incl. the translation's year**, recorded; **byte-matched** to a
-  Gutenberg/archive.org scan; complete colophon (author · work · translator/edition
-  · locator).
+**Per-passage ship-gate (all must hold) — under bounded B:**
+- **Rights tier recorded** (`PD` or `in-copyright-fair-use`) and the passage clears
+  the bounded-B bounds (prose, ≤~100 words, none of the excluded buckets). PD
+  passages are **byte-matched** to a Gutenberg/archive.org scan; in-copyright
+  passages cite the edition + locator transcribed from. Complete colophon in both
+  cases (author · work · translator/edition · locator).
 - **Beats its note** in a blind attribution-stripped forced-choice. For
   argumentative concepts (thinner margins — see the Homer 3–2 result), try a second
   PD translation before shipping *or* rejecting.
@@ -240,13 +285,14 @@ mobile-legible at 360px; `index.html` stays under budget.
 ≥2/3 blind → supersede this ADR; any shipped passage reads as a settled *answer* to
 an open question; any passage fails byte-match; empty-slot / "coming soon" drift.
 
-**New `tests/smoke.mjs` assertions (the machine half of the bar):** passage-first
-DOM order; gated render / no empty slot; every provenance field present & non-empty;
-`source_url` matches `gutenberg.org`/`archive.org`; `edition_year < 1930`; no
-Loeb/OCT/Teubner in work/source; no second-person regex in passage text; no verdict
-words on non-settled concepts; **`contested ⇒ passages.length ≥ 2 or none`**
-(plural-or-none enforced in code even though no Phase-1 concept exercises it with
-real content); `index.html` size budget.
+**New `tests/smoke.mjs` assertions (the machine half of the bar — under bounded B):**
+passage-first DOM order; gated render / no empty slot; every provenance field
+present & non-empty; **`rights ∈ {PD, in-copyright-fair-use}`** (replaces the old
+`source_url`-must-be-gutenberg / `edition_year < 1930` gates); no Loeb/OCT/Teubner
+in work/source; passage length ≤ ~100 words; no second-person regex in passage text;
+no verdict words on non-settled concepts; **`contested ⇒ passages.length ≥ 2 or
+none`** (plural-or-none enforced in code even though no Phase-1 concept exercises it
+with real content); `index.html` size budget.
 
 **Per-passage provenance ledger:** record each verification (concept id, source_url
 deep link, locator, translator, edition_year, date verified) in `docs/PASSAGES.md`;
