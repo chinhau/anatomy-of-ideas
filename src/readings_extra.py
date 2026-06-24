@@ -102,8 +102,9 @@ EXTRA = {
   ("Huineng","The Platform Sutra of the Sixth Patriarch","c.700","Primary","The charter of sudden-awakening Chan."),
   ("(comp.) Linji","The Record of Linji","c.870","Primary","Zen's most ferocious teacher."),
 ]),
-"Self-Cultivation": (["Wang Yangming","Zhu Xi"],[
-  ("Wang Yangming","Instructions for Practical Living","1518","Primary","Innate knowing and the unity of knowledge and action."),
+"Self-Cultivation": (["Wang Yangming"],[
+  ("Wang Yangming","Instructions for Practical Living (Chuanxi lu, trans. Wing-tsit Chan)","1518","Primary","Innate knowing (liangzhi) and the unity of knowledge and action (zhixing heyi) — the Lu-Wang answer that rejects Zhu Xi's gewu."),
+  ("Philip J. Ivanhoe","Readings from the Lu-Wang School of Neo-Confucianism","2009","Translation","Wang in the school that took the mind, not outer things, as the site of moral knowing."),
 ]),
 "Integral Theory": (["Ken Wilber"],[
   ("Ken Wilber","Sex, Ecology, Spirituality","1995","Primary","The four-quadrant integral model."),

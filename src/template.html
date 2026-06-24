@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Anatomy of Ideas — the great questions humans keep asking</title>
-<meta name="description" content="An interactive atlas of the great questions humans keep asking: 285 ideas across eleven great questions, cross-linked to a 425-star constellation of the thinkers who shaped them. You're not the first to wonder.">
+<meta name="description" content="An interactive atlas of the great questions humans keep asking: 289 ideas across eleven great questions, cross-linked to a 425-star constellation of the thinkers who shaped them. You're not the first to wonder.">
 <meta property="og:type" content="website">
 <meta property="og:title" content="The Anatomy of Ideas — the great questions humans keep asking">
-<meta property="og:description" content="An interactive atlas of philosophy, psychology and consciousness — 285 ideas, eleven great questions, 425 thinkers and schools. You're not the first to wonder.">
+<meta property="og:description" content="An interactive atlas of philosophy, psychology and consciousness — 289 ideas, eleven great questions, 425 thinkers and schools. You're not the first to wonder.">
 <meta name="twitter:card" content="summary">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23070b16'/%3E%3Cg fill='%23d9b65f'%3E%3Ccircle cx='16' cy='16' r='2.6'/%3E%3Ccircle cx='8' cy='9' r='1.4'/%3E%3Ccircle cx='24' cy='8' r='1.4'/%3E%3Ccircle cx='25' cy='23' r='1.4'/%3E%3Ccircle cx='7' cy='24' r='1.4'/%3E%3C/g%3E%3C/svg%3E">
 <style>__FONTS_CSS__</style>
@@ -511,7 +511,7 @@
   .llink.builds{stroke:rgba(233,220,192,0.5);}
   .llink.rejects{stroke:var(--oppose);stroke-dasharray:4 4;opacity:0.7;}
   .llink.echoes{stroke:var(--echo);stroke-dasharray:1 5;opacity:0.8;}
-  /* Lens board — the "Eleven Doors In" empty state */
+  /* Lens board — the "Where will you begin?" empty state (a hand of question cards) */
   #lens-board{position:absolute;inset:0;z-index:5;display:flex;flex-direction:column;
     align-items:center;justify-content:flex-start;padding:86px 24px 44px;overflow:auto;}
   #lens-board[hidden]{display:none;}
@@ -529,22 +529,22 @@
     margin-left:calc(clamp(150px,20vw,196px) / -2);
     display:flex;flex-direction:column;align-items:center;text-align:center;
     background:var(--panel);color:var(--parchment);font-family:inherit;
-    border:1px solid var(--panel-edge);border-radius:10px;padding:15px 13px 11px;cursor:pointer;
-    box-shadow:0 16px 34px -20px rgba(0,0,0,.8);transform-origin:50% 120%;
+    border:1px solid var(--panel-edge);border-radius:3px;padding:15px 13px 11px;cursor:pointer;
+    box-shadow:0 3px 12px -7px rgba(0,0,0,.7);transform-origin:50% 120%;
     will-change:transform,opacity;transition:transform .5s cubic-bezier(.32,.06,.2,1),
       box-shadow .3s ease,opacity .42s ease;}
   /* triple-register frame: outer hairline (border) + inset hue cartouche + thin keep-line */
   .lb-card::before{content:"";position:absolute;inset:6px;border:1px solid var(--hue,#888);
-    border-radius:6px;opacity:.4;pointer-events:none;transition:border-color .3s,opacity .3s;}
+    border-radius:2px;opacity:.4;pointer-events:none;transition:border-color .3s,opacity .3s;}
   .lb-card::after{content:"";position:absolute;inset:9px;border:1px solid var(--panel-edge);
-    border-radius:4px;pointer-events:none;}
-  .lb-card.is-active{box-shadow:0 30px 60px -18px rgba(0,0,0,.9);}
+    border-radius:1px;pointer-events:none;}
+  .lb-card.is-active{box-shadow:0 10px 26px -14px rgba(0,0,0,.85);}
   .lb-card.is-active::before{opacity:.9;border-color:var(--gold);}
   .lb-card:focus{outline:none;}
   /* gold focus ring on any keyboard-focused card — not gated on .is-active, so the
      ring still shows while a deal/riffle animation has setActive() suppressed */
-  .lb-card:focus-visible{box-shadow:0 0 0 2px var(--gold),0 16px 34px -20px rgba(0,0,0,.8);}
-  .lb-card.is-active:focus-visible{box-shadow:0 0 0 2px var(--gold),0 30px 60px -18px rgba(0,0,0,.9);}
+  .lb-card:focus-visible{box-shadow:0 0 0 2px var(--gold),0 3px 12px -7px rgba(0,0,0,.7);}
+  .lb-card.is-active:focus-visible{box-shadow:0 0 0 2px var(--gold),0 10px 26px -14px rgba(0,0,0,.85);}
   .lb-q{font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--parchment-dim);
     display:flex;align-items:center;gap:6px;line-height:1.2;}
   .lb-q .lb-dot{width:7px;height:7px;border-radius:50%;background:var(--hue,#888);flex:none;}
@@ -568,7 +568,7 @@
   .lb-card.is-active .lb-gloss{max-height:96px;opacity:1;}
   .lb-foot{margin-top:auto;padding-top:8px;color:var(--parchment-dim);opacity:.5;font-size:12px;letter-spacing:.3em;}
   /* riffle control: a single hairline button that gathers and re-deals the fan */
-  .lb-nav{display:flex;align-items:center;justify-content:center;margin-top:20px;}
+  .lb-nav{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:20px;}
   .lb-riffle{display:inline-flex;align-items:center;gap:9px;background:none;
     border:1px solid var(--panel-edge);color:var(--parchment);font-family:inherit;font-size:12px;
     letter-spacing:.16em;text-transform:uppercase;padding:9px 18px;border-radius:24px;cursor:pointer;
@@ -585,7 +585,7 @@
      onto the focus node as the ego-graph fades up. One continuous gesture. */
   .lb-ghost{position:fixed;z-index:60;pointer-events:none;box-sizing:border-box;
     background:var(--panel);border:1px solid var(--gold);border-left:3px solid var(--hue,var(--gold));
-    border-radius:8px;color:var(--parchment);font-family:inherit;font-size:14px;font-weight:600;
+    border-radius:3px;color:var(--parchment);font-family:inherit;font-size:14px;font-weight:600;
     display:flex;align-items:center;justify-content:center;text-align:center;padding:0 12px;overflow:hidden;
     transition:transform .56s cubic-bezier(.5,.05,.2,1),opacity .56s ease,border-radius .56s ease;
     will-change:transform,opacity;}
@@ -792,7 +792,7 @@
       <div id="lens-board" hidden></div>
       <div id="lens-top">
       <div id="lens-ctrl">
-        <button id="lens-home" class="hbtn" hidden data-i18n="‹ Doors">‹ Doors</button>
+        <button id="lens-home" class="hbtn" hidden data-i18n="‹ Cards">‹ Cards</button>
         <div class="lens-seg" role="group" aria-label="Lens mode">
           <button id="lens-explore" class="on" data-i18n="Explore">Explore</button>
           <button id="lens-tour" data-i18n="Guided tour">Guided tour</button>
@@ -1081,7 +1081,7 @@
   let lensTrail=[], trailExpanded=false;  // the path of concepts walked in Explore (each {id, rel})
   const TYPE_ORDER={builds:0,echoes:1,rejects:2};
   const REL_VERB={builds:'builds on',rejects:'rejects',echoes:'echoes'};
-  // "Eleven Doors In" — one curated gateway concept per question (the Lens empty state).
+  // "Where will you begin?" — one curated gateway concept per question (the Lens empty state).
   const LENS_DOORS=[
     ['real','Theory of Forms'],['know','Empiricism'],['mind','Stream of Consciousness'],
     ['self','Bundle Theory'],['live','Eudaimonia'],['just','Social Contract'],
@@ -1144,6 +1144,11 @@
         '<button class="lb-riffle" id="lb-riffle" type="button">'+
         '<span class="rsuit" aria-hidden="true">\u2042</span>'+
         '<span data-i18n="Riffle the deck">Riffle the deck</span></button>'+
+        '<button class="lb-riffle" id="lb-draw" type="button">'+
+        '<svg class="rdraw" viewBox="0 0 24 24" width="13" height="13" aria-hidden="true">'+
+          '<rect x="6.5" y="3" width="11" height="18" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.3"/>'+
+          '<circle cx="12" cy="12" r="1.7" fill="currentColor"/></svg>'+
+        '<span data-i18n="Let the cards choose">Let the cards choose</span></button>'+
       '</div>'+
       '<div id="lb-live" class="sr-only" role="status" aria-live="polite"></div>';
     const deck=host.querySelector('#lens-deck');
@@ -1171,6 +1176,7 @@
       const ni=slotOf.indexOf(next); if(ni>=0&&cards[ni]) cards[ni].focus();
     });
     host.querySelector('#lb-riffle').onclick=()=>riffleDeck();
+    host.querySelector('#lb-draw').onclick=()=>drawForMe();
     activeIdx=-1;
     paintLensBoard();
   }
@@ -1235,26 +1241,29 @@
   }
   // Riffle: gather the fan, give it two quick interleaving cuts, then deal it back
   // out into a freshly shuffled order. Reduced motion just re-lays the new order.
-  function riffleDeck(){
+  // Optional `then` fires once the new order has settled (used by "Let the cards
+  // choose" to draw a card after the riffle); plain riffle-button calls omit it.
+  function riffleDeck(then){
     const deck=document.getElementById('lens-deck'); if(!deck||fanAnim) return;
     for(let i=slotOf.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [slotOf[i],slotOf[j]]=[slotOf[j],slotOf[i]]; }
     activeIdx=-1;
     // Announce the re-deal for screen-reader (and reduced-motion) users — the shuffle
     // is otherwise silent. Cleared first so identical text still re-fires politely.
+    // A draw (then) carries its own announcement, so stay quiet to avoid talking over it.
     const live=document.getElementById('lb-live');
-    if(live){ live.textContent=''; setTimeout(()=>{ live.textContent=T('Deck reshuffled — eleven doors'); }, 60); }
+    if(live&&!then){ live.textContent=''; setTimeout(()=>{ live.textContent=T('Deck reshuffled'); }, 60); }
     const cards=deck.querySelectorAll('.lb-card');
     if(reduce){
       // jsdom / no rAF → instant reorder; real reduced-motion browser → opacity-only
       // cross-dissolve: dim the fan, reorder under cover, fade back in slot-staggered.
-      if(typeof requestAnimationFrame!=='function'){ layoutFan(); syncDomToFan(); return; }
+      if(typeof requestAnimationFrame!=='function'){ layoutFan(); syncDomToFan(); if(then) then(); return; }
       fanAnim=true;
       cards.forEach(c=>{ c.classList.add('rm-dissolve'); c.style.transitionDelay='0ms'; c.style.opacity='.12'; });
       setTimeout(()=>{
         layoutFan();                                         // reorder at the opacity trough
         cards.forEach((c,i)=>{ c.style.transitionDelay=(slotOf[i]*42)+'ms'; c.style.opacity='1'; });
         setTimeout(()=>{ cards.forEach(c=>{ c.classList.remove('rm-dissolve'); c.style.transitionDelay=''; c.style.opacity=''; });
-          fanAnim=false; syncDomToFan(); }, 42*cards.length+360);
+          fanAnim=false; syncDomToFan(); if(then) then(); }, 42*cards.length+360);
       }, 260);
       return;
     }
@@ -1267,14 +1276,28 @@
     setTimeout(()=>{
       cards.forEach((c,i)=>{ c.style.transitionDelay=(slotOf[i]*42)+'ms'; });
       layoutFan();                                           // deal the new order
-      setTimeout(()=>{ cards.forEach(c=>c.style.transitionDelay=''); fanAnim=false; syncDomToFan(); }, 42*cards.length+650);
+      setTimeout(()=>{ cards.forEach(c=>c.style.transitionDelay=''); fanAnim=false; syncDomToFan(); if(then) then(); }, 42*cards.length+650);
     }, 640);
+  }
+  // "Let the cards choose": riffle the deck the maintainer wanted, then lift one card
+  // at random and, after a beat to register the pick, step through it — a draw made
+  // for you. The pick happens only once the fan has settled (fanAnim cleared).
+  function drawForMe(){
+    const deck=document.getElementById('lens-deck'); if(!deck||fanAnim) return;
+    riffleDeck(()=>{
+      const cards=deck.querySelectorAll('.lb-card');
+      const pick=Math.floor(Math.random()*cards.length), card=cards[pick]; if(!card) return;
+      setActive(pick);                                       // lift + gild the drawn card
+      const live=document.getElementById('lb-live');
+      if(live){ live.textContent=''; setTimeout(()=>{ live.textContent=T('The cards chose for you')+' \u2014 '+cName(cById[card.dataset.cid]); }, 60); }
+      setTimeout(()=>enterDoor(card.dataset.cid,card), reduce?450:900);
+    });
   }
   function paintLensBoard(){
     const host=document.getElementById('lens-board'); if(!host) return;
-    const t=host.querySelector('[data-lb="title"]'); if(t) t.textContent=T('Eleven doors');
-    const s=host.querySelector('[data-lb="sub"]'); if(s) s.textContent=T('One way into each of the eleven questions, fanned like a hand of cards. Lift any card to read it, riffle to re-deal, then step through a door into the field of ideas around it.');
-    const dk=host.querySelector('#lens-deck'); if(dk) dk.setAttribute('aria-label',T('Eleven doors'));
+    const t=host.querySelector('[data-lb="title"]'); if(t) t.textContent=T('Where will you begin?');
+    const s=host.querySelector('[data-lb="sub"]'); if(s) s.textContent=T('One card for each of the eleven great questions. Lift a card to read it, riffle to re-deal, or let the cards choose for you — then step into the ideas around it.');
+    const dk=host.querySelector('#lens-deck'); if(dk) dk.setAttribute('aria-label',T('A hand of eleven question cards'));
     host.querySelectorAll('.lb-card').forEach(card=>{
       const q=qById[card.dataset.qid], c=cById[card.dataset.cid]; if(!q||!c) return;
       const count=D.concepts.filter(x=>x.q===q.id).length, sign=DOOR_SIGN[q.id]||'';
@@ -1292,7 +1315,7 @@
     document.getElementById('lens-board').hidden=false;
     document.getElementById('lens-svg').style.visibility='hidden';
     document.getElementById('lens-cap').style.visibility='hidden';
-    // The board is one screen with one verb (pick a door): hide the graph-only
+    // The board is one screen with one verb (pick a card): hide the graph-only
     // top chrome (control bar + trail rail) and the graph hint so they can't compete.
     document.getElementById('lens-top').style.display='none';
     const hint=document.getElementById('lens-hint'); if(hint) hint.style.display='none';
