@@ -168,7 +168,7 @@ eq($$('#tl-svg .tl-lane-lab').map(l=>l.dataset.q).join(' '), D.questions.map(q=>
   'timeline lanes are in fixed canonical question order (not sorted by recurrence)');
 eq($$('#tl-svg .tl-band').length, D.questions.length, 'each lane has a temporal density band');
 assert($$('#tl-svg .tl-band').every(b=>(b.getAttribute('d')||'').length>10), 'every density band has geometry');
-const STINK={'handed-off':'#5fc7b8','hardened':'#86c08a','live-rivals':'#d9b65f','open':'#c3c7cf','dissolved':'#9aa3bd'};
+const STINK={'handed-off':'#c98a52','hardened':'#9a8fb0','live-rivals':'#d9b65f','open':'#c3c7cf','dissolved':'#9aa3bd'};
 assert($$('#tl-svg .tl-lane-lab').every(l=>l.style.fill===STINK[D.questions.find(q=>q.id===l.dataset.q).status]),
   'lane label colour encodes epistemic status (not region/hue)');
 eq($$('#m-timeline .tl-stkey .row').length, 5, 'timeline legend keys all five status colours');

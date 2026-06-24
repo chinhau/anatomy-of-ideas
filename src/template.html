@@ -96,8 +96,8 @@
   .q-why{font-size:11px;color:var(--parchment-dim);line-height:1.5;max-width:220px;margin-top:5px;
     border-left:1px solid var(--st);padding-left:8px;opacity:0.9;}
   /* state inks — gold reserved for "live rivals" (the mission's heartbeat) */
-  [data-state="handed-off"]{--st:#5fc7b8;}
-  [data-state="hardened"]{--st:#86c08a;}
+  [data-state="handed-off"]{--st:#c98a52;}
+  [data-state="hardened"]{--st:#9a8fb0;}
   [data-state="live-rivals"]{--st:#d9b65f;}
   [data-state="open"]{--st:#c3c7cf;}
   [data-state="dissolved"]{--st:#9aa3bd;}
@@ -883,9 +883,9 @@
   // Each state carries a colour (gold is reserved for "live rivals", the
   // mission's heartbeat) and a glyph, so the signal survives without colour.
   const STATES={
-    'handed-off': {glyph:'\u2192', ink:'#5fc7b8', label:'Handed off to science',
+    'handed-off': {glyph:'\u2192', ink:'#c98a52', label:'Handed off to science',
       defn:'The empirical core migrated to a science that now constrains it; a metaphysical residue can remain.'},
-    'hardened':   {glyph:'\u25C6', ink:'#86c08a', label:'Hardened within a frame',
+    'hardened':   {glyph:'\u25C6', ink:'#9a8fb0', label:'Hardened within a frame',
       defn:'A durable consensus formed inside a frame; some sub-questions are genuinely closed.'},
     'live-rivals':{glyph:'\u21C4', ink:'#d9b65f', label:'Live rivals',
       defn:'Mature, articulate positions that argue on and have not converged.'},

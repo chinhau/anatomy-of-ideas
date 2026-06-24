@@ -64,7 +64,8 @@ hand-engraved codex of cosmology, *not* a fantasy-novel prop or a theme-park.
 | `--muted` | `#9aa3bd` | tertiary, captions |
 | `--rule` | `#2a3354` | hairlines / frames |
 | `--hatch` | 45° 0.045-alpha repeat | engraved "tooth" texture |
-| `--oppose/--echo/--affirm` | `#d8505c / #5fc7b8 / #86c08a` | semantic trio — **the weakest part of the palette** (reads as generic UI status; re-pitch toward mineral inks) |
+| `--oppose/--echo/--affirm` | `#c75a45 / #7da0e0 / →parchment-dim` | relation inks — minium red (rejects) + muted azurite (echoes); **builds is neutral parchment**, carried by dash + glyph, not hue |
+| status inks (5-state) | `#c98a52 / #9a8fb0 / #d9b65f / #c3c7cf / #9aa3bd` | epistemic taxonomy — handed-off (raw sienna) / hardened (amethyst) / live-rivals (gold, heartbeat) / open (silver) / dissolved (muted); a *separate axis* from relations |
 
 Typefaces: **Cormorant Garamond** (display serif — titles, italic glosses;
 floor ≈ 16px, it goes spindly below that) + **Inter** (all UI chrome / labels /
