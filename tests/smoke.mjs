@@ -23,6 +23,10 @@ global.window=window; global.document=window.document;
 global.SVGElement=window.SVGElement; global.Element=window.Element; global.HTMLElement=window.HTMLElement;
 global.localStorage=window.localStorage; global.location=window.location; global.history=window.history;
 window.d3=d3; window.matchMedia=()=>({matches:false,addEventListener(){}}); global.matchMedia=window.matchMedia;
+// d3-zoom/d3-drag reference a bare `navigator` for touch detection. Node 21+ has a
+// global navigator (so this is a no-op locally), but Node 20 has none — inject
+// jsdom's so the timeline/constellation builds don't throw `navigator is not defined`.
+if(typeof navigator==='undefined') global.navigator=window.navigator;
 window.requestAnimationFrame=cb=>setTimeout(()=>cb(Date.now()),0);
 for(const id of ['m-questions','m-timeline','m-constellation','m-lens']){const el=window.document.getElementById(id);
   Object.defineProperty(el,'clientWidth',{value:1180,configurable:true});Object.defineProperty(el,'clientHeight',{value:640,configurable:true});}
