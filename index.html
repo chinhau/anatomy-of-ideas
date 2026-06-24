@@ -297,10 +297,10 @@
   .c-contested{color:var(--vermilion);font-weight:600;cursor:help;}
   .card .c-gloss{font-size:11.5px;line-height:1.46;color:var(--parchment-dim);}
   .card.dim{opacity:0.16;}
-  .card.related{box-shadow:0 0 0 1px var(--affirm),0 0 18px rgba(134,192,138,0.22);}
-  .card.related.rej{box-shadow:0 0 0 1px var(--oppose),0 0 18px rgba(216,80,92,0.25);}
-  .card.related.ech{box-shadow:0 0 0 1px var(--echo),0 0 18px rgba(95,199,184,0.25);}
-  .card.sel{box-shadow:0 0 0 2px var(--gold),0 0 26px rgba(217,182,95,0.4);background:rgba(217,182,95,0.07);}
+  .card.related{box-shadow:0 0 0 1px var(--affirm);}
+  .card.related.rej{box-shadow:0 0 0 1px var(--oppose);}
+  .card.related.ech{box-shadow:0 0 0 1px var(--echo);}
+  .card.sel{box-shadow:0 0 0 2px var(--gold);background:rgba(217,182,95,0.07);}
   .c-glyph{position:absolute;top:7px;right:9px;font-family:'Cormorant Garamond',serif;
     font-size:14px;line-height:1;opacity:0;pointer-events:none;transition:opacity .16s;}
   .card.related .c-glyph{opacity:0.9;color:var(--affirm);}
@@ -360,9 +360,9 @@
   .dr-gloss{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:18px;line-height:1.45;
     color:#ddd3bb;margin:0 0 18px;}
   .dr-think{font-size:11.5px;color:var(--parchment-dim);margin-bottom:20px;}
-  .dr-think b{color:var(--gold);font-weight:500;letter-spacing:0.1em;text-transform:uppercase;
+  .dr-think b{color:var(--ink);font-weight:500;letter-spacing:0.1em;text-transform:uppercase;
     font-size:9.5px;display:block;margin-bottom:4px;}
-  .dr-sec{margin:20px 0 2px;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);
+  .dr-sec{margin:20px 0 2px;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--ink);
     padding-bottom:5px;border-bottom:1px solid var(--rule);display:flex;align-items:baseline;gap:8px;}
   .dr-sec .sub{color:var(--muted);letter-spacing:0.05em;text-transform:none;font-size:10px;font-style:italic;
     font-family:'Cormorant Garamond',serif;}
@@ -429,8 +429,8 @@
   .clegend .lr:focus-visible{outline:none;box-shadow:0 0 0 1.5px var(--gold);}
   .clegend .lr.on{color:var(--gold);background:rgba(217,182,95,0.1);}
   .clegend .sw{width:9px;height:9px;border-radius:50%;flex:none;}
-  .clegend .rg{font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);
-    opacity:0.8;margin:7px 0 2px;}
+  .clegend .rg{font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--ink);
+    opacity:0.9;margin:7px 0 2px;}
   .clegend .rg .rmark{width:11px;height:11px;margin-right:5px;vertical-align:-1px;}
   .con-hint{position:absolute;bottom:16px;right:16px;font-size:10px;letter-spacing:.03em;
     color:var(--muted);opacity:.72;max-width:232px;text-align:right;line-height:1.5;
@@ -472,10 +472,10 @@
   /* First-run hand-off: a single quiet glance toward "How to read this".
      Under prefers-reduced-motion the keyframes are suppressed globally, so the
      class still leaves a static gold highlight for the same brief window. */
-  .hbtn.nudge{color:var(--gold);border-color:var(--gold);box-shadow:0 0 0 1px var(--gold),0 0 12px rgba(217,182,95,.4);
+  .hbtn.nudge{color:var(--gold);border-color:var(--gold);box-shadow:0 0 0 1px var(--gold);
     animation:about-nudge 1.5s ease 2;}
-  @keyframes about-nudge{0%,100%{box-shadow:0 0 0 1px rgba(217,182,95,.25),0 0 0 rgba(217,182,95,0);}
-    45%{box-shadow:0 0 0 1px var(--gold),0 0 13px rgba(217,182,95,.55);}}
+  @keyframes about-nudge{0%,100%{box-shadow:0 0 0 1px rgba(217,182,95,.3);}
+    45%{box-shadow:0 0 0 2px var(--gold);}}
   #lens-random{display:inline-flex;align-items:center;gap:6px;}
   .rdie{flex:0 0 auto;opacity:.85;transform:rotate(-8deg);transition:transform .18s,opacity .18s;}
   #lens-random:hover .rdie{opacity:1;transform:rotate(8deg);}
@@ -500,8 +500,8 @@
   .flt-head button{background:none;border:none;color:var(--parchment-dim);font-size:20px;cursor:pointer;line-height:1;}
   .flt-head button:hover{color:var(--parchment);}
   .flt-body{padding:14px 18px;}
-  .flt-sec{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);
-    opacity:.8;margin:16px 0 8px;}
+  .flt-sec{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink);
+    opacity:.9;margin:16px 0 8px;}
   .flt-sec:first-child{margin-top:0;}
   .flt-pills{display:flex;flex-wrap:wrap;gap:6px;}
   .flt-pill{font-size:11px;padding:5px 10px;border:1px solid var(--rule);border-radius:20px;
@@ -531,7 +531,7 @@
   .wlegend .row{display:flex;align-items:center;gap:7px;padding:1.5px 0;}
   .wlegend .ln{width:16px;border-top:2px solid transparent;flex:none;}
   .wlegend .sw{width:9px;height:9px;border-radius:2px;flex:none;}
-  .wlegend .hd{font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold);opacity:.85;
+  .wlegend .hd{font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:var(--ink);opacity:.95;
     margin:8px 0 2px;border-top:1px solid var(--rule);padding-top:7px;}
   #tl-svg .tl-axis{stroke:var(--rule);stroke-width:1;}
   #tl-svg .tl-tick{font-size:10px;fill:var(--muted);letter-spacing:.08em;}
@@ -567,8 +567,8 @@
   /* keyboard focus rings on interactive SVG nodes */
   .tl-node:focus,.cnode:focus,
   .tl-node:focus-visible,.cnode:focus-visible{outline:none;}
-  .tl-node:focus circle,.cnode:focus circle{
-    stroke:var(--gold);stroke-width:2.5px;}
+  .tl-node:focus circle,.cnode:focus circle,.cnode circle.focal{
+    stroke:var(--gold);stroke-width:2.5px;paint-order:stroke;}
   .tl-node:focus text,.cnode:focus text{opacity:.95 !important;}
 
   /* empty-state (no ideas match filters) */
@@ -605,11 +605,11 @@
     background:linear-gradient(180deg,var(--void-2),var(--void));border:1px solid var(--panel-edge);
     border-radius:5px;padding:30px 32px 34px;box-shadow:0 30px 80px rgba(0,0,0,.6);}
   #about-panel h2{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:26px;margin:0 0 4px;}
-  #about-panel .sub{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);
-    opacity:.85;margin-bottom:16px;}
+  #about-panel .sub{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink);
+    opacity:.95;margin-bottom:16px;}
   #about-panel p{font-size:13.5px;line-height:1.62;color:var(--parchment-dim);margin:0 0 13px;}
   #about-panel p b{color:var(--parchment);font-weight:500;}
-  #about-panel h3{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);
+  #about-panel h3{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink);
     margin:20px 0 7px;padding-bottom:5px;border-bottom:1px solid var(--rule);}
   #about-panel ul{margin:0 0 13px;padding-left:18px;}
   #about-panel li{font-size:12.5px;line-height:1.55;color:var(--parchment-dim);margin-bottom:5px;}
@@ -12438,10 +12438,7 @@
   function buildLens(){
     if(lensBuilt) return; lensBuilt=true;
     lsvg=d3.select('#lens-svg');
-    const defs=lsvg.append('defs');
-    const g=defs.append('filter').attr('id','lglow').attr('x','-60%').attr('y','-60%').attr('width','220%').attr('height','220%');
-    g.append('feGaussianBlur').attr('stdDeviation','3.5').attr('result','b');
-    const me=g.append('feMerge'); me.append('feMergeNode').attr('in','b'); me.append('feMergeNode').attr('in','SourceGraphic');
+    lsvg.append('defs');
     lworld=lsvg.append('g'); llinkG=lworld.append('g'); lnodeG=lworld.append('g');
     lsvg.on('click',()=>{ if(selected) closeDrawer(); });
     document.getElementById('lens-explore').onclick=()=>setLensMode('explore');
@@ -12519,7 +12516,7 @@
     ndA.on('click',(e,d)=>{ e.stopPropagation(); d.focus?openConcept(d.id):focusLens(d.id,d.type); })
       .on('keydown',(e,d)=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); e.stopPropagation();
         d.focus?openConcept(d.id):focusLens(d.id,d.type); } });
-    ndA.select('circle').attr('r',d=>d.r).attr('fill',d=>d.c.color).attr('filter',d=>d.focus?'url(#lglow)':null);
+    ndA.select('circle').attr('r',d=>d.r).attr('fill',d=>d.c.color);
     // Anchor each neighbour's label to its side of the focus so adjacent labels near
     // the vertical axis (top/bottom of the ring) splay apart instead of overlapping.
     ndA.select('text')
@@ -13289,9 +13286,6 @@
     const W=host.clientWidth||window.innerWidth, H=host.clientHeight||window.innerHeight;
     csvg=d3.select('#con-svg').attr('viewBox',`0 0 ${W} ${H}`);
     const defs=csvg.append('defs');
-    const gl=defs.append('filter').attr('id','cglow').attr('x','-60%').attr('y','-60%').attr('width','220%').attr('height','220%');
-    gl.append('feGaussianBlur').attr('stdDeviation','3.4').attr('result','b');
-    const me=gl.append('feMerge'); me.append('feMergeNode').attr('in','b'); me.append('feMergeNode').attr('in','SourceGraphic');
     defs.append('marker').attr('id','carr').attr('viewBox','0 -5 10 10').attr('refX',9).attr('refY',0)
       .attr('markerWidth',5).attr('markerHeight',5).attr('orient','auto')
       .append('path').attr('d','M0,-4L9,0L0,4').attr('fill','#9aa3bd').attr('opacity',0.7);
@@ -13387,13 +13381,13 @@
   function currentConK(){return csvg?d3.zoomTransform(csvg.node()).k:1;}
   function conHighlight(id){
     if(!cnode)return;
-    if(!id){ cnode.classed('faded',false).select('circle').attr('filter',null);
+    if(!id){ cnode.classed('faded',false).select('circle').classed('focal',false);
       cnode.selectAll('text').classed('show',d=>d.type==='school'||d.big||currentConK()>1.7);
       clink.classed('faded',false); return; }
     const keep=new Set([id,...(aAdj.get(id)||[]).map(e=>e.other)]);
     cnode.classed('faded',d=>!keep.has(d.id));
     cnode.selectAll('text').classed('show',d=>keep.has(d.id)||d.type==='school'||d.big);
-    cnode.select('circle').attr('filter',d=>d.id===id?'url(#cglow)':null);
+    cnode.select('circle').classed('focal',d=>d.id===id);
     clink.classed('faded',l=>!(((l.source.id||l.source)===id)||((l.target.id||l.target)===id)));
   }
   // Clicking a school/tradition in the bottom-left legend lights up just the stars
