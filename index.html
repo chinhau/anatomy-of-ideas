@@ -12154,7 +12154,7 @@
         const gly=el.querySelector('.c-glyph');
         if(cid===id) el.classList.add('sel');
         else if(rel[cid]){ el.classList.add('related');
-          if(rel[cid]==='rejects'){ el.classList.add('rej'); if(gly) gly.textContent='↯'; }
+          if(rel[cid]==='rejects'){ el.classList.add('rej'); if(gly) gly.textContent='≠'; }
           else if(rel[cid]==='echoes'){ el.classList.add('ech'); if(gly) gly.textContent='≈'; }
           else if(gly){ gly.textContent='＋'; } }
         else el.classList.add('dim');
