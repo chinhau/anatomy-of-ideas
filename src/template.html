@@ -162,8 +162,7 @@
     filter:brightness(var(--p-bri)) contrast(var(--p-con)) url(#cameo);}
   .dr-sigil{width:100%;height:100%;display:block;}
   .dr-sigil path,.dr-sigil circle{fill:none;stroke:var(--reg);stroke-width:1.1;
-    stroke-linecap:round;stroke-linejoin:round;opacity:0.8;
-    filter:drop-shadow(0 0 5px color-mix(in srgb,var(--reg) 40%, transparent));}
+    stroke-linecap:round;stroke-linejoin:round;opacity:0.8;}
   /* small engraved region mark — same West/Psyche/East shapes as .dr-sigil, kept
      quiet in --ink so region is read off the shape, never gold (guardrail 3). */
   .rmark{width:13px;height:13px;flex:none;display:inline-block;vertical-align:-2px;}
@@ -172,9 +171,8 @@
   .dr-head h2{font-family:'EB Garamond',serif;font-weight:600;font-size:28px;line-height:1.05;margin:0;}
   .dr-seal{position:absolute;right:20px;bottom:14px;width:34px;height:34px;opacity:0;transition:opacity .25s;}
   .dr-seal.on{opacity:0.8;}
-  .dr-seal svg{width:100%;height:100%;display:block;}
-  .dr-seal path,.dr-seal circle{fill:none;stroke:var(--gold);stroke-width:0.6;
-    filter:drop-shadow(0 0 3px rgba(217,182,95,0.28));}
+  .dr-seal svg{width:100%;height:100%;display:block;filter:drop-shadow(0 0.6px 0 rgba(0,0,0,0.55));}
+  .dr-seal path,.dr-seal circle{fill:none;stroke:var(--gold);stroke-width:0.6;}
   .dr-seal .seal-pin{fill:var(--gold);stroke:none;}
   .dr-meta{font-size:11px;color:var(--muted);margin-top:7px;}
   .dr-body{padding:18px 24px 50px;overflow-y:auto;}
@@ -926,10 +924,6 @@
           values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.05 0"/>
         <feComposite in="ng" in2="duo" operator="in" result="grain"/>
         <feBlend in="duo" in2="grain" mode="overlay" result="grained"/>
-        <feGaussianBlur in="grained" stdDeviation="5" result="halo"/>
-        <feColorMatrix in="halo" type="matrix" result="goldhalo"
-          values="0 0 0 0 0.851  0 0 0 0 0.714  0 0 0 0 0.373  0 0 0 0.42 0"/>
-        <feMerge><feMergeNode in="goldhalo"/><feMergeNode in="grained"/></feMerge>
       </filter>
     </defs></svg>
   </div>
