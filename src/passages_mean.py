@@ -29,8 +29,11 @@ current commercial translations. See docs/PASSAGES.md for the provenance ledger.
 
 PASSAGES = {
 
-# Homer / The Heroic Code — Sarpedon to Glaucus on why mortal men still charge.
-# Butler's 1898 prose is public domain; byte-matched to Project Gutenberg #2199.
+# Homer / The Heroic Code — a TRUE pair on an OPEN question: Sarpedon affirms the
+# code (mortal men charge precisely because death is unavoidable — win glory or
+# yield it), then Achilles rejects it to the embassy (a life outweighs all the
+# treasure of Troy; cattle can be raided back, a life cannot). Two rival passages,
+# not one verdict. Both Butler 1898 PD, byte-matched to Project Gutenberg #2199.
 "The Heroic Code": [
   {
     "text": "My good friend, if, when we were once out of this fight, we could "
@@ -44,6 +47,23 @@ PASSAGES = {
     "translator": "Samuel Butler",
     "edition_year": "1898",
     "locator": "Book XII — Sarpedon to Glaucus",
+    "source": "Project Gutenberg #2199 (Butler prose translation)",
+    "source_url": "https://www.gutenberg.org/cache/epub/2199/pg2199.txt",
+    "rights": "PD",
+    "book_url": "https://www.gutenberg.org/ebooks/2199",
+  },
+  {
+    "text": "My life is more to me than all the wealth of Ilius while it was yet "
+            "at peace before the Achaeans went there, or than all the treasure "
+            "that lies on the stone floor of Apollo\u2019s temple beneath the "
+            "cliffs of Pytho. Cattle and sheep are to be had for harrying, and a "
+            "man buy both tripods and horses if he wants them, but when his life "
+            "has once left him it can neither be bought nor harried back again.",
+    "author": "Homer",
+    "work": "The Iliad",
+    "translator": "Samuel Butler",
+    "edition_year": "1898",
+    "locator": "Book IX — Achilles to the embassy",
     "source": "Project Gutenberg #2199 (Butler prose translation)",
     "source_url": "https://www.gutenberg.org/cache/epub/2199/pg2199.txt",
     "rights": "PD",
