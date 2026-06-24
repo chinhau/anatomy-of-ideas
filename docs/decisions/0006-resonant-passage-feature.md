@@ -129,13 +129,25 @@ fight is sidestepped, not fought):
   Snorri / Ragnarök.
 - **No** ache wall, **no** `aches.json`, **no** ache taxonomy, **no** verification
   badges-as-feature, **no** context lines, **no** two-door model. All deferred.
-- **Exercise the hardest rule on day one.** The literary/`mean` skew above
-  conveniently dodges plural-or-none. To stop the pilot from grading itself on the
-  easy case, it must include **≥1 `open` / `live-rivals` concept shipped with ≥2
-  genuinely rival PD passages** (e.g. free will, or the self), proving the
-  plural-or-none machinery before we trust it. Log the pilot's tradition/era
-  distribution so the PD-availability bias toward Western/ancient texts is visible
-  and corrected, not hidden — the MISSION's even-handedness is a release gate.
+- **Exercise the hardest rule — but it cannot be done with real PD content, so
+  prove it in code instead.** SCOPING FINDING (2026-06-23): the data encodes rival
+  positions as *separate* concepts (Hard Determinism / Libertarian Free Will /
+  Compatibilism are three concepts, each `contested=False`), so the
+  plural-rivals-*within-one-concept* rule only bites on the **6 `contested=True`
+  concepts — all of which are modern and in-copyright** (Metzinger / Ego Tunnel,
+  Hoffman / Case Against Reality, Libet / Readiness Potential, +3). **A contested
+  concept with ≥2 rival *PD* passages does not exist.** Resolution: Phase 1 ships
+  single-passage non-contested concepts (the rule permits one passage for
+  non-contested), the plural-or-none guard is **enforced by a smoke-test assertion**
+  (`contested ⇒ passages.length ≥ 2 or none`) so the machinery is proven by code,
+  and the live ≥2-rival demonstration is **deferred to the first contested concept**
+  — which will fall in the in-copyright phase. This is flagged openly, not dodged.
+  Still log the pilot's tradition/era distribution so the PD-availability bias
+  toward Western/ancient texts is visible — the MISSION's even-handedness is a gate.
+- **The 5-state badge isn't in the data — only a `contested` boolean is.** SCOPING
+  FINDING: "the passage inherits its concept's 5-state badge" degrades to inheriting
+  `contested` for now. Accepted for the pilot; building the full 5-state badge is
+  not a prerequisite (and would be its own decision).
 
 ### The in-copyright "Goodreads-norm" question is deferred, not decided
 The debate's loosen-vs-strict axis (whether to post short attributed *in-copyright*
@@ -202,6 +214,49 @@ Mirror the readings pipeline: author passages as Python tuples
 (`passages_mean.py`) merged into `ideas.json`; new drawer render + CSS; extend
 `tests/smoke.mjs` (assert passage-first order, gated rendering, provenance
 present, no empty-slot leakage).
+
+## Acceptance bar / definition of done (Phase 1)
+
+Set by a 2-agent quality pass (2026-06-23) so the feature ships only if users
+genuinely value it. The single load-bearing gate: **every passage must beat its
+note in a blind forced-choice, or it is cut** — the note already exists at ~2% of
+the cost, so a passage that merely ties is pure overhead.
+
+**Per-passage ship-gate (all must hold):**
+- PD edition **≤1930 incl. the translation's year**, recorded; **byte-matched** to a
+  Gutenberg/archive.org scan; complete colophon (author · work · translator/edition
+  · locator).
+- **Beats its note** in a blind attribution-stripped forced-choice. For
+  argumentative concepts (thinner margins — see the Homer 3–2 result), try a second
+  PD translation before shipping *or* rejecting.
+- No "answer/encapsulates" framing; **no second-person**; falsifiable / non-Barnum
+  (would not comfort just anyone); 40–120 words.
+
+**Feature-level "useful" bar:** no empty slots (gated render); the gloss stays
+present below the passage; **WCAG AA contrast (≥4.5:1)** on passage *and* colophon;
+mobile-legible at 360px; `index.html` stays under budget.
+
+**Kill conditions (stop / roll back, don't push through):** passages stop winning
+≥2/3 blind → supersede this ADR; any shipped passage reads as a settled *answer* to
+an open question; any passage fails byte-match; empty-slot / "coming soon" drift.
+
+**New `tests/smoke.mjs` assertions (the machine half of the bar):** passage-first
+DOM order; gated render / no empty slot; every provenance field present & non-empty;
+`source_url` matches `gutenberg.org`/`archive.org`; `edition_year < 1930`; no
+Loeb/OCT/Teubner in work/source; no second-person regex in passage text; no verdict
+words on non-settled concepts; **`contested ⇒ passages.length ≥ 2 or none`**
+(plural-or-none enforced in code even though no Phase-1 concept exercises it with
+real content); `index.html` size budget.
+
+**Per-passage provenance ledger:** record each verification (concept id, source_url
+deep link, locator, translator, edition_year, date verified) in `docs/PASSAGES.md`;
+reject any passage whose edition/translator/date/locator cannot all be pinned.
+
+**Post-ship validation (no analytics needed):** a 5–8 reader blind panel (passage
+vs note, "which makes you want to open the book?" + "would you click through?");
+maintainer cooling-week re-read (keep ≥80% unchanged); and the **north-star proxy** —
+listen for an *unprompted* "why am I only reading this now" in panel debrief on ≥2
+pilot concepts. Zero occurrences = the payload isn't landing.
 
 ## Rejected / deferred alternatives
 
