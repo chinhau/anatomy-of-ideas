@@ -2,7 +2,7 @@
 """Build index.html (at the repo root) from src/.
 
 Pipeline (deterministic, no network):
-  1. expand16.py — applies rounds 1–16 (… + Cārvāka/Māori/Andean + metaethics), writes src/ideas.json
+  1. expand17.py — applies rounds 1–17 (… + Cārvāka/Māori/Andean + metaethics + mind-body), writes src/ideas.json
   2. merge.py    — attaches ranked thinkers + readings, validates full coverage
   3. inject      — splices src/ideas.json + src/atlas_graph.json + the vendored D3/fonts
                    into src/template.html (escaping </ so embedded blobs can't close their
@@ -27,7 +27,7 @@ def run(script):
 
 def build_html():
     if not CHECK: print("1/3  Building ideas dataset…")
-    run("expand16.py")
+    run("expand17.py")
     if not CHECK: print("2/3  Attaching readings + validating…")
     run("merge.py")
     if not CHECK: print("3/3  Injecting data + vendored assets into template…")

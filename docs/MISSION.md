@@ -20,7 +20,7 @@ conversation, standing at a real frontier rather than alone in the dark.
 
 This atlas exists to show, **honestly**, where human thought actually stands on
 the great questions we keep asking — what has quietly settled, what
-we've only *sharpened*, and what stays genuinely open. It maps 281 ideas across
+we've only *sharpened*, and what stays genuinely open. It maps 285 ideas across
 eleven such questions and 2,500 years for the curious non-specialist (and the
 philosophy-literate skeptic), so a reader leaves seeing the inquiry as a
 navigable landscape with real frontiers — not a pile of opinions, and not a
