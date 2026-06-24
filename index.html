@@ -486,7 +486,7 @@
     overflow:auto;max-width:188px;line-height:1.5;}
   .clegend .lr{display:flex;align-items:center;gap:7px;padding:1.5px 4px;margin:0 -4px;border-radius:3px;
     color:var(--parchment-dim);cursor:pointer;transition:color .15s,background .15s;}
-  .clegend .lr:hover{color:var(--parchment);}
+  .clegend .lr:hover{color:var(--parchment);background:rgba(233,220,192,0.06);}
   .clegend .lr:focus-visible{outline:none;box-shadow:0 0 0 1.5px var(--gold);}
   .clegend .lr.on{color:var(--gold);background:rgba(217,182,95,0.1);}
   .clegend .sw{width:9px;height:9px;border-radius:50%;flex:none;}
@@ -13709,6 +13709,16 @@
     conLeg.addEventListener('click',e=>{ const r=e.target.closest('.lr[data-grp]'); if(r) toggleConGroup(r.dataset.grp); });
     conLeg.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){ const r=e.target.closest('.lr[data-grp]');
       if(r){ e.preventDefault(); toggleConGroup(r.dataset.grp); } } });
+    // Hovering/focusing a legend row previews that group — lights its stars, dims the
+    // rest — without pinning. This is the natural exploratory gesture (it mirrors the
+    // star hover) and makes the click-to-isolate affordance discoverable. A pinned
+    // group (conGroupSel) or open dossier (conSelected) takes precedence.
+    const legPreview=code=>{ if(conGroupSel||conSelected) return; code?conHighlightGroup(code):conHighlight(null); };
+    conLeg.addEventListener('mouseover',e=>{ const r=e.target.closest('.lr[data-grp]'); if(r) legPreview(r.dataset.grp); });
+    conLeg.addEventListener('mouseout',e=>{ const r=e.target.closest('.lr[data-grp]'); if(!r) return;
+      const to=e.relatedTarget&&e.relatedTarget.closest&&e.relatedTarget.closest('.lr[data-grp]'); if(to) return; legPreview(null); });
+    conLeg.addEventListener('focusin',e=>{ const r=e.target.closest('.lr[data-grp]'); if(r) legPreview(r.dataset.grp); });
+    conLeg.addEventListener('focusout',e=>{ const r=e.target.closest('.lr[data-grp]'); if(r) legPreview(null); });
     setTimeout(()=>fitCon(W,H),reduce?0:1600);
   }
   function fitCon(W,H){ if(!conNodes.length)return; const p=70;
