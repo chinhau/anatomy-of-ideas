@@ -93,6 +93,29 @@ jolt at ~2% of the cost (the 12 notes, `12234f7`). The note is the control; the
 passage must out-pull it to earn its much larger per-item cost. With no analytics,
 a blind forced-choice is the only honest decider.
 
+**Phase 0 RESULT (2026-06-23) — PASSED, with caveats.** Ran the blind forced-choice
+on the three concepts against a best-effort note *written in the shipped voice rule*
+(not the old dry note — so the passage had to beat the control at its best). Panel
+= 5 reader-proxy agents (casual / student / poetry-lover / skeptic / seeker), each
+shown the two texts as A/B with the verbatim passage's position randomised and
+unlabelled. Tally (passage vs note): **Tolstoy / Ivan Ilyich 5–0, Bashō / Yūgen
+5–0, Homer / Heroic Code 3–2** → passage won all three, decision rule (≥2 of 3
+decisively) cleared. Findings that shape Phase 1:
+- The win concentrates **where the prose *is* the datum** — Tolstoy's "quite, quite
+  separate from all others" and Bashō's bare frog crushed their glosses; readers
+  said the summary "explains away the mystery." Confirms the literary/aesthetic
+  scoping rule.
+- **Homer was the close one (3–2), and the split was about the *translation*** —
+  dissenters called Pope's 1720 couplets "varnish." For argumentative/heroic
+  concepts the PD-translation choice is a real quality lever (try Lang/Leaf/Myers
+  1883 or Butler 1898 prose); margins there are thinner than for aesthetic concepts.
+- **Bashō passed only because Aston 1899 is a clean PD English** — a 3-line haiku is
+  exactly where "the translation IS the work / modern renderings are in-copyright"
+  bites; not every aesthetic concept will have a usable PD rendering.
+- **Method caveat:** the panel is *agent reader-proxies*, not humans. Directional
+  green light only; the maintainer's own cooling-off-week read remains the real gate
+  before any concept ships.
+
 ### Phase 1 — the gated PD pilot (ONLY if Phase 0 passes)
 Build a **small, gated, public-domain pilot** — passage-first, honesty-first.
 **Scope it to literary/aesthetic concepts**, the segment where verbatim provably
