@@ -22,7 +22,11 @@ const {window}=dom;
 global.window=window; global.document=window.document;
 global.SVGElement=window.SVGElement; global.Element=window.Element; global.HTMLElement=window.HTMLElement;
 global.localStorage=window.localStorage; global.location=window.location; global.history=window.history;
-window.d3=d3; window.matchMedia=()=>({matches:false,addEventListener(){}}); global.matchMedia=window.matchMedia;
+// Report prefers-reduced-motion: the app then sets every D3 transition duration to 0
+// (template `dur=reduce?0:520`), so node enter/exit and zoom complete SYNCHRONOUSLY.
+// Without this, exiting lens nodes linger mid-transition under JSDOM and pollute later
+// DOM queries (e.g. `g.lnode:not(.focus)`), which made the lens assertions flaky.
+window.d3=d3; window.matchMedia=(q)=>({matches:/reduced-motion/.test(String(q)),addEventListener(){}}); global.matchMedia=window.matchMedia;
 // d3-zoom/d3-drag reference a bare `navigator` for touch detection. Node 21+ has a
 // global navigator (so this is a no-op locally), but Node 20 has none — inject
 // jsdom's so the timeline/constellation builds don't throw `navigator is not defined`.
@@ -127,12 +131,17 @@ eq($('#lens-trail').hidden, false, 'breadcrumb rail appears once you have walked
 eq($$('#lens-trail .lt-chip').length, 2, 'rail shows both concepts of the path');
 assert($('#lens-trail .lt-chip.cur')?.textContent!==focusName0, 'current chip names where you are now, not where you started');
 eq($$('#lens-trail .lt-chip.cur').length, 1, 'exactly one chip marked current');
-click($('#lens-random')); // serendipity dice — must keep a valid focus
-eq($$('#lens-svg g.lnode.focus').length, 1, 'random walk keeps a single focus');
-assert($$('#lens-trail .lt-chip').length>=2, 'random walk extends the path');
 // rewind by clicking the first breadcrumb chip → back to the start, rail collapses
 click($$('#lens-trail .lt-chip')[0]);
 eq($('#lens-trail').hidden, true, 'clicking the first chip rewinds the path to a single concept');
+// serendipity dice. Run it from the single-concept start, NOT a multi-node path:
+// the walk always targets a concept != the current focus, and here the focus is the
+// only visited node, so the step can only EXTEND (from a longer path a random hop can
+// land on an already-visited node, which correctly rewinds the trail — so "extends"
+// is only a deterministic invariant from a length-1 path).
+click($('#lens-random'));
+eq($$('#lens-svg g.lnode.focus').length, 1, 'random walk keeps a single focus');
+assert($$('#lens-trail .lt-chip').length>=2, 'random walk extends the path');
 // guided tour (the rail is an Explore-mode notion; it hides in Tour)
 click($('#lens-tour'));
 eq($('#lens-trail').hidden, true, 'breadcrumb rail is hidden during the guided tour');
@@ -387,7 +396,7 @@ eq($('#m-questions .card .c-id')?.textContent, firstCardName, 'concept names res
   global.window=w; global.document=w.document;
   global.SVGElement=w.SVGElement; global.Element=w.Element; global.HTMLElement=w.HTMLElement;
   global.localStorage=w.localStorage; global.location=w.location; global.history=w.history;
-  w.d3=d3; w.matchMedia=()=>({matches:false,addEventListener(){}}); global.matchMedia=w.matchMedia;
+  w.d3=d3; w.matchMedia=(q)=>({matches:/reduced-motion/.test(String(q)),addEventListener(){}}); global.matchMedia=w.matchMedia;
   w.requestAnimationFrame=cb=>setTimeout(()=>cb(Date.now()),0);
   for(const id of ['m-timeline','m-lens','m-constellation']){const el=w.document.getElementById(id);
     Object.defineProperty(el,'clientWidth',{value:1180,configurable:true});Object.defineProperty(el,'clientHeight',{value:640,configurable:true});}
