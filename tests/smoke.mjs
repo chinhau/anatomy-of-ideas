@@ -251,6 +251,47 @@ if(mixed){ openByName(mixed.id);
   eq($$('#dr-readings .reading .badge').length, (mixed.readings||[]).filter(r=>r.kind!=='Primary').length, 'only companion (non-Primary) readings carry a badge');
   assert(!$$('#dr-readings .reading')[0].querySelector('.badge'), 'the leading (Primary) reading is unmarked'); }
 
+// RESONANT PASSAGES (ADR 0006, bounded B): the payload, rendered first, gated,
+// honesty-bounded. The machine half of the acceptance bar.
+const qById_={}; (D.questions||[]).forEach(q=>qById_[q.id]=q);
+const SETTLED=new Set(['handed-off','hardened']);
+const RIGHTS=new Set(['PD','in-copyright-fair-use']);
+const VERDICT=/\b(prove[sn]?|proven|encapsulat|the answer|solved|refute[sd]?)\b/i;
+const passageCs=D.concepts.filter(c=>c.passages&&c.passages.length);
+assert(passageCs.length>=1,'at least one concept carries a resonant passage (pilot is live)');
+for(const c of passageCs){
+  // plural-or-none: a contested concept must ship >=2 rival passages, never one.
+  assert(!c.contested||c.passages.length>=2, `contested concept "${c.id}" ships >=2 rival passages or none (got ${c.passages.length})`);
+  const settled=SETTLED.has(qById_[c.q]?.status);
+  for(const p of c.passages){
+    for(const f of ['text','author','work','edition_year','locator','source','rights'])
+      assert(typeof p[f]==='string'&&p[f].trim().length>0, `passage on "${c.id}" has non-empty ${f}`);
+    assert(RIGHTS.has(p.rights), `passage on "${c.id}" has a valid rights tier (got ${JSON.stringify(p.rights)})`);
+    // PD passages must record a (byte-matchable) scan/source URL.
+    if(p.rights==='PD') assert((p.source_url||'').trim().length>0, `PD passage on "${c.id}" records a source_url`);
+    assert(p.text.split(/\s+/).length<=100, `passage on "${c.id}" is <=100 words (bounded B)`);
+    // critical/scholarly editions carry fresh editorial copyright — never cite them.
+    assert(!/\b(Loeb|Oxford Classical Text|Teubner|OCT)\b/i.test([p.work,p.source,p.translator].join(' ')), `passage on "${c.id}" cites no Loeb/OCT/Teubner critical edition`);
+    // no verdict words smuggling a "proven answer" onto an unsettled question.
+    if(!settled) assert(!VERDICT.test(p.text), `passage on unsettled "${c.id}" uses no verdict word`);
+  }
+}
+// PASSAGE-FIRST: in the drawer markup the passage block precedes the gloss.
+const drBody=$('.dr-body');
+const kids=[...drBody.children].map(e=>e.id);
+assert(kids.indexOf('dr-passage')>-1 && kids.indexOf('dr-passage')<kids.indexOf('dr-gloss'),'passage renders first in the drawer, above the gloss');
+// GATED RENDER: a concept WITH a passage shows the block (not display:none); a
+// concept WITHOUT one hides it entirely — no empty slot, ever.
+openByName(passageCs[0].id);
+assert(!$('#dr-passage').hasAttribute('hidden'),'a concept with a passage reveals the passage block');
+eq(window.getComputedStyle($('#dr-passage')).display!=='none',true,'the revealed passage is actually displayed');
+assert($('#dr-passage .pq')!=null && $('#dr-passage .pq').textContent.trim().length>0,'the passage text renders');
+assert($('#dr-passage .pcol')!=null,'the passage carries a provenance colophon');
+const noPassage=D.concepts.find(c=>!(c.passages&&c.passages.length));
+openByName(noPassage.id);
+assert($('#dr-passage').hasAttribute('hidden'),'a concept with no passage hides the block (no empty slot)');
+eq(window.getComputedStyle($('#dr-passage')).display,'none','the empty passage block is truly display:none');
+
 // FOIL (argues against)
 openByName('Modern Virtue Ethics');
 assert(($('#dr-foil')?.textContent||'').length>0, 'foil shown for a concept that rejects others');
@@ -351,6 +392,10 @@ eq($('#m-questions .card .c-id')?.textContent, firstCardName, 'concept names res
   assert(q2('.cregion').some(t=>hasCJK(t.textContent)),'constellation built cold under zh shows localized region headings');
   assert(q2('.clegend .rg').some(t=>hasCJK(t.textContent)),'constellation legend headings localise under zh');
 }
+
+// SIZE BUDGET: the single-file artifact must stay deployable-small. Passages are
+// authored text, so growth is bounded — guard against an accidental blow-up.
+assert(Buffer.byteLength(html,'utf8')<=3_300_000, `index.html stays under the 3.3MB budget (got ${Buffer.byteLength(html,'utf8')})`);
 
 console.log(`SMOKE OK — ${PASS} assertions passed.`);
 // Do NOT force exit. The known async d3-zoom error is swallowed by the

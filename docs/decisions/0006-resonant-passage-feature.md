@@ -289,10 +289,15 @@ an open question; any passage fails byte-match; empty-slot / "coming soon" drift
 passage-first DOM order; gated render / no empty slot; every provenance field
 present & non-empty; **`rights ∈ {PD, in-copyright-fair-use}`** (replaces the old
 `source_url`-must-be-gutenberg / `edition_year < 1930` gates); no Loeb/OCT/Teubner
-in work/source; passage length ≤ ~100 words; no second-person regex in passage text;
-no verdict words on non-settled concepts; **`contested ⇒ passages.length ≥ 2 or
-none`** (plural-or-none enforced in code even though no Phase-1 concept exercises it
-with real content); `index.html` size budget.
+in work/source; passage length ≤ ~100 words; no verdict words on non-settled
+concepts; **`contested ⇒ passages.length ≥ 2 or none`** (plural-or-none enforced in
+code even though no Phase-1 concept exercises it with real content); `index.html`
+size budget. **SCOPING FINDING (2026-06-23):** the planned blanket *no-second-person
+regex on passage text* was dropped — it false-positives on legitimate **quoted
+intra-narrative dialogue** (Homer's Sarpedon tells Glaucus "nor bid *you* do so").
+The rule's real target is *our* authored reader-flattery (Barnum "at times you
+feel…"), not the author's verbatim words; it stays an **authoring discipline**
+(checked at curation, logged in `docs/PASSAGES.md`), not a machine assertion.
 
 **Per-passage provenance ledger:** record each verification (concept id, source_url
 deep link, locator, translator, edition_year, date verified) in `docs/PASSAGES.md`;

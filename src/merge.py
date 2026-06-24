@@ -20,6 +20,7 @@ from readings_extra16 import EXTRA16 as _EX16
 from readings_extra17 import EXTRA17 as _EX17
 from readings_extra18 import EXTRA18 as _EX18
 from readings_extra19 import EXTRA19 as _EX19
+from passages_mean import PASSAGES
 RD = {**_RD, **_EX, **_EX2, **_EX3, **_EX4, **_EX5, **_EX6, **_EX7, **_EX8, **_EX9, **_EX10, **_EX11, **_EX12, **_EX13, **_EX14, **_EX15, **_EX16, **_EX17, **_EX18, **_EX19}
 
 ideas = json.load(open('ideas.json', encoding='utf-8'))
@@ -32,6 +33,13 @@ if missing:
     raise SystemExit("NO READINGS for: " + ", ".join(missing))
 if extra:
     raise SystemExit("READINGS reference unknown concept: " + ", ".join(extra))
+
+# Passages are OPTIONAL (a gated pilot, ADR 0006) — missing is fine, but an
+# unknown concept id is a typo and fatal. Plural-or-none for contested concepts
+# is enforced downstream in tests/smoke.mjs.
+p_extra = sorted(set(PASSAGES.keys()) - ids)
+if p_extra:
+    raise SystemExit("PASSAGES reference unknown concept: " + ", ".join(p_extra))
 
 # Honest reading order: lead with the primary text (Adler — read the source
 # before commentary), then the inspectional/secondary apparatus. Stable, so the
@@ -47,6 +55,11 @@ for c in ideas['concepts']:
         {"author": a, "title": t, "year": y, "kind": k, "note": n}
         for (a, t, y, k, n) in ordered
     ]
+    # Resonant passages — attach only where one exists and is non-empty, so the
+    # drawer never renders an empty slot (ADR 0006: gated render).
+    ps = PASSAGES.get(c['id'])
+    if ps:
+        c['passages'] = ps
 
 # Derived "works the atlas keeps returning to": readings that land on two or more
 # concepts. Pure aggregation — no editorial weighting, it just surfaces the texts

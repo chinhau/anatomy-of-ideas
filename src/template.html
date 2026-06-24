@@ -173,6 +173,20 @@
   .dr-body{padding:18px 24px 50px;overflow-y:auto;}
   .dr-gloss{font-family:'EB Garamond',serif;font-style:italic;font-size:18px;line-height:1.45;
     color:#ddd3bb;margin:0 0 18px;}
+  /* Resonant passage (ADR 0006): the payload, rendered first and full-contrast.
+     One hairline rule, a quiet provenance colophon, a non-affiliate book pointer.
+     No glow, no card, no faint context — the words carry it. */
+  .dr-passage{margin:4px 0 22px;}
+  #dr-passage[hidden]{display:none;}
+  .dr-passage .pq{font-family:'EB Garamond',serif;font-size:21px;line-height:1.52;
+    color:var(--parchment);margin:0 0 13px;}
+  .dr-passage .pcol{border-top:1px solid var(--rule);padding-top:9px;font-size:11.5px;
+    line-height:1.55;color:var(--parchment-dim);}
+  .dr-passage .pcol .pwork{font-style:italic;}
+  .dr-passage .pcol .psep{opacity:0.55;margin:0 6px;}
+  .dr-passage .pbook{display:inline-block;margin-top:7px;font-size:11.5px;
+    color:var(--parchment);text-decoration:none;border-bottom:1px solid var(--ink);}
+  .dr-passage .pbook:hover{border-bottom-color:var(--parchment);}
   .dr-think{font-size:11.5px;color:var(--parchment-dim);margin-bottom:20px;}
   .dr-think b{color:var(--ink);font-weight:500;letter-spacing:0.1em;text-transform:uppercase;
     font-size:9.5px;display:block;margin-bottom:4px;}
@@ -891,6 +905,7 @@
         <div class="dr-status" id="dr-status"></div>
       </div>
       <div class="dr-body">
+        <div class="dr-passage" id="dr-passage" hidden></div>
         <p class="dr-gloss" id="dr-gloss"></p>
         <div id="dr-contested" hidden><span class="tag">Contested</span><span>A minority or actively disputed position in its field — presented here among genuine rivals, not as consensus.</span></div>
         <div id="dr-practice" hidden><span class="tag" data-i18n="Practice">Practice</span><span data-i18n="A discipline you perform, not only a thesis you hold — here the teaching is the exercise itself.">A discipline you perform, not only a thesis you hold — here the teaching is the exercise itself.</span></div>
@@ -1015,6 +1030,28 @@
     const cbadge=document.getElementById('dr-contested'); if(cbadge) cbadge.toggleAttribute('hidden',!c.contested);
     const pbadge=document.getElementById('dr-practice'); if(pbadge) pbadge.toggleAttribute('hidden',!c.practice);
     const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    // Resonant passage — the payload, rendered first and only where one exists
+    // (gated; no empty slot). Provenance colophon + a quiet, non-affiliate book
+    // pointer. See ADR 0006.
+    const pw=document.getElementById('dr-passage');
+    const ps=(c.passages&&c.passages.length)?c.passages:null;
+    if(ps){
+      pw.innerHTML = ps.map(p=>{
+        const trans = p.translator ? `trans. ${esc(p.translator)}` : '';
+        const cite = [esc(p.author), `<span class="pwork">${esc(p.work)}</span>`,
+                      [trans, esc(p.edition_year)].filter(Boolean).join(' '),
+                      esc(p.locator)].filter(Boolean)
+                      .join('<span class="psep">·</span>');
+        const book = p.book_url
+          ? `<a class="pbook" href="${esc(p.book_url)}" target="_blank" rel="noopener">${esc0(T('Read the whole thing'))} →</a>`
+          : '';
+        return `<blockquote class="pq">${esc(p.text)}</blockquote>`+
+               `<div class="pcol">${cite}</div>${book}`;
+      }).join('<div style="height:18px"></div>');
+    } else {
+      pw.innerHTML='';
+    }
+    pw.toggleAttribute('hidden', !ps);
     const tw=document.getElementById('dr-thinkers');
     tw.innerHTML = (c.thinkers&&c.thinkers.length)
       ? `<div class="dr-sec">${esc0(T('Principal thinkers'))}</div><div class="chips">`+
@@ -2302,6 +2339,7 @@
     document.getElementById('dr-meta').textContent=
       (n.type==='school'?'School / tradition':'Thinker')+(n.dates?(' · '+n.dates):'')+' · '+regName;
     document.getElementById('dr-gloss').textContent=n.k||'';
+    { const pw=document.getElementById('dr-passage'); pw.innerHTML=''; pw.setAttribute('hidden',''); }
     // ideas they shaped (cross-link into the idea maps)
     const ideas=conceptsForPerson(id).sort();
     document.getElementById('dr-thinkers').innerHTML = ideas.length
