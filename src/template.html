@@ -1328,7 +1328,7 @@
   function paintLensBoard(){
     const host=document.getElementById('lens-board'); if(!host) return;
     const t=host.querySelector('[data-lb="title"]'); if(t) t.textContent=T('Where will we begin?');
-    const s=host.querySelector('[data-lb="sub"]'); if(s) s.textContent=T('One card for each of the eleven great questions. Lift a card to read it, riffle to re-deal, or let the cards choose for you — then step into the ideas around it.');
+    const s=host.querySelector('[data-lb="sub"]'); if(s) s.textContent=T('Eleven great questions, each behind a door. Lift a card to step into its ideas — or let the cards choose.');
     const dk=host.querySelector('#lens-deck'); if(dk) dk.setAttribute('aria-label',T('A hand of eleven question cards'));
     host.querySelectorAll('.lb-card').forEach(card=>{
       const q=qById[card.dataset.qid], c=cById[card.dataset.cid]; if(!q||!c) return;
