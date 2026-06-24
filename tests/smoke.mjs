@@ -297,6 +297,11 @@ if(pairC){ openByName(pairC.id);
 const soloC=D.concepts.find(c=>(c.passages||[]).length===1);
 if(soloC){ openByName(soloC.id);
   eq($$('#dr-passage .prival').length, 0, 'a single passage renders no rival divider'); }
+// VERSE LINE-BREAKS: a passage whose text carries newlines (e.g. a PD haiku) must
+// render them as <br> — the line breaks ARE the form, not collapsible whitespace.
+const verseC=D.concepts.find(c=>(c.passages||[]).some(p=>p.text.includes('\n')));
+if(verseC){ openByName(verseC.id);
+  assert(/<br>/i.test($('#dr-passage .pq').innerHTML), 'a multi-line passage renders its line breaks as <br>'); }
 const noPassage=D.concepts.find(c=>!(c.passages&&c.passages.length));
 openByName(noPassage.id);
 assert($('#dr-passage').hasAttribute('hidden'),'a concept with no passage hides the block (no empty slot)');

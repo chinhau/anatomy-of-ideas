@@ -22,9 +22,12 @@ plural-or-none rule for contested concepts can be honoured later):
   rights       "PD" | "in-copyright-fair-use"
   book_url     optional quiet, NON-affiliate pointer to read the whole thing
 
-Bounded-B bounds enforced here and in tests/smoke.mjs: prose only, <= ~100 words,
-attributed, full provenance; NO lyrics / full poems / haiku / litigious estates /
-current commercial translations. See docs/PASSAGES.md for the provenance ledger.
+Bounded-B bounds enforced here and in tests/smoke.mjs: <= ~100 words, attributed,
+full provenance; NO lyrics / litigious estates / current commercial translations.
+The full-poem / haiku exclusion applies to IN-COPYRIGHT works only: a 3-line poem
+quoted whole is the factor-3 worst case, but that copyright rationale evaporates
+for a genuinely PD haiku, which may ship whole. See docs/PASSAGES.md for the
+provenance ledger.
 """
 
 PASSAGES = {
@@ -91,6 +94,26 @@ PASSAGES = {
     "source_url": "https://www.worldcat.org/title/death-of-ivan-ilyich/oclc/2588832",
     "rights": "in-copyright-fair-use",
     "book_url": "",
+  },
+],
+
+# Bashō / Yūgen — the crow on the withered branch: the eternal flashing in an
+# ordinary autumn instant. A whole PD haiku (Aston's 1899 prose-history rendering,
+# public domain) — the full-poem exclusion is a copyright rule whose factor-3
+# rationale does not apply here. States no thesis; pure recognition, so it stands
+# alone honestly. Byte-matched to two independent PD Aston scans.
+"Yūgen": [
+  {
+    "text": "On a withered branch\nA crow is sitting\nThis autumn eve.",
+    "author": "Matsuo Bashō",
+    "work": "(hokku)",
+    "translator": "W. G. Aston",
+    "edition_year": "1899",
+    "locator": "A History of Japanese Literature, p.295",
+    "source": "Aston, A History of Japanese Literature (1899)",
+    "source_url": "https://archive.org/details/historyjapanese00asto",
+    "rights": "PD",
+    "book_url": "https://archive.org/details/historyjapanese00asto",
   },
 ],
 

@@ -10,9 +10,13 @@ This is risk analysis, not legal advice.
 ## Bounded-B bounds (what may ship)
 
 - **Prose only**, ≤ ~100 words, historically attributed, full provenance recorded.
-- **Hard-excluded** (stay paraphrase-or-PD): song lyrics, full poems / **haiku**
-  (a 3-line work quoted whole = the whole work), **litigious estates**, and
-  **current commercial translations** still actively marketed.
+- **Hard-excluded** (stay paraphrase-or-PD): song lyrics, **in-copyright** full
+  poems / **haiku** (a 3-line work quoted whole = the whole work — factor 3),
+  **litigious estates**, and **current commercial translations** still actively
+  marketed. *The full-poem/haiku exclusion is a copyright rule:* its factor-3
+  rationale only bites on in-copyright works, so a genuinely **PD** haiku (in a PD
+  translation) may ship whole — there is no market to harm and no exclusive right to
+  infringe. (Amended 2026-06-23 to ship Bashō.)
 - **No affiliate links** beside quoted text; the book pointer is a quiet,
   non-monetised link.
 - **Takedown / opt-out:** rights-holders may request removal of any in-copyright
@@ -79,15 +83,26 @@ Gutenberg #2199 (<https://www.gutenberg.org/ebooks/2199>; plain text
 - **Book pointer:** none (no affiliate link beside in-copyright text); the work
   title in the colophon is the pointer.
 
+### Yūgen — Matsuo Bashō (a SOLO PD haiku — pure recognition, no thesis)
+Ships **whole** because it is genuinely **PD**: the full-poem/haiku exclusion is a
+copyright rule whose factor-3 "quoting the entire work" rationale evaporates once
+there is no copyright to infringe (bound relaxed 2026-06-23). Stands **alone** under
+the recognition-vs-verdict rule — a haiku states no contested thesis, so no rival is
+owed; Yūgen is also non-contested, so the machine rule (`contested ⇒ ≥2 or none`) is
+satisfied.
+- **Passage:** "On a withered branch / A crow is sitting / This autumn eve."
+- **Translator / edition:** W. G. Aston, *A History of Japanese Literature*, **1899**,
+  p.295. **PD.**
+- **Source:** archive.org `historyjapanese00asto`
+  (<https://archive.org/details/historyjapanese00asto>).
+- **Verification:** byte-matched 2026-06-23 against **two** independent PD Aston
+  scans (`historyjapanese00asto` and `AHistoryOfJapaneseLiterature`); both confirm
+  the three lines verbatim, OCR noise only at the decorative quotation marks. The
+  rendering chosen over the frog haiku — the crow on the withered branch carries the
+  yūgen jolt the academic prose alternative lacked.
+- **Book pointer:** archive.org scan (free full text — a genuine "go read it"
+  pointer, not a sales link).
+
 ## Deferred (authored-but-not-shipped)
 
-### Yūgen — Matsuo Bashō — DEFERRED
-The Phase-0 winner was the **frog haiku**, which falls in the **hard-excluded
-"full poems / haiku" bucket** (a 3-line work quoted whole). A PD prose alternative
-exists — W. G. Aston, *A History of Japanese Literature* (1899, archive.org
-`historyjapanese00asto`), on the "suggestiveness" of Bashō's haikai — but it is
-academic and faintly dismissive ("absurd to put forward any serious claim"), so it
-does **not** carry the jolt that won Phase 0. Held back until either (a) the
-haiku-exclusion bound is deliberately relaxed for genuinely **PD** haiku (whose
-factor-3 copyright rationale does not apply), or (b) a stronger PD prose passage on
-yūgen is found. Recorded so the gap is a decision, not an oversight.
+_(none)_

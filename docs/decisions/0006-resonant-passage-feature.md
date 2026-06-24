@@ -83,10 +83,15 @@ unchanged. The four bounds:
    excerpting of a paragraph from a full-length book, with a pointer back to it —
    not anthologising the heart of a short work.
 2. **Hard-exclude the high-risk buckets → these stay paraphrase-or-PD only:**
-   song **lyrics**, **full poems / haiku** (a 3-line work quoted whole is the whole
-   work — factor 3), **litigious estates** (e.g. Joyce historically, Beckett,
-   Salinger), and **current commercial translations** still actively marketed. When
-   in doubt, paraphrase + pointer.
+   song **lyrics**, **in-copyright full poems / haiku** (a 3-line work quoted whole
+   is the whole work — factor 3), **litigious estates** (e.g. Joyce historically,
+   Beckett, Salinger), and **current commercial translations** still actively
+   marketed. When in doubt, paraphrase + pointer. **Amendment (2026-06-23):** the
+   full-poem / haiku exclusion is a *copyright* rule — its factor-3 "quoting the
+   whole work" rationale only bites on in-copyright works. A genuinely **PD** haiku
+   (and PD translation) may ship whole, since there is no market to harm and no
+   exclusive right to infringe. Bashō's crow haiku in Aston's 1899 PD rendering is
+   the first such case; the bound now reads "in-copyright full poems / haiku."
 3. **Takedown/opt-out + no commercial sheen:** ship a visible **takedown/opt-out
    policy** and honour requests promptly; **no affiliate links** beside any quoted
    text (the book pointer stays a quiet, non-monetised link). This keeps factor 4

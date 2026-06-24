@@ -1051,7 +1051,7 @@
         const book = p.book_url
           ? `<a class="pbook" href="${esc(p.book_url)}" target="_blank" rel="noopener">${esc0(T('Read the whole thing'))} →</a>`
           : '';
-        return `<blockquote class="pq">${esc(p.text)}</blockquote>`+
+        return `<blockquote class="pq">${esc(p.text).replace(/\n/g,'<br>')}</blockquote>`+
                `<div class="pcol">${cite}</div>${book}`;
       // Between rivals (a concept ships >=2 passages or none on an unsettled
       // question), a dashed-vermilion divider — the atlas's existing "rejects /
