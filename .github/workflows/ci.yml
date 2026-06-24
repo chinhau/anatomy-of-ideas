@@ -1,0 +1,40 @@
+name: CI
+
+# The app is a single self-contained index.html built from src/ by build.py.
+# This runs the full guard suite — smoke behaviour, i18n coverage, copy/doc
+# counts, route resolution, and the build-in-sync check — on every push and PR
+# so drift (notably from concurrent edits to the shared tree) fails loudly here
+# instead of shipping to GitHub Pages.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install JS dev dependencies
+        run: npm ci
+
+      # Runs: smoke.mjs + freshness.mjs + `build.py --check` (build-in-sync guard).
+      - name: Test
+        run: npm test
