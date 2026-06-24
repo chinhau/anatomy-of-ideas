@@ -3,103 +3,103 @@
   {
    "code": "grk",
    "label": "Ancient Greek",
-   "color": "#9DB0CB",
+   "color": "#5CCCC4",
    "region": "West"
   },
   {
    "code": "hel",
    "label": "Hellenistic & Roman",
-   "color": "#8597BE",
+   "color": "#62BFCD",
    "region": "West"
   },
   {
    "code": "med",
    "label": "Medieval, Islamic & Jewish",
-   "color": "#7385B2",
+   "color": "#67ACCF",
    "region": "West"
   },
   {
    "code": "mod",
    "label": "Rationalism & Empiricism",
-   "color": "#6E90C2",
+   "color": "#6D9BD1",
    "region": "West"
   },
   {
    "code": "enl",
    "label": "Enlightenment & German Idealism",
-   "color": "#8C7CC0",
+   "color": "#738BD3",
    "region": "West"
   },
   {
    "code": "c19",
    "label": "19th-Century Currents",
-   "color": "#7B84B0",
+   "color": "#787DD4",
    "region": "West"
   },
   {
    "code": "phe",
    "label": "Phenomenology & Existentialism",
-   "color": "#9686BE",
+   "color": "#8C7ED6",
    "region": "West"
   },
   {
    "code": "ana",
    "label": "Analytic Philosophy",
-   "color": "#6FA6BE",
+   "color": "#A283D8",
    "region": "West"
   },
   {
    "code": "con",
    "label": "Continental & Critical Theory",
-   "color": "#8180AA",
+   "color": "#B689DA",
    "region": "West"
   },
   {
    "code": "pra",
    "label": "American Pragmatism",
-   "color": "#82AAB4",
+   "color": "#CA8FDC",
    "region": "West"
   },
   {
    "code": "psa",
    "label": "Psychology — Psychoanalytic",
-   "color": "#C77E96",
+   "color": "#CC5CA6",
    "region": "Psyche"
   },
   {
    "code": "pbc",
    "label": "Psychology — Behaviorist & Cognitive",
-   "color": "#B38CA6",
+   "color": "#D47595",
    "region": "Psyche"
   },
   {
    "code": "phu",
    "label": "Psychology — Humanistic & Existential",
-   "color": "#D19BA1",
+   "color": "#DC8F8F",
    "region": "Psyche"
   },
   {
    "code": "ind",
    "label": "Indian Philosophy",
-   "color": "#D2954B",
+   "color": "#CC6F5C",
    "region": "East"
   },
   {
    "code": "bud",
    "label": "Buddhist Philosophy",
-   "color": "#C59367",
+   "color": "#D1956D",
    "region": "East"
   },
   {
    "code": "chn",
    "label": "Chinese Philosophy",
-   "color": "#C16A45",
+   "color": "#D6B67E",
    "region": "East"
   },
   {
    "code": "jpn",
    "label": "Japanese & Korean",
-   "color": "#B59A5E",
+   "color": "#DCD18F",
    "region": "East"
   }
  ],
