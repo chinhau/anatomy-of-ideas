@@ -108,31 +108,43 @@ findings + concrete fixes + a 3-sentence verdict**, and **no edits**.
 
 ---
 
-## 5. Convergent verdict (audit 2026-06-23)
+## 5. Convergent verdict (audit 2026-06-23 · status refreshed 2026-06-23)
 
 Four agents above, run independently, agreed on the same handful of things. This
-is our current punch-list of where the build *drifts from the taste* — useful as
-both a TODO and a worked example of the taste in action:
+was our punch-list of where the build *drifts from the taste*. **Status refreshed
+2026-06-23** as the fixes landed: four of the seven items are now resolved (two
+of them by palette/engraving work that post-dated the audit) and are marked
+**✓ DONE** below — treat the remaining three **⬜ OPEN** items as the live TODO.
 
-- **Gold is leaking.** It drives ordinary section labels in 8+ places
-  (`.dr-sec`, `#about-panel h3`, `.flt-sec`, `.dr-think b`, …) instead of
-  active/selection/seal only. The idle `--ink #7a6038` token is the intended
-  demoted-label colour — put it to work. *(Highest-leverage fix; breaks guardrail 3.)*
-- **Glow violates engraving logic.** `feGaussianBlur` node halos (`#lglow`,
-  `#cglow`) and 18–26px coloured box-shadow card halos are theme-park bloom →
-  replace with crisp 1px engraved rings. *(Breaks guardrail 2.)*
-- **The semantic trio is bootstrap.** red/teal/green status colours — `--echo`
-  teal especially is alien to a period palette → re-pitch toward mineral inks.
-- **SMP alchemical door-glyphs will tofu off-macOS.** Six Deck-of-Doors signs are
-  Plane-1 codepoints with no coverage in Cormorant/Inter and an uncontrolled
+- **✓ Gold leak — DONE.** The flagged section labels (`.dr-sec`, `#about-panel h3`,
+  `.flt-sec`, `.dr-think b`, …) were already on `--ink` in HEAD; the second-tier
+  static-label gold (`.caption b`, `.reading .rk`, `.hchip b`, `.flt-head`,
+  `.recur-i .rc-n`, the read-state card markers, the `.dr-figure` region-tint
+  fallback, the `⁂` colophon tint) was demoted to `--ink`, and the "builds"
+  separator `.lt-sep.b` to `--parchment-dim`, in commit `812fa8b`. Gold is now
+  active / selection / seal / CTA / masthead eyebrow only.
+- **✓ Glow → engraving — DONE (`8a76b35`).** `#lglow`/`#cglow` were already gone;
+  the live halos — `.dr-sigil`'s 5px region bloom, `.dr-seal`'s gold glow, and the
+  `#cameo` portrait's `feGaussianBlur` gold-halo chain — were removed, and `.dr-seal`
+  given the same crisp zero-blur relief as the brand-mark/gate-seal. The deck-card
+  elevation shadows (black, downward, tightly clipped) are kept on purpose: lifted
+  physical cards, not bloom.
+- **✓ Semantic inks de-bootstrapped — DONE.** Relations are now minium red
+  `#c75a45` / azurite `#7da0e0` (the "teal" the audit flagged is gone) / neutral
+  parchment-dim; the 5-state status inks are mineral (raw sienna / amethyst / gold /
+  silver / muted — see §3). No bootstrap red/teal/green remains anywhere.
+- **⬜ SMP alchemical door-glyphs will tofu off-macOS.** Six Deck-of-Doors signs are
+  Plane-1 codepoints with no coverage in EB Garamond/Inter and an uncontrolled
   fallback → render as inline SVG (same engraving logic) or retreat to BMP.
-- **The `↯` "opposes" mark misreads as lightning** and is inconsistent with the
+- **⬜ The `↯` "opposes" mark misreads as lightning** and is inconsistent with the
   dossier's own `↔ / → / ←` grammar → reuse the directional arrows or a struck bar.
-- **The status badge is the heartbeat — and it's diluted.** Strip `.q-status` to
+- **⬜ The status badge is the heartbeat — and it's diluted.** Strip `.q-status` to
   glyph + label + state ink; cut the `qs-residue` second-colour line and the
   `qs-conf` micro-caption that double the colour load in the busiest column.
-- **A few pure-garnish ornaments** fail guardrail 1: the `⁂` dossier colophon,
-  the `.dr-seal` second wax seal, the spinning `.rdie`.
+- **✓ Garnish ornaments cut — DONE (`27d05b1`).** The three guardrail-1 failures —
+  the `⁂` dossier colophon, the second `.dr-seal` wax seal (a duplicate of the
+  masthead rosette), and the spinning `.rdie` die — were removed outright. (This
+  also retired the `.dr-seal` relief added in `8a76b35`, since the seal is gone.)
 
 The substrate the agents *praised* — void-indigo ground, hatch tooth, SVG seals
 whose petals count the 11 questions, the region metal-ink school tints — is the
