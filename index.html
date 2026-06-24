@@ -416,15 +416,8 @@
   .rmark path,.rmark circle{fill:none;stroke:var(--ink);stroke-width:3;
     stroke-linecap:round;stroke-linejoin:round;}
   .dr-head h2{font-family:'EB Garamond',serif;font-weight:600;font-size:28px;line-height:1.05;margin:0;}
-  .dr-seal{position:absolute;right:20px;bottom:14px;width:34px;height:34px;opacity:0;transition:opacity .25s;}
-  .dr-seal.on{opacity:0.8;}
-  .dr-seal svg{width:100%;height:100%;display:block;filter:drop-shadow(0 0.6px 0 rgba(0,0,0,0.55));}
-  .dr-seal path,.dr-seal circle{fill:none;stroke:var(--gold);stroke-width:0.6;}
-  .dr-seal .seal-pin{fill:var(--gold);stroke:none;}
   .dr-meta{font-size:11px;color:var(--muted);margin-top:7px;}
   .dr-body{padding:18px 24px 50px;overflow-y:auto;}
-  .dr-body::after{content:'⁂';display:block;text-align:center;font-size:15px;letter-spacing:0.3em;
-    color:color-mix(in srgb,var(--ink) 45%,transparent);margin:22px 0 6px;}
   .dr-gloss{font-family:'EB Garamond',serif;font-style:italic;font-size:18px;line-height:1.45;
     color:#ddd3bb;margin:0 0 18px;}
   .dr-think{font-size:11.5px;color:var(--parchment-dim);margin-bottom:20px;}
@@ -533,9 +526,6 @@
     cursor:pointer;transition:all .18s;white-space:nowrap;}
   .hbtn:hover{color:var(--parchment);background:rgba(217,182,95,.08);border-color:var(--gold);}
   .hbtn.on{background:var(--gold);color:#1a1205;border-color:var(--gold);}
-  #lens-random{display:inline-flex;align-items:center;gap:6px;}
-  .rdie{flex:0 0 auto;opacity:.85;transform:rotate(-8deg);transition:transform .18s,opacity .18s;}
-  #lens-random:hover .rdie{opacity:1;transform:rotate(8deg);}
   .hchip{font-size:11px;color:var(--muted);white-space:nowrap;}
   .hchip b{color:var(--ink);font-weight:500;}
   #lang-switch{display:flex;gap:0;border:1px solid var(--panel-edge);border-radius:3px;overflow:hidden;}
@@ -1109,7 +1099,7 @@
           <button id="lens-explore" class="on" data-i18n="Explore">Explore</button>
           <button id="lens-tour" data-i18n="Guided tour">Guided tour</button>
         </div>
-        <button id="lens-random" class="hbtn"><svg class="rdie" viewBox="0 0 16 16" width="13" height="13" aria-hidden="true"><rect x="1.6" y="1.6" width="12.8" height="12.8" rx="3" fill="none" stroke="currentColor" stroke-width="1.3"/><circle cx="5" cy="5" r="1.15" fill="currentColor"/><circle cx="8" cy="8" r="1.15" fill="currentColor"/><circle cx="11" cy="11" r="1.15" fill="currentColor"/></svg><span data-i18n="Random walk">Random walk</span></button>
+        <button id="lens-random" class="hbtn" data-i18n="Random walk">Random walk</button>
         <span id="lens-tour-nav" hidden>
           <button id="lens-prev" class="hbtn" data-i18n="‹ Prev">‹ Prev</button>
           <button id="lens-play" class="hbtn" data-i18n="Play">Play</button>
@@ -1137,7 +1127,6 @@
         <h2 id="dr-name"></h2>
         <div class="dr-meta" id="dr-meta"></div>
         <div class="dr-status" id="dr-status"></div>
-        <span class="dr-seal" id="dr-seal" aria-hidden="true"></span>
       </div>
       <div class="dr-body">
         <p class="dr-gloss" id="dr-gloss"></p>
@@ -12323,7 +12312,6 @@
     const c=cById[id]; if(!c) return;
     const q=qById[c.q];
     document.getElementById('dr-figure').innerHTML='';
-    drSeal(false);
     document.getElementById('dr-q').innerHTML=`<span class="dot" style="background:${q.hue}"></span>${esc0(qLabel(q))}`;
     const dqs=document.getElementById('dr-qstatus');
     if(dqs){ const st=STATES[q.status]||{};
@@ -13567,14 +13555,9 @@
     });
     return out;
   }
-  function drSeal(canonical){
-    const s=document.getElementById('dr-seal');
-    s.innerHTML=canonical?sealMarkup():''; s.classList.toggle('on',!!canonical);
-  }
   function openPerson(id){
     const n=aById[id]; if(!n)return; const g=aGroup[n.group];
     conGroupSel=null; markLegendActive();
-    drSeal(n.big);
     const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
     const regName={West:'Occident',Psyche:'Psyche',East:'Orient'}[g.region]||g.region;
     drFigure(n,g);
