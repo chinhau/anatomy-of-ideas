@@ -753,12 +753,13 @@
   .llink.builds{stroke:rgba(233,220,192,0.5);}
   .llink.rejects{stroke:var(--oppose);stroke-dasharray:4 4;opacity:0.7;}
   .llink.echoes{stroke:var(--echo);stroke-dasharray:1 5;opacity:0.8;}
-  /* Lens board — the "Where will you begin?" empty state (a hand of question cards) */
+  /* Lens board — the "Where will we begin?" empty state (a hand of question cards) */
   #lens-board{position:absolute;inset:0;z-index:5;display:flex;flex-direction:column;
     align-items:center;justify-content:flex-start;padding:86px 24px 44px;overflow:auto;}
   #lens-board[hidden]{display:none;}
   #lens-board .lb-head{text-align:center;max-width:640px;margin-bottom:24px;}
-  #lens-board .lb-title{font-family:'EB Garamond',serif;font-size:30px;font-weight:600;line-height:1.05;}
+  #lens-board .lb-title{font-family:'Cinzel',serif;font-weight:600;font-size:clamp(22px,3.2vw,27px);
+    letter-spacing:0.05em;text-transform:uppercase;line-height:1.12;}
   #lens-board .lb-sub{font-size:13px;color:var(--parchment-dim);line-height:1.55;margin-top:9px;}
   /* The deck: eleven emblem-plate doors fanned like a hand of tarot. Each card is
      an engraved plate (eyebrow question / central astrolabe device / gateway
@@ -8698,10 +8699,6 @@
       "zh": "非英文文字為機器輔助翻譯——專有名詞、技術術語與措辭未必精確。歡迎指正。",
       "ru": "Текст не на английском языке — машинный перевод: имена собственные, технические термины и формулировки могут быть неточными. Будем рады исправлениям."
     },
-    "Where will you begin?": {
-      "zh": "從何處開始？",
-      "ru": "С чего вы начнёте?"
-    },
     "One card for each of the eleven great questions. Lift a card to read it, riffle to re-deal, or let the cards choose for you — then step into the ideas around it.": {
       "zh": "為十一個大哉問各備一張牌。掀起任一張牌即可閱讀，洗牌可重新發牌，或讓紙牌為你抽選——然後步入環繞它的思想之中。",
       "ru": "По одной карте для каждого из одиннадцати великих вопросов. Поднимите карту, чтобы прочесть её, перетасуйте колоду, чтобы раздать заново, или позвольте картам выбрать за вас — затем войдите в идеи вокруг неё."
@@ -8913,6 +8910,10 @@
     "Open an answer →": {
       "zh": "點開一個答案 →",
       "ru": "Откройте ответ →"
+    },
+    "Where will we begin?": {
+      "zh": "從何處開始？",
+      "ru": "С чего мы начнём?"
     }
   },
   "questions": {
@@ -12415,7 +12416,7 @@
   let lensTrail=[], trailExpanded=false;  // the path of concepts walked in Explore (each {id, rel})
   const TYPE_ORDER={builds:0,echoes:1,rejects:2};
   const REL_VERB={builds:'builds on',rejects:'rejects',echoes:'echoes'};
-  // "Where will you begin?" — one curated gateway concept per question (the Lens empty state).
+  // "Where will we begin?" — one curated gateway concept per question (the Lens empty state).
   const LENS_DOORS=[
     ['real','Theory of Forms'],['know','Empiricism'],['mind','Stream of Consciousness'],
     ['self','Bundle Theory'],['live','Eudaimonia'],['just','Social Contract'],
@@ -12629,7 +12630,7 @@
   }
   function paintLensBoard(){
     const host=document.getElementById('lens-board'); if(!host) return;
-    const t=host.querySelector('[data-lb="title"]'); if(t) t.textContent=T('Where will you begin?');
+    const t=host.querySelector('[data-lb="title"]'); if(t) t.textContent=T('Where will we begin?');
     const s=host.querySelector('[data-lb="sub"]'); if(s) s.textContent=T('One card for each of the eleven great questions. Lift a card to read it, riffle to re-deal, or let the cards choose for you — then step into the ideas around it.');
     const dk=host.querySelector('#lens-deck'); if(dk) dk.setAttribute('aria-label',T('A hand of eleven question cards'));
     host.querySelectorAll('.lb-card').forEach(card=>{
