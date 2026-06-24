@@ -1,92 +1,97 @@
 # Concept-Coverage Gaps & Integration Opportunities
 
-**Date:** 2026-06-23 · **Method:** audited the current 263 concepts against canonical
-idea-indexes (SEP, IEP, Adler's *Syntopicon*, Routledge, PhilPapers, Önduygu).
-Every candidate below clears both bars: a **single sharp nameable thesis** AND a
-**named author + real dated text**. Companion to `MISSION.md` and `PRIOR-ART.md`.
+**Date:** 2026-06-24 (refreshed; first cut 2026-06-23 at 263 concepts) ·
+**Method:** audited the current **289 concepts** against canonical idea-indexes
+(SEP, IEP, Adler's *Syntopicon*, Routledge, PhilPapers, Önduygu). Every candidate
+below clears both bars: a **single sharp nameable thesis** AND a **named author +
+real dated text**. Companion to `MISSION.md` and `PRIOR-ART.md`.
 
-**Headline finding:** the two largest *systematic* blind spots are **analytic
-philosophy of language** (near-absent) and **metaethics** (absent) — both core to
-`know` / `live`. The non-Western traditions are *present*, but several of their
-internal *debates* are flattened into one entry while the rival thinkers appear
-only as tags (the "hidden gap" pattern: Mencius/Xunzi, Zhu Xi/Wang Yangming).
+**Headline finding (updated):** the three largest *systematic* blind spots the
+first audit named — analytic **philosophy of language**, **metaethics**, and the
+**mind-body core** of philosophy of mind — are now **all closed** (Rounds 1–18).
+The remaining gaps are no longer systematic holes but *individual* canonical
+entries: a handful of named non-Western theses still flattened into tags (the
+"hidden gap" pattern), plus a short Tier-3 analytic-epistemology list. The atlas
+has moved from "missing whole subfields" to "completing the roster."
 
 ---
 
-## Tier 1 — Strongest gaps (canonical, sharp, well-sourced)
+## Closed since the first audit (do not re-add)
 
-**Philosophy of mind (`mind`)** — rich on consciousness, missing the mind-body core:
-- **Mind-Brain Identity Theory** — "mental states *are* brain states" — J.J.C.
-  Smart (1959) / U.T. Place (1956). *The very position our Hard Problem / What
-  It Is Like entries argue against — yet it's absent.*
-- **Multiple Realizability** — "one mental kind, many physical realizers" —
-  Putnam (1967). (Distinct from our "Functionalism" entry.)
-- **Eliminative Materialism** — "folk psychology is a false theory" — P. Churchland (1981).
-- **The Extended Mind** — "cognition extends beyond the skull" — Clark & Chalmers
-  (1998). Pairs with our "Embodied Mind."
+- **Philosophy of language** — Sense & Reference, Theory of Descriptions, Rigid
+  Designators, Speech Acts, Private Language Argument (Rounds 1–14).
+- **Metaethics (`live`/`know`)** — Euthyphro Dilemma, Is–Ought Gap, Moral Error
+  Theory, Open-Question Argument, Emotivism, plus Mīmāṃsā and the kalām Ḥusn &
+  Qubḥ (**Round 16**).
+- **Mind-body core (`mind`)** — Mind-Brain Identity Theory, Anomalous Monism,
+  Eliminative Materialism, Yogācāra/Mind-Only (**Round 17**).
+- **Confucian "hidden gap" (`self`/`know`/`real`)** — Human Nature Is Good
+  (Mencius) vs. Is Bad (Xunzi); Investigation of Things (Zhu Xi's gewu) split
+  out from Self-Cultivation (refocused to Wang Yangming); Being-Time (Dōgen,
+  Japan's first formal philosopher) (**Round 18**).
+- **Cārvāka / Lokāyata materialism** — shipped **Round 15** (with the
+  reconstructed-text honesty note).
+- **Negative theology** — covered by **Via Negativa** (Pseudo-Dionysius,
+  Maimonides, Eckhart); a dedicated Maimonides *Guide* entry is optional, not a gap.
 
-**Philosophy of language (`know`/`mind`)** — only "Language Games" exists today:
-- **Sense and Reference** — Frege (1892).
-- **Theory of Descriptions** — Russell, "On Denoting" (1905).
-- **Rigid Designators / Causal Theory of Reference** — Kripke, *Naming and Necessity* (1980).
-- **Speech Acts (Performatives)** — Austin (1962).
-- **Private Language Argument** — Wittgenstein, *PI* (1953). (Distinct thesis from Language Games.)
+---
 
-**Metaethics (`live`)** — we have first-order ethics but no metaethics:
-- **The Is-Ought Gap** — Hume (1739).
-- **Naturalistic Fallacy / Open-Question Argument** — Moore (1903).
-- **Moral Error Theory** — Mackie (1977).
-- **Moral Luck** — Williams & Nagel (1976/79).
-- **Trolley Problem / Doctrine of Double Effect** — Foot (1967).
-  *(Also candidate: Nozick's Experience Machine (1974) — check overlap with our Epicurean/hedonism entries.)*
+## Tier 1 — was "strongest gaps"; now CLOSED
 
-## Tier 2 — Non-Western & cross-tradition gaps (named authors + dated texts)
+All three Tier-1 clusters from the first audit (philosophy of mind, philosophy of
+language, metaethics) shipped in Rounds 1–18 (see above). One Tier-1 candidate was
+deliberately **not** added as its own entry:
+
+- **Multiple Realizability** (Putnam 1967) — folded into Functionalism (which *is*
+  Putnam's conclusion from it) + the Identity→Functionalism link/note (R17 decision).
+- **The Extended Mind** (Clark & Chalmers 1998) — distinct from our Embodied Mind
+  but not a mind-body *position*; deferred to a future 4E mini-round.
+
+## Tier 2 — Non-Western & cross-tradition (remaining)
 
 *Pattern: the thinker is already a tag; the signature thesis isn't its own entry.*
-- **Human Nature Is Good** — Mencius, *Mengzi* (c. -300) · **Human Nature Is
-  Bad / Ritual Reshapes It** — Xunzi (c. -250). (Both currently only tags.)
-- **Investigation of Things (gewu)** — Zhu Xi (c. 1175) · **Unity of Knowledge
-  and Action** — Wang Yangming (c. 1518). (Both only tags on "Self-Cultivation.")
-- **Cārvāka / Lokāyata Materialism** — *Bārhaspatya Sūtras* (text lost; survives
-  via Madhava). **Flag as reconstructed/contested** — don't present opponents'
-  polemic as doctrine.
-- **Vaiśeṣika Atomism** — Kaṇāda, *Vaiśeṣika Sūtra*. (Category-ontology, distinct
-  from Greek Atomism.) *(Nyāya Inferential Realism likely duplicates "Pramāṇa".)*
-- **Occasionalism / Incoherence of the Philosophers** — al-Ghazālī (1095)
-  (anticipates Hume; check overlap with our "Problem of Induction").
-- **The Virtuous City** — al-Fārābī (c. 940).
+
+- **Vaiśeṣika Atomism** — Kaṇāda, *Vaiśeṣika Sūtra*. Category-ontology, distinct
+  from Greek Atomism. *(Nyāya Inferential Realism likely duplicates "Pramāṇa".)*
+- **Occasionalism / Incoherence of the Philosophers** — al-Ghazālī (1095).
+  Currently a tag on "Faith Beyond Reason"; the causation-skepticism thesis (which
+  anticipates Hume) is absent. *Check overlap with our "Problem of Induction".*
+- **The Virtuous City** — al-Fārābī (c. 940). The Islamic political-philosophy
+  founder; no entry.
 - **ʿAṣabiyya (Social Solidarity)** — Ibn Khaldūn, *Muqaddimah* (1377) — rare
   pre-modern philosophy of history. *(Optional: Averroes, Harmony of Religion &
   Philosophy, c. 1180.)*
-- **Negative Theology / Guide of the Perplexed** — Maimonides (c. 1190) — the
-  Jewish thread's missing central rationalist.
-- **Being-Time (Uji)** — Dōgen, *Shōbōgenzō* (1240) · **Pure Experience /
-  Absolute Nothingness** — Nishida Kitarō (1911, Kyoto School). (Japan has
-  aesthetic entries but no formal philosophers.)
+- **Pure Experience / Absolute Nothingness** — Nishida Kitarō, *An Inquiry into
+  the Good* (1911), Kyoto School. **Deferred in R18** (would deepen the
+  consciousness/"nothingness" cluster beside Yogācāra; no in-round rival). Best
+  shipped in a dedicated modern-non-Western round where it can pair against
+  Phenomenology / Process Reality.
 
-## Tier 3 — Defensible, verify overlap/desirability first
+## Tier 3 — Defensible, verify overlap/desirability first (all still open)
+
 - **Epistemic Injustice** — Fricker (2007) `know` — fits our strong social thread.
 - **The Myth of the Given** — Sellars (1956) `know` — pivotal but abstract.
-- **Reliabilism** — Goldman (1979) `know` — major post-Gettier response; pairs with our "Gettier Problem."
+- **Reliabilism** — Goldman (1979) `know` — major post-Gettier response; pairs with
+  our "Gettier Problem."
 - **Republican Liberty (Non-Domination)** — Pettit (1997) `free`/`just` — third
   option beside our "Two Concepts of Liberty."
 - **Situated Knowledges / Cyborg** — Haraway (1985/88) `know`/`self`.
 
 ## Cautions
+
 - **Already present — do not re-add:** Greek Atomism, Functionalism, Language
   Games, Gettier, Two Dogmas, Mohist Universal Love, Pramāṇa, Sāṃkhya,
-  Anekāntavāda, Two Concepts of Liberty.
+  Anekāntavāda, Two Concepts of Liberty, Via Negativa (Maimonides), plus everything
+  in "Closed since the first audit" above.
 - **Overlap to check before adding:** Nyāya vs. Pramāṇa; Experience Machine vs.
   Epicureanism; al-Ghazālī occasionalism vs. Hume induction.
-- **Honesty flag:** Cārvāka text is reconstructed — tag accordingly.
 
 ---
 
 ## Integration / leverage opportunities (features & data, from PRIOR-ART.md)
 Concrete patterns proven by peers, worth adopting:
 - **Signed, stance-typed edges** (Önduygu) — agree / disagree / refutes, not just
-  "relates to." Richer than our current relations and directly serves the
-  "show the verdict, not just the voices" principle.
+  "relates to." *(Partly shipped: our links are typed builds/rejects/echoes.)*
 - **Per-edge source citations + crowd correction** (Six Degrees of Francis Bacon)
   — strengthens the honesty bar; every interpretive link traces to a source.
 - **"On this day in ideas" hook** (Pantheon) — low-friction daily relevance.
