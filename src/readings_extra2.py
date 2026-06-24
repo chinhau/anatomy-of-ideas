@@ -47,7 +47,7 @@ EXTRA2 = {
   ("Burton Watson (trans.)","The Complete Works of Zhuangzi","1968","Translation","The readable standard English text."),
 ]),
 "To Have or To Be": (["Erich Fromm"],[
-  ("Erich Fromm","To Have or to Be?","1976","Primary","Two modes of existence, having versus being."),
+  ("Erich Fromm","To Have or to Be?","1976","Primary","Fromm's two modes of living — grasping to have, or simply to be — and how a culture of having crowds out being."),
   ("Erich Fromm","The Art of Loving","1956","Intro","The accessible gateway to Fromm."),
 ]),
 # ---- DEATH ----

@@ -61,11 +61,11 @@ DATA = {
   ("Ādi Śaṅkara","Brahma Sūtra Bhāṣya","c.800","Commentary","The classic non-dual reading."),
 ]),
 "The Dao": (["Laozi","Zhuangzi"],[
-  ("Laozi","Tao Te Ching","c.400 BCE","Primary","The way that can be named is not the Way."),
+  ("Laozi","Tao Te Ching","c.400 BCE","Primary","The nameless source and pattern beneath all things — named, it is already not the Way."),
   ("Zhuangzi","Zhuangzi","c.300 BCE","Primary","Playful, radical Daoist parables."),
 ]),
 "Yin–Yang / Qi": (["Zou Yan","the I Ching tradition"],[
-  ("(Anonymous)","I Ching (Book of Changes)","c.800 BCE","Primary","The cosmology of changing polarities."),
+  ("(Anonymous)","I Ching (Book of Changes)","c.800 BCE","Primary","The Book of Changes: reality read as the turning of complementary opposites, an order found in the pattern of flux."),
   ("Fung Yu-lan","A Short History of Chinese Philosophy","1948","Study","Sets yin-yang in its philosophical context."),
 ]),
 "Monadology": (["G.W. Leibniz"],[
@@ -74,7 +74,7 @@ DATA = {
 ]),
 # ---------------- KNOWLEDGE ----------------
 "Allegory of the Cave": (["Plato"],[
-  ("Plato","Republic (Book VII)","c.375 BCE","Primary","Shadows, ascent, and the painful turn to light."),
+  ("Plato","Republic (Book VII)","c.375 BCE","Primary","Shadows mistaken for the real, and the painful turn toward the light — knowledge as a waking that hurts."),
 ]),
 "Rationalism": (["René Descartes","Baruch Spinoza","G.W. Leibniz"],[
   ("René Descartes","Meditations on First Philosophy","1641","Primary","Doubt rebuilt into certainty by reason."),
@@ -140,11 +140,11 @@ DATA = {
   ("David Hume","A Treatise of Human Nature (I.IV.6)","1739","Primary","The self as a bundle of perceptions."),
 ]),
 "The Unconscious": (["Sigmund Freud","Pierre Janet"],[
-  ("Sigmund Freud","The Interpretation of Dreams","1900","Primary","The royal road to the unconscious."),
+  ("Sigmund Freud","The Interpretation of Dreams","1900","Primary","Freud's royal road inward: the dream as the disguised speech of a mind mostly hidden from itself."),
   ("Sigmund Freud","Introductory Lectures on Psychoanalysis","1917","Intro","Freud lecturing on his own system."),
 ]),
 "Collective Unconscious": (["Carl Jung"],[
-  ("Carl Jung","The Archetypes and the Collective Unconscious","1959","Primary","Archetypes beneath the personal psyche."),
+  ("Carl Jung","The Archetypes and the Collective Unconscious","1959","Primary","Beneath the personal mind, Jung maps a shared layer of inherited images — myth and dream drawn from one well."),
   ("Carl Jung","Man and His Symbols","1964","Intro","Jung's last, deliberately accessible book."),
 ]),
 "Behaviorist Mind": (["John B. Watson","B.F. Skinner","Ivan Pavlov"],[
@@ -202,7 +202,7 @@ DATA = {
   ("Mencius","Mencius","c.300 BCE","Primary","Human nature as innately good."),
 ]),
 "Wu Wei": (["Laozi","Zhuangzi"],[
-  ("Laozi","Tao Te Ching","c.400 BCE","Primary","Effortless action aligned with the Way."),
+  ("Laozi","Tao Te Ching","c.400 BCE","Primary","Effortless action: moving with the grain of things, so the most is accomplished by forcing the least."),
   ("Edward Slingerland","Trying Not to Try","2014","Study","Wu wei meets modern psychology."),
 ]),
 "Ahimsa": (["Mahāvīra","Mahatma Gandhi"],[
@@ -210,7 +210,7 @@ DATA = {
   ("Mahatma Gandhi","An Autobiography","1929","Primary","Ahimsa lived as 'experiments with truth.'"),
 ]),
 "Master & Slave Morality": (["Friedrich Nietzsche"],[
-  ("Friedrich Nietzsche","On the Genealogy of Morality","1887","Primary","Where our values came from — and against whom."),
+  ("Friedrich Nietzsche","On the Genealogy of Morality","1887","Primary","Nietzsche traces inherited morality to a slave's revolt against the strong — and dares a revaluation of values."),
   ("Friedrich Nietzsche","Beyond Good and Evil","1886","Primary","The prelude to the revaluation."),
 ]),
 "Authenticity": (["Søren Kierkegaard","Jean-Paul Sartre","Martin Heidegger"],[
@@ -337,11 +337,11 @@ DATA = {
   ("Arthur Schopenhauer","Essays and Aphorisms","1851","Intro","The accessible late essays."),
 ]),
 "The Absurd": (["Albert Camus"],[
-  ("Albert Camus","The Myth of Sisyphus","1942","Primary","Living without appeal, and revolt."),
+  ("Albert Camus","The Myth of Sisyphus","1942","Primary","Camus on living without appeal in a silent universe — and the revolt that finds joy without pretending the silence answers."),
   ("Albert Camus","The Rebel","1951","Primary","From the absurd to rebellion and limits."),
 ]),
 "Logotherapy": (["Viktor Frankl"],[
-  ("Viktor Frankl","Man's Search for Meaning","1946","Primary","Meaning as the will that survives suffering."),
+  ("Viktor Frankl","Man's Search for Meaning","1946","Primary","Frankl's case from the camps: whoever holds a why can bear almost any how — meaning found, not handed down."),
 ]),
 "Flow": (["Mihály Csíkszentmihályi"],[
   ("Mihály Csíkszentmihályi","Flow: The Psychology of Optimal Experience","1990","Primary","Absorption as the shape of well-being."),

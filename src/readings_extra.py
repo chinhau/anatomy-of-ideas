@@ -79,7 +79,7 @@ EXTRA = {
 ]),
 # ---- TRANSFORMATION ----
 "Cognitive Behavioral Therapy": (["Aaron Beck","Albert Ellis"],[
-  ("Aaron Beck","Cognitive Therapy and the Emotional Disorders","1976","Primary","The clinical foundation of CBT."),
+  ("Aaron Beck","Cognitive Therapy and the Emotional Disorders","1976","Primary","Beck's finding that catching and testing distorted thoughts can lift depression — the Stoic insight rebuilt as clinical method."),
   ("Albert Ellis","Reason and Emotion in Psychotherapy","1962","Primary","REBT — the Stoic root made therapy."),
 ]),
 "Mindfulness (MBSR)": (["Jon Kabat-Zinn"],[
@@ -91,7 +91,7 @@ EXTRA = {
   ("Steven C. Hayes","Get Out of Your Mind and Into Your Life","2005","Intro","ACT for the general reader."),
 ]),
 "Individuation": (["Carl Jung"],[
-  ("Carl Jung","Two Essays on Analytical Psychology","1928","Primary","The path toward becoming whole."),
+  ("Carl Jung","Two Essays on Analytical Psychology","1928","Primary","Jung's account of becoming whole by integrating the shadow and the buried self, rather than living as the persona alone."),
   ("Carl Jung","Memories, Dreams, Reflections","1962","Intro","Individuation lived, in his own voice."),
 ]),
 "Yoga: Stilling the Mind": (["Patañjali"],[
