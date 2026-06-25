@@ -1,14 +1,16 @@
 #!/usr/bin/env python3
-"""Build index.html (at the repo root) from src/.
+"""Build atlas.html (at the repo root) from src/.
 
 Pipeline (deterministic, no network):
   1. expand19.py — applies rounds 1–19 (… + mind-body + East-Asian/Confucian + Islamic falsafa), writes src/ideas.json
   2. merge.py    — attaches ranked thinkers + readings, validates full coverage
   3. inject      — splices src/ideas.json + src/atlas_graph.json + the vendored D3/fonts
                    into src/template.html (escaping </ so embedded blobs can't close their
-                   <script>/<style> tags) -> index.html at the repo root.
+                   <script>/<style> tags) -> atlas.html at the repo root.
 
-The root index.html IS the deployable (GitHub Pages serves the repo root). The
+The root index.html is the hand-maintained landing (the front door); ENTER navigates
+to atlas.html, the built deployable. Both ship from the repo root (GitHub Pages serves
+the repo root, with index.html as the default document). The
 constellation data (src/atlas_graph.json) is a maintained data file. The one-time
 migrations that grew it from 376 to 425 stars live in migrations/ and are idempotent;
 you do NOT need to run them for a normal build.
@@ -43,11 +45,11 @@ def build_html():
     assert not any(p in html for p in ("__IDEAS_JSON__", "__ATLAS_JSON__", "__I18N_JSON__", "__FONTS_CSS__", "__D3_JS__")), "placeholder not replaced"
     return html
 
-out = ROOT / "index.html"
+out = ROOT / "atlas.html"
 
 if CHECK:
     # Build-in-sync guard: regenerate the artifact from src/ in memory and compare
-    # to the committed index.html. Catches the "edited the template but forgot to
+    # to the committed atlas.html. Catches the "edited the template but forgot to
     # rebuild" drift (notably from concurrent sessions sharing the working tree).
     #
     # The expand/merge pipeline rewrites src/ideas.json as a side effect, so
@@ -66,14 +68,15 @@ if CHECK:
     if fresh != current:
         n = min(len(fresh), len(current))
         at = next((i for i in range(n) if fresh[i] != current[i]), n)
-        print(f"✗ index.html is STALE — it is not a fresh build of src/.")
+        print(f"✗ atlas.html is STALE — it is not a fresh build of src/.")
         print(f"  first divergence at byte {at:,} (fresh {len(fresh):,} B vs on-disk {len(current):,} B).")
-        print("  Run `python3 build.py` and commit the rebuilt index.html.")
+        print("  Run `python3 build.py` and commit the rebuilt atlas.html.")
         sys.exit(1)
-    print("✓ index.html is in sync with src/.")
+    print("✓ atlas.html is in sync with src/.")
     sys.exit(0)
 
 html = build_html()
 out.write_text(html, encoding="utf-8")
 print(f"✓ Wrote {out.relative_to(ROOT)}  ({len(html):,} bytes)")
-print("  Deploy index.html to any static host, or run `npm test` to smoke-test it.")
+print("  atlas.html is the built atlas; the hand-maintained index.html landing links into it.")
+print("  Deploy the repo root to any static host, or run `npm test` to smoke-test it.")

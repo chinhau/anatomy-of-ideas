@@ -1,5 +1,5 @@
 // Freshness checks — guard against the website drifting out of date.
-// Run after the smoke test (which already proves index.html behaves). These
+// Run after the smoke test (which already proves atlas.html behaves). These
 // three are static/consistency checks; the build-in-sync guard lives in
 // `python3 build.py --check` and is run separately from `npm test`.
 //
@@ -15,7 +15,7 @@ const fail=[];
 function assert(cond,msg){ if(cond){PASS++; return;} fail.push(msg); }
 function eq(a,b,msg){ assert(a===b, msg+` (got ${JSON.stringify(a)}, want ${JSON.stringify(b)})`); }
 
-const html=fs.readFileSync('index.html','utf8');
+const html=fs.readFileSync('atlas.html','utf8');
 const tpl =fs.readFileSync('src/template.html','utf8');
 const i18n=JSON.parse(fs.readFileSync('src/i18n.json','utf8'));
 const ideas=JSON.parse(fs.readFileSync('src/ideas.json','utf8'));

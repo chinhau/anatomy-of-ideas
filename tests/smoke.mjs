@@ -16,7 +16,7 @@ process.on('uncaughtException',e=>{
 });
 
 // Test the artifact as it actually ships (D3 + fonts inlined; no CDN/link tags to strip).
-const html=fs.readFileSync('index.html','utf8');
+const html=fs.readFileSync('atlas.html','utf8');
 const dom=new JSDOM(html,{pretendToBeVisual:true,url:'https://example.org/app'});
 const {window}=dom;
 global.window=window; global.document=window.document;
@@ -420,7 +420,7 @@ eq($('#m-questions .card .c-id')?.textContent, firstCardName, 'concept names res
 
 // SIZE BUDGET: the single-file artifact must stay deployable-small. Passages are
 // authored text, so growth is bounded — guard against an accidental blow-up.
-assert(Buffer.byteLength(html,'utf8')<=3_300_000, `index.html stays under the 3.3MB budget (got ${Buffer.byteLength(html,'utf8')})`);
+assert(Buffer.byteLength(html,'utf8')<=3_300_000, `atlas.html stays under the 3.3MB budget (got ${Buffer.byteLength(html,'utf8')})`);
 
 console.log(`SMOKE OK — ${PASS} assertions passed.`);
 // Do NOT force exit. The known async d3-zoom error is swallowed by the
