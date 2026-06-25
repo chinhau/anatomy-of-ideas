@@ -1,0 +1,79 @@
+{
+  "_note": "Authored debate spines for the Timeline rail. The graph links cannot define a spine's order on their own (builds edges run both directions in time, hinges are unlinked), so a human asserts which ideas, in what order, and how each move relates to the one before. Node `id` must match a concept id in ideas.json; `era` is read from there at runtime, so spines MUST be authored in ascending era (the rail draws true time, left to right). `rel` is the move THIS node makes against the previous one: opens / builds (real inheritance) / rejects / echoes (an independent rhyme between cultures that never met) / reframes. `shape` is documentation only (the renderer ignores it). `status` drives the margin sub-label and the single gold terminus seal, which renders ONLY for live-rivals. One debate is the flagship (opens the tab); the rest sit in the margin index.",
+  "debates": [
+    {
+      "id": "free-will",
+      "q": "free",
+      "flagship": true,
+      "shape": "fight",
+      "title": "Is my will my own?",
+      "status": "live-rivals",
+      "nodes": [
+        { "id": "Libertarian Free Will", "rel": "opens",    "caption": "I could have chosen otherwise — the will is genuinely undetermined." },
+        { "id": "Compatibilism",        "rel": "reframes",  "caption": "Free and determined at once — a free act is simply an uncoerced one." },
+        { "id": "Hard Determinism",     "rel": "rejects",   "caption": "Every choice has prior causes; \u2018free will\u2019 is the illusion." },
+        { "id": "Condemned to be Free", "rel": "reframes",  "caption": "There is no escaping choice — we are sentenced to freedom." }
+      ]
+    },
+    {
+      "id": "self",
+      "q": "self",
+      "flagship": false,
+      "shape": "convergence",
+      "title": "Is there a self?",
+      "status": "live-rivals",
+      "nodes": [
+        { "id": "Ātman = Brahman",  "rel": "opens",   "caption": "The innermost self just is the absolute — one unchanging soul." },
+        { "id": "Anattā (No-Self)", "rel": "rejects", "caption": "Look closely and no self is found — only changing processes." },
+        { "id": "Bundle Theory",    "rel": "echoes",  "caption": "The self is only a bundle of perceptions; no owner sits behind them." },
+        { "id": "The Ego Tunnel",   "rel": "echoes",  "caption": "The self is a model the brain builds — a useful illusion." }
+      ]
+    },
+    {
+      "id": "knowledge",
+      "q": "know",
+      "flagship": false,
+      "shape": "contest",
+      "title": "What can I really know?",
+      "status": "open",
+      "nodes": [
+        { "id": "Allegory of the Cave", "rel": "opens",    "caption": "Real knowledge is grasping the eternal Forms behind the shadows we take for the world." },
+        { "id": "Skepticism",           "rel": "rejects",  "caption": "We can be certain of nothing — so the wise suspend judgment." },
+        { "id": "The Cogito",           "rel": "reframes", "caption": "One thing survives every doubt: that I am doubting. I think, therefore I am." },
+        { "id": "Empiricism",           "rel": "rejects",  "caption": "Nothing reaches the mind except through the senses; knowledge is built from experience, not pure reason." },
+        { "id": "Falsifiability",       "rel": "reframes", "caption": "Knowledge isn\u2019t what we\u2019ve proven true, but what has survived every honest attempt to prove it false." }
+      ]
+    },
+    {
+      "id": "absolute",
+      "q": "abs",
+      "flagship": false,
+      "shape": "convergence",
+      "title": "Is there an Absolute?",
+      "status": "live-rivals",
+      "nodes": [
+        { "id": "The Unmoved Mover",     "rel": "opens",    "caption": "All motion traces back to a first cause that moves everything without itself being moved." },
+        { "id": "Non-Theistic Absolute", "rel": "echoes",   "caption": "The ultimate is real but empty of any creator-God — an unconditioned ground, not a ruler above the world." },
+        { "id": "The One",               "rel": "echoes",   "caption": "Beyond being, beyond even thought, lies the One — the ineffable source from which all things overflow." },
+        { "id": "Tawhid (Divine Unity)", "rel": "builds",   "caption": "There is no god but God. Islamic philosophy read the Neoplatonists and refounded that One as the single divine unity." },
+        { "id": "Pantheism",             "rel": "reframes", "caption": "God and Nature are one and the same; the Absolute is not beyond the world, it is the world." },
+        { "id": "The Death of God",      "rel": "rejects",  "caption": "We have killed God; there is no Absolute left to anchor our values." }
+      ]
+    },
+    {
+      "id": "suffering",
+      "q": "peace",
+      "flagship": false,
+      "shape": "dialogue",
+      "title": "Why do we suffer?",
+      "status": "live-rivals",
+      "nodes": [
+        { "id": "Samsara & Moksha",    "rel": "opens",   "caption": "Life is a wheel of death and rebirth; the aim is release — moksha — from the whole turning." },
+        { "id": "Four Noble Truths",   "rel": "builds",  "caption": "Suffering has a cause — craving — and an end: the eightfold path that quiets it." },
+        { "id": "Stoic Apatheia",      "rel": "echoes",  "caption": "Suffering comes not from events but from our judgments of them; master the judgment and be unshaken." },
+        { "id": "Denial of the Will",  "rel": "builds",  "caption": "Schopenhauer, reading the Upanishads, agreed: suffering is the will\u2019s endless craving — so quiet the will." },
+        { "id": "The Absurd",          "rel": "rejects", "caption": "There is no cure and no escape; we revolt and live without appeal. Imagine Sisyphus happy." }
+      ]
+    }
+  ]
+}

@@ -279,6 +279,7 @@ R = [
  ("Non-Attachment","Four Noble Truths","builds"),
  ("Samsara & Moksha","Karma","builds"),
  ("Stoic Apatheia","Non-Attachment","echoes"),
+ ("Stoic Apatheia","Four Noble Truths","echoes"),  # audited convergence (see echoes.json)
  ("Ataraxia","Non-Attachment","echoes"),
  ("Ataraxia","Stoic Apatheia","echoes"),
  ("Denial of the Will","Non-Attachment","echoes"),
@@ -295,6 +296,8 @@ R = [
  ("The One","The Unmoved Mover","builds"),
  ("Via Negativa","The One","builds"),
  ("Via Negativa","Non-Theistic Absolute","echoes"),
+ ("Non-Theistic Absolute","The Unmoved Mover","echoes"),  # audited convergence (see echoes.json)
+ ("The One","Non-Theistic Absolute","echoes"),            # audited convergence (see echoes.json)
  ("The Death of God","The Five Ways","rejects"),
  ("Non-Theistic Absolute","Śūnyatā (Emptiness)","builds"),
  ("Non-Theistic Absolute","Brahman","rejects"),

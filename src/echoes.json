@@ -1,0 +1,37 @@
+{
+  "_note": "Provenance for the atlas's strongest convergence claims — the 'echoes' the rail and constellation actually surface. An echo asserts that two traditions arrived at the same move WITHOUT a baton passing between them; that is a historical claim, so each one here carries a checkable warrant (`independent`) and an honest disclosure of any possible or disputed contact (`caveat`). The renderer fails closed: an echo edge with no entry shows no provenance, never a fabricated one. Keyed by the unordered concept pair {early, late} (ids must match ideas.json). Mirrors debates.json: a human asserts what the graph cannot.",
+  "echoes": [
+    {
+      "early": "Anattā (No-Self)",
+      "late": "Bundle Theory",
+      "claim": "Look closely at the mind and you find only a stream of changing perceptions — no enduring self standing behind them that owns them.",
+      "independent": "Hume published A Treatise of Human Nature in 1739, more than two thousand years after the Pali canon framed anattā, and Buddhist scriptures had not yet been translated into any European language. He had no text to copy.",
+      "caveat": "Disputed: the philosopher Alison Gopnik has argued Hume could have heard of the Buddhist no-self doctrine at the Jesuit college of La Flèche, where he wrote the Treatise, from a missionary returned from Siam. No transmission is documented; the mainstream reading is still independent rediscovery.",
+      "verdict": "On the weight of the evidence, a genuine rediscovery — the same insight reached twice, two millennia and a continent apart."
+    },
+    {
+      "early": "Four Noble Truths",
+      "late": "Stoic Apatheia",
+      "claim": "Suffering springs not from events themselves but from our craving and our judgments about them; freedom comes from loosening that grip.",
+      "independent": "Early Buddhism and the Hellenistic Stoa grew up in separate worlds, and no record shows Zeno's school drawing on the Buddha's teaching. The diagnosis was reached twice over.",
+      "caveat": "Faint contact along Persian and Indian trade routes after Alexander has sometimes been speculated, but none has ever been documented.",
+      "verdict": "Most likely convergence: two cultures diagnosing the same human predicament, not one copying the other."
+    },
+    {
+      "early": "The Unmoved Mover",
+      "late": "Non-Theistic Absolute",
+      "claim": "Reason alone, with no appeal to revelation, can reach an ultimate ground on which everything else depends.",
+      "independent": "Aristotle's Greece and the Buddhist philosophers of India had no philosophical contact in this period; each reasoned its way to an ultimate by a wholly separate road.",
+      "caveat": "What rhymes is the move, not the doctrine: Aristotle's mover is a thinking substance, while the Buddhist absolute is empty of any essence at all.",
+      "verdict": "A convergence of method, not doctrine — reason reaching for an ultimate from two unconnected starting points."
+    },
+    {
+      "early": "Non-Theistic Absolute",
+      "late": "The One",
+      "claim": "The ultimate is an ineffable unity beyond being and beyond thought, from which all multiplicity overflows.",
+      "independent": "Plotinus worked in Roman Egypt with no demonstrable knowledge of Buddhist or Vedic texts; his One descends from Plato, not from India.",
+      "caveat": "Disputed: Porphyry's life of Plotinus reports that he joined a military expedition hoping to study Persian and Indian philosophy. Whether any Indian thought actually reached him is unknown — the parallel may be convergence or faint contact.",
+      "verdict": "Probably convergence, possibly faint contact — honest readers should hold the question open."
+    }
+  ]
+}

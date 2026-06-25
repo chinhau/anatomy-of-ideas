@@ -5,10 +5,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Anatomy of Ideas — the great questions humans keep asking</title>
 <meta name="description" content="An interactive atlas of the great questions humans keep asking: 293 ideas across eleven great questions, cross-linked to a 425-star constellation of the thinkers who shaped them. You're not the first to wonder.">
+<link rel="canonical" href="https://chinhau.github.io/anatomy-of-ideas/atlas.html">
 <meta property="og:type" content="website">
+<meta property="og:site_name" content="The Anatomy of Ideas">
+<meta property="og:url" content="https://chinhau.github.io/anatomy-of-ideas/atlas.html">
 <meta property="og:title" content="The Anatomy of Ideas — the great questions humans keep asking">
 <meta property="og:description" content="An interactive atlas of philosophy, psychology and consciousness — 293 ideas, eleven great questions, 425 thinkers and schools. You're not the first to wonder.">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="https://chinhau.github.io/anatomy-of-ideas/assets/portal-flower.jpg">
+<meta property="og:image:width" content="1672">
+<meta property="og:image:height" content="941">
+<meta property="og:image:alt" content="A luminous golden-flower oculus opening onto a vast hall — the threshold into the atlas.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The Anatomy of Ideas — the great questions humans keep asking">
+<meta name="twitter:description" content="293 ideas, eleven great questions, 425 thinkers and schools. You're not the first to wonder.">
+<meta name="twitter:image" content="https://chinhau.github.io/anatomy-of-ideas/assets/portal-flower.jpg">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23070b16'/%3E%3Cg fill='%23d9b65f'%3E%3Ccircle cx='16' cy='16' r='2.6'/%3E%3Ccircle cx='8' cy='9' r='1.4'/%3E%3Ccircle cx='24' cy='8' r='1.4'/%3E%3Ccircle cx='25' cy='23' r='1.4'/%3E%3Ccircle cx='7' cy='24' r='1.4'/%3E%3C/g%3E%3C/svg%3E">
 <style>__FONTS_CSS__</style>
 <script>__D3_JS__</script>
@@ -220,6 +230,25 @@
   .rel-i{display:flex;align-items:center;gap:8px;padding:4px 0;font-size:13px;cursor:pointer;}
   .rel-i:hover{color:var(--gold);}
   .rel-i .dot{width:7px;height:7px;border-radius:50%;flex:none;}
+  /* an "audited" echo: the convergence claim is backed by a checkable warrant */
+  .rel-aud{font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:var(--echo-t);
+    border:1px solid var(--echo);border-radius:3px;padding:1px 4px;opacity:.8;cursor:help;}
+  .rel-prov{margin:0 0 6px 15px;}
+  .rel-prov>summary{list-style:none;cursor:pointer;font-size:10.5px;letter-spacing:.04em;
+    font-style:italic;color:var(--echo-t);opacity:.85;padding:2px 0;}
+  .rel-prov>summary::-webkit-details-marker{display:none;}
+  .rel-prov>summary:hover{color:var(--gold);}
+  .rel-prov[open]>summary{opacity:1;}
+  .rel-prov-b{font-size:12px;line-height:1.5;color:var(--parchment-dim);
+    border-left:1px solid var(--echo);padding:2px 0 2px 11px;margin:2px 0 0;}
+  .rel-prov-b p{margin:0 0 6px;}
+  .rel-prov-b .rp-claim{color:var(--parchment);font-style:italic;}
+  .rel-prov-b .rp-lab{color:var(--muted);text-transform:uppercase;letter-spacing:.12em;font-size:9px;}
+  .rel-prov-b .rp-cav{color:var(--muted);}
+  .rel-prov-b .rp-case{margin-top:4px;background:none;border:none;padding:0;cursor:pointer;
+    font-size:10.5px;letter-spacing:.04em;font-style:italic;color:var(--echo-t);
+    text-decoration:underline;text-underline-offset:3px;}
+  .rel-prov-b .rp-case:hover{color:var(--gold);}
   #drclose{position:absolute;top:16px;right:16px;background:none;border:none;color:var(--muted);
     font-size:22px;cursor:pointer;line-height:1;}
   #drclose:hover{color:var(--gold);}
@@ -339,37 +368,77 @@
   .flt-erao{font-size:11px;color:var(--muted);text-align:center;margin-top:2px;}
 
   /* ---------- timeline ---------- */
-  #tl-svg{width:100%;height:100%;display:block;cursor:grab;}
-  #tl-svg .tl-lane{stroke:var(--rule);stroke-width:1;stroke-dasharray:2 5;opacity:.5;}
-  #tl-svg .tl-lane-lab{font-family:'EB Garamond',serif;font-style:italic;font-size:12.5px;
-    fill:var(--parchment-dim);opacity:.9;}
-  #tl-svg .tl-now{stroke:var(--rule);stroke-width:1;stroke-dasharray:2 4;opacity:.55;}
-  /* engraved ridge: hairline contour over a faint ink wash — line, not glow */
-  #tl-svg .tl-band{fill-opacity:.12;stroke-width:1.1;stroke-opacity:.85;pointer-events:none;}
-  #tl-svg .tl-frame{fill:none;stroke:var(--rule);stroke-width:1;opacity:.55;}
-  #tl-svg .tl-era-div{stroke:var(--rule);stroke-dasharray:1 4;opacity:.4;}
-  #tl-svg .tl-cartouche{font-size:9.5px;letter-spacing:.22em;fill:var(--ink);
-    text-transform:uppercase;text-anchor:middle;pointer-events:none;}
-  #tl-svg .tl-openmark{font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;
-    opacity:.8;text-anchor:end;pointer-events:none;}
-  #tl-svg .tl-lanehit{fill:transparent;cursor:pointer;}
-  #tl-svg .tl-lanehit:hover{fill:var(--parchment);fill-opacity:.025;}
+  #tl-svg{width:100%;height:100%;display:block;}
+  /* mobile: the rail turns vertical and the panel scrolls down through true time
+     (JS sets an explicit pixel width/height on the SVG, overriding the 100% above). */
+  #m-timeline.tl-narrow{overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;}
+  /* --- the debate header (the question itself) --- */
+  #tl-svg .tl-q{font-family:'Cormorant Garamond','EB Garamond',serif;font-size:26px;font-style:italic;
+    fill:var(--parchment);letter-spacing:.01em;pointer-events:none;}
+  /* --- margin index: the forest of debates --- */
+  #tl-svg .tl-idx-hd{font-size:9px;letter-spacing:.24em;text-transform:uppercase;fill:var(--parchment-dim);
+    opacity:.9;pointer-events:none;}
+  #tl-svg .tl-idx{cursor:pointer;}
+  #tl-svg .tl-idx-rule{stroke:var(--rule);stroke-width:1;opacity:.5;transition:stroke .18s,opacity .18s,stroke-width .18s;}
+  #tl-svg .tl-idx-t{font-family:'EB Garamond',serif;font-style:italic;font-size:13px;fill:var(--parchment-dim);opacity:.7;transition:opacity .18s,fill .18s;}
+  #tl-svg .tl-idx-sub{font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;fill:var(--muted);opacity:.7;}
+  /* the "you are here" caret: solid on the open debate, a faint nudge on hover/focus
+     so every margin row reads as a switchable door (gold stays reserved for the seal). */
+  #tl-svg .tl-idx-mark{fill:var(--parchment-dim);opacity:0;transition:opacity .18s;}
+  #tl-svg .tl-idx.on .tl-idx-t{fill:var(--parchment);opacity:1;}
+  #tl-svg .tl-idx.on .tl-idx-rule{stroke:var(--parchment);opacity:1;stroke-width:2.4;}
+  #tl-svg .tl-idx.on .tl-idx-mark{opacity:1;fill:var(--parchment);}
+  #tl-svg .tl-idx:hover .tl-idx-t,#tl-svg .tl-idx:focus .tl-idx-t{opacity:1;}
+  #tl-svg .tl-idx:hover .tl-idx-rule,#tl-svg .tl-idx:focus .tl-idx-rule{stroke:var(--parchment-dim);opacity:.85;}
+  #tl-svg .tl-idx:hover .tl-idx-mark,#tl-svg .tl-idx:focus .tl-idx-mark{opacity:.55;}
+  #tl-svg .tl-idx:focus{outline:none;}
+  /* each debate's moves plotted on a shared time scale — a temporal fingerprint */
+  #tl-svg .tl-spark-base{stroke:var(--rule);stroke-width:1;opacity:.4;}
+  #tl-svg .tl-spark-tick{stroke:var(--parchment-dim);stroke-width:1;opacity:.5;transition:opacity .18s,stroke .18s;}
+  #tl-svg .tl-idx.on .tl-spark-tick{stroke:var(--parchment);opacity:1;}
+  #tl-svg .tl-idx:hover .tl-spark-tick,#tl-svg .tl-idx:focus .tl-spark-tick{opacity:.85;}
+  /* --- the rail: a double-hairline limb, graduated like an astrolabe --- */
+  #tl-svg .tl-limb{stroke:var(--parchment-dim);stroke-width:1;opacity:.5;}
+  #tl-svg .tl-grad{stroke:var(--rule);stroke-width:1;opacity:.45;}
+  /* disclosed silence */
+  #tl-svg .tl-break{fill:none;stroke:var(--muted);stroke-width:1.2;opacity:.7;}
+  #tl-svg .tl-break-lab{font-size:9px;letter-spacing:.14em;text-transform:uppercase;fill:var(--muted);
+    text-anchor:middle;pointer-events:none;}
+  /* --- the moves between nodes, each in its own hand --- */
+  #tl-svg .tl-move{fill:none;pointer-events:none;}
+  #tl-svg .tl-move.bld{stroke:var(--parchment-dim);stroke-width:1.3;opacity:.75;}
+  #tl-svg .tl-move.rej{stroke:var(--oppose);stroke-width:1.4;opacity:.85;}
+  #tl-svg .tl-move.ech{stroke:var(--echo);stroke-width:1.1;stroke-dasharray:1 4;opacity:.85;}
+  #tl-svg .tl-move.ref{stroke:var(--muted);stroke-width:1.3;opacity:.8;}
+  #tl-svg .tl-move-lab{font-size:8px;letter-spacing:.16em;text-transform:uppercase;text-anchor:middle;
+    fill:var(--muted);opacity:.8;pointer-events:none;}
+  #tl-svg .tl-move-lab.rej{fill:var(--oppose);}
+  #tl-svg .tl-move-lab.ech{fill:var(--echo);}
+  /* --- the nodes: engraved lozenges --- */
+  #tl-svg .tl-dn{cursor:pointer;}
+  #tl-svg .tl-loz{fill:var(--void);stroke:var(--parchment-dim);stroke-width:1.3;}
+  #tl-svg .tl-dn.open .tl-loz{stroke:var(--parchment);stroke-width:1.6;}
+  #tl-svg .tl-dn:hover .tl-loz,#tl-svg .tl-dn:focus .tl-loz,#tl-svg .tl-dn.on .tl-loz{fill:var(--parchment-dim);}
+  #tl-svg .tl-dn:focus{outline:none;}
+  #tl-svg .tl-drop{font-family:'Cormorant Garamond',serif;font-size:34px;fill:var(--parchment-dim);opacity:.55;pointer-events:none;}
+  #tl-svg .tl-dn-t{font-family:'EB Garamond',serif;font-size:11px;letter-spacing:.05em;fill:var(--parchment);
+    text-anchor:middle;text-transform:uppercase;pointer-events:none;}
+  #tl-svg .tl-dn-era{font-size:9px;letter-spacing:.1em;fill:var(--muted);text-anchor:middle;pointer-events:none;}
+  #tl-svg .tl-dn-cap{font-family:'EB Garamond',serif;font-style:italic;font-size:10.5px;fill:var(--parchment-dim);
+    opacity:.8;text-anchor:middle;pointer-events:none;}
+  #tl-svg .tl-dn:hover .tl-dn-cap,#tl-svg .tl-dn:focus .tl-dn-cap,#tl-svg .tl-dn.on .tl-dn-cap{opacity:1;}
+  /* --- the live-rivals seal: the one gold mark --- */
+  #tl-svg .tl-seal-o{fill:none;stroke:var(--gold);stroke-width:1.3;opacity:.9;}
+  #tl-svg .tl-seal-g{font-size:13px;fill:var(--gold);text-anchor:middle;pointer-events:none;}
+  #tl-svg .tl-seal-lab{font-size:7.5px;letter-spacing:.18em;text-transform:uppercase;fill:var(--gold);
+    text-anchor:middle;opacity:.85;pointer-events:none;}
   .wlegend{position:absolute;bottom:16px;left:16px;background:var(--panel);border:1px solid var(--panel-edge);
-    border-radius:4px;padding:10px 13px;font-size:10.5px;color:var(--parchment-dim);line-height:1.5;z-index:5;max-width:210px;}
+    border-radius:4px;padding:10px 13px;font-size:10.5px;color:var(--parchment-dim);line-height:1.5;z-index:5;max-width:215px;}
   .wlegend .row{display:flex;align-items:center;gap:7px;padding:1.5px 0;}
   .wlegend .ln{width:16px;border-top:2px solid transparent;flex:none;}
   .wlegend .sw{width:9px;height:9px;border-radius:2px;flex:none;}
   .wlegend .hd{font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:var(--ink);opacity:.95;
-    margin:8px 0 2px;border-top:1px solid var(--rule);padding-top:7px;}
-  #tl-svg .tl-axis{stroke:var(--rule);stroke-width:1;}
-  #tl-svg .tl-tick{font-size:10px;fill:var(--muted);letter-spacing:.08em;}
-  #tl-svg .tl-edge{fill:none;stroke:rgba(233,220,192,.4);stroke-width:.8;pointer-events:none;}
-  #tl-svg .tl-edge.rej{stroke:var(--oppose);stroke-dasharray:4 3;}
-  #tl-svg .tl-edge.ech{stroke:var(--echo);stroke-dasharray:1 4;}
-  #tl-svg .tl-node{cursor:pointer;}
-  #tl-svg .tl-node circle{stroke:var(--void);stroke-width:1.2;}
-  #tl-svg .tl-node text{font-size:10px;fill:var(--parchment-dim);opacity:0;pointer-events:none;}
-  #tl-svg .tl-node.lab text{opacity:1;}
+    margin:0 0 4px;padding-bottom:5px;border-bottom:1px solid var(--rule);}
 
 
   /* ---------- drawer: foil + bookmark ---------- */
@@ -457,6 +526,44 @@
   #about-close{position:absolute;top:14px;right:16px;background:none;border:none;color:var(--muted);
     font-size:24px;cursor:pointer;line-height:1;}
   #about-close:hover{color:var(--gold);}
+  /* ===== Convergence card (the auditable echo, laid out as a case) ===== */
+  #echo-overlay{position:fixed;inset:0;z-index:62;background:rgba(4,7,14,0.80);
+    backdrop-filter:blur(3px);display:none;align-items:center;justify-content:center;padding:24px;}
+  #echo-overlay.open{display:flex;}
+  #echo-panel{max-width:600px;max-height:88vh;overflow-y:auto;position:relative;
+    background:linear-gradient(180deg,var(--void-2),var(--void));border:1px solid var(--panel-edge);
+    border-radius:5px;padding:30px 32px 30px;box-shadow:0 30px 80px rgba(0,0,0,.6);}
+  #echo-close{position:absolute;top:14px;right:16px;background:none;border:none;color:var(--muted);
+    font-size:24px;cursor:pointer;line-height:1;}
+  #echo-close:hover{color:var(--gold);}
+  #echo-body .ec-kicker{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--echo-t);
+    opacity:.95;margin-bottom:9px;}
+  #echo-body .ec-title{font-family:'EB Garamond',serif;font-weight:600;font-size:24px;line-height:1.2;
+    margin:0 0 14px;color:var(--parchment);}
+  #echo-body .ec-title .ec-amp{color:var(--echo-t);font-style:italic;padding:0 .28em;}
+  #echo-body .ec-claim{font-family:'EB Garamond',serif;font-style:italic;font-size:18px;line-height:1.5;
+    color:var(--parchment);border-left:2px solid var(--echo);padding:2px 0 2px 14px;margin:0 0 20px;}
+  .ec-voices{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:0 0 20px;}
+  .ec-voice{border:1px solid var(--rule);border-radius:4px;padding:13px 14px;background:rgba(255,255,255,.012);}
+  .ec-voice .ev-name{font-family:'EB Garamond',serif;font-size:16px;color:var(--parchment);margin-bottom:2px;
+    display:flex;align-items:center;gap:7px;}
+  .ec-voice .ev-dot{width:7px;height:7px;border-radius:50%;flex:none;}
+  .ec-voice .ev-meta{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);margin-bottom:8px;}
+  .ec-voice .ev-gloss{font-size:12.5px;line-height:1.5;color:var(--parchment-dim);margin:0 0 8px;}
+  .ec-voice .ev-who{font-size:11px;color:var(--muted);}
+  #echo-body .ec-sec{font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink);
+    margin:18px 0 6px;padding-bottom:5px;border-bottom:1px solid var(--rule);}
+  #echo-body .ec-p{font-size:13px;line-height:1.6;color:var(--parchment-dim);margin:0 0 4px;}
+  #echo-body .ec-verdict{font-size:13.5px;line-height:1.58;color:var(--parchment);font-style:italic;
+    border-left:2px solid var(--gold);padding:2px 0 2px 13px;margin:0;}
+  .ec-actions{display:flex;align-items:center;gap:12px;margin-top:22px;}
+  #echo-body .ec-copy{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--parchment-dim);
+    background:transparent;border:1px solid var(--rule);border-radius:4px;padding:7px 13px;cursor:pointer;}
+  #echo-body .ec-copy:hover{color:var(--gold);border-color:var(--gold);}
+  #echo-body .ec-rail{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
+    background:none;border:none;cursor:pointer;text-decoration:underline;text-underline-offset:3px;}
+  #echo-body .ec-rail:hover{color:var(--gold);}
+  @media(max-width:560px){ .ec-voices{grid-template-columns:1fr;} }
   .begin-list{display:flex;flex-direction:column;gap:1px;margin:2px 0 4px;}
   .begin-i{display:block;width:100%;text-align:left;background:transparent;border:none;
     border-left:2px solid var(--rule);padding:7px 0 7px 12px;cursor:pointer;
@@ -531,6 +638,14 @@
   .llink.builds{stroke:rgba(233,220,192,0.5);}
   .llink.rejects{stroke:var(--oppose);stroke-dasharray:4 4;opacity:0.7;}
   .llink.echoes{stroke:var(--echo);stroke-dasharray:1 5;opacity:0.8;}
+  /* --- era-clock dial: a graduated instrument, not a chart axis --- */
+  #lens-svg .ldial-limb{fill:none;stroke:var(--parchment-dim);stroke-width:1;opacity:.42;}
+  #lens-svg .ldial-tick{stroke:var(--rule);stroke-width:1;opacity:.6;}
+  #lens-svg .ldial-tick.maj{stroke:var(--parchment-dim);stroke-width:1.1;opacity:.7;}
+  #lens-svg .ldial-num{font-family:'EB Garamond',serif;font-size:10.5px;letter-spacing:.14em;
+    text-transform:uppercase;fill:var(--muted);text-anchor:middle;}
+  #lens-svg .ldial-foc{stroke:var(--parchment);stroke-width:1.4;opacity:.85;}
+  #lens-svg .ldial-foc-r{stroke:var(--parchment-dim);stroke-width:1;opacity:.3;stroke-dasharray:1 4;}
   /* Lens board — the "Where will we begin?" empty state (a hand of question cards) */
   #lens-board{position:absolute;inset:0;z-index:5;display:flex;flex-direction:column;
     align-items:center;justify-content:flex-start;padding:86px 24px 44px;overflow:auto;}
@@ -772,6 +887,17 @@
     </div>
   </div>
 
+  <!-- Convergence card: the atlas's "atom" — one auditable echo, laid out as a
+       falsifiable case (the shared insight, the two voices that reached it apart,
+       the no-contact warrant, the strongest objection, a verdict). Deep-linkable
+       via #/echo/<early>~<late>; fails closed (opens only for an audited pair). -->
+  <div id="echo-overlay" role="dialog" aria-modal="true" aria-labelledby="echo-title">
+    <div id="echo-panel">
+      <button id="echo-close" aria-label="Close">×</button>
+      <div id="echo-body"></div>
+    </div>
+  </div>
+
   <div id="stage">
     <aside id="filters" aria-label="Filters" hidden>
       <div class="flt-head"><span data-i18n="Filters">Filters</span><button id="flt-close" aria-label="Close filters">×</button></div>
@@ -793,14 +919,17 @@
 
     <section id="m-questions" class="view active"></section>
     <section id="m-timeline" class="view">
-      <svg id="tl-svg"></svg>
+      <svg id="tl-svg" role="img" aria-label="A timeline of the great debates, each drawn as a true-time spine."></svg>
+      <div id="tl-live" class="sr-only" role="status" aria-live="polite"></div>
       <div class="wlegend">
+        <div class="hd" data-i18n="How a move relates to the one before">How a move relates to the one before</div>
         <div class="row"><span class="ln" style="border-color:rgba(233,220,192,.7)"></span><span data-i18n="builds on">builds on</span></div>
-        <div class="row"><span class="ln" style="border-color:var(--oppose);border-top-style:dashed"></span><span data-i18n="rejects / opposes">rejects / opposes</span></div>
-        <div class="row"><span class="ln" style="border-color:var(--echo);border-top-style:dotted"></span><span data-i18n="echoes">echoes</span></div>
-        <div class="row" style="margin-top:6px;opacity:.7" data-i18n="size = ideas built on it">size = ideas built on it</div>
+        <div class="row"><span class="ln" style="border-color:var(--oppose);border-top-style:solid"></span>✕ <span data-i18n="rejects">rejects</span></div>
+        <div class="row"><span class="ln" style="border-color:var(--echo);border-top-style:dotted"></span><span data-i18n="echoes (no descent)">echoes (no descent)</span></div>
+        <div class="row"><span class="ln" style="border-color:var(--muted)"></span><span data-i18n="reframes">reframes</span></div>
+        <div class="row" style="margin-top:6px;opacity:.8"><span class="sw" style="background:var(--gold)"></span><span data-i18n="live rivals — unresolved">live rivals — unresolved</span></div>
       </div>
-      <div class="con-hint" data-i18n="Each ridge shows when a question was actually being asked — floored to where this atlas holds ideas, never an even spread to now. Time is compressed so recent centuries stay legible; colour marks where the thinking stands today. Click a lane to surface its ideas; a thin ridge can mean real quiet or a gap in this atlas.">Each ridge shows when a question was actually being asked — floored to where this atlas holds ideas, never an even spread to now. Time is compressed so recent centuries stay legible; colour marks where the thinking stands today. Click a lane to surface its ideas; a thin ridge can mean real quiet or a gap in this atlas.</div>
+      <div class="con-hint" data-i18n="One great question, argued across centuries. Each node is a move; time runs left to right, and a long silence is shown as a labelled break — never warped away. An echo is a rhyme across cultures that never met, not a line of descent. Pick another question from the margin to see it flip.">One great question, argued across centuries. Each node is a move; time runs left to right, and a long silence is shown as a labelled break — never warped away. An echo is a rhyme across cultures that never met, not a line of descent. Pick another question from the margin to see it flip.</div>
     </section>
     <section id="m-constellation" class="view">
       <svg id="con-svg"></svg>
@@ -817,6 +946,10 @@
           <button id="lens-tour" data-i18n="Guided tour">Guided tour</button>
         </div>
         <button id="lens-random" class="hbtn" data-i18n="Random walk">Random walk</button>
+        <div class="lens-seg" id="lens-layout" role="group" aria-label="Neighbour layout">
+          <button id="lens-lay-ring" class="on" data-lay="even" title="Neighbours evenly spaced — position carries no meaning" data-i18n="Ring">Ring</button>
+          <button id="lens-lay-era" data-lay="era" title="Neighbours placed by era on a dial of history — echoes leap across the centuries" data-i18n="Era-clock">Era-clock</button>
+        </div>
         <span id="lens-tour-nav" hidden>
           <button id="lens-prev" class="hbtn" data-i18n="‹ Prev">‹ Prev</button>
           <button id="lens-play" class="hbtn" data-i18n="Play">Play</button>
@@ -887,6 +1020,8 @@
 <script id="ideas-data" type="application/json">__IDEAS_JSON__</script>
 <script id="atlas-data" type="application/json">__ATLAS_JSON__</script>
 <script id="i18n-data" type="application/json">__I18N_JSON__</script>
+<script id="debates-data" type="application/json">__DEBATES_JSON__</script>
+<script id="echoes-data" type="application/json">__ECHOES_JSON__</script>
 <script>
 (function(){
   "use strict";
@@ -949,7 +1084,7 @@
   // the tab numerals — the views are peers, not a fixed sequence.
   const CAPTIONS = {
     questions:'<b>Questions</b> Eleven questions every tradition has wrestled with — and the rival answers, side by side. Click any answer to light up the ideas it builds on, rejects, or quietly echoes.',
-    timeline:'<b>Timeline</b> One lane per great question, in fixed order. The ridge shows <i>when</i> a question was actually being asked — taller where ideas cluster, floored to where this atlas holds them, never an even spread to now. Time is compressed: recent centuries are stretched to stay legible. Colour marks where the thinking stands <i>today</i>. Click a lane to surface its ideas.',
+    timeline:'<b>Timeline</b> One great question, argued across centuries. Each node is a move; the mark before it shows how it answers the one before — builds, rejects, echoes (a rhyme between cultures that never met), or reframes. Time runs left to right, and a long stretch with no traced moves is shown as a labelled break, never warped away. Pick another question from the margin to watch it flip.',
     constellation:'<b>Thinkers</b> The original constellation — every thinker and school as a star, clustered into the traditions of West, Psyche and East. Click a star to cross into the ideas they shaped.',
     lens:'<b>Concepts</b> One idea at the centre, the thoughts it touches arranged around it. Travel from neighbour to neighbour, roll the dice to wander, or let a guided tour walk you through a lineage.'
   };
@@ -1039,10 +1174,26 @@
         const o=cById[r.other];
         const arrow = t==='echoes' ? '↔' : (r.dir==='out'?'→':'←');
         const it=document.createElement('div'); it.className='rel-i';
+        const prov = t==='echoes' ? echoProv(id, r.other) : null;
         it.innerHTML=`<span class="dot" style="background:${o.color}"></span><span>${esc0(cName(o))}</span>`+
+          (prov?`<span class="rel-aud" title="${esc0(T('an audited convergence'))}">${esc0(T('audited'))}</span>`:'')+
           `<span style="color:var(--muted);margin-left:auto;font-size:11px">${arrow}</span>`;
         it.onclick=()=>{ openConcept(r.other); crossHighlight(r.other); };
         wrap.appendChild(it);
+        // auditable echo: fold the warrant + honest caveat beneath the relation
+        if(prov){
+          const det=document.createElement('details'); det.className='rel-prov';
+          const sm=document.createElement('summary'); sm.textContent=T('Why call this independent?'); det.appendChild(sm);
+          const body=document.createElement('div'); body.className='rel-prov-b';
+          body.innerHTML=`<p class="rp-claim">${esc0(prov.claim)}</p>`+
+            `<p><span class="rp-lab">${esc0(T('No baton passed'))}:</span> ${esc0(prov.independent)}</p>`+
+            (prov.caveat?`<p class="rp-cav"><span class="rp-lab">${esc0(T('But in honesty'))}:</span> ${esc0(prov.caveat)}</p>`:'');
+          const other=r.other;
+          const cs=document.createElement('button'); cs.type='button'; cs.className='rp-case';
+          cs.textContent=T('See the full case')+' →'; cs.onclick=()=>openEcho(id,other);
+          body.appendChild(cs);
+          det.appendChild(body); wrap.appendChild(det);
+        }
       });
     });
     { const dm=document.getElementById('dr-more'); if(dm){ dm.classList.remove('bare'); dm.open=false; } }
@@ -1136,9 +1287,23 @@
   }
 
   // ---------- MODE : Idea Lens — focus+context, guided tour & random walk (lazy) ----------
-  let lensBuilt=false, lsvg, lworld, llinkG, lnodeG, lensFocus=null, lensMode='explore';
+  let lensBuilt=false, lsvg, lworld, llinkG, lnodeG, ldialG, lensFocus=null, lensMode='explore';
   let tourPath=[], tourIdx=0, tourTimer=null;
   let lensTrail=[], trailExpanded=false;  // the path of concepts walked in Explore (each {id, rel})
+  // Neighbour layout: 'even' spaces kin by index (position is meaningless — the honest
+  // default); 'era' keys each kin's ANGLE to its date on a fixed dial of history, so an
+  // echo that rhymes across two millennia visibly leaps to the far side of the clock.
+  let lensLayout=(function(){ try{ return localStorage.getItem('aoi.lens.layout')==='era'?'era':'even'; }catch(e){ return 'even'; } })();
+  // a fixed global time range (every concept carries an era) so the dial never rescales
+  // as you walk — "4 o'clock" means the same century from one focus to the next.
+  const LENS_ERA=(function(){ const es=D.concepts.map(c=>c.era).filter(e=>e!=null);
+    const lo=Math.min(...es), hi=Math.max(...es), pad=80;
+    return {lo:lo-pad, hi:hi+pad}; })();
+  const ERA_SEAM=34, ERA_SWEEP=360-ERA_SEAM;   // degrees; gap at top so oldest≠newest
+  const eraAngle=era=>{ const f=(era-LENS_ERA.lo)/((LENS_ERA.hi-LENS_ERA.lo)||1);
+    return (-90 + ERA_SEAM/2 + f*ERA_SWEEP)*Math.PI/180; };   // 12 o'clock = oldest, clockwise
+  const eraYearLabel=y=>{ const a=Math.abs(Math.round(y/100)*100)||0;
+    return y<0 ? a+' '+T('BCE') : (a===0?'1 '+T('CE'):a+' '+T('CE')); };
   const TYPE_ORDER={builds:0,echoes:1,rejects:2};
   const REL_VERB={builds:'builds on',rejects:'rejects',echoes:'echoes'};
   // "Where will we begin?" — one curated gateway concept per question (the Lens empty state).
@@ -1474,11 +1639,13 @@
     if(lensBuilt) return; lensBuilt=true;
     lsvg=d3.select('#lens-svg');
     lsvg.append('defs');
-    lworld=lsvg.append('g'); llinkG=lworld.append('g'); lnodeG=lworld.append('g');
+    lworld=lsvg.append('g'); ldialG=lworld.append('g'); llinkG=lworld.append('g'); lnodeG=lworld.append('g');
     lsvg.on('click',()=>{ if(selected) closeDrawer(); });
     document.getElementById('lens-explore').onclick=()=>setLensMode('explore');
     document.getElementById('lens-tour').onclick=()=>setLensMode('tour');
     document.getElementById('lens-random').onclick=()=>randomWalk();
+    document.querySelectorAll('#lens-layout button').forEach(b=>b.onclick=()=>setLensLayout(b.dataset.lay));
+    syncLayoutToggle();
     document.getElementById('lens-prev').onclick=()=>tourGo(tourIdx-1);
     document.getElementById('lens-next').onclick=()=>tourGo(tourIdx+1);
     document.getElementById('lens-play').onclick=()=>toggleTour();
@@ -1499,6 +1666,60 @@
 
   function edgePath(s,t){ const dx=t.x-s.x,dy=t.y-s.y,dr=Math.hypot(dx,dy)||1,ux=dx/dr,uy=dy/dr;
     return `M${s.x+ux*(s.r+2)},${s.y+uy*(s.r+2)}L${t.x-ux*(t.r+2)},${t.y-uy*(t.r+2)}`; }
+
+  // The era-clock degrades to the even ring on a narrow canvas (the dial + rim numerals
+  // need room) — so the effective layout is what the user chose, unless we're cramped.
+  function lensNarrow(){ const h=document.getElementById('m-lens'); return (h?h.clientWidth:999)<560; }
+  function effLayout(){ return (lensLayout==='era' && !lensNarrow()) ? 'era' : 'even'; }
+  function syncLayoutToggle(){ const narrow=lensNarrow();
+    document.querySelectorAll('#lens-layout button').forEach(b=>{
+      b.classList.toggle('on', b.dataset.lay===lensLayout);
+      b.setAttribute('aria-pressed', b.dataset.lay===lensLayout?'true':'false'); });
+    const seg=document.getElementById('lens-layout'); if(seg) seg.style.opacity=narrow?'.4':''; }
+  function setLensLayout(lay){ lensLayout=(lay==='era')?'era':'even';
+    try{ localStorage.setItem('aoi.lens.layout',lensLayout); }catch(e){}
+    syncLayoutToggle();
+    if(lensFocus && !lensBoardOn) focusLens(lensFocus,null,{trail:'none'}); }
+
+  // Era-clock node placement: each kin's ANGLE is its date on the fixed dial; radius stays
+  // constant (so it never lies about importance). Kin sharing an era would overlap, so we
+  // nudge them apart ALONG the arc (a small angular jitter) — never radially — preserving
+  // the time reading. Returns id -> {a (angle), era}.
+  function eraClockAngles(neigh){
+    const seam0=(-90+ERA_SEAM/2)*Math.PI/180, seam1=seam0+ERA_SWEEP*Math.PI/180;
+    const items=neigh.map(nb=>({id:nb.id, era:cById[nb.id].era, a:eraAngle(cById[nb.id].era)}))
+      .sort((p,q)=>p.a-q.a);
+    const minGap=Math.min(7*Math.PI/180, (ERA_SWEEP*Math.PI/180)/Math.max(items.length,1));
+    for(let i=1;i<items.length;i++){ if(items[i].a < items[i-1].a+minGap) items[i].a=items[i-1].a+minGap; }
+    // if the forward push ran past the seam, pull the whole run back to fit
+    const overflow=items.length?items[items.length-1].a-seam1:0;
+    if(overflow>0) items.forEach(it=>{ it.a=Math.max(seam0, it.a-overflow); });
+    const m={}; items.forEach((it,i)=>{ m[it.id]={a:it.a, era:it.era, oi:i}; }); return m;
+  }
+  // Draw the dial of history behind the ring: a graduated limb with serif century numerals,
+  // and an engraved hairline (NOT a second gold mark) showing where the focus itself sits in time.
+  function drawEraDial(cx,cy,R,focusEra){
+    ldialG.selectAll('*').remove();
+    if(effLayout()!=='era') return;
+    ldialG.append('circle').attr('class','ldial-limb').attr('cx',cx).attr('cy',cy).attr('r',R);
+    const P=a=>[cx+Math.cos(a)*R, cy+Math.sin(a)*R];
+    for(let y=-2000;y<=2000;y+=500){ if(y<LENS_ERA.lo||y>LENS_ERA.hi) continue;
+      const a=eraAngle(y), maj=(y%1000===0), [px,py]=P(a);
+      const i0=R-(maj?7:4), o0=R+(maj?8:4);
+      ldialG.append('line').attr('class','ldial-tick'+(maj?' maj':''))
+        .attr('x1',cx+Math.cos(a)*i0).attr('y1',cy+Math.sin(a)*i0)
+        .attr('x2',cx+Math.cos(a)*o0).attr('y2',cy+Math.sin(a)*o0);
+      if(maj) ldialG.append('text').attr('class','ldial-num')
+        .attr('x',cx+Math.cos(a)*(R+20)).attr('y',cy+Math.sin(a)*(R+20)+3).text(eraYearLabel(y));
+    }
+    // where the focus sits on its own clock — an engraved hairline + a faint spoke to centre
+    const fa=eraAngle(focusEra);
+    ldialG.append('line').attr('class','ldial-foc-r')
+      .attr('x1',cx).attr('y1',cy).attr('x2',cx+Math.cos(fa)*(R-6)).attr('y2',cy+Math.sin(fa)*(R-6));
+    ldialG.append('line').attr('class','ldial-foc')
+      .attr('x1',cx+Math.cos(fa)*(R-6)).attr('y1',cy+Math.sin(fa)*(R-6))
+      .attr('x2',cx+Math.cos(fa)*(R+9)).attr('y2',cy+Math.sin(fa)*(R+9));
+  }
 
   // record the walked path: append, or truncate back if we've returned to a concept already on it
   function trailPush(id, rel){
@@ -1525,8 +1746,13 @@
     const R=Math.max(70,Math.min((H-botInset-topInset)/2, W/2-70));
     const pos={}; pos[id]={x:cx,y:cy,r:8+Math.sqrt(c.deg)*1.6,focus:true,c};
     const n=neigh.length||1;
-    neigh.forEach((nb,i)=>{ const a=-Math.PI/2+(i+0.5)/n*2*Math.PI, o=cById[nb.id];
-      pos[nb.id]={x:cx+Math.cos(a)*R,y:cy+Math.sin(a)*R,r:5+Math.sqrt(o.deg)*1.3,c:o,type:nb.type,oi:i}; });
+    const era=effLayout()==='era';
+    const clock=era?eraClockAngles(neigh):null;
+    neigh.forEach((nb,i)=>{ const o=cById[nb.id];
+      const a=era ? clock[nb.id].a : -Math.PI/2+(i+0.5)/n*2*Math.PI;
+      pos[nb.id]={x:cx+Math.cos(a)*R,y:cy+Math.sin(a)*R,r:5+Math.sqrt(o.deg)*1.3,
+        c:o,type:nb.type,oi:era?clock[nb.id].oi:i,era:o.era}; });
+    drawEraDial(cx,cy,R,c.era);
     const nodes=Object.entries(pos).map(([k,v])=>Object.assign({id:k},v));
     const links=neigh.map(nb=>({s:pos[id],t:pos[nb.id],type:nb.type}));
     const dur=reduce?0:520;
@@ -1552,7 +1778,8 @@
     enter.append('circle'); enter.append('text').attr('text-anchor','middle');
     const ndA=enter.merge(nd);
     ndA.classed('focus',d=>!!d.focus).classed('dimf',d=>!d.focus&&!passes(d.c))
-      .attr('aria-label',d=>cName(d.c)+(d.focus?'':' — '+T(REL_VERB[d.type]||'related')));
+      .attr('aria-label',d=>cName(d.c)+(d.focus?'':' — '+T(REL_VERB[d.type]||'related')
+        +(era&&d.era!=null?', '+eraTxt(d.era):'')));
     ndA.on('click',(e,d)=>{ e.stopPropagation(); d.focus?openConcept(d.id):focusLens(d.id,d.type); })
       .on('keydown',(e,d)=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); e.stopPropagation();
         d.focus?openConcept(d.id):focusLens(d.id,d.type); } });
@@ -1786,6 +2013,65 @@
     if(e.shiftKey&&document.activeElement===first){ e.preventDefault(); last.focus(); }
     else if(!e.shiftKey&&document.activeElement===last){ e.preventDefault(); first.focus(); } });
 
+  // ========== Convergence card — the auditable echo as a falsifiable case ==========
+  // Renders one ECHO_PROV entry as: the shared insight, the two voices that reached
+  // it without contact (each idea's own gloss/era/thinker — never a copyrighted
+  // quote), the no-contact warrant, the strongest objection, and a verdict. Fails
+  // closed: opens only for a pair that carries a warrant.
+  const echoOv=document.getElementById('echo-overlay'), echoPanel=document.getElementById('echo-panel');
+  let echoPrevFocus=null;
+  function echoBackground(inert){ for(const el of document.body.children){ if(el===echoOv) continue;
+    if(inert){ el.setAttribute('inert',''); el.setAttribute('aria-hidden','true'); }
+    else { el.removeAttribute('inert'); el.removeAttribute('aria-hidden'); } } }
+  function echoVoice(c){ if(!c) return '';
+    const who=(c.thinkers&&c.thinkers.length)?c.thinkers.slice(0,2).join(' · '):'';
+    return `<div class="ec-voice"><div class="ev-name">`+
+      `<span class="ev-dot" style="background:${c.color}"></span>${esc0(cName(c))}</div>`+
+      `<div class="ev-meta">${esc0(cTrad(c))} · ${esc0(eraTxt(c.era))}</div>`+
+      `<p class="ev-gloss">${esc0(cGloss(c))}</p>`+
+      (who?`<div class="ev-who">${esc0(who)}</div>`:'')+`</div>`; }
+  function openEcho(a,b){
+    const e=echoProv(a,b); if(!e) return;          // fails closed
+    const early=cById[e.early], late=cById[e.late];
+    if(!early||!late) return;
+    const body=document.getElementById('echo-body');
+    body.innerHTML=
+      `<div class="ec-kicker">${esc0(T('An audited convergence'))}</div>`+
+      `<h2 class="ec-title" id="echo-title">${esc0(cName(early))}<span class="ec-amp">↔</span>${esc0(cName(late))}</h2>`+
+      `<p class="ec-claim">${esc0(e.claim)}</p>`+
+      `<div class="ec-voices">${echoVoice(early)}${echoVoice(late)}</div>`+
+      `<div class="ec-sec">${esc0(T('No baton passed'))}</div>`+
+      `<p class="ec-p">${esc0(e.independent)}</p>`+
+      (e.caveat?`<div class="ec-sec">${esc0(T('The strongest objection'))}</div>`+
+        `<p class="ec-p">${esc0(e.caveat)}</p>`:'')+
+      (e.verdict?`<div class="ec-sec">${esc0(T('Verdict'))}</div>`+
+        `<p class="ec-verdict">${esc0(e.verdict)}</p>`:'')+
+      `<div class="ec-actions">`+
+        `<button type="button" class="ec-copy">${esc0(T('Copy link to this case'))}</button>`+
+        `<button type="button" class="ec-rail">${esc0(T('Trace it on the rail'))} →</button>`+
+      `</div>`;
+    const copyBtn=body.querySelector('.ec-copy');
+    copyBtn.onclick=()=>{ const url=location.origin+location.pathname+'#/echo/'+encodeURIComponent(e.early)+'~'+encodeURIComponent(e.late);
+      const done=()=>{ copyBtn.textContent=T('Link copied'); setTimeout(()=>{ copyBtn.textContent=T('Copy link to this case'); },1600); };
+      if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(url).then(done,done); } else done(); };
+    body.querySelector('.ec-rail').onclick=()=>{ closeEcho(); setMode('timeline'); };
+    echoPrevFocus=document.activeElement; echoOv.classList.add('open'); echoBackground(true);
+    document.getElementById('echo-close').focus();
+    setHash('/echo/'+encodeURIComponent(e.early)+'~'+encodeURIComponent(e.late));
+  }
+  function closeEcho(){ if(!echoOv.classList.contains('open')) return;
+    echoOv.classList.remove('open'); echoBackground(false);
+    if(echoPrevFocus&&echoPrevFocus.focus) echoPrevFocus.focus();
+    if(selected) setHash('/'+modeSlug(currentMode)+'/idea/'+encodeURIComponent(selected));
+    else setHash('/'+modeSlug(currentMode)); }
+  document.getElementById('echo-close').onclick=closeEcho;
+  echoOv.addEventListener('click',e=>{ if(e.target===echoOv) closeEcho(); });
+  echoPanel.addEventListener('keydown',e=>{ if(e.key!=='Tab') return;
+    const f=[...echoPanel.querySelectorAll('button,[href],a,input,[tabindex]:not([tabindex="-1"])')].filter(x=>!x.disabled&&x.offsetParent!==null);
+    if(!f.length) return; const first=f[0], last=f[f.length-1];
+    if(e.shiftKey&&document.activeElement===first){ e.preventDefault(); last.focus(); }
+    else if(!e.shiftKey&&document.activeElement===last){ e.preventDefault(); first.focus(); } });
+
   // "Where to begin": one hand-picked door per question, grounded in real
   // concepts (ids must match) so each opens its drawer. Editorial, deliberately
   // a *suggestion* — the recurring list below it is the derived counterpart.
@@ -1823,146 +2109,248 @@
   // (renderBegin/renderRecurring are invoked from applyLang, which re-renders the
   // About body and runs at init — see below.)
 
-  // ========== TIMELINE ==========
-  let tlBuilt=false, tlsvg, tlWorld, tlArc, tlNode, tlPos={};
-  const buildsIn={}; D.links.forEach(l=>{ if(l.type==='builds') buildsIn[l.target]=(buildsIn[l.target]||0)+1; });
-  function hashId(s){ let h=0; for(let i=0;i<s.length;i++) h=(h*31+s.charCodeAt(i))>>>0; return h; }
+  // ========== TIMELINE — the debates rail ==========
+  // One great question, argued across centuries, drawn as an engraved spine: each
+  // node a move in the conversation, the relationship to the prior move drawn in
+  // its own hand (builds = limb, rejects = struck bar, echoes = a dotted rhyme,
+  // reframes = a stepped tier). True time within each era; a long silence is shown
+  // as a DISCLOSED break (a labelled ≈ glyph), never warped away. The other debates
+  // sit in a quiet margin index — the "forest" — so five lit question-lines say
+  // "only these few, in 2,500 years" without recreating the cluttered overview.
+  let tlBuilt=false, tlsvg, tlWorld, tlDebate=null, tlCur=null, tlPos={};
+  const DEBATES=(function(){ try{ return (JSON.parse(document.getElementById('debates-data').textContent)||{}).debates||[]; }catch(e){ return []; } })();
+  const debById={}, debByQ={}; DEBATES.forEach(d=>{ debById[d.id]=d; if(!debByQ[d.q]) debByQ[d.q]=d; });
+  const flagshipId=(DEBATES.find(d=>d.flagship)||DEBATES[0]||{}).id;
+  // auditable echoes: a human-authored warrant for each "independent convergence" claim
+  // the rail/drawer surfaces. Keyed by the unordered concept pair; fails closed (no entry
+  // → no provenance shown, never a fabricated one).
+  const ECHO_PROV=(function(){ const m={};
+    let list=[]; try{ list=(JSON.parse(document.getElementById('echoes-data').textContent)||{}).echoes||[]; }catch(e){}
+    list.forEach(e=>{ m[e.early+'\u241F'+e.late]=e; m[e.late+'\u241F'+e.early]=e; });
+    return m; })();
+  const echoProv=(a,b)=>ECHO_PROV[a+'\u241F'+b]||null;
+  const BREAKYRS=700;       // a silence longer than this is drawn as a disclosed break
+  function relClass(r){ return r==='rejects'?'rej':r==='echoes'?'ech':r==='reframes'?'ref':'bld'; }
+  function relLabel(r){ return T(r==='rejects'?'rejects':r==='echoes'?'echoes':r==='reframes'?'reframes':'builds on'); }
+  function fmtYears(n){ return (n>=1000? Math.round(n/100)*100 : n).toLocaleString('en')+' '+T('years'); }
+  function wrapTspan(sel,str,max,x,dy0,dyN){ const words=String(str).split(' '); let line=[],n=0;
+    for(let i=0;i<words.length;i++){ const test=line.concat(words[i]).join(' ');
+      if(test.length>max && line.length){ sel.append('tspan').attr('x',x).attr('dy',n++?dyN:dy0).text(line.join(' ')); line=[words[i]]; }
+      else line.push(words[i]); }
+    if(line.length) sel.append('tspan').attr('x',x).attr('dy',n++?dyN:dy0).text(line.join(' '));
+    return n; }
+
   function buildTimeline(){
     if(tlBuilt) return; tlBuilt=true;
+    tlsvg=d3.select('#tl-svg');
+    tlRenderDebate(flagshipId);
+  }
+
+  // lay the authored spine out on a piecewise-linear true-time axis, splitting into
+  // segments wherever a gap exceeds BREAKYRS (each split becomes a disclosed break).
+  // axis-agnostic: lay every node on a single "along" coordinate (time) so the same
+  // layout serves the horizontal desktop rail (along=x) and the vertical mobile rail
+  // (along=y). g supplies the along origin (p0), along length (len), break width and PAD.
+  function tlLayout(deb,g){
+    const ns=deb.nodes.map(n=>Object.assign({},n,{era:(cById[n.id]||{}).era}))
+      .filter(n=>n.era!=null).sort((a,b)=>a.era-b.era);
+    if(!ns.length) return {ns:[],segs:[],breaks:[]};   // guard: a debate with no datable nodes
+    const segs=[]; let cur=[ns[0]];
+    for(let i=1;i<ns.length;i++){ if(ns[i].era-ns[i-1].era>BREAKYRS){ segs.push(cur); cur=[ns[i]]; } else cur.push(ns[i]); }
+    segs.push(cur);
+    const breaks=[];
+    for(let k=0;k<segs.length-1;k++){ const a=segs[k][segs[k].length-1].era, b=segs[k+1][0].era; breaks.push({after:a,before:b,years:b-a}); }
+    const span=s=>Math.max(s[s.length-1].era-s[0].era,1);
+    const totalSpan=segs.reduce((t,s)=>t+span(s),0);
+    // keep the end nodes off the canvas edges so their centred labels + the
+    // terminal seal have room (a node at the very end would clip its own caption).
+    const PAD=g.PAD;
+    const availL=g.len-2*PAD-breaks.length*g.breakW, MINSEG=availL*0.20;
+    let cur2=g.p0+PAD;
+    segs.forEach((s,si)=>{
+      const segL=Math.max(MINSEG, availL*span(s)/totalSpan), lo=s[0].era, sp=span(s);
+      s.forEach(n=>{ n.p=(s.length===1)?cur2+segL/2:cur2+segL*(n.era-lo)/sp; tlPos[n.id]={p:n.p}; });
+      s.p0=cur2; s.p1=cur2+segL; cur2+=segL;
+      if(si<breaks.length){ breaks[si].p=cur2+g.breakW/2; cur2+=g.breakW; }
+    });
+    return {ns,segs,breaks};
+  }
+
+  function tlRenderDebate(id){
+    const deb=debById[id]; if(!deb||!tlsvg) return;
+    // diagnostics: a debate must name ids that exist in ideas.json with a datable era
+    (deb.nodes||[]).forEach(n=>{ const c=cById[n.id];
+      if(!c) console.warn('[timeline] debate "'+id+'" references unknown concept id: '+n.id);
+      else if(c.era==null) console.warn('[timeline] debate "'+id+'" concept "'+n.id+'" has no era — dropped from the rail'); });
+    tlDebate=id; tlPos={};
     const host=document.getElementById('m-timeline');
-    const W=Math.max(host.clientWidth,900), H=Math.max(host.clientHeight,560);
-    tlsvg=d3.select('#tl-svg').attr('viewBox','0 0 '+W+' '+H).attr('width',W).attr('height',H);
+    const cw=host.clientWidth||900, ch=host.clientHeight||560;
+    const vert=cw<600;                       // narrow viewport → a vertical, natively-scrolled spine
+    host.classList.toggle('tl-narrow',vert);
+    const validN=deb.nodes.filter(n=>(cById[n.id]||{}).era!=null).length;
+
+    let W,H,railC,g,idxX,idxY0,idxDY,hdr;
+    if(vert){
+      W=cw;
+      const railX=44, PAD=34;
+      idxX=16; idxY0=70; idxDY=22;
+      const idxBottom=idxY0+Math.max(DEBATES.length,1)*idxDY;
+      const p0=idxBottom+30, spineL=Math.max(validN*116,360);
+      H=p0+spineL+2*PAD; railC=railX;
+      hdr={x:16,y:34};
+      g={p0, len:spineL+2*PAD, breakW:Math.min(60,spineL*0.10), PAD};
+    } else {
+      W=Math.max(cw,900); H=Math.max(ch,560);
+      const padL=224, padR=58; railC=Math.round(H*0.50);
+      idxX=30; idxY0=92; idxDY=Math.min(74,(H-idxY0-40)/Math.max(DEBATES.length,1));
+      hdr={x:padL,y:58};
+      g={p0:padL, len:W-padL-padR, breakW:Math.min(72,(W-padL-padR)*0.09), PAD:86};
+    }
+    // map an (along p, cross c) pair onto screen coords for the chosen orientation
+    const M=vert ? (p,c)=>({x:railC+c,y:p}) : (p,c)=>({x:p,y:railC+c});
+    const pt=(p,c)=>{ const o=M(p,c); return o.x+','+o.y; };
+
+    tlsvg.attr('viewBox','0 0 '+W+' '+H).attr('width',W).attr('height',H).selectAll('*').remove();
+    // on mobile the spine grows past the panel and the panel scrolls; on desktop the
+    // SVG fills the panel (the CSS width/height:100% rule scales it to fit).
+    if(vert){ tlsvg.style('width',W+'px').style('height',H+'px'); } else { tlsvg.style('width',null).style('height',null); }
     tlWorld=tlsvg.append('g');
-    const padL=170,padR=40,padT=44,padB=52, plotW=W-padL-padR, plotR=W-padR;
-    // FIXED lane order — the canonical question order, NOT sorted by recurrence.
-    // (Recurrence-ordering implied a false perennity: a question crowded into the
-    // last two centuries was drawn with the same "top-to-now" silhouette as one
-    // genuinely asked in every age. Lane colour now encodes epistemic STATUS, and
-    // the per-lane ridge shows WHEN a question was actually asked.)
-    const lanes=D.questions.slice();
-    const laneBand=(H-padT-padB)/lanes.length, laneY={};
-    lanes.forEach((q,i)=>laneY[q.id]=padT+(i+0.5)*laneBand);
-    const fr=[0,0.12,0.28,0.42,0.58,0.74,1];
-    const x=d3.scaleLinear().domain([-600,0,1000,1500,1800,1900,2025])
-      .range(fr.map(f=>padL+plotW*f)).clamp(true);
-    const inkOf=q=>(STATES[q.status]||{}).ink||q.hue;
-    // ----- codex frame + era cartouches (the warp made legible) -----
-    tlWorld.append('rect').attr('class','tl-frame')
-      .attr('x',padL).attr('y',padT-8).attr('width',plotW).attr('height',(H-padB)-(padT-8));
-    [[-600,476,'Antiquity'],[476,1500,'Medieval'],[1500,2025,'Modern']].forEach((e,i)=>{
-      if(i>0) tlWorld.append('line').attr('class','tl-era-div')
-        .attr('x1',x(e[0])).attr('x2',x(e[0])).attr('y1',padT-8).attr('y2',H-padB);
-      tlWorld.append('text').attr('class','tl-cartouche')
-        .attr('x',(x(e[0])+x(e[1]))/2).attr('y',padT-16).text(e[2]); });
-    // ----- per-lane temporal ridge (Gaussian KDE in screen space) -----
-    // Honesty: each ridge is FLOORED to the lane's real era support — the KDE tail
-    // is clamped to zero before the first idea and after the last, so a lane never
-    // implies thinking in a century where this atlas holds none. Height is the
-    // count-shape (where ideas cluster), normalised to ONE global max so a busy
-    // lane stands taller; it is NOT an even spread to the present.
-    const NS=160, BW=Math.max(14,plotW*0.022);
-    const laneXs={}, laneEras={};
-    lanes.forEach(q=>{ laneXs[q.id]=[]; laneEras[q.id]=[]; });
-    D.concepts.forEach(c=>{ if(laneXs[c.q]){ laneXs[c.q].push(x(c.era)); laneEras[c.q].push(c.era); } });
-    const support={};
-    lanes.forEach(q=>{ const xs=laneXs[q.id]; support[q.id]=xs.length?[Math.min.apply(null,xs),Math.max.apply(null,xs)]:null; });
-    const dens={}; let gmax=0;
-    lanes.forEach(q=>{ const xs=laneXs[q.id], sup=support[q.id], row=[];
-      for(let i=0;i<NS;i++){ const px=padL+plotW*i/(NS-1); let s=0;
-        if(sup && px>=sup[0]-0.5 && px<=sup[1]+0.5){
-          for(let k=0;k<xs.length;k++){ const u=(px-xs[k])/BW; s+=Math.exp(-0.5*u*u); } }
-        row.push([px,s]); if(s>gmax) gmax=s; }
-      dens[q.id]=row; });
-    const dScale=d3.scaleLinear().domain([0,gmax||1]).range([0,laneBand*0.82]);
-    const area=d3.area().x(p=>p[0]).y0(0).y1(p=>-dScale(p[1])).curve(d3.curveBasis);
-    // baseline + ridge + left-gutter label, all coloured by epistemic status
-    lanes.forEach(q=>{ const ink=inkOf(q), y=laneY[q.id];
-      tlWorld.append('line').attr('class','tl-lane').attr('data-q',q.id).attr('x1',padL).attr('x2',plotR)
-        .attr('y1',y).attr('y2',y).style('stroke',ink);
-      tlWorld.append('path').attr('class','tl-band').attr('data-q',q.id).attr('transform','translate(0,'+y+')')
-        .attr('d',area(dens[q.id])).style('fill',ink).style('stroke',ink);
-      tlWorld.append('text').attr('class','tl-lane-lab').attr('data-q',q.id)
-        .attr('x',padL-12).attr('y',y).attr('dy','.32em').attr('text-anchor','end')
-        .style('fill',ink).text(qLabel(q)); });
-    tlWorld.append('line').attr('class','tl-axis').attr('x1',padL).attr('x2',plotR).attr('y1',H-padB).attr('y2',H-padB);
-    [[-500,'500 BCE'],[0,'1 CE'],[1000,'1000'],[1500,'1500'],[1800,'1800'],[1900,'1900'],[2020,'now']].forEach(t=>{
-      tlWorld.append('line').attr('class','tl-axis').attr('x1',x(t[0])).attr('x2',x(t[0])).attr('y1',H-padB).attr('y2',H-padB+5).style('opacity',.5);
-      tlWorld.append('text').attr('class','tl-tick').attr('x',x(t[0])).attr('y',H-padB+18).attr('text-anchor','middle').text(t[1]); });
-    // "now" rule — every ridge runs up to the present (engraved hairline, not gold)
-    tlWorld.append('line').attr('class','tl-now').attr('x1',x(2025)).attr('x2',x(2025)).attr('y1',padT-8).attr('y2',H-padB);
-    // ----- opening beat: mark the oldest question still genuinely OPEN -----
-    let oldestOpen=null, oldestEra=Infinity;
-    lanes.forEach(q=>{ if(q.status!=='open') return; const es=laneEras[q.id]; if(!es.length) return;
-      const m=Math.min.apply(null,es); if(m<oldestEra){ oldestEra=m; oldestOpen=q; } });
-    if(oldestOpen){ const ink=inkOf(oldestOpen);
-      tlWorld.append('text').attr('class','tl-openmark').attr('data-q',oldestOpen.id).attr('data-era',oldestEra)
-        .attr('x',plotR-4).attr('y',laneY[oldestOpen.id]-laneBand*0.30)
-        .style('fill',ink).text(T('still open since')+' '+eraTxt(oldestEra)); }
-    // ----- lane hit-areas: click a lane to solo it (under the dots, over the ridges) -----
-    tlWorld.append('g').selectAll('rect').data(lanes).join('rect')
-      .attr('class','tl-lanehit').attr('data-q',q=>q.id)
-      .attr('x',padL).attr('y',q=>laneY[q.id]-laneBand/2).attr('width',plotW).attr('height',laneBand)
-      .on('click',(e,q)=>{ e.stopPropagation(); tlSetSolo(tlSolo===q.id?null:q.id,{dots:true}); });
-    tlArc=tlWorld.append('g');
-    // ----- per-idea dots — surfaced only when a lane is soloed (focus+context) -----
-    // At rest the ridge IS the view; the scatter of individual ideas is detail you
-    // pull up by clicking a lane, then click an idea to open it.
-    D.concepts.forEach(c=>{ const j=((hashId(c.id)%100)/100)*laneBand*0.34;
-      tlPos[c.id]={x:x(c.era), y:(laneY[c.q]!=null?laneY[c.q]:padT)+6+j}; });
-    tlNode=tlWorld.append('g').selectAll('g').data(D.concepts).join('g')
-      .attr('class','tl-node').attr('transform',c=>'translate('+tlPos[c.id].x+','+tlPos[c.id].y+')')
-      .attr('tabindex',-1).attr('role','button')
-      .attr('aria-label',c=>c.id+' — '+c.tradLabel+', '+eraTxt(c.era));
-    tlNode.append('circle').attr('r',c=>3+Math.min(buildsIn[c.id]||0,6)).attr('fill',c=>inkOf(qById[c.q]));
-    tlNode.append('text').attr('x',c=>6+Math.min(buildsIn[c.id]||0,6)).attr('y',3).text(c=>c.id);
-    tlNode.append('title').text(c=>c.id);
-    tlNode.on('mouseenter',(e,c)=>{ if(!selected) tlHighlight(c.id); })
-      .on('mouseleave',()=>{ if(!selected) tlHighlight(null); })
-      .on('focus',(e,c)=>{ if(!selected) tlHighlight(c.id); })
-      .on('blur',()=>{ if(!selected) tlHighlight(null); })
-      .on('keydown',(e,c)=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); e.stopPropagation(); openConcept(c.id); } })
-      .on('click',(e,c)=>{ e.stopPropagation(); openConcept(c.id); });
-    // X-only scrub: lanes stay vertically anchored; pan/zoom rides the time axis.
-    const zoom=d3.zoom().scaleExtent([0.8,6])
-      .on('zoom',e=>tlWorld.attr('transform','translate('+e.transform.x+',0) scale('+e.transform.k+')'));
-    tlsvg.call(zoom).on('dblclick.zoom',null)
-      .on('click',()=>{ if(tlSolo!=null) tlSetSolo(null); else if(selected) closeDrawer(); });
-    buildTlStatusKey(host);
-    tlRelabel(); // a lazy build under a non-EN language ships English text; localise now
-    tlApplyFilter();
+    const lay=tlLayout(deb,g); tlCur={deb,lay};
+
+    // ----- margin index: the forest of debates (click to switch the open one) -----
+    // a shared era scale across every debate, so each row's spark of move-ticks reads
+    // as a comparable temporal fingerprint: which debates span millennia (where the
+    // cross-era echoes live) versus which cluster in a single modern moment.
+    const debEras=d=>d.nodes.map(n=>(cById[n.id]||{}).era).filter(e=>e!=null);
+    const allEras=DEBATES.flatMap(debEras);
+    const eMin=Math.min(...allEras), eSpan=(Math.max(...allEras)-eMin)||1, sparkW=140;
+    tlWorld.append('text').attr('class','tl-idx-hd').attr('x',idxX).attr('y',idxY0-(vert?14:28)).text(T('THE DEBATES'));
+    DEBATES.forEach((d,i)=>{
+      const y=idxY0+i*idxDY, on=d.id===id;
+      const gx=tlWorld.append('g').attr('class','tl-idx'+(on?' on':'')).attr('tabindex',0).attr('role','button')
+        .attr('aria-label',d.title).attr('transform','translate('+idxX+','+y+')')
+        .on('click',()=>tlRenderDebate(d.id))
+        .on('keydown',e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); tlRenderDebate(d.id); } });
+      gx.append('line').attr('class','tl-idx-rule').attr('x1',0).attr('x2',0).attr('y1',-9).attr('y2',9);
+      gx.append('path').attr('class','tl-idx-mark').attr('d','M-13,-4 L-7,0 L-13,4 Z');
+      const tx=gx.append('text').attr('class','tl-idx-t').attr('x',12).attr('y',0);
+      if(vert){ tx.attr('dy','0.32em').text(d.title); }
+      else {
+        wrapTspan(tx,d.title,22,12,'-0.1em','1.15em');
+        gx.append('text').attr('class','tl-idx-sub').attr('x',12).attr('y',0).attr('dy','2.3em')
+          .text(d.nodes.length+' '+T('moves')+' · '+stLabel(d.status));
+        // temporal fingerprint: a tick per datable move on the shared era scale
+        if(idxDY>=54){ const eras=debEras(d); if(eras.length){ const sy=42;
+          gx.append('line').attr('class','tl-spark-base').attr('x1',12).attr('y1',sy).attr('x2',12+sparkW).attr('y2',sy);
+          eras.forEach(e=>{ const sx=12+(e-eMin)/eSpan*sparkW;
+            gx.append('line').attr('class','tl-spark-tick').attr('x1',sx).attr('y1',sy-3).attr('x2',sx).attr('y2',sy+3); }); } }
+      }
+    });
+
+    // ----- the rail: a double-hairline limb per segment, graduated like an astrolabe -----
+    lay.segs.forEach(s=>{
+      [-1.6,1.6].forEach(off=>{ const a=M(s.p0,off),b=M(s.p1,off);
+        tlWorld.append('line').attr('class','tl-limb').attr('x1',a.x).attr('y1',a.y).attr('x2',b.x).attr('y2',b.y); });
+      s.forEach(n=>{ const a=M(n.p,-5),b=M(n.p,5);
+        tlWorld.append('line').attr('class','tl-grad').attr('x1',a.x).attr('y1',a.y).attr('x2',b.x).attr('y2',b.y); });
+    });
+    // disclosed silence: a labelled break across the limb (an honest datum, not a warp)
+    lay.breaks.forEach(b=>{
+      tlWorld.append('path').attr('class','tl-break').attr('d','M'+pt(b.p-6,-12)+'L'+pt(b.p+4,-4)+'L'+pt(b.p-4,4)+'L'+pt(b.p+6,12));
+      tlWorld.append('path').attr('class','tl-break').attr('d','M'+pt(b.p-12,-12)+'L'+pt(b.p-2,-4)+'L'+pt(b.p-10,4)+'L'+pt(b.p,12));
+      const lp=M(b.p,vert?22:-26);
+      const t=tlWorld.append('text').attr('class','tl-break-lab').attr('x',lp.x).attr('y',lp.y)
+        .text('≈ '+fmtYears(b.years)+' '+T('untraced'));
+      if(vert) t.attr('text-anchor','start').attr('dy','0.32em');
+    });
+
+    // ----- the moves: each node's relationship to the prior, drawn in its own hand -----
+    const ns=lay.ns;
+    for(let i=1;i<ns.length;i++){ const a=ns[i-1], b=ns[i], cls=relClass(b.rel), mid=(a.p+b.p)/2;
+      let labC, labAnch=vert?'end':'middle';
+      if(cls==='ech'){ // an independent rhyme — a dotted arc rising over the gap (and over any break)
+        const lift=Math.min(64,Math.abs(b.p-a.p)*0.28+24);
+        tlWorld.append('path').attr('class','tl-move ech')
+          .attr('d','M'+pt(a.p,-9)+' Q'+pt(mid,-9-lift)+' '+pt(b.p,-9));
+        labC=-(lift+9);
+      } else if(cls==='rej'){ // antithesis — a struck cross-bar on the limb
+        const p1=M(mid-7,-9),p2=M(mid+7,9),p3=M(mid+7,-9),p4=M(mid-7,9);
+        tlWorld.append('line').attr('class','tl-move rej').attr('x1',p1.x).attr('y1',p1.y).attr('x2',p2.x).attr('y2',p2.y);
+        tlWorld.append('line').attr('class','tl-move rej').attr('x1',p3.x).attr('y1',p3.y).attr('x2',p4.x).attr('y2',p4.y);
+        labC=vert?-14:26;
+      } else if(cls==='ref'){ // the question recast — a stepped tier
+        tlWorld.append('path').attr('class','tl-move ref').attr('d','M'+pt(mid-9,9)+'L'+pt(mid-3,9)+'L'+pt(mid,-9)+'L'+pt(mid+6,-9));
+        labC=vert?-14:26;
+      } else { // builds — a small chevron riding the limb
+        tlWorld.append('path').attr('class','tl-move bld').attr('d','M'+pt(mid-4,-4)+'L'+pt(mid,0)+'L'+pt(mid-4,4));
+        labC=vert?-14:26;
+      }
+      const lp=M(mid,labC);
+      const t=tlWorld.append('text').attr('class','tl-move-lab '+cls).attr('x',lp.x).attr('y',lp.y).text(relLabel(b.rel));
+      if(vert) t.attr('text-anchor',labAnch).attr('dy','0.32em');
+    }
+
+    // ----- the nodes: engraved lozenges; on desktop labels stack above/below, on mobile to the right -----
+    ns.forEach((n,i)=>{
+      const c=cById[n.id], last=i===ns.length-1, open=n.rel==='opens';
+      const o=M(n.p,0);
+      const gN=tlWorld.append('g').attr('class','tl-dn'+(open?' open':'')+(last?' term':'')).attr('data-id',n.id)
+        .attr('transform','translate('+o.x+','+o.y+')').attr('tabindex',0).attr('role','button')
+        .attr('aria-label',cName(c)+' — '+cTrad(c)+', '+eraTxt(c.era))
+        .on('click',e=>{ e.stopPropagation(); openConcept(n.id); })
+        .on('keydown',e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); e.stopPropagation(); openConcept(n.id); } });
+      gN.append('rect').attr('class','tl-loz').attr('x',-6).attr('y',-6).attr('width',12).attr('height',12).attr('transform','rotate(45)');
+      if(vert){
+        if(open) gN.append('text').attr('class','tl-drop').attr('x',18).attr('y',-12).text(cName(c).charAt(0));
+        const tt=gN.append('text').attr('class','tl-dn-t').attr('x',18).attr('y',-5).attr('text-anchor','start'); wrapTspan(tt,cName(c),20,18,0,'1.12em');
+        gN.append('text').attr('class','tl-dn-era').attr('x',18).attr('y',9).attr('text-anchor','start').text(eraTxt(c.era));
+        const cp=gN.append('text').attr('class','tl-dn-cap').attr('x',18).attr('y',23).attr('text-anchor','start'); wrapTspan(cp,n.caption,34,18,0,'1.18em');
+      } else {
+        // illuminated opening: a Cormorant drop-cap initial for the thesis node
+        if(open) gN.append('text').attr('class','tl-drop').attr('x',-16).attr('y',-26).text(cName(c).charAt(0));
+        const tt=gN.append('text').attr('class','tl-dn-t').attr('y',-24); wrapTspan(tt,cName(c),16,0,0,'1.12em');
+        gN.append('text').attr('class','tl-dn-era').attr('y',26).text(eraTxt(c.era));
+        const cp=gN.append('text').attr('class','tl-dn-cap').attr('y',40); wrapTspan(cp,n.caption,30,0,0,'1.18em');
+      }
+    });
+
+    // ----- the live-rivals seal: gold appears exactly once, at the terminus -----
+    const term=ns[ns.length-1];
+    if(deb.status==='live-rivals' && term){
+      const so=M(term.p+(vert?30:34),0);
+      const seal=tlWorld.append('g').attr('class','tl-seal').attr('transform','translate('+so.x+','+so.y+')');
+      seal.append('circle').attr('class','tl-seal-o').attr('r',13);
+      seal.append('text').attr('class','tl-seal-g').attr('y',5).text('\u21C4');
+      seal.append('text').attr('class','tl-seal-lab').attr('x',0).attr('y',30).text(T('live rivals'));
+    }
+
+    // header: the question itself, in the maintained codex voice
+    tlWorld.append('text').attr('class','tl-q').attr('x',hdr.x).attr('y',hdr.y).text(deb.title);
+
+    // a11y: name the whole figure for screen readers and announce debate switches
+    const label=deb.title+' — '+ns.map(n=>cName(cById[n.id])).join(', ');
+    tlsvg.attr('aria-label',label);
+    const live=document.getElementById('tl-live'); if(live) live.textContent=T('Now showing')+': '+deb.title;
+
+    tlsvg.on('click',()=>{ if(selected) closeDrawer(); });
   }
-  // solo state: which lane is foregrounded, and whether its dots are surfaced.
-  let tlSolo=null, tlSoloDots=false;
-  function tlNodeVisible(c){ return passes(c) && tlSoloDots && c.q===tlSolo; }
-  function tlRefreshNodes(){ if(!tlNode) return;
-    tlNode.style('display',c=>tlNodeVisible(c)?null:'none').attr('tabindex',c=>tlNodeVisible(c)?0:-1); }
-  function tlSetSolo(qid,opts){ opts=opts||{}; if(!tlBuilt) return;
-    tlSolo=qid; tlSoloDots=qid!=null && opts.dots!==false;
-    tlWorld.selectAll('.tl-band,.tl-lane,.tl-lane-lab,.tl-openmark')
-      .style('opacity',function(){ const q=this.getAttribute('data-q');
-        return (tlSolo==null||q===tlSolo)?null:0.18; });
-    tlWorld.selectAll('.tl-lanehit').classed('on',function(){ return this.getAttribute('data-q')===tlSolo; });
-    tlRefreshNodes(); if(!selected) tlHighlight(null); }
-  function buildTlStatusKey(host){
-    const wl=host.querySelector('.wlegend'); if(!wl||wl.querySelector('.tl-stkey')) return;
-    const order=['handed-off','hardened','live-rivals','open','dissolved'];
-    const div=document.createElement('div'); div.className='tl-stkey';
-    div.innerHTML='<div class="hd" data-i18n="Lane colour = status">'+esc0(T('Lane colour = status'))+'</div>'+
-      order.map(id=>'<div class="row"><span class="sw" style="background:'+STATES[id].ink+'"></span>'+
-        '<span class="stl" data-st="'+id+'">'+esc0(stLabel(id))+'</span></div>').join('');
-    wl.appendChild(div);
+
+  // ----- compatibility shims for the shared call-sites (filter / locate / relabel) -----
+  // The rail shows authored debates, not the live filter set, so filtering is a no-op.
+  function tlApplyFilter(){}
+  // Locate / cross-highlight: surface the debate that holds this idea, mark its node.
+  function tlHighlight(id){ if(!tlBuilt||!tlWorld) return;
+    tlWorld.selectAll('.tl-dn').classed('on',false);
+    if(!id) return;
+    // highlight ≠ navigate: only mark the idea if it lives in the OPEN debate. Flipping
+    // to the debate that holds an idea is an explicit locate (tlSetSolo, called from
+    // locateInView), never a side effect of a passing cross-highlight or tab switch.
+    tlWorld.selectAll('.tl-dn').filter(function(){ return this.getAttribute('data-id')===id; }).classed('on',true);
   }
-  function tlArcPath(a,b){ const mx=(a.x+b.x)/2, my=(a.y+b.y)/2-Math.min(120,Math.abs(a.x-b.x)*0.35+30);
-    return 'M'+a.x+','+a.y+' Q'+mx+','+my+' '+b.x+','+b.y; }
-  function tlHighlight(id){ if(!tlBuilt) return; tlArc.selectAll('*').remove();
-    if(!id){ tlNode.style('opacity',c=>passes(c)?1:0.12).classed('lab',false); return; }
-    const keep=neighborSet(id);
-    tlNode.style('opacity',c=>!passes(c)?0.06:(keep.has(c.id)?1:0.12)).classed('lab',c=>keep.has(c.id)&&passes(c));
-    (adj.get(id)||[]).forEach(e=>{ const a=tlPos[id], b=tlPos[e.other]; if(!a||!b||!passes(cById[e.other])) return;
-      tlArc.append('path').attr('class','tl-edge'+(e.type==='rejects'?' rej':e.type==='echoes'?' ech':''))
-        .attr('d',tlArcPath(a,b)); }); }
-  function tlApplyFilter(){ if(!tlBuilt) return; tlRefreshNodes();
-    if(!selected) tlHighlight(null); }
+  function tlSetSolo(qid){ if(!tlBuilt) return; const d=qid!=null&&debByQ[qid]; if(d) tlRenderDebate(d.id); }
+  // re-lay the rail on resize/rotate so it can flip horizontal⇄vertical at the 600px line
+  let tlResizeT; window.addEventListener('resize',()=>{ if(!tlBuilt||!tlDebate) return;
+    clearTimeout(tlResizeT); tlResizeT=setTimeout(()=>{ if(document.getElementById('m-timeline').classList.contains('active')) tlRenderDebate(tlDebate); },160); });
 
   // ========== deep-link routing ==========
   let currentMode='questions', suppressHash=false;
@@ -1989,6 +2377,8 @@
     const p=raw.split('/').map(x=>{ try{ return decodeURIComponent(x); }catch(e){ return x; } });
     suppressHash=true;
     try{
+      // #/echo/<early>~<late> — open the convergence card for an audited pair (fails closed).
+      if(p[0]==='echo' && p[1]){ const pr=p[1].split('~'); if(pr.length===2 && echoProv(pr[0],pr[1])){ openEcho(pr[0],pr[1]); suppressHash=false; return true; } }
       const mode=SLUG_MODE[p[0]]||p[0];
       // The Arguments/Reading-journeys views were removed; redirect their legacy
       // /paths, /threads and /journeys deep links to the default Questions tab.
@@ -2033,7 +2423,7 @@
 
   // keyboard: Esc closes drawer/filters, "/" focuses search
   document.addEventListener('keydown',e=>{
-    if(e.key==='Escape'){ if(aboutOv.classList.contains('open')) closeAbout(); else if(!filt.hasAttribute('hidden')) toggleFilters(false); else if(selected) closeDrawer(); }
+    if(e.key==='Escape'){ if(echoOv.classList.contains('open')) closeEcho(); else if(aboutOv.classList.contains('open')) closeAbout(); else if(!filt.hasAttribute('hidden')) toggleFilters(false); else if(selected) closeDrawer(); }
     else if(e.key==='/' && document.activeElement!==document.getElementById('search2')){
       e.preventDefault(); document.getElementById('search2').focus(); }
   });
@@ -2042,13 +2432,7 @@
   // ========== language switching ==========
   const HTML_LANG={en:'en',zh:'zh-Hant',ru:'ru'};
   // Relabel the lazily-built graphs in place (preserve node positions / sim state).
-  function tlRelabel(){ if(!tlBuilt||!tlNode) return;
-    tlNode.select('text').text(c=>cName(c));
-    tlNode.select('title').text(c=>cName(c));
-    tlNode.attr('aria-label',c=>cName(c)+' — '+cTrad(c)+', '+eraTxt(c.era));
-    if(tlWorld) tlWorld.selectAll('.tl-lane-lab').text(function(){ const q=qById[this.dataset.q]; return q?qLabel(q):T(this.textContent.trim()); });
-    if(tlWorld) tlWorld.selectAll('.tl-openmark').text(function(){ return T('still open since')+' '+eraTxt(+this.dataset.era); });
-    document.querySelectorAll('#m-timeline .tl-stkey .stl').forEach(el=>{ el.textContent=stLabel(el.dataset.st); }); }
+  function tlRelabel(){ if(!tlBuilt||!tlDebate) return; tlRenderDebate(tlDebate); }
   // Declared up here (not in the constellation section below) so the bootstrap
   // applyLang(LANG) -> conRelabel() call is past their temporal dead zone.
   let conBuilt=false, conLeg=null;

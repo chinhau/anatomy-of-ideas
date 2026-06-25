@@ -159,23 +159,99 @@ assert(!!lensNb, 'lens graph has a neighbour to navigate to');
 click(lensNb);
 eq($('#dr-name').textContent, $('#lens-svg g.lnode.focus text')?.textContent, 'open dossier follows the lens focus to the clicked neighbour');
 assert($('#dr-name').textContent!==lensDrBefore, 'the synced dossier actually changed concepts');
+// ERA-CLOCK — the lens can re-key neighbour ANGLE to historical era (a dial of history),
+// so echoes that rhyme across millennia leap to the far side of the clock. A toggle; the
+// even ring stays the default. Position encodes a real datum (date), never decoration.
+assert($('#lens-layout') && $$('#lens-layout button').length===2, 'the lens offers a Ring / Era-clock layout toggle');
+eq($$('#lens-svg .ldial-limb').length, 0, 'the even-ring default draws no dial');
+click($('#lens-lay-era'));
+assert($$('#lens-svg .ldial-limb').length===1, 'switching to era-clock engraves the dial limb');
+assert($$('#lens-svg .ldial-num').length>0, 'the dial carries century numerals as its time reference');
+assert($$('#lens-svg .ldial-foc').length===1, 'an engraved tick marks where the focus itself sits in time');
+eq($$('#lens-svg g.lnode.focus').length, 1, 'the era-clock keeps exactly one focus at centre');
+assert($$('#lens-svg g.lnode:not(.focus)').some(g=>/,\s*\d/.test(g.getAttribute('aria-label')||'')),
+  'in era-clock, a neighbour announces its era to screen readers');
+assert(window.localStorage.getItem('aoi.lens.layout')==='era', 'the chosen layout persists');
+click($('#lens-lay-ring'));
+eq($$('#lens-svg .ldial-limb').length, 0, 'switching back to the ring clears the dial');
+assert(window.localStorage.getItem('aoi.lens.layout')==='even', 'returning to the ring persists too');
 esc(); click($('.switch button[data-mode="questions"]'));
 
-// TIMELINE
+// TIMELINE — the debates rail
+const DEB=JSON.parse($('#debates-data').textContent).debates;
+const FLAG=DEB.find(d=>d.flagship)||DEB[0];
 click($('.switch button[data-mode="timeline"]'));
-eq($$('#tl-svg .tl-node').length, D.concepts.length, 'timeline renders one node per concept');
-eq($$('#tl-svg .tl-lane').length, D.questions.length, 'timeline has one lane per great question');
-eq($$('#tl-svg .tl-lane-lab').length, D.questions.length, 'each question lane is labelled');
-assert($$('#tl-svg .tl-tick').length>0, 'timeline has era ticks');
-// re-encode: FIXED lane order (canonical, not recurrence) + status colour + density bands
-eq($$('#tl-svg .tl-lane-lab').map(l=>l.dataset.q).join(' '), D.questions.map(q=>q.id).join(' '),
-  'timeline lanes are in fixed canonical question order (not sorted by recurrence)');
-eq($$('#tl-svg .tl-band').length, D.questions.length, 'each lane has a temporal density band');
-assert($$('#tl-svg .tl-band').every(b=>(b.getAttribute('d')||'').length>10), 'every density band has geometry');
-const STINK={'handed-off':'#c98a52','hardened':'#9a8fb0','live-rivals':'#d9b65f','open':'#c3c7cf','dissolved':'#9aa3bd'};
-assert($$('#tl-svg .tl-lane-lab').every(l=>l.style.fill===STINK[D.questions.find(q=>q.id===l.dataset.q).status]),
-  'lane label colour encodes epistemic status (not region/hue)');
-eq($$('#m-timeline .tl-stkey .row').length, 5, 'timeline legend keys all five status colours');
+// every authored debate appears in the margin index (the forest)
+eq($$('#tl-svg .tl-idx').length, DEB.length, 'margin index lists every authored debate');
+// the flagship opens; its spine renders one engraved node per authored move
+eq($$('#tl-svg .tl-dn').length, FLAG.nodes.length, 'flagship debate renders one node per authored move');
+eq($('#tl-svg .tl-q').textContent, FLAG.title, 'the open debate header is the flagship question');
+assert($$('#tl-svg .tl-limb').length>0, 'the rail draws an engraved limb');
+// each node carries its concept id for locate/cross-highlight
+eq($$('#tl-svg .tl-dn').map(n=>n.getAttribute('data-id')).join('|'), FLAG.nodes.map(n=>n.id).join('|'),
+  'nodes are laid out in authored spine order');
+// gold discipline: a single live-rivals seal, nowhere else
+eq($$('#tl-svg .tl-seal-g').length, 1, 'exactly one gold live-rivals seal at the terminus');
+// the "moves" are drawn (relationship to the prior node): one per non-opening node
+eq($$('#tl-svg .tl-move-lab').length, FLAG.nodes.length-1, 'each move past the thesis is labelled');
+// margin sparklines: every debate gets a baseline + a tick per datable move on a shared
+// era scale, so the forest reads which debates span millennia (where cross-era echoes live)
+eq($$('#tl-svg .tl-spark-base').length, DEB.length, 'each debate in the forest carries a temporal sparkline');
+assert($$('#tl-svg .tl-spark-tick').length>0,'the sparklines plot move-ticks across the shared time scale');
+// switching debates in the margin flips the open spine
+const selfDeb=DEB.find(d=>d.id==='self'); assert(selfDeb,'the self debate is authored');
+const idxSelf=$$('#tl-svg .tl-idx').find(g=>g.getAttribute('aria-label')===selfDeb.title);
+assert(idxSelf,'self debate is reachable from the margin index'); click(idxSelf);
+eq($('#tl-svg .tl-q').textContent, selfDeb.title, 'clicking the margin index flips the open debate');
+// the self debate spans a ~2,189-yr gap → a disclosed break must be drawn, and labelled
+// "untraced" (not "silence": the rail only claims ITS thread went quiet, not that history did)
+assert($$('#tl-svg .tl-break-lab').length>0, 'the long gap is shown as a disclosed, labelled break');
+assert(/untraced/.test($('#tl-svg .tl-break-lab').textContent), 'the break label is honest ("untraced"), not the overclaiming "silence"');
+// the open debate carries a single "you-are-here" caret in the margin index
+eq($$('#tl-svg .tl-idx.on .tl-idx-mark').length, 1, 'the open debate shows one margin caret');
+click($$('#tl-svg .tl-idx').find(g=>g.getAttribute('aria-label')===FLAG.title)); // restore flagship
+
+// MOBILE — a narrow viewport flips the rail to a vertical, natively-scrolled spine
+const tlHost=$('#m-timeline');
+Object.defineProperty(tlHost,'clientWidth',{value:380,configurable:true});Object.defineProperty(tlHost,'clientHeight',{value:720,configurable:true});
+click($$('#tl-svg .tl-idx').find(g=>g.getAttribute('aria-label')===FLAG.title)); // re-render at the new width
+assert(tlHost.classList.contains('tl-narrow'),'a narrow viewport switches the rail to its mobile (vertical) layout');
+eq($$('#tl-svg .tl-dn').length, FLAG.nodes.length, 'the mobile rail still renders one node per authored move');
+eq($$('#tl-svg .tl-dn').map(n=>n.getAttribute('data-id')).join('|'), FLAG.nodes.map(n=>n.id).join('|'), 'the mobile spine keeps authored order');
+eq($$('#tl-svg .tl-seal-g').length, 1, 'the mobile rail keeps the single gold seal');
+// a11y: the figure carries an accessible name and debate switches reach the live region
+assert($('#tl-svg').getAttribute('aria-label')?.includes(FLAG.title), 'the rail SVG is labelled with the open debate for screen readers');
+assert($('#tl-live')?.textContent.includes(FLAG.title), 'switching debates announces the new debate via the live region');
+// restore the desktop width for any later assertions
+Object.defineProperty(tlHost,'clientWidth',{value:1180,configurable:true});Object.defineProperty(tlHost,'clientHeight',{value:640,configurable:true});
+click($$('#tl-svg .tl-idx').find(g=>g.getAttribute('aria-label')===FLAG.title));
+
+// AUDITED ECHO — an "independent convergence" claim must carry a checkable warrant and an
+// honest caveat (the whole point of the atom: the echoes are auditable, not decorative).
+click($$('#tl-svg .tl-idx').find(g=>g.getAttribute('aria-label')===selfDeb.title));
+const bundleNode=$$('#tl-svg .tl-dn').find(n=>n.getAttribute('data-id')==='Bundle Theory');
+assert(bundleNode,'the self rail carries the Bundle Theory node'); click(bundleNode);
+const prov=$('#dr-rels .rel-prov');
+assert(prov,'an audited echo surfaces its provenance disclosure in the dossier');
+assert(/baton/i.test(prov.textContent),'the warrant states why no baton was passed between the traditions');
+assert(/Gopnik/.test(prov.textContent),'the honest caveat (the disputed La Flèche contact) is disclosed, not hidden');
+assert($$('#dr-rels .rel-aud').length>0,'the converging relation is badged as audited');
+// CONVERGENCE CARD — the disclosure offers "See the full case", which opens the
+// layered, deep-linkable atom: shared insight + two voices + warrant + objection + verdict.
+const caseBtn=$('#dr-rels .rel-prov .rp-case');
+assert(caseBtn,'an audited echo offers a link into the full convergence case');
+click(caseBtn);
+assert($('#echo-overlay').classList.contains('open'),'the convergence card opens');
+const card=$('#echo-body');
+assert($$('#echo-body .ec-voice').length===2,'the card lays out exactly two voices that reached the insight apart');
+assert(/baton/i.test(card.textContent),'the card carries the no-contact warrant');
+assert(/Gopnik/.test(card.textContent),'the card carries the strongest objection (the disputed contact)');
+assert($('#echo-body .ec-verdict'),'the card delivers a verdict on the weight of the evidence');
+assert($('#echo-body .ec-copy'),'the card offers a copy-link for sharing');
+assert(/#\/echo\//.test(location.hash),'the open card is deep-linkable via the hash');
+esc();
+assert(!$('#echo-overlay').classList.contains('open'),'Escape closes the convergence card');
+esc(); click($$('#tl-svg .tl-idx').find(g=>g.getAttribute('aria-label')===FLAG.title));
 
 // ARGUMENTS tab removed: neither the tab, its pane, nor its data may survive.
 assert(!$('.switch button[data-mode="paths"]'), 'the Arguments (Paths) tab is gone');
@@ -404,7 +480,7 @@ eq($('#m-questions .card .c-id')?.textContent, firstCardName, 'concept names res
   const hasCJK=s=>/[\u4e00-\u9fff]/.test(s||'');
   eq(w.document.documentElement.lang,'zh-Hant','fresh boot starts in zh when localStorage says so');
   click2(w.document.querySelector('.switch button[data-mode="timeline"]'));
-  assert(q2('.tl-node text').some(t=>hasCJK(t.textContent)),'timeline built cold under zh shows localized concept names');
+  assert(q2('.tl-dn-t').some(t=>hasCJK(t.textContent)),'timeline built cold under zh shows localized concept names');
   click2(w.document.querySelector('.switch button[data-mode="lens"]'));
   click2(q2('.lb-cell')[0]); // enter a door so the ego-graph builds cold under zh
   assert(q2('#lens-svg g.lnode text').some(t=>hasCJK(t.textContent)),'idea lens built cold under zh shows localized concept names');

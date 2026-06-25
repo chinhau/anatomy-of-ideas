@@ -105,7 +105,7 @@ NEW_R2 = [
  ("The Chinese Room","The Intentional Stance","rejects"),
  ("The Chinese Room","The Hard Problem","echoes"),
  ("The Ego Tunnel","Strange Loop","builds"),
- ("The Ego Tunnel","Anattā (No-Self)","builds"),
+ ("The Ego Tunnel","Anattā (No-Self)","echoes"),
  ("The Ego Tunnel","Bundle Theory","echoes"),
  ("Controlled Hallucination","The Embodied Mind","builds"),
  ("Controlled Hallucination","Transcendental Idealism","builds"),

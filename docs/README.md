@@ -15,6 +15,7 @@ keep it honest**, and **every decision we've locked in**. Start here.
 |---|---|
 | [MISSION.md](MISSION.md) | The product thesis — what the atlas *is* and is *not*. The strategy north star. |
 | [DESIGN-TASTE.md](DESIGN-TASTE.md) | The **visual** north star — the "spiritual aesthetic," the 3 anti-kitsch guardrails, the palette/type reference. The taste north star. |
+| [LANDING-ART-DIRECTION.md](LANDING-ART-DIRECTION.md) | The resolved look for the **front door** — lapis-and-gold celestial atlas, four principles (awe/truth/honesty/restraint), distilled from the six-register moodboard. Downstream of DESIGN-TASTE; not yet ratified. |
 
 ## 2. The agents we deploy (reusable, read-only)
 
