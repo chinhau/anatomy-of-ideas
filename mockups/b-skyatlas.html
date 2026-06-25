@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mockup B — The Dark Sky-Atlas (The Plenum)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=EB+Garamond:ital@0;1&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --void:#070b16; --void-2:#101d44; --lapis:#16266b;
+    --parchment:#e9dcc0; --parchment-dim:#b6ad96; --muted:#9aa3bd;
+    --rule:#2a3354; --gold:#d9b65f; --oppose:#c75a45; --echo:#7da0e0; --ink:#7a6038;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;height:100%;background:var(--void);color:var(--parchment);
+    font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow:hidden;}
+  /* lapis-deepened void — ground reads like ultramarine ink, gold sits on it like leaf */
+  #stage{position:fixed;inset:0;
+    background:
+      radial-gradient(ellipse 46% 42% at 50% 50%,var(--lapis),transparent 70%),
+      radial-gradient(ellipse 82% 74% at 50% 48%,var(--void-2),var(--void) 74%);}
+  svg#sky{position:absolute;inset:0;width:100%;height:100%;display:block;}
+
+  /* engraved star linework — struck, never glowing */
+  .grat{fill:none;stroke:var(--gold);stroke-width:.5;opacity:.30;}
+  .aster{fill:none;stroke:var(--rule);stroke-width:1;opacity:.85;}
+  .bgstar{fill:var(--parchment);}
+  /* the moon — tonight's real phase, engraved in silver (never gold, never glowing) */
+  .moon-disc{fill:none;stroke:var(--parchment-dim);stroke-width:.6;opacity:.30;}
+  .moon-lit{fill:var(--parchment);fill-opacity:.13;stroke:var(--parchment);stroke-width:.8;opacity:.72;}
+  .moon-cap{font-family:'EB Garamond',serif;font-style:italic;fill:var(--muted);
+    font-size:10.5px;letter-spacing:.05em;opacity:.8;}
+  /* the maker's hand — faint construction geometry, drawn before the stars */
+  .cmark{fill:none;stroke:var(--ink);stroke-width:.8;opacity:.22;stroke-linecap:round;}
+  /* the eleven radial limbs — the first wonder reaching from the spark to each question */
+  .limb{fill:none;stroke:var(--ink);stroke-width:.7;opacity:.20;stroke-linecap:round;}
+  /* the First Spark — the one gold struck, at the centre the whole wheel circles */
+  .seed{fill:var(--gold);stroke:var(--void);stroke-width:.8;paint-order:stroke;}
+  /* the eleven questions — all equal parchment; none louder than another */
+  .qstar .spike{stroke:var(--parchment);stroke-width:1;stroke-linecap:round;}
+  .qstar .core{fill:var(--parchment);stroke:var(--void);stroke-width:1.1;paint-order:stroke;}
+  .qlabel{font-family:'EB Garamond',serif;font-style:italic;fill:var(--parchment-dim);
+    font-size:13px;text-anchor:middle;}
+
+  /* frontispiece */
+  .front{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);
+    text-align:center;pointer-events:none;}
+  .eyebrow{font-size:10.5px;letter-spacing:.42em;text-transform:uppercase;color:var(--gold);opacity:.85;}
+  .headline{font-family:'Cinzel',serif;font-weight:600;font-size:clamp(28px,5.4vw,52px);
+    letter-spacing:.05em;text-transform:uppercase;margin:14px 0 0;line-height:1.08;
+    background:linear-gradient(100deg,var(--parchment) 38%,#fff4d6 50%,var(--parchment) 62%);
+    background-size:300% 100%;background-position:100% 0;
+    -webkit-background-clip:text;background-clip:text;color:transparent;}
+  .sub{font-family:'EB Garamond',serif;font-style:italic;font-size:clamp(15px,2.3vw,18px);
+    color:var(--parchment-dim);max-width:30em;margin:16px auto 0;line-height:1.5;padding:0 24px;}
+  /* the comparative epigraph — every tradition's first morning, equal weight, telling not happening */
+  .epigraph{font-family:'EB Garamond',serif;font-style:italic;font-size:clamp(12.5px,1.7vw,14.5px);
+    color:var(--muted);margin:18px auto 0;max-width:36em;min-height:3.1em;line-height:1.5;padding:0 24px;
+    transition:opacity .9s ease;}
+  .epigraph b{color:var(--parchment-dim);font-weight:500;font-style:normal;letter-spacing:.02em;}
+  .counts{display:flex;gap:36px;justify-content:center;margin:24px 0 0;}
+  .counts b{font-family:'EB Garamond',serif;font-size:25px;color:var(--parchment);display:block;line-height:1;}
+  .counts i{font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-style:normal;}
+  .enter{margin:28px auto 0;display:inline-block;background:var(--gold);color:#1a1205;border:none;border-radius:3px;
+    font-family:'Inter';font-size:13px;letter-spacing:.12em;text-transform:uppercase;font-weight:500;
+    padding:13px 32px;cursor:pointer;pointer-events:auto;}
+
+  /* hidden pre-roll state */
+  .anim .headline,.anim .sub,.anim .eyebrow,.anim .epigraph,.anim .counts,.anim .enter{opacity:0;}
+
+  .hud{position:fixed;left:18px;bottom:16px;z-index:20;display:flex;gap:10px;align-items:center;
+    font-size:11px;letter-spacing:.06em;color:var(--muted);max-width:62vw;}
+  .hud button{background:rgba(16,29,68,.85);border:1px solid var(--rule);color:var(--parchment-dim);
+    border-radius:3px;padding:7px 13px;font-family:'Inter';font-size:11px;letter-spacing:.08em;cursor:pointer;white-space:nowrap;}
+  .hud button:hover{border-color:var(--gold);color:var(--parchment);}
+  .tag{position:fixed;top:16px;left:18px;z-index:20;font-size:10px;letter-spacing:.3em;
+    text-transform:uppercase;color:var(--gold);opacity:.7;}
+  a.back{position:fixed;top:16px;right:18px;z-index:20;font-size:10px;letter-spacing:.2em;
+    text-transform:uppercase;color:var(--muted);text-decoration:none;}
+  a.back:hover{color:var(--parchment);}
+</style>
+</head>
+<body>
+  <div class="tag">Direction B · Dark Sky-Atlas</div>
+  <a class="back" href="index.html">← compare</a>
+  <div id="stage">
+    <svg id="sky" viewBox="0 0 1000 680" preserveAspectRatio="xMidYMid slice" aria-hidden="true"></svg>
+    <div class="front">
+      <div class="eyebrow">A Celestial Atlas of the Great Questions</div>
+      <h1 class="headline">You're not the<br>first to look up</h1>
+      <p class="sub">For some four thousand years the same few questions have wheeled overhead. This is one chart of that sky — drawn from a single vantage, and offered to argue with.</p>
+      <p class="epigraph" id="epigraph"><b>The old stories all mark the same morning —</b><br><span id="epitext"></span></p>
+      <div class="counts">
+        <span><b>11</b><i>fixed questions</i></span>
+        <span><b>425</b><i>thinkers</i></span>
+        <span><b>4,399</b><i>years</i></span>
+      </div>
+      <button class="enter" id="enter">Take the Sighting</button>
+    </div>
+  </div>
+  <div class="hud"><span>Signature: the whole corpus strikes at once (the Plenum), settles into a chronological sky, the spark is struck, and the wheel of eleven questions resolves.</span><button id="replay">↻ Replay</button></div>
+
+<script>
+const SVGNS='http://www.w3.org/2000/svg';
+const sky=document.getElementById('sky');
+const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+const CX=500,CY=340;
+// 11 great questions as a wreath around a central clearing (the title lives in the clearing).
+// Positions are an 11-point ring; mag = relative influence (mock thinker-count) → star size.
+const RING=[
+  {a:-90,mag:9,label:'Is there meaning?'},
+  {a:-57.3,mag:6,label:'Who am I?'},
+  {a:-24.5,mag:5,label:'What is mind?'},
+  {a:8.2,mag:6,label:'What is good?'},
+  {a:40.9,mag:5,label:'What is sacred?'},
+  {a:73.6,mag:7,label:'How should we live?'},
+  {a:106.4,mag:6,label:'What is just?'},
+  {a:139.1,mag:8,label:'What can I know?'},
+  {a:171.8,mag:5,label:'Am I free?'},
+  {a:204.5,mag:7,label:'What is real?'},
+  {a:237.3,mag:5,label:'What is beautiful?'},
+];
+const RA=405, RB=148;                         // ring radii (x,y) — keeps the band (and labels) visible on wide screens
+const QS=RING.map(q=>{const r=q.a*Math.PI/180;
+  return {...q,x:+(CX+Math.cos(r)*RA).toFixed(1),y:+(CY+Math.sin(r)*RB).toFixed(1)};});
+// asterism: the rim of the wheel — one continuous 11-sided figure
+const LINKS=[[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,7],[7,8],[8,9],[9,10],[10,0]];
+
+// Every tradition's first morning — equal weight, framed as stories humans TOLD (never that they happened).
+const EPI=[
+  'Genesis — they ate, and their eyes were opened.',
+  'Prometheus — he stole the fire from heaven, for us.',
+  'the Upani\u1E63ad — in the beginning, mind first stirred to wonder.',
+  'the Analects — at fifteen, I bent my heart to learning.',
+  'the Buddha — beneath the tree, he looked, and woke.',
+];
+
+// tonight's real moon phase, from the visitor's date (a true, ever-changing datum — zero glow)
+function moonPhase(d){
+  const syn=29.530588853, ref=Date.UTC(2000,0,6,18,14,0);     // a known new moon
+  let p=((((d.getTime()-ref)/86400000)/syn)%1); if(p<0)p+=1;   // 0=new … 0.5=full
+  return {p, illum:(1-Math.cos(2*Math.PI*p))/2, waxing:p<0.5};
+}
+function phaseName(p){
+  const n=['new moon','waxing crescent','first quarter','waxing gibbous',
+           'full moon','waning gibbous','last quarter','waning crescent'];
+  return n[Math.round(p*8)%8];
+}
+
+function star4(mag){
+  const g=document.createElementNS(SVGNS,'g');
+  const R=2.4+mag*0.7;        // spike length scales with influence
+  const r=1.1+mag*0.18;       // core radius
+  [[0,-R,0,R],[-R,0,R,0]].forEach(s=>{
+    const ln=document.createElementNS(SVGNS,'line');
+    ln.setAttribute('class','spike');
+    ln.setAttribute('x1',s[0]);ln.setAttribute('y1',s[1]);ln.setAttribute('x2',s[2]);ln.setAttribute('y2',s[3]);
+    g.appendChild(ln);
+  });
+  const c=document.createElementNS(SVGNS,'circle');
+  c.setAttribute('class','core');c.setAttribute('r',r);
+  g.appendChild(c);
+  return g;
+}
+
+function build(){
+  sky.innerHTML='';
+  // 1. THE PLENUM — the whole corpus as a chronological canopy.
+  //    Each star is one thinker; radial distance encodes birth-year (ancient near the
+  //    central spark, modern at the rim), so the field is a real datum, not decoration.
+  //    (Mockup uses a synthetic year distribution; the production build seeds from the
+  //    real 425 birth-years.) They all strike at once, then recede to faint catalogue light.
+  const bg=document.createElementNS(SVGNS,'g');bg.setAttribute('id','bg');
+  let seed=7;const rnd=()=>{seed=(seed*9301+49297)%233280;return seed/233280;};
+  const Y0=-624, Y1=1908;                         // oldest → youngest birth-year in the atlas
+  for(let i=0;i<220;i++){
+    // more thinkers in recent centuries → bias the year distribution toward the modern rim
+    const yr=Y0+(Y1-Y0)*Math.pow(rnd(),0.62);
+    const t=(yr-Y0)/(Y1-Y0);                      // 0 ancient … 1 modern
+    const f=0.13+0.87*Math.pow(t,0.85);           // radial fraction: ancient hugs the centre
+    const th=rnd()*Math.PI*2;
+    const c=document.createElementNS(SVGNS,'circle');
+    c.setAttribute('class','bgstar');
+    c.setAttribute('cx',(CX+Math.cos(th)*f*566).toFixed(1));
+    c.setAttribute('cy',(CY+Math.sin(th)*f*330).toFixed(1));
+    c.setAttribute('r',(0.3+rnd()*0.7).toFixed(2));
+    c.dataset.rest=(0.10+rnd()*0.13).toFixed(2);  // faint rest brightness (after the strike settles)
+    c.setAttribute('opacity',c.dataset.rest);
+    bg.appendChild(c);
+  }
+  sky.appendChild(bg);
+  // 2. the maker's hand — construction geometry struck before the chart (honesty layer)
+  const cm=document.createElementNS(SVGNS,'g');cm.setAttribute('id','cmarks');
+  const mk=(tag,attrs)=>{const e=document.createElementNS(SVGNS,tag);e.setAttribute('class','cmark');
+    for(const k in attrs)e.setAttribute(k,attrs[k]);cm.appendChild(e);return e;};
+  mk('line',{x1:CX-26,y1:CY,x2:CX+26,y2:CY});           // centering cross
+  mk('line',{x1:CX,y1:CY-26,x2:CX,y2:CY+26});
+  mk('circle',{cx:CX,cy:CY,r:7});                        // the struck centre
+  mk('path',{d:`M ${CX-RA} ${CY} A ${RA} ${RB} 0 0 1 ${CX+RA} ${CY}`}); // compass arc through the ring
+  sky.appendChild(cm);
+  // 2b. the eleven limbs — the first wonder reaching from the spark out to each question
+  const lg=document.createElementNS(SVGNS,'g');lg.setAttribute('id','limbs');
+  QS.forEach(q=>{
+    const ln=document.createElementNS(SVGNS,'line');ln.setAttribute('class','limb');
+    ln.setAttribute('x1',CX);ln.setAttribute('y1',CY);
+    ln.setAttribute('x2',q.x);ln.setAttribute('y2',q.y);lg.appendChild(ln);
+  });
+  sky.appendChild(lg);
+  // 2c. the First Spark — a single gold core at the centre the whole wheel circles
+  const sp=document.createElementNS(SVGNS,'circle');
+  sp.setAttribute('class','seed');sp.setAttribute('id','spark');
+  sp.setAttribute('cx',CX);sp.setAttribute('cy',CY);sp.setAttribute('r',1.7);
+  sky.appendChild(sp);
+  // 3. graticule (planisphere ruling)
+  const grat=document.createElementNS(SVGNS,'g');grat.setAttribute('id','grat');
+  [120,210,300].forEach(r=>{ // parallels
+    const p=document.createElementNS(SVGNS,'ellipse');
+    p.setAttribute('class','grat');p.setAttribute('cx',CX);p.setAttribute('cy',CY);
+    p.setAttribute('rx',r*1.5);p.setAttribute('ry',r);grat.appendChild(p);
+  });
+  [-60,-20,20,60].forEach(a=>{ // meridians
+    const p=document.createElementNS(SVGNS,'path');
+    const rad=a*Math.PI/180,dx=Math.sin(rad)*450;
+    p.setAttribute('class','grat');
+    p.setAttribute('d',`M ${CX+dx} ${CY-300} Q ${CX+dx*0.3} ${CY} ${CX+dx} ${CY+300}`);
+    grat.appendChild(p);
+  });
+  sky.appendChild(grat);
+  // 4. asterism lines (wheel rim)
+  const al=document.createElementNS(SVGNS,'g');al.setAttribute('id','aster');
+  LINKS.forEach(([a,b])=>{
+    const ln=document.createElementNS(SVGNS,'line');ln.setAttribute('class','aster');
+    ln.setAttribute('x1',QS[a].x);ln.setAttribute('y1',QS[a].y);
+    ln.setAttribute('x2',QS[b].x);ln.setAttribute('y2',QS[b].y);al.appendChild(ln);
+  });
+  sky.appendChild(al);
+  // 4b. THE MOON — the nearest body, hung over the timeless questions; tonight's real phase.
+  //     Engraved almanac crescent in silver-parchment (gold stays the rarest ink). The one
+  //     mark in the chart that is true *right now* — and ever-changing, with zero glow.
+  const mp=moonPhase(new Date());
+  const MX=500, MY=232, MR=14;            // upper-centre: overhead of the vantage, below the crown of questions
+  const mg=document.createElementNS(SVGNS,'g');mg.setAttribute('id','moon');
+  mg.setAttribute('transform',`translate(${MX},${MY})`+(mp.waxing?'':' scale(-1,1)'));
+  const ghost=document.createElementNS(SVGNS,'circle');
+  ghost.setAttribute('class','moon-disc');ghost.setAttribute('r',MR);mg.appendChild(ghost);
+  const rx=(MR*(1-2*mp.illum)).toFixed(2);                     // terminator half-width
+  const lit=document.createElementNS(SVGNS,'path');lit.setAttribute('class','moon-lit');
+  lit.setAttribute('d',`M 0 ${-MR} A ${MR} ${MR} 0 0 1 0 ${MR} A ${Math.abs(rx)} ${MR} 0 0 ${mp.illum<0.5?0:1} 0 ${-MR} Z`);
+  mg.appendChild(lit);
+  sky.appendChild(mg);
+  const cap=document.createElementNS(SVGNS,'text');cap.setAttribute('class','moon-cap');
+  cap.setAttribute('x',MX);cap.setAttribute('y',MY-MR-9);cap.setAttribute('text-anchor','middle');
+  cap.textContent=phaseName(mp.p)+' \u00b7 tonight';
+  sky.appendChild(cap);                                        // caption rides upright (outside the mirror)
+  // 5. question stars + labels
+  const sg=document.createElementNS(SVGNS,'g');sg.setAttribute('id','qs');
+  QS.forEach((q,i)=>{
+    const g=star4(q.mag);
+    g.setAttribute('class','qstar');
+    g.setAttribute('transform',`translate(${q.x},${q.y})`);
+    g.dataset.i=i;
+    const lab=document.createElementNS(SVGNS,'text');
+    lab.setAttribute('class','qlabel');lab.setAttribute('x',0);
+    lab.setAttribute('y',(q.y>CY?28:-20));lab.textContent=q.label;
+    g.appendChild(lab); // label rides with the star at its origin
+    sg.appendChild(g);
+  });
+  sky.appendChild(sg);
+}
+
+function setLen(el){const len=el.getTotalLength?el.getTotalLength():400;
+  el.style.strokeDasharray=len;el.style.strokeDashoffset=len;return len;}
+
+let epiTimer=null;
+function startEpigraph(delay){
+  const wrap=document.getElementById('epigraph');
+  const txt=document.getElementById('epitext');
+  let i=0;
+  clearInterval(epiTimer);
+  setTimeout(()=>{
+    txt.textContent=EPI[0];wrap.style.opacity=1;
+    epiTimer=setInterval(()=>{
+      wrap.style.opacity=0;
+      setTimeout(()=>{i=(i+1)%EPI.length;txt.textContent=EPI[i];wrap.style.opacity=1;},900);
+    },3800);
+  },delay);
+}
+
+function play(){
+  build();
+  document.body.classList.add('anim');
+  clearInterval(epiTimer);
+  document.getElementById('epigraph').style.opacity=0;
+  if(reduce){ // static finished plate — Plenum settled, chart struck, title resolved
+    document.body.classList.remove('anim');
+    document.getElementById('epitext').textContent=EPI[0];
+    document.getElementById('epigraph').style.opacity=1;
+    return;
+  }
+  // BEAT 0 — THE PLENUM: the whole corpus strikes at once, one breath, then recedes to faint light.
+  //   (everything, everywhere, all at once — one struck field, not a montage)
+  sky.querySelectorAll('#bg .bgstar').forEach(s=>{
+    const rest=+s.dataset.rest;
+    s.animate([{opacity:0},{opacity:0.92,offset:.16},{opacity:rest}],
+      {duration:780,delay:220,easing:'cubic-bezier(.2,.7,.3,1)',fill:'both'});
+  });
+  // BEAT 0b — the moon is struck: the nearest body, the one thing true tonight, hung over the questions.
+  const moonG=document.getElementById('moon');
+  moonG.animate([{opacity:0},{opacity:1}],{duration:700,delay:680,fill:'both'});
+  const litP=moonG.querySelector('.moon-lit');const ll=setLen(litP);
+  litP.animate([{strokeDashoffset:ll},{strokeDashoffset:0}],
+    {duration:900,delay:740,easing:'cubic-bezier(.6,0,.2,1)',fill:'both'});
+  document.querySelector('.moon-cap').animate([{opacity:0},{opacity:.8}],{duration:700,delay:1200,fill:'both'});
+  // BEAT 1 — the maker's hand draws order onto the vastness; the First Spark catches.
+  sky.querySelectorAll('#cmarks .cmark').forEach((p,i)=>{
+    const len=setLen(p);
+    p.animate([{strokeDashoffset:len},{strokeDashoffset:0}],
+      {duration:620,delay:1000+i*110,easing:'cubic-bezier(.6,0,.2,1)',fill:'both'});
+  });
+  const spark=document.getElementById('spark');
+  spark.style.transformBox='fill-box';spark.style.transformOrigin='center';
+  spark.animate([{opacity:0,transform:'scale(.2)'},{opacity:1,transform:'scale(1)'}],
+    {duration:520,delay:1180,easing:'cubic-bezier(.34,1.4,.5,1)',fill:'both'});
+  // BEAT 2 — the graticule rules itself; the eleven limbs reach; the eleven questions ignite (equal, sized by influence).
+  sky.querySelectorAll('#grat .grat').forEach((p,i)=>{
+    const len=setLen(p);
+    p.animate([{strokeDashoffset:len},{strokeDashoffset:0}],
+      {duration:900,delay:1600+i*100,easing:'cubic-bezier(.6,0,.2,1)',fill:'both'});
+  });
+  sky.querySelectorAll('#limbs .limb').forEach((ln,i)=>{
+    const len=setLen(ln);
+    ln.animate([{strokeDashoffset:len},{strokeDashoffset:0}],
+      {duration:680,delay:1700+i*70,easing:'cubic-bezier(.6,0,.2,1)',fill:'both'});
+  });
+  const stars=[...sky.querySelectorAll('.qstar')];
+  stars.forEach((g,i)=>{
+    g.style.transformBox='fill-box';g.style.transformOrigin='center';
+    g.animate([{opacity:0,transform:'scale(.15)'},{opacity:1,transform:'scale(1.18)',offset:.7},{opacity:1,transform:'scale(1)'}],
+      {duration:420,delay:2500+i*90,easing:'cubic-bezier(.34,1.4,.5,1)',fill:'both'});
+    const lab=g.querySelector('.qlabel');
+    lab.animate([{opacity:0},{opacity:.9}],{duration:500,delay:2700+i*90,fill:'both'});
+  });
+  // BEAT 3 — the rim strikes; the First Spark is STRUCK once (the single gold flash); the title resolves.
+  sky.querySelectorAll('#aster .aster').forEach((ln,i)=>{
+    const len=setLen(ln);
+    ln.animate([{strokeDashoffset:len},{strokeDashoffset:0}],
+      {duration:480,delay:3500+i*45,easing:'ease-out',fill:'both'});
+  });
+  spark.animate([{transform:'scale(1)'},{transform:'scale(2.4)',offset:.42},{transform:'scale(1)'}],
+    {duration:720,delay:4050,easing:'cubic-bezier(.3,0,.2,1)',fill:'both'});
+  spark.animate([{fill:'#d9b65f'},{fill:'#fff8e6',offset:.35},{fill:'#d9b65f'}],
+    {duration:720,delay:4050,easing:'ease-out',fill:'both'});
+  // 5. title resolves beneath the struck spark
+  const T=4250;
+  ['.eyebrow','.headline','.sub','.epigraph','.counts','.enter'].forEach((sel,i)=>{
+    if(sel==='.epigraph')return; // epigraph reveals via its own cycle
+    const el=document.querySelector(sel);
+    el.animate([{opacity:0,transform:'translateY(12px)'},{opacity:1,transform:'none'}],
+      {duration:760,delay:T+i*110,easing:'ease',fill:'both'});
+  });
+  // gold specular sweep across the headline once it has arrived — struck leaf, one pass
+  const h=document.querySelector('.headline');
+  h.animate([{backgroundPosition:'100% 0'},{backgroundPosition:'-50% 0'}],
+    {duration:1100,delay:T+500,easing:'cubic-bezier(.4,0,.15,1)',fill:'forwards'});
+  // BEAT 4 — the comparative epigraph begins to cycle (every tradition's first morning, equal weight)
+  startEpigraph(T+900);
+  setTimeout(()=>document.body.classList.remove('anim'),T+1100);
+}
+document.getElementById('replay').onclick=play;
+document.getElementById('enter').onclick=play;
+play();
+</script>
+</body>
+</html>

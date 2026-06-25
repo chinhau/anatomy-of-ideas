@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bookmark glyphs — candidates</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=EB+Garamond:ital@0;1&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --void:#070b16; --void-2:#101d44; --lapis:#16266b;
+    --parchment:#e9dcc0; --parchment-dim:#b6ad96; --muted:#9aa3bd;
+    --rule:#2a3354; --gold:#d9b65f; --gold-deep:#a8863f; --ink:#7a6038;
+    --card:#0d1428;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;min-height:100%;background:
+      radial-gradient(ellipse 70% 60% at 50% 0%,var(--void-2),var(--void) 75%);
+    color:var(--parchment);font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:1180px;margin:0 auto;padding:54px 26px 80px;}
+  .eyebrow{font-size:10.5px;letter-spacing:.4em;text-transform:uppercase;color:var(--gold);opacity:.85;}
+  h1{font-family:'Cinzel',serif;font-weight:600;font-size:clamp(24px,4vw,38px);letter-spacing:.04em;
+     margin:12px 0 0;}
+  .lede{font-family:'EB Garamond',serif;font-style:italic;font-size:16px;color:var(--parchment-dim);
+     max-width:46em;margin:14px 0 0;line-height:1.5;}
+  .hint{font-size:12px;color:var(--muted);margin:8px 0 0;letter-spacing:.02em;}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(248px,1fr));gap:30px 26px;margin-top:40px;}
+  .cell{display:flex;flex-direction:column;gap:11px;}
+  .label{display:flex;align-items:baseline;gap:8px;}
+  .label .n{font-family:'Cinzel',serif;color:var(--gold);font-size:13px;}
+  .label .name{font-size:12.5px;letter-spacing:.05em;color:var(--parchment);text-transform:uppercase;}
+  .label .desc{font-family:'EB Garamond',serif;font-style:italic;font-size:12.5px;color:var(--muted);}
+
+  /* ---- a representative concept card ---- */
+  .card{position:relative;background:var(--card);border:1px solid var(--rule);border-radius:5px;
+    padding:16px 16px 14px;cursor:pointer;transition:border-color .2s, background .2s;overflow:visible;
+    min-height:128px;}
+  .card:hover{border-color:#3a466f;}
+  .card .cid{font-family:'Cinzel',serif;font-size:11px;letter-spacing:.14em;color:var(--gold);opacity:.8;}
+  .card h3{font-family:'EB Garamond',serif;font-weight:500;font-size:20px;margin:6px 0 0;color:var(--parchment);}
+  .card p{font-size:12.5px;line-height:1.5;color:var(--parchment-dim);margin:7px 0 0;}
+  .card .meta{display:block;margin-top:11px;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);}
+
+  /* affordance: faint when unmarked, struck gold when marked */
+  .mark{position:absolute;pointer-events:none;transition:opacity .25s ease, transform .25s ease;}
+  .card:not(.on) .mark{opacity:.16;}
+  .card.on .mark{opacity:1;}
+
+  /* 1 — DOG-EAR : a folded page corner */
+  .g-dogear{top:0;right:0;width:0;height:0;
+    border-top:24px solid var(--gold);border-left:24px solid transparent;
+    border-top-right-radius:5px;filter:drop-shadow(-2px 2px 1px rgba(0,0,0,.35));}
+  .g-dogear::after{content:"";position:absolute;top:-24px;right:0;width:24px;height:24px;
+    background:linear-gradient(225deg,transparent 49%,var(--gold-deep) 50%,transparent 52%);}
+
+  /* 2 — WAX SEAL : a pressed gold disc */
+  .g-seal{top:11px;right:11px;width:21px;height:21px;border-radius:50%;
+    background:radial-gradient(circle at 38% 34%,#e7c878,var(--gold) 45%,var(--gold-deep));
+    border:1px solid var(--ink);box-shadow:inset 0 0 0 2px rgba(122,96,56,.5);}
+  .g-seal::after{content:"✶";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+    font-size:11px;color:#6e5526;}
+
+  /* 3 — RIBBON : a marker hung from the top edge */
+  .g-ribbon{top:-3px;right:24px;width:13px;height:40px;background:linear-gradient(var(--gold),var(--gold-deep));
+    clip-path:polygon(0 0,100% 0,100% 100%,50% 76%,0 100%);
+    box-shadow:inset -3px 0 0 rgba(122,96,56,.4);}
+
+  /* 4 — MANICULE : a marginalia pointing hand */
+  .g-manicule{top:12px;left:-9px;font-size:21px;color:var(--gold);line-height:1;
+    text-shadow:0 1px 0 rgba(0,0,0,.4);}
+
+  /* 5 — CORNER BRACKET : an engraver's L-tick */
+  .g-bracket{top:9px;right:9px;width:17px;height:17px;
+    border-top:2px solid var(--gold);border-right:2px solid var(--gold);}
+
+  /* 6 — ROSETTE SEAL : the atlas's own 11-petal seal, in miniature (built in JS) */
+  .g-rosette{top:8px;right:8px;width:27px;height:27px;}
+
+  /* 7 — FLEURON : a printer's aldus-leaf */
+  .g-fleuron{top:8px;right:10px;font-size:19px;color:var(--gold);line-height:1;}
+
+  /* 8 — INDEX TAB : a thumb-index tab on the fore-edge */
+  .g-tab{top:50%;right:-9px;transform:translateY(-50%);width:9px;height:34px;
+    background:linear-gradient(90deg,var(--gold-deep),var(--gold));border-radius:0 3px 3px 0;
+    box-shadow:inset 0 1px 0 rgba(231,200,120,.6);}
+  .card.on .g-tab{transform:translateY(-50%) translateX(2px);}
+
+  /* 9 — MARGINAL RULE : a scholar's struck line down the margin */
+  .g-rule{top:12px;bottom:12px;left:-1px;width:3px;border-radius:2px;
+    background:linear-gradient(var(--gold),var(--gold-deep));}
+  .g-rule::before{content:"";position:absolute;top:-5px;left:-2px;width:7px;height:7px;border-radius:50%;
+    background:var(--gold);}
+
+  .foot{margin-top:46px;font-size:12.5px;color:var(--muted);line-height:1.6;border-top:1px solid var(--rule);padding-top:20px;}
+  .foot b{color:var(--parchment-dim);font-weight:500;}
+  kbd{font-family:inherit;background:rgba(217,182,95,.12);border:1px solid var(--rule);border-radius:3px;
+    padding:1px 6px;color:var(--gold);}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">Reshape — the bookmark mark</div>
+  <h1>Nine ways to dog-ear an idea</h1>
+  <p class="lede">The reading-tracker is gone. In its place, one binary "mark to return" flag — it must read as a struck gold mark a reader leaves, never as a fade that hides the curated idea. Here are candidate glyphs on a representative card.</p>
+  <p class="hint">Each card starts <b style="color:var(--gold)">marked</b>. Click a card to toggle it off and see the faint unmarked affordance. Pick the one that feels right.</p>
+
+  <div class="grid" id="grid"></div>
+
+  <div class="foot">
+    Note: <b>“star” is already taken</b> by the thinker constellation, so none of these use a star. The leading candidate on aesthetic grounds is <b>#1 Dog-ear</b> (it <i>is</i> the gesture — turning down a page corner in a book of secrets), but the seal, rosette and ribbon are all strong. Tell me a number and I'll wire it into <kbd>template.html</kbd> and rebuild.
+  </div>
+</div>
+
+<script>
+const CONCEPTS=[
+  ['№ 47','Free Will','Whether our choices are truly ours — or links in an unbroken chain.','West · Metaphysics'],
+  ['№ 112','Wu Wei','Effortless action; moving with the grain of things, not against it.','East · Ethics'],
+  ['№ 08','Amor Fati','To love one\u2019s fate — to will the whole of what has been.','West · Ethics'],
+  ['№ 153','Anatt\u0101','No abiding self; the person as a process, not a thing.','East · Mind'],
+  ['№ 31','The Sublime','Awe shading into terror, where beauty exceeds the measure of the mind.','West · Aesthetics'],
+  ['№ 209','The Absurd','The collision between our hunger for meaning and a silent world.','Psyche · Meaning'],
+  ['№ 64','Tabula Rasa','The mind at birth as a blank slate, written on by experience.','West · Knowledge'],
+  ['№ 88','Eternal Recurrence','Would you live this same life, unchanged, an infinite number of times?','West · Meaning'],
+  ['№ 176','Apeiron','The boundless — the formless source from which all things arise.','West · Reality'],
+];
+const GLYPHS=[
+  ['dogear','Dog-ear','folded page corner'],
+  ['seal','Wax seal','a pressed disc'],
+  ['ribbon','Ribbon','a hung marker'],
+  ['manicule','Manicule','a pointing hand'],
+  ['bracket','Corner tick','an engraver\u2019s L'],
+  ['rosette','Rosette seal','the atlas\u2019s own seal'],
+  ['fleuron','Fleuron','an aldus leaf'],
+  ['tab','Index tab','a thumb-index'],
+  ['rule','Marginal rule','a struck margin line'],
+];
+const GLYPH_CHAR={manicule:'\u261E',fleuron:'\u2767'};
+
+const grid=document.getElementById('grid');
+GLYPHS.forEach((g,i)=>{
+  const [key,name,desc]=g;
+  const [cid,title,gloss,meta]=CONCEPTS[i];
+  const cell=document.createElement('div');cell.className='cell';
+  const card=document.createElement('div');card.className='card on';
+  card.innerHTML=`<span class="cid">${cid}</span><h3>${title}</h3><p>${gloss}</p><span class="meta">${meta}</span>`;
+  // the mark
+  let mark;
+  if(key==='rosette'){
+    mark=document.createElementNS('http://www.w3.org/2000/svg','svg');
+    mark.setAttribute('class','mark g-rosette');mark.setAttribute('viewBox','0 0 40 40');
+    const ns='http://www.w3.org/2000/svg';
+    for(let p=0;p<11;p++){
+      const el=document.createElementNS(ns,'ellipse');
+      el.setAttribute('cx','20');el.setAttribute('cy','11.5');el.setAttribute('rx','3.2');el.setAttribute('ry','8.5');
+      el.setAttribute('fill','none');el.setAttribute('stroke','var(--gold)');el.setAttribute('stroke-width','1');
+      el.setAttribute('transform',`rotate(${p*360/11} 20 20)`);mark.appendChild(el);
+    }
+    const c=document.createElementNS(ns,'circle');
+    c.setAttribute('cx','20');c.setAttribute('cy','20');c.setAttribute('r','2.4');c.setAttribute('fill','var(--gold)');
+    mark.appendChild(c);
+  }else{
+    mark=document.createElement('span');mark.className='mark g-'+key;
+    if(GLYPH_CHAR[key])mark.textContent=GLYPH_CHAR[key];
+  }
+  card.appendChild(mark);
+  card.onclick=()=>card.classList.toggle('on');
+  const lab=document.createElement('div');lab.className='label';
+  lab.innerHTML=`<span class="n">${i+1}</span><span class="name">${name}</span><span class="desc">— ${desc}</span>`;
+  cell.appendChild(card);cell.appendChild(lab);
+  grid.appendChild(cell);
+});
+</script>
+</body>
+</html>

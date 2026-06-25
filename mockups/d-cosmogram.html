@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mockup D — The Living Cosmogram (The Bloom)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=EB+Garamond:ital@0;1&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --void:#070b16; --void-2:#101d44; --lapis:#16266b;
+    --parchment:#e9dcc0; --parchment-dim:#b6ad96; --muted:#9aa3bd;
+    --rule:#2a3354; --gold:#d9b65f; --oppose:#c75a45; --echo:#7da0e0; --ink:#7a6038;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;height:100%;background:var(--void);color:var(--parchment);
+    font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow:hidden;}
+  /* lapis-deepened void — ground reads like ultramarine ink, gold sits on it like leaf */
+  #stage{position:fixed;inset:0;
+    background:
+      radial-gradient(ellipse 46% 42% at 50% 50%,var(--lapis),transparent 70%),
+      radial-gradient(ellipse 82% 74% at 50% 48%,var(--void-2),var(--void) 74%);}
+  svg#sky{position:absolute;inset:0;width:100%;height:100%;display:block;}
+  svg#sky *{vector-effect:non-scaling-stroke;}
+
+  .bgstar{fill:var(--parchment);}
+  /* the moon — tonight's real phase, engraved in silver (never gold, never glowing) */
+  .moon-disc{fill:none;stroke:var(--parchment-dim);stroke-width:.6;opacity:.30;}
+  .moon-lit{fill:var(--parchment);fill-opacity:.13;stroke:var(--parchment);stroke-width:.8;opacity:.72;}
+  .moon-cap{font-family:'EB Garamond',serif;font-style:italic;fill:var(--muted);
+    font-size:10.5px;letter-spacing:.05em;opacity:.8;}
+  /* the maker's hand — faint construction geometry under the bloom (honesty layer) */
+  .cmark{fill:none;stroke:var(--ink);stroke-width:.8;opacity:.20;stroke-linecap:round;}
+  /* the mandala rings — concentric, fine, low amplitude (cosmos, not cog) */
+  .bloomring{fill:none;stroke:var(--ink);stroke-width:.7;opacity:.32;}
+  /* the eleven petals — each a great question, opening from the heart; length = its weight */
+  .petal{fill:none;stroke:var(--parchment);stroke-width:1;opacity:.82;stroke-linejoin:round;}
+  .petal-in{fill:none;stroke:var(--parchment-dim);stroke-width:.8;opacity:.5;stroke-linejoin:round;}
+  /* the gold heart — the one struck gold, the sun of the golden flower */
+  .heart{fill:var(--gold);stroke:var(--void);stroke-width:.8;paint-order:stroke;}
+  .heart-ring{fill:none;stroke:var(--gold);stroke-width:.8;opacity:.55;}
+  .plabel{font-family:'EB Garamond',serif;font-style:italic;fill:var(--parchment-dim);
+    font-size:13px;text-anchor:middle;}
+  /* the seekers — robed, anonymous, every tradition's looker-up; equal, none named */
+  .figure{fill:var(--parchment-dim);opacity:.34;}
+  .figure-lead{fill:var(--parchment-dim);opacity:.46;}
+
+  /* frontispiece */
+  .front{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);
+    text-align:center;pointer-events:none;}
+  .eyebrow{font-size:10.5px;letter-spacing:.42em;text-transform:uppercase;color:var(--gold);opacity:.85;}
+  .headline{font-family:'Cinzel',serif;font-weight:600;font-size:clamp(28px,5.4vw,52px);
+    letter-spacing:.05em;text-transform:uppercase;margin:14px 0 0;line-height:1.08;
+    background:linear-gradient(100deg,var(--parchment) 38%,#fff4d6 50%,var(--parchment) 62%);
+    background-size:300% 100%;background-position:100% 0;
+    -webkit-background-clip:text;background-clip:text;color:transparent;}
+  .sub{font-family:'EB Garamond',serif;font-style:italic;font-size:clamp(15px,2.3vw,18px);
+    color:var(--parchment-dim);max-width:30em;margin:16px auto 0;line-height:1.5;padding:0 24px;}
+  .epigraph{font-family:'EB Garamond',serif;font-style:italic;font-size:clamp(12.5px,1.7vw,14.5px);
+    color:var(--muted);margin:18px auto 0;max-width:36em;min-height:3.1em;line-height:1.5;padding:0 24px;
+    transition:opacity .9s ease;}
+  .epigraph b{color:var(--parchment-dim);font-weight:500;font-style:normal;letter-spacing:.02em;}
+  .counts{display:flex;gap:36px;justify-content:center;margin:24px 0 0;}
+  .counts b{font-family:'EB Garamond',serif;font-size:25px;color:var(--parchment);display:block;line-height:1;}
+  .counts i{font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-style:normal;}
+  .enter{margin:28px auto 0;display:inline-block;background:var(--gold);color:#1a1205;border:none;border-radius:3px;
+    font-family:'Inter';font-size:13px;letter-spacing:.12em;text-transform:uppercase;font-weight:500;
+    padding:13px 32px;cursor:pointer;pointer-events:auto;}
+
+  .anim .headline,.anim .sub,.anim .eyebrow,.anim .epigraph,.anim .counts,.anim .enter{opacity:0;}
+
+  .hud{position:fixed;left:18px;bottom:16px;z-index:20;display:flex;gap:10px;align-items:center;
+    font-size:11px;letter-spacing:.06em;color:var(--muted);max-width:62vw;}
+  .hud button{background:rgba(16,29,68,.85);border:1px solid var(--rule);color:var(--parchment-dim);
+    border-radius:3px;padding:7px 13px;font-family:'Inter';font-size:11px;letter-spacing:.08em;cursor:pointer;white-space:nowrap;}
+  .hud button:hover{border-color:var(--gold);color:var(--parchment);}
+  .tag{position:fixed;top:16px;left:18px;z-index:20;font-size:10px;letter-spacing:.3em;
+    text-transform:uppercase;color:var(--gold);opacity:.7;}
+  a.back{position:fixed;top:16px;right:18px;z-index:20;font-size:10px;letter-spacing:.2em;
+    text-transform:uppercase;color:var(--muted);text-decoration:none;}
+  a.back:hover{color:var(--parchment);}
+</style>
+</head>
+<body>
+  <div class="tag">Direction D · Living Cosmogram</div>
+  <a class="back" href="index.html">← compare</a>
+  <div id="stage">
+    <svg id="sky" viewBox="0 0 1000 680" preserveAspectRatio="xMidYMid slice" aria-hidden="true"></svg>
+    <div class="front">
+      <div class="eyebrow">A Living Cosmogram of the Great Questions</div>
+      <h1 class="headline">You're not the<br>first to look up</h1>
+      <p class="sub">For some four thousand years the same few questions have opened, like a flower, over everyone who ever looked up. This is one chart of that bloom — and you are standing inside it.</p>
+      <p class="epigraph" id="epigraph"><b>The old stories all mark the same morning —</b><br><span id="epitext"></span></p>
+      <div class="counts">
+        <span><b>11</b><i>petals · questions</i></span>
+        <span><b>425</b><i>thinkers</i></span>
+        <span><b>4,399</b><i>years</i></span>
+      </div>
+      <button class="enter" id="enter">Step Into the Bloom</button>
+    </div>
+  </div>
+  <div class="hud"><span>Signature: a lone seeker looks up; the moon hangs true tonight; the golden flower of eleven questions blooms open around them, every seeker joining, the heart struck once in gold.</span><button id="replay">↻ Replay</button></div>
+
+<script>
+const SVGNS='http://www.w3.org/2000/svg';
+const sky=document.getElementById('sky');
+const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+const CX=500,CY=340;
+const RA=405, RB=148;                 // elliptical footprint (matches B's, so the test isolates the figurative variable)
+const K=RB/RA;                        // vertical squash for the bloom group
+const RING=[
+  {mag:9,label:'Is there meaning?'},
+  {mag:6,label:'Who am I?'},
+  {mag:5,label:'What is mind?'},
+  {mag:6,label:'What is good?'},
+  {mag:5,label:'What is sacred?'},
+  {mag:7,label:'How should we live?'},
+  {mag:6,label:'What is just?'},
+  {mag:8,label:'What can I know?'},
+  {mag:5,label:'Am I free?'},
+  {mag:7,label:'What is real?'},
+  {mag:5,label:'What is beautiful?'},
+];
+// each day a different question crowns the flower — a real, ever-changing datum (never the same twice)
+const now=new Date();
+const DOY=Math.floor((now-new Date(now.getFullYear(),0,0))/86400000);
+// each day the bloom re-aims (never the same); the half-step keeps a petal-GAP at top, so the moon crowns it cleanly
+const ROT=(DOY%RING.length)*(360/RING.length)+(360/RING.length)/2;
+const N=RING.length, STEP=360/N, R_INNER=150;
+const PET=RING.map((q,i)=>{
+  const aDeg=-90+i*STEP+ROT, a=aDeg*Math.PI/180;
+  const rOut=352+q.mag*9;             // petal reach scales with the question's weight (datum)
+  return {...q,a,rOut,
+    dir:[Math.cos(a),Math.sin(a)],
+    // label in absolute (elliptical) coords, upright
+    lx:+(CX+Math.cos(a)*(rOut+22)).toFixed(1),
+    ly:+(CY+Math.sin(a)*(rOut+22)*K).toFixed(1)};
+});
+
+const EPI=[
+  'Genesis \u2014 they ate, and their eyes were opened.',
+  'Prometheus \u2014 he stole the fire from heaven, for us.',
+  'the Upani\u1E63ad \u2014 in the beginning, mind first stirred to wonder.',
+  'the Analects \u2014 at fifteen, I bent my heart to learning.',
+  'the Buddha \u2014 beneath the tree, he looked, and woke.',
+];
+
+// tonight's real moon phase, from the visitor's date (a true, ever-changing datum — zero glow)
+function moonPhase(d){
+  const syn=29.530588853, ref=Date.UTC(2000,0,6,18,14,0);
+  let p=((((d.getTime()-ref)/86400000)/syn)%1); if(p<0)p+=1;
+  return {p, illum:(1-Math.cos(2*Math.PI*p))/2, waxing:p<0.5};
+}
+function phaseName(p){
+  const n=['new moon','waxing crescent','first quarter','waxing gibbous',
+           'full moon','waning gibbous','last quarter','waning crescent'];
+  return n[Math.round(p*8)%8];
+}
+
+// a robed, anonymous seeker — head tilted up; no tradition named, all equal
+function seeker(h,lead){
+  const g=document.createElementNS(SVGNS,'g');
+  const w=h*0.24, hr=h*0.105;
+  const robe=document.createElementNS(SVGNS,'path');
+  robe.setAttribute('class',lead?'figure-lead':'figure');
+  robe.setAttribute('d',`M ${-w} 0 C ${-w} ${-h*0.5} ${-w*0.55} ${-h*0.84} ${-h*0.04} ${-h*0.9} `
+    +`C ${w*0.5} ${-h*0.84} ${w} ${-h*0.5} ${w} 0 Z`);
+  g.appendChild(robe);
+  const head=document.createElementNS(SVGNS,'circle');     // tilted back — looking up
+  head.setAttribute('class',lead?'figure-lead':'figure');
+  head.setAttribute('r',hr);
+  head.setAttribute('cx',-h*0.06);
+  head.setAttribute('cy',-(h*0.9)-hr*0.55);
+  g.appendChild(head);
+  return g;
+}
+
+// one petal as a leaf (built on the unscaled circle; the group squashes it to the ellipse)
+function petalPath(rIn,rOut,dir,wide){
+  const [dx,dy]=dir, px=-dy, py=dx;              // perpendicular
+  const mid=(rIn+rOut)/2;
+  const bx=rIn*dx, by=rIn*dy, tx=rOut*dx, ty=rOut*dy;
+  const lx=mid*dx+px*wide, ly=mid*dy+py*wide;
+  const rx=mid*dx-px*wide, ry=mid*dy-py*wide;
+  return `M ${bx.toFixed(1)} ${by.toFixed(1)} Q ${lx.toFixed(1)} ${ly.toFixed(1)} ${tx.toFixed(1)} ${ty.toFixed(1)} `
+       + `Q ${rx.toFixed(1)} ${ry.toFixed(1)} ${bx.toFixed(1)} ${by.toFixed(1)} Z`;
+}
+
+function build(){
+  sky.innerHTML='';
+  // 1. faint canopy — the night the bloom opens against (sparse; the flower is the hero, not the field)
+  const bg=document.createElementNS(SVGNS,'g');bg.setAttribute('id','bg');
+  let seed=11;const rnd=()=>{seed=(seed*9301+49297)%233280;return seed/233280;};
+  for(let i=0;i<120;i++){
+    const c=document.createElementNS(SVGNS,'circle');
+    c.setAttribute('class','bgstar');
+    c.setAttribute('cx',(rnd()*1000).toFixed(1));
+    c.setAttribute('cy',(rnd()*680).toFixed(1));
+    c.setAttribute('r',(0.3+rnd()*0.6).toFixed(2));
+    c.dataset.rest=(0.08+rnd()*0.12).toFixed(2);
+    c.setAttribute('opacity',c.dataset.rest);
+    bg.appendChild(c);
+  }
+  sky.appendChild(bg);
+
+  // 2. the maker's hand — construction geometry under the bloom (honesty)
+  const cm=document.createElementNS(SVGNS,'g');cm.setAttribute('id','cmarks');
+  const mk=(tag,attrs)=>{const e=document.createElementNS(SVGNS,tag);e.setAttribute('class','cmark');
+    for(const k in attrs)e.setAttribute(k,attrs[k]);cm.appendChild(e);return e;};
+  mk('line',{x1:CX-24,y1:CY,x2:CX+24,y2:CY});
+  mk('line',{x1:CX,y1:CY-24,x2:CX,y2:CY+24});
+  mk('ellipse',{cx:CX,cy:CY,rx:R_INNER,ry:(R_INNER*K).toFixed(1)});
+  sky.appendChild(cm);
+
+  // 3. THE BLOOM — concentric mandala rings + eleven petals, all squashed into the elliptical sky
+  const bloom=document.createElementNS(SVGNS,'g');bloom.setAttribute('id','bloom');
+  bloom.setAttribute('transform',`translate(${CX},${CY}) scale(1,${K.toFixed(4)})`);
+  [210,330,430].forEach(r=>{
+    const c=document.createElementNS(SVGNS,'circle');
+    c.setAttribute('class','bloomring');c.setAttribute('r',r);bloom.appendChild(c);
+  });
+  PET.forEach((p,i)=>{
+    const inner=document.createElementNS(SVGNS,'path');   // short inner petal (the doubled flower)
+    inner.setAttribute('class','petal-in');
+    inner.setAttribute('d',petalPath(74,R_INNER+30,p.dir,56));
+    inner.dataset.i=i;bloom.appendChild(inner);
+  });
+  PET.forEach((p,i)=>{
+    const pet=document.createElementNS(SVGNS,'path');     // the long outer petal = the question
+    pet.setAttribute('class','petal');
+    pet.setAttribute('d',petalPath(R_INNER,p.rOut,p.dir,92));
+    pet.dataset.i=i;bloom.appendChild(pet);
+  });
+  sky.appendChild(bloom);
+
+  // 3b. the gold heart — the sun of the golden flower (the one struck gold)
+  const hr=document.createElementNS(SVGNS,'g');hr.setAttribute('id','heart');
+  const hRing=document.createElementNS(SVGNS,'ellipse');
+  hRing.setAttribute('class','heart-ring');hRing.setAttribute('cx',CX);hRing.setAttribute('cy',CY);
+  hRing.setAttribute('rx',26);hRing.setAttribute('ry',(26*K).toFixed(1));hr.appendChild(hRing);
+  const core=document.createElementNS(SVGNS,'circle');
+  core.setAttribute('class','heart');core.setAttribute('id','core');
+  core.setAttribute('cx',CX);core.setAttribute('cy',CY);core.setAttribute('r',2.4);hr.appendChild(core);
+  sky.appendChild(hr);
+
+  // 4. the labels — the eleven questions at the petal tips (upright, even-handed)
+  const lg=document.createElementNS(SVGNS,'g');lg.setAttribute('id','labels');
+  PET.forEach((p,i)=>{
+    const t=document.createElementNS(SVGNS,'text');
+    t.setAttribute('class','plabel');t.setAttribute('x',p.lx);
+    t.setAttribute('y',p.ly+(p.ly>CY?9:-2));t.textContent=p.label;t.dataset.i=i;
+    lg.appendChild(t);
+  });
+  sky.appendChild(lg);
+
+  // 5. THE MOON — tonight's real phase, hung over the bloom (silver, never gold, never glowing)
+  const mp=moonPhase(new Date());
+  const MX=500, MY=168, MR=12;
+  const mg=document.createElementNS(SVGNS,'g');mg.setAttribute('id','moon');
+  mg.setAttribute('transform',`translate(${MX},${MY})`+(mp.waxing?'':' scale(-1,1)'));
+  const ghost=document.createElementNS(SVGNS,'circle');
+  ghost.setAttribute('class','moon-disc');ghost.setAttribute('r',MR);mg.appendChild(ghost);
+  const rx=(MR*(1-2*mp.illum)).toFixed(2);
+  const lit=document.createElementNS(SVGNS,'path');lit.setAttribute('class','moon-lit');
+  lit.setAttribute('d',`M 0 ${-MR} A ${MR} ${MR} 0 0 1 0 ${MR} A ${Math.abs(rx)} ${MR} 0 0 ${mp.illum<0.5?0:1} 0 ${-MR} Z`);
+  mg.appendChild(lit);
+  sky.appendChild(mg);
+  const cap=document.createElementNS(SVGNS,'text');cap.setAttribute('class','moon-cap');
+  cap.setAttribute('x',MX);cap.setAttribute('y',MY+MR+15);cap.setAttribute('text-anchor','middle');
+  cap.textContent=phaseName(mp.p)+' \u00b7 tonight';
+  sky.appendChild(cap);
+
+  // 6. THE SEEKERS — a lone looker-up at the base, companions joining; robed, anonymous, equal
+  const fg=document.createElementNS(SVGNS,'g');fg.setAttribute('id','figures');
+  const lone=seeker(58,true);lone.setAttribute('id','lone');
+  lone.setAttribute('transform',`translate(${CX},498)`);fg.appendChild(lone);
+  [[360,486,40],[640,486,40],[262,500,34],[738,500,34]].forEach(([x,y,h],i)=>{
+    const s=seeker(h,false);s.setAttribute('class','companion');s.dataset.i=i;
+    s.setAttribute('transform',`translate(${x},${y})`);fg.appendChild(s);
+  });
+  sky.appendChild(fg);
+}
+
+function setLen(el){const len=el.getTotalLength?el.getTotalLength():400;
+  el.style.strokeDasharray=len;el.style.strokeDashoffset=len;return len;}
+
+let epiTimer=null;
+function startEpigraph(delay){
+  const wrap=document.getElementById('epigraph');
+  const txt=document.getElementById('epitext');
+  let i=0;
+  clearInterval(epiTimer);
+  setTimeout(()=>{
+    txt.textContent=EPI[0];wrap.style.opacity=1;
+    epiTimer=setInterval(()=>{
+      wrap.style.opacity=0;
+      setTimeout(()=>{i=(i+1)%EPI.length;txt.textContent=EPI[i];wrap.style.opacity=1;},900);
+    },3800);
+  },delay);
+}
+
+function play(){
+  build();
+  document.body.classList.add('anim');
+  clearInterval(epiTimer);
+  document.getElementById('epigraph').style.opacity=0;
+  if(reduce){ // static finished plate — bloom open, seekers present, title resolved
+    document.body.classList.remove('anim');
+    document.getElementById('epitext').textContent=EPI[0];
+    document.getElementById('epigraph').style.opacity=1;
+    return;
+  }
+  // BEAT 0 — the night; the canopy settles; the moon is struck (the one thing true tonight)
+  sky.querySelectorAll('#bg .bgstar').forEach(s=>{
+    const rest=+s.dataset.rest;
+    s.animate([{opacity:0},{opacity:0.8,offset:.2},{opacity:rest}],
+      {duration:760,delay:180,easing:'cubic-bezier(.2,.7,.3,1)',fill:'both'});
+  });
+  const moonG=document.getElementById('moon');
+  moonG.animate([{opacity:0},{opacity:1}],{duration:700,delay:520,fill:'both'});
+  const litP=moonG.querySelector('.moon-lit');const ll=setLen(litP);
+  litP.animate([{strokeDashoffset:ll},{strokeDashoffset:0}],
+    {duration:900,delay:600,easing:'cubic-bezier(.6,0,.2,1)',fill:'both'});
+  document.querySelector('.moon-cap').animate([{opacity:0},{opacity:.8}],{duration:700,delay:1080,fill:'both'});
+  // BEAT 1 — a lone human appears at the base, and looks up
+  const lone=document.getElementById('lone');
+  lone.animate([{opacity:0,transform:'translate(500px,506px)'},{opacity:1,transform:'translate(500px,498px)'}],
+    {duration:900,delay:900,easing:'cubic-bezier(.4,0,.2,1)',fill:'both'});
+  // BEAT 1b — the maker's hand sets the centre
+  sky.querySelectorAll('#cmarks .cmark').forEach((p,i)=>{
+    const len=setLen(p);
+    p.animate([{strokeDashoffset:len},{strokeDashoffset:0}],
+      {duration:640,delay:1300+i*120,easing:'cubic-bezier(.6,0,.2,1)',fill:'both'});
+  });
+  // BEAT 2 — THE BLOOM: the mandala rings draw, then the eleven petals open from the heart, one by one
+  sky.querySelectorAll('#bloom .bloomring').forEach((c,i)=>{
+    const len=setLen(c);
+    c.animate([{strokeDashoffset:len,opacity:0},{strokeDashoffset:0,opacity:.32}],
+      {duration:1000,delay:1700+i*140,easing:'cubic-bezier(.6,0,.2,1)',fill:'both'});
+  });
+  sky.querySelectorAll('#bloom .petal-in').forEach((p,i)=>{
+    const len=setLen(p);
+    p.animate([{strokeDashoffset:len},{strokeDashoffset:0}],
+      {duration:620,delay:2050+i*55,easing:'cubic-bezier(.6,0,.2,1)',fill:'both'});
+  });
+  sky.querySelectorAll('#bloom .petal').forEach((p,i)=>{
+    const len=setLen(p);
+    p.animate([{strokeDashoffset:len},{strokeDashoffset:0}],
+      {duration:760,delay:2400+i*75,easing:'cubic-bezier(.55,0,.2,1)',fill:'both'});
+  });
+  // labels arrive with their petals
+  sky.querySelectorAll('#labels .plabel').forEach((t,i)=>{
+    t.animate([{opacity:0},{opacity:.9}],{duration:520,delay:2700+i*75,fill:'both'});
+  });
+  // BEAT 3 — the companions join (every seeker, equal); the gold heart is struck once; the title resolves
+  sky.querySelectorAll('#figures .companion').forEach((s,i)=>{
+    s.animate([{opacity:0},{opacity:1}],{duration:760,delay:3500+i*160,fill:'both'});
+  });
+  const heart=document.getElementById('heart');
+  heart.animate([{opacity:0},{opacity:1}],{duration:600,delay:3600,fill:'both'});
+  const core=document.getElementById('core');
+  core.style.transformBox='fill-box';core.style.transformOrigin='center';
+  core.animate([{transform:'scale(.4)'},{transform:'scale(2.6)',offset:.42},{transform:'scale(1)'}],
+    {duration:760,delay:4150,easing:'cubic-bezier(.3,0,.2,1)',fill:'both'});
+  core.animate([{fill:'#d9b65f'},{fill:'#fff8e6',offset:.35},{fill:'#d9b65f'}],
+    {duration:760,delay:4150,easing:'ease-out',fill:'both'});
+  // title resolves in the heart-clearing
+  const T=4350;
+  ['.eyebrow','.headline','.sub','.epigraph','.counts','.enter'].forEach((sel,i)=>{
+    if(sel==='.epigraph')return;
+    const el=document.querySelector(sel);
+    el.animate([{opacity:0,transform:'translateY(12px)'},{opacity:1,transform:'none'}],
+      {duration:760,delay:T+i*110,easing:'ease',fill:'both'});
+  });
+  const h=document.querySelector('.headline');
+  h.animate([{backgroundPosition:'100% 0'},{backgroundPosition:'-50% 0'}],
+    {duration:1100,delay:T+500,easing:'cubic-bezier(.4,0,.15,1)',fill:'forwards'});
+  startEpigraph(T+900);
+  setTimeout(()=>document.body.classList.remove('anim'),T+1100);
+}
+document.getElementById('replay').onclick=play;
+document.getElementById('enter').onclick=play;
+play();
+</script>
+</body>
+</html>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mockup A — The Living Codex</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=EB+Garamond:ital@0;1&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --void:#070b16; --void-2:#0e1530;
+    --parchment:#e9dcc0; --parchment-dim:#b6ad96; --muted:#9aa3bd;
+    --rule:#2a3354; --gold:#d9b65f; --ink:#7a6038;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;height:100%;background:var(--void);color:var(--parchment);
+    font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow:hidden;}
+  #stage{position:fixed;inset:0;perspective:1500px;
+    background:radial-gradient(ellipse 70% 60% at 50% 44%,var(--void-2),var(--void) 75%);}
+
+  /* the open spread (frontispiece) sits beneath the covers */
+  .spread{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;
+    justify-content:center;text-align:center;z-index:1;}
+  .spread::before{content:'';position:absolute;inset:0;z-index:2;pointer-events:none;
+    background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2'/></filter><rect width='160' height='160' filter='url(%23n)' opacity='0.5'/></svg>");
+    mix-blend-mode:overlay;opacity:.06;}
+  /* the gutter — present site-wide as the spine of the book */
+  .gutter{position:absolute;left:50%;top:0;bottom:0;width:1px;transform:translateX(-.5px);z-index:3;
+    background:linear-gradient(180deg,transparent,rgba(217,182,95,.05) 18%,rgba(217,182,95,.18) 50%,rgba(217,182,95,.05) 82%,transparent);}
+
+  .inner{position:relative;z-index:4;max-width:620px;padding:0 24px;}
+  .eyebrow{font-size:10.5px;letter-spacing:.42em;text-transform:uppercase;color:var(--gold);opacity:.85;}
+  .headline{font-family:'Cinzel',serif;font-weight:600;font-size:clamp(28px,5.4vw,52px);
+    letter-spacing:.05em;text-transform:uppercase;margin:16px 0 0;line-height:1.08;color:var(--parchment);
+    position:relative;display:inline-block;}
+  /* historiated drop-cap frame on the first word */
+  .dropcap{font-family:'Cinzel',serif;color:var(--gold);position:relative;padding:0 .06em;}
+  .dropcap::before{content:'';position:absolute;inset:-6px -2px;border:1px solid rgba(217,182,95,.5);}
+  .sub{font-family:'EB Garamond',serif;font-style:italic;font-size:clamp(15px,2.3vw,18px);
+    color:var(--parchment-dim);max-width:30em;margin:18px auto 0;line-height:1.55;}
+  .colophon{display:flex;gap:34px;justify-content:center;margin:26px 0 0;
+    border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:14px 0;}
+  .colophon b{font-family:'EB Garamond',serif;font-size:24px;color:var(--parchment);display:block;line-height:1;}
+  .colophon i{font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-style:normal;}
+  .enter{margin:30px auto 0;display:inline-block;background:var(--gold);color:#1a1205;border:none;border-radius:3px;
+    font-family:'Inter';font-size:13px;letter-spacing:.12em;text-transform:uppercase;font-weight:500;padding:13px 32px;cursor:pointer;}
+
+  /* the two cover halves */
+  .cover{position:absolute;top:0;bottom:0;width:50%;z-index:6;backface-visibility:hidden;
+    background:
+      linear-gradient(180deg,rgba(217,182,95,.05),transparent 30%),
+      radial-gradient(120% 80% at 50% 40%,var(--void-2),var(--void) 80%);
+    box-shadow:inset 0 0 120px rgba(0,0,0,.5);}
+  .cover.l{left:0;transform-origin:100% 50%;
+    border-right:1px solid rgba(217,182,95,.22);}
+  .cover.r{right:0;transform-origin:0% 50%;
+    border-left:1px solid rgba(217,182,95,.22);}
+  /* faint blind-tooled frame on each cover */
+  .cover::after{content:'';position:absolute;inset:28px;border:1px solid rgba(217,182,95,.10);}
+
+  /* the clasp seal straddles the gutter, on top of the closed covers */
+  .clasp{position:absolute;left:50%;top:50%;width:120px;height:120px;margin:-60px 0 0 -60px;z-index:8;}
+  .clasp svg{width:100%;height:100%;overflow:visible;}
+  .clasp path,.clasp circle{fill:none;stroke:var(--gold);stroke-width:.7;opacity:.85;}
+  .clasp .pin{fill:var(--gold);stroke:none;}
+
+  .anim .inner>*{opacity:0;}
+
+  .hud{position:fixed;left:18px;bottom:16px;z-index:20;display:flex;gap:10px;align-items:center;
+    font-size:11px;letter-spacing:.06em;color:var(--muted);}
+  .hud button{background:rgba(11,17,34,.85);border:1px solid var(--rule);color:var(--parchment-dim);
+    border-radius:3px;padding:7px 13px;font-family:'Inter';font-size:11px;letter-spacing:.08em;cursor:pointer;}
+  .hud button:hover{border-color:var(--gold);color:var(--parchment);}
+  .tag{position:fixed;top:16px;left:18px;z-index:20;font-size:10px;letter-spacing:.3em;
+    text-transform:uppercase;color:var(--gold);opacity:.7;}
+  a.back{position:fixed;top:16px;right:18px;z-index:20;font-size:10px;letter-spacing:.2em;
+    text-transform:uppercase;color:var(--muted);text-decoration:none;}
+  a.back:hover{color:var(--parchment);}
+</style>
+</head>
+<body>
+  <div class="tag">Direction A · Living Codex</div>
+  <a class="back" href="index.html">← compare</a>
+  <div id="stage">
+    <div class="spread">
+      <div class="gutter"></div>
+      <div class="inner">
+        <div class="eyebrow">A Codex of the Great Questions</div>
+        <h1 class="headline"><span class="dropcap">Y</span>ou're not the<br>first to wonder</h1>
+        <p class="sub">For some four thousand years the same few questions keep returning. This codex gathers them onto one set of leaves — drawn from a single vantage, and bound to be argued with.</p>
+        <div class="colophon">
+          <span><b>11</b><i>great questions</i></span>
+          <span><b>425</b><i>thinkers</i></span>
+          <span><b>4,399</b><i>years</i></span>
+        </div>
+        <button class="enter" id="enter">Open the Codex</button>
+      </div>
+    </div>
+    <div class="cover l" id="coverL"></div>
+    <div class="cover r" id="coverR"></div>
+    <div class="clasp" id="clasp"></div>
+  </div>
+  <div class="hud"><span>Signature: the void is a shut book — the clasp engraves, the cover opens to the frontispiece</span><button id="replay">↻ Replay</button></div>
+
+<script>
+const SVGNS='http://www.w3.org/2000/svg';
+const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+const cL=document.getElementById('coverL'),cR=document.getElementById('coverR'),clasp=document.getElementById('clasp');
+
+// 11-petal rosette seal, faithful to the atlas's sealMarkup()
+function sealSVG(){
+  const cx=60,cy=60;
+  const rosette=(R,amp,petals,phase)=>{let d='';const steps=petals*18;
+    for(let i=0;i<=steps;i++){const t=i/steps*Math.PI*2,rr=R+amp*Math.cos(petals*t+phase);
+      d+=(i?'L':'M')+(cx+Math.cos(t)*rr).toFixed(2)+' '+(cy+Math.sin(t)*rr).toFixed(2);}
+    return d+'Z';};
+  return `<svg viewBox="0 0 120 120">
+    <circle cx="60" cy="60" r="55"/>
+    <path d="${rosette(42,7.2,11,0)}"/>
+    <path d="${rosette(42,7.2,11,Math.PI/11)}"/>
+    <circle cx="60" cy="60" r="18.6"/>
+    <circle class="pin" cx="60" cy="60" r="5.7"/></svg>`;
+}
+
+function play(){
+  clasp.innerHTML=sealSVG();
+  document.body.classList.add('anim');
+  const strokes=[...clasp.querySelectorAll('path,circle:not(.pin)')];
+  const pin=clasp.querySelector('.pin');
+  // reset covers shut
+  cL.style.transform='rotateY(0)';cR.style.transform='rotateY(0)';
+  cL.style.opacity=1;cR.style.opacity=1;clasp.style.opacity=1;
+
+  if(reduce){ // static: book already open, clasp drawn, content shown
+    cL.style.transform='rotateY(-120deg)';cR.style.transform='rotateY(120deg)';
+    cL.style.opacity=0;cR.style.opacity=0;clasp.style.opacity=0;
+    document.body.classList.remove('anim');return;
+  }
+
+  // 1. clasp engraves (outer rim → rosettes → centre, then pin presses)
+  strokes.forEach((s,i)=>{
+    const len=s.getTotalLength();
+    s.style.strokeDasharray=len;s.style.strokeDashoffset=len;
+    s.animate([{strokeDashoffset:len},{strokeDashoffset:0}],
+      {duration:760,delay:200+i*150,easing:'cubic-bezier(.6,0,.2,1)',fill:'both'});
+  });
+  pin.style.opacity=0;
+  pin.animate([{opacity:0,transform:'scale(.2)'},{opacity:1,transform:'scale(1)'}],
+    {duration:420,delay:200+strokes.length*150,easing:'ease',fill:'both'});
+
+  // 2. clasp unlatches + the covers swing open around the gutter
+  const T=200+strokes.length*150+520;
+  clasp.animate([{transform:'rotate(0) scale(1)'},{transform:'rotate(-7deg) scale(1.05)',offset:.4},{transform:'rotate(0) scale(1)'}],
+    {duration:300,delay:T,easing:'ease'});
+  clasp.animate([{opacity:1},{opacity:0}],{duration:420,delay:T+260,fill:'forwards'});
+  cL.animate([{transform:'rotateY(0)'},{transform:'rotateY(-120deg)'}],
+    {duration:720,delay:T+120,easing:'cubic-bezier(.34,.01,.27,1)',fill:'forwards'});
+  cR.animate([{transform:'rotateY(0)'},{transform:'rotateY(120deg)'}],
+    {duration:720,delay:T+120,easing:'cubic-bezier(.34,.01,.27,1)',fill:'forwards'});
+  cL.animate([{opacity:1},{opacity:0}],{duration:300,delay:T+560,fill:'forwards'});
+  cR.animate([{opacity:1},{opacity:0}],{duration:300,delay:T+560,fill:'forwards'});
+
+  // 3. the frontispiece inks up
+  const T2=T+560;
+  [...document.querySelectorAll('.inner>*')].forEach((el,i)=>{
+    el.animate([{opacity:0,transform:'translateY(10px)'},{opacity:1,transform:'none'}],
+      {duration:640,delay:T2+i*110,easing:'ease',fill:'both'});
+  });
+  setTimeout(()=>document.body.classList.remove('anim'),T2+900);
+}
+document.getElementById('replay').onclick=play;
+document.getElementById('enter').onclick=play;
+play();
+</script>
+</body>
+</html>

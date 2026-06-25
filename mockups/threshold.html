@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Threshold — Golden Flower portal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=EB+Garamond:ital@0;1&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --void:#070b16; --parchment:#e9dcc0; --parchment-dim:#c3b89a; --muted:#9aa3bd; --gold:#d9b65f;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;height:100%;background:var(--void);color:var(--parchment);
+    font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow:hidden;}
+  #stage{position:fixed;inset:0;overflow:hidden;background:var(--void);}
+
+  /* THE SCENE — the generated Golden-Flower threshold, shown whole; void fills the slim side margins */
+  #scene{position:absolute;inset:0;
+    background:#070b16 url('assets/threshold-scene.jpg') center center/contain no-repeat;
+    transform-origin:50% 40%;will-change:transform;}
+
+  /* cinema grading laid over the still: deepen the corners, pull the eye up to the portal */
+  .vignette{position:absolute;inset:0;pointer-events:none;
+    background:
+      radial-gradient(ellipse 64% 60% at 50% 34%,transparent 40%,rgba(7,11,22,.55) 100%),
+      linear-gradient(to bottom,rgba(7,11,22,.45) 0%,transparent 22%,transparent 60%,rgba(7,11,22,.30) 100%);}
+  /* a soft scrim that lifts the title off the scene without a hard edge */
+  .titlescrim{position:absolute;left:50%;top:49%;transform:translateX(-50%);
+    width:min(980px,94vw);height:420px;pointer-events:none;
+    background:radial-gradient(ellipse 56% 50% at 50% 42%,rgba(7,11,22,.92),rgba(7,11,22,.55) 58%,transparent 76%);}
+
+  /* the single raking-gold light that crosses the scene once, then is gone */
+  .rake{position:absolute;top:-20%;left:-40%;width:40%;height:140%;pointer-events:none;opacity:0;
+    background:linear-gradient(105deg,transparent 0%,rgba(255,246,214,.0) 38%,rgba(255,248,230,.32) 50%,rgba(255,246,214,0) 62%,transparent 100%);
+    mix-blend-mode:soft-light;transform:translateX(0);}
+  /* film grain */
+  .grain{position:absolute;inset:0;pointer-events:none;opacity:.05;mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+
+  .front{position:absolute;left:0;right:0;top:55%;text-align:center;pointer-events:none;z-index:5;
+    text-shadow:0 2px 26px rgba(7,11,22,.98),0 1px 4px rgba(7,11,22,.95);}
+  .eyebrow{font-size:10.5px;letter-spacing:.46em;text-transform:uppercase;color:var(--gold);opacity:.9;}
+  .headline{font-family:'Cinzel',serif;font-weight:600;font-size:clamp(26px,4.2vw,44px);
+    letter-spacing:.05em;text-transform:uppercase;margin:11px 0 0;line-height:1.06;
+    background:linear-gradient(100deg,var(--parchment) 38%,#fff4d6 50%,var(--parchment) 62%);
+    background-size:300% 100%;background-position:100% 0;
+    -webkit-background-clip:text;background-clip:text;color:transparent;}
+  .sub{font-family:'EB Garamond',serif;font-style:italic;font-size:clamp(13px,1.8vw,16px);
+    color:var(--parchment-dim);max-width:30em;margin:11px auto 0;line-height:1.45;padding:0 24px;}
+  .counts{display:flex;gap:34px;justify-content:center;margin:18px 0 0;}
+  .counts b{font-family:'EB Garamond',serif;font-size:24px;color:var(--parchment);display:block;line-height:1;}
+  .counts i{font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-style:normal;}
+  .enter{margin:24px auto 0;display:inline-block;background:var(--gold);color:#1a1205;border:none;border-radius:3px;
+    font-family:'Inter';font-size:13px;letter-spacing:.12em;text-transform:uppercase;font-weight:500;
+    padding:12px 30px;cursor:pointer;pointer-events:auto;}
+  .anim .eyebrow,.anim .headline,.anim .sub,.anim .counts,.anim .enter{opacity:0;}
+
+  .tag{position:fixed;top:16px;left:18px;z-index:20;font-size:10px;letter-spacing:.3em;
+    text-transform:uppercase;color:var(--gold);opacity:.7;}
+  a.back{position:fixed;top:16px;right:18px;z-index:20;font-size:10px;letter-spacing:.2em;
+    text-transform:uppercase;color:var(--muted);text-decoration:none;}
+  a.back:hover{color:var(--parchment);}
+  .hud{position:fixed;left:18px;bottom:16px;z-index:20;display:flex;gap:10px;align-items:center;
+    font-size:11px;letter-spacing:.04em;color:var(--muted);max-width:64vw;}
+  .hud button{background:rgba(16,29,68,.85);border:1px solid #2a3354;color:var(--parchment-dim);
+    border-radius:3px;padding:7px 13px;font-family:'Inter';font-size:11px;letter-spacing:.08em;cursor:pointer;white-space:nowrap;}
+  .hud button:hover{border-color:var(--gold);color:var(--parchment);}
+</style>
+</head>
+<body>
+  <div class="tag">Threshold · Golden Flower</div>
+  <a class="back" href="index.html">← compare</a>
+  <div id="stage">
+    <div id="scene"></div>
+    <div class="vignette"></div>
+    <div class="rake" id="rake"></div>
+    <div class="titlescrim"></div>
+    <div class="grain"></div>
+    <div class="front">
+      <div class="eyebrow">A Portal to Four Thousand Years of Wonder</div>
+      <h1 class="headline">You're not the<br>first to look up</h1>
+      <p class="sub">The same few questions have opened overhead for everyone who ever stood here. Step under, and look up through them.</p>
+      <div class="counts">
+        <span><b>11</b><i>great questions</i></span>
+        <span><b>425</b><i>thinkers</i></span>
+        <span><b>4,399</b><i>years</i></span>
+      </div>
+      <button class="enter" id="enter">Cross the threshold</button>
+    </div>
+  </div>
+  <div class="hud"><span>The scene rises from the dark, breathes with a slow parallax, is crossed once by a raking gold light, and the title resolves.</span><button id="replay">↻ Replay</button></div>
+
+<script>
+const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+const scene=document.getElementById('scene');
+const rake=document.getElementById('rake');
+
+// gentle mouse parallax — the scene leans a few px toward the cursor, lerped for weight
+let tx=0,ty=0,cx=0,cy=0,base=1;
+function loop(){ cx+=(tx-cx)*0.06; cy+=(ty-cy)*0.06;
+  scene.style.transform=`scale(${base}) translate(${cx}px,${cy}px)`;
+  requestAnimationFrame(loop); }
+addEventListener('mousemove',e=>{ if(reduce)return;
+  tx=(e.clientX/innerWidth-0.5)*-16; ty=(e.clientY/innerHeight-0.5)*-10; });
+
+function play(){
+  document.body.classList.add('anim');
+  if(reduce){ document.body.classList.remove('anim'); base=1; scene.style.transform='scale(1)'; return; }
+
+  // BEAT 1 — the scene rises out of black with a slow push-in (Ken Burns settle)
+  base=1;
+  scene.animate(
+    [{opacity:0,transform:'scale(1.10)'},{opacity:1,transform:'scale(1.0)'}],
+    {duration:2600,easing:'cubic-bezier(.16,1,.3,1)',fill:'both'});
+
+  // BEAT 2 — the raking gold light crosses once, then is gone
+  rake.animate(
+    [{opacity:0,transform:'translateX(0)'},
+     {opacity:1,transform:'translateX(80vw)',offset:.5},
+     {opacity:1,transform:'translateX(200vw)',offset:.92},
+     {opacity:0,transform:'translateX(240vw)'}],
+    {duration:2200,delay:1700,easing:'cubic-bezier(.4,0,.2,1)',fill:'both'});
+
+  // BEAT 3 — the title resolves below the portal, gold sweeping the headline once
+  const T=2300;
+  ['.eyebrow','.headline','.sub','.counts','.enter'].forEach((sel,i)=>{
+    document.querySelector(sel).animate(
+      [{opacity:0,transform:'translateY(12px)'},{opacity:1,transform:'none'}],
+      {duration:820,delay:T+i*120,easing:'cubic-bezier(.16,1,.3,1)',fill:'both'});
+  });
+  const h=document.querySelector('.headline');
+  h.animate([{backgroundPosition:'100% 0'},{backgroundPosition:'-50% 0'}],
+    {duration:1200,delay:T+550,easing:'cubic-bezier(.4,0,.15,1)',fill:'forwards'});
+
+  // continuous slow breath so the still never sits dead-still
+  setTimeout(()=>{ document.body.classList.remove('anim');
+    scene.animate([{transform:'scale(1.0)'},{transform:'scale(1.035)'}],
+      {duration:30000,iterations:Infinity,direction:'alternate',easing:'ease-in-out'});
+    base=1; }, T+1300);
+}
+
+document.getElementById('replay').onclick=()=>{scene.getAnimations().forEach(a=>a.cancel());play();};
+document.getElementById('enter').onclick=()=>{scene.getAnimations().forEach(a=>a.cancel());play();};
+requestAnimationFrame(loop);
+play();
+</script>
+</body>
+</html>

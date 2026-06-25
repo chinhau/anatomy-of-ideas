@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mockup — Era-clock lens</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital@0;1&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --void:#070b16; --void-2:#0e1530;
+    --parchment:#e9dcc0; --parchment-dim:#b6ad96; --muted:#9aa3bd;
+    --rule:#2a3354; --gold:#d9b65f; --oppose:#c75a45; --echo:#7da0e0; --echo-t:#9db8ee;
+    --ink:#7a6038;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;height:100%;background:var(--void);color:var(--parchment);
+    font-family:'Inter',system-ui,sans-serif;}
+  .wrap{max-width:1080px;margin:0 auto;padding:28px 24px 60px;}
+  h1{font-family:'EB Garamond',serif;font-weight:600;font-size:26px;margin:0 0 4px;}
+  .kick{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink);margin-bottom:14px;}
+  p.lede{font-size:13.5px;line-height:1.62;color:var(--parchment-dim);max-width:760px;margin:0 0 18px;}
+  .toggle{display:inline-flex;gap:0;border:1px solid var(--rule);border-radius:4px;overflow:hidden;margin-bottom:18px;}
+  .toggle button{background:transparent;border:none;color:var(--parchment-dim);font-family:'Inter';
+    font-size:12px;letter-spacing:.04em;padding:8px 16px;cursor:pointer;}
+  .toggle button.on{background:var(--gold);color:#1a1205;font-weight:500;}
+  .stage{position:relative;border:1px solid var(--rule);border-radius:6px;
+    background:radial-gradient(circle at 50% 46%, #0e1530 0%, #070b16 74%);overflow:hidden;}
+  svg{display:block;width:100%;height:560px;}
+  .leg{display:flex;gap:22px;flex-wrap:wrap;margin-top:14px;font-size:12px;color:var(--parchment-dim);}
+  .leg b{font-weight:500;color:var(--parchment);}
+  .sw{display:inline-block;width:22px;height:0;border-top-width:2px;border-top-style:solid;
+    vertical-align:middle;margin-right:7px;}
+  .note{font-size:12.5px;line-height:1.6;color:var(--muted);max-width:780px;margin:16px 0 0;}
+  .note b{color:var(--parchment);font-weight:500;}
+  /* svg classes */
+  .lnode-c{transition:opacity .2s;}
+  .lnode-t{font-family:'EB Garamond',serif;font-style:italic;font-size:13px;fill:var(--parchment-dim);}
+  .focus-t{fill:var(--parchment);font-style:normal;font-size:15px;}
+  .llink{fill:none;opacity:.55;}
+  .llink.builds{stroke:var(--parchment-dim);}
+  .llink.rejects{stroke:var(--oppose);}
+  .llink.echoes{stroke:var(--echo);stroke-dasharray:2 5;}
+  .dial{fill:none;stroke:var(--rule);opacity:.5;}
+  .dial-tick{stroke:var(--rule);opacity:.55;}
+  .dial-num{font-size:10px;letter-spacing:.1em;fill:var(--muted);text-anchor:middle;}
+  .dial-cap{font-size:9px;letter-spacing:.22em;text-transform:uppercase;fill:var(--ink);text-anchor:middle;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="kick">Phase 2 mockup · option “Era-clock lens”</div>
+  <h1>The same ego-graph, two ways</h1>
+  <p class="lede">Focus: <b style="color:var(--parchment)">Anattā (No-Self)</b>, c.250&nbsp;BCE. Its neighbours
+    are the same in both views — only their <em>angular position</em> changes. Today the ring spaces them
+    evenly by list order (position means nothing). The era-clock keys each neighbour’s angle to its own
+    historical date, so the dial reads like a clock of time — and the two <span style="color:var(--echo-t)">echoes</span>
+    visibly leap to the far, modern side of the dial, two millennia from the focus’s contemporaries.</p>
+
+  <div class="toggle" id="toggle">
+    <button data-mode="even" class="on">Now — even ring (no time)</button>
+    <button data-mode="clock">Era-clock — angle = era</button>
+  </div>
+
+  <div class="stage"><svg id="svg" viewBox="0 0 1000 560"></svg></div>
+
+  <div class="leg">
+    <span><span class="sw" style="border-top-color:var(--parchment-dim)"></span><b>builds on</b></span>
+    <span><span class="sw" style="border-top-color:var(--oppose)"></span><b>rejects</b></span>
+    <span><span class="sw" style="border-top-color:var(--echo);border-top-style:dashed"></span><b>echoes</b> (independent rhyme)</span>
+  </div>
+
+  <p class="note"><b>Why this serves the atom:</b> the atlas’s thesis is independent convergence — the same
+    move reached by cultures that never met. In the even ring you cannot see that. In the era-clock, an
+    echo sitting 2,000 years around the dial from the focus <em>is</em> the convergence, drawn to scale.
+    The change is small and low-risk: only the angle function changes (index&nbsp;→&nbsp;era); nodes, edges,
+    labels and interactions are untouched.</p>
+</div>
+
+<script>
+const NS='http://www.w3.org/2000/svg';
+const el=(n,a)=>{const e=document.createElementNS(NS,n);for(const k in a)e.setAttribute(k,a[k]);return e;};
+const svg=document.getElementById('svg');
+const cx=500, cy=292, R=190;
+const focus={id:'Anattā (No-Self)', era:-250};
+const NB=[
+  {id:'Ātman (the Self)',        era:-700, type:'rejects'},
+  {id:'Dependent Origination',   era:-400, type:'builds'},
+  {id:'Emptiness (Śūnyatā)',     era:150,  type:'builds'},
+  {id:'The Two Truths',          era:400,  type:'builds'},
+  {id:'Bundle Theory',           era:1739, type:'echoes'},
+  {id:'Personal Identity',       era:1971, type:'rejects'},
+  {id:'No-Self in Neuroscience', era:1996, type:'echoes'},
+];
+const eMin=-700, eMax=2000, eSpan=eMax-eMin;
+// even ring: evenly spaced by index. era-clock: angle keyed to era (30° seam at top).
+const evenAng=i=>-Math.PI/2+(i+0.5)/NB.length*2*Math.PI;
+const clockAng=era=>-Math.PI/2+(15*Math.PI/180)+ (era-eMin)/eSpan*(330*Math.PI/180);
+const edgePath=(x1,y1,x2,y2,type)=>{
+  if(type!=='echoes') return `M${x1},${y1}L${x2},${y2}`;
+  const mx=(x1+x2)/2, my=(y1+y2)/2, dx=x2-x1, dy=y2-y1, len=Math.hypot(dx,dy)||1;
+  const ox=-dy/len*40, oy=dx/len*40;            // bow the echo so its leap reads as an arc
+  return `M${x1},${y1}Q${mx+ox},${my+oy} ${x2},${y2}`;
+};
+let mode='even';
+function render(){
+  svg.innerHTML='';
+  if(mode==='clock'){
+    // the dial: a faint time ring with clock-numerals in years
+    svg.appendChild(el('circle',{class:'dial',cx,cy,r:R}));
+    [-500,0,500,1000,1500,2000].forEach(y=>{
+      const a=clockAng(y), rx=cx+Math.cos(a)*(R+24), ry=cy+Math.sin(a)*(R+24);
+      const tx1=cx+Math.cos(a)*(R-6), ty1=cy+Math.sin(a)*(R-6);
+      const tx2=cx+Math.cos(a)*(R+6), ty2=cy+Math.sin(a)*(R+6);
+      svg.appendChild(el('line',{class:'dial-tick',x1:tx1,y1:ty1,x2:tx2,y2:ty2}));
+      const t=el('text',{class:'dial-num',x:rx,y:ry+3}); t.textContent=(y<0?Math.abs(y)+' BCE':(y===0?'1 CE':y+' CE')); svg.appendChild(t);
+    });
+    const cap=el('text',{class:'dial-cap',x:cx,y:cy-R-40}); cap.textContent='◀ older    the dial of history    newer ▶'; svg.appendChild(cap);
+  }
+  const pos={};
+  NB.forEach((nb,i)=>{ const a=mode==='even'?evenAng(i):clockAng(nb.era);
+    pos[nb.id]={x:cx+Math.cos(a)*R, y:cy+Math.sin(a)*R, a}; });
+  // edges first
+  NB.forEach(nb=>{ const p=pos[nb.id];
+    svg.appendChild(el('path',{class:'llink '+nb.type, d:edgePath(cx,cy,p.x,p.y,nb.type)})); });
+  // neighbour nodes
+  NB.forEach(nb=>{ const p=pos[nb.id], col=nb.type==='rejects'?'var(--oppose)':nb.type==='echoes'?'var(--echo)':'var(--parchment-dim)';
+    svg.appendChild(el('circle',{class:'lnode-c', cx:p.x, cy:p.y, r:7, fill:col, opacity:.92}));
+    const right=p.x>=cx, t=el('text',{class:'lnode-t', x:p.x+(right?12:-12), y:p.y+4, 'text-anchor':right?'start':'end'});
+    t.textContent=nb.id; svg.appendChild(t);
+    const yr=el('text',{class:'lnode-t', x:p.x+(right?12:-12), y:p.y+18, 'text-anchor':right?'start':'end',
+      style:'font-size:10px;font-style:normal;fill:var(--muted)'});
+    yr.textContent=(nb.era<0?Math.abs(nb.era)+' BCE':nb.era+' CE'); svg.appendChild(yr);
+  });
+  // focus
+  svg.appendChild(el('circle',{cx,cy,r:11,fill:'var(--gold)'}));
+  const ft=el('text',{class:'lnode-t focus-t',x:cx,y:cy+30,'text-anchor':'middle'}); ft.textContent=focus.id; svg.appendChild(ft);
+  const fy=el('text',{class:'lnode-t',x:cx,y:cy+46,'text-anchor':'middle',style:'font-size:10px;font-style:normal;fill:var(--muted)'});
+  fy.textContent='250 BCE'; svg.appendChild(fy);
+}
+document.getElementById('toggle').addEventListener('click',e=>{
+  const b=e.target.closest('button'); if(!b) return;
+  mode=b.dataset.mode;
+  [...document.querySelectorAll('#toggle button')].forEach(x=>x.classList.toggle('on',x===b));
+  render();
+});
+render();
+</script>
+</body>
+</html>
