@@ -386,11 +386,13 @@
     transform:translateX(100%);transition:transform .34s cubic-bezier(.4,0,.1,1);
     display:flex;flex-direction:column;box-shadow:-20px 0 60px rgba(0,0,0,.5);}
   #drawer.open{transform:translateX(0);}
-  .dr-head{padding:24px 24px 16px;border-bottom:1px solid var(--rule);position:relative;}
+  .dr-head{padding:24px 24px 18px;position:relative;}
   .dr-head::after{content:'';display:block;clear:both;}
   .dr-q{font-size:10px;letter-spacing:0.22em;text-transform:uppercase;display:flex;align-items:center;
-    gap:7px;margin-bottom:8px;}
-  .dr-q .dot{width:9px;height:9px;border-radius:50%;}
+    flex-wrap:wrap;gap:7px;margin-bottom:9px;color:var(--parchment-dim);}
+  .dr-q .dot{width:9px;height:9px;border-radius:50%;flex:none;}
+  .dr-q .qsep{opacity:.4;}
+  .dr-q .qstat{display:inline-flex;align-items:center;gap:5px;cursor:help;color:var(--st);}
   /* illuminated-initial figure: a duotone portrait (thinker) or region sigil (school)
      in the same arched niche, framed by one hairline stroke in the region colour. */
   .dr-figure{--reg:var(--ink);float:left;width:84px;margin:2px 14px 6px 0;}
@@ -443,17 +445,15 @@
   .dr-think{font-size:11.5px;color:var(--parchment-dim);margin-bottom:20px;}
   .dr-think b{color:var(--ink);font-weight:500;letter-spacing:0.1em;text-transform:uppercase;
     font-size:9.5px;display:block;margin-bottom:4px;}
-  .dr-sec{margin:20px 0 2px;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--ink);
-    padding-bottom:5px;border-bottom:1px solid var(--rule);display:flex;align-items:baseline;gap:8px;}
+  .dr-sec{margin:22px 0 10px;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--ink);
+    display:flex;align-items:baseline;gap:8px;}
   .dr-sec .sub{color:var(--muted);letter-spacing:0.05em;text-transform:none;font-size:10px;font-style:italic;
     font-family:'EB Garamond',serif;}
   .chips{display:flex;flex-wrap:wrap;gap:6px;margin:11px 0 2px;}
   .chip{font-size:12px;padding:4px 11px;border:1px solid var(--rule);border-radius:20px;
     color:var(--parchment);background:rgba(255,255,255,0.025);}
   .readings{margin:9px 0 2px;}
-  .reading{display:grid;grid-template-columns:24px 1fr;gap:10px;padding:11px 0;
-    border-bottom:1px solid rgba(42,51,84,0.5);}
-  .reading:last-child{border-bottom:none;}
+  .reading{display:grid;grid-template-columns:24px 1fr;gap:10px;padding:9px 0;}
   .reading .rk{font-family:'EB Garamond',serif;font-style:italic;font-size:21px;color:var(--ink);
     line-height:1;opacity:0.85;}
   .reading .tt{font-family:'EB Garamond',serif;font-style:italic;font-size:17px;line-height:1.18;
@@ -462,8 +462,7 @@
   .reading .badge{display:inline-block;font-size:8.5px;letter-spacing:0.12em;text-transform:uppercase;
     padding:1.5px 7px;border-radius:3px;margin-top:6px;border:1px solid var(--rule);color:var(--muted);}
   .reading .nt{font-size:11.5px;color:var(--muted);margin-top:5px;line-height:1.45;}
-  .rel-h{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;margin:14px 0 6px;
-    padding-bottom:4px;border-bottom:1px solid var(--rule);}
+  .rel-h{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;margin:18px 0 7px;}
   .rel-h.b{color:var(--affirm);} .rel-h.r{color:var(--oppose);} .rel-h.e{color:var(--echo-t);}
   .rel-i{display:flex;align-items:center;gap:8px;padding:4px 0;font-size:13px;cursor:pointer;}
   .rel-i:hover{color:var(--gold);}
@@ -621,21 +620,31 @@
 
 
   /* ---------- drawer: foil + bookmark ---------- */
-  .dr-qstatus{display:flex;align-items:baseline;gap:6px;margin-top:6px;font-size:11px;cursor:help;}
-  .dr-qstatus:empty{display:none;}
-  /* "mark to return" — a single struck seal, not a reading tracker */
-  .dr-mark{display:flex;align-items:center;gap:9px;width:100%;margin-top:12px;font-family:inherit;
-    font-size:10px;letter-spacing:.08em;text-transform:uppercase;text-align:left;
-    padding:8px 11px;border:1px solid var(--rule);background:transparent;color:var(--parchment-dim);
-    border-radius:3px;cursor:pointer;transition:all .15s;}
-  .dr-mark:hover{border-color:var(--gold);color:var(--parchment);}
-  .dr-mark .seal{width:16px;height:16px;flex:none;}
+  /* "mark to return" — a single struck seal docked in the drawer chrome beside the
+     close ×, never wedged between the idea's identity and its words (icon, not button) */
+  .dr-mark{position:absolute;top:15px;right:46px;width:26px;height:26px;display:flex;
+    align-items:center;justify-content:center;padding:0;border:none;background:none;
+    cursor:pointer;color:var(--muted);transition:color .15s;}
+  .dr-mark:empty{display:none;}
+  .dr-mark .seal{width:18px;height:18px;flex:none;}
   .dr-mark .seal svg{width:100%;height:100%;display:block;}
-  .dr-mark .seal path,.dr-mark .seal circle{fill:none;stroke:var(--rule);stroke-width:.9;}
-  .dr-mark .seal .seal-pin{fill:var(--rule);stroke:none;}
-  .dr-mark.on{border-color:var(--gold);color:var(--gold);}
-  .dr-mark.on .seal path,.dr-mark.on .seal circle{stroke:var(--gold);}
-  .dr-mark.on .seal .seal-pin{fill:var(--gold);}
+  .dr-mark .seal path,.dr-mark .seal circle{fill:none;stroke:currentColor;stroke-width:.9;}
+  .dr-mark .seal .seal-pin{fill:currentColor;stroke:none;}
+  .dr-mark:hover{color:var(--parchment);}
+  .dr-mark.on{color:var(--gold);}
+  /* "lineage & sources" — the reference apparatus (thinkers / readings / relations)
+     folded behind one quiet disclosure so the drawer ends calmly at the gloss. */
+  .dr-more{margin-top:6px;}
+  .dr-more>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:8px;
+    padding:12px 0 2px;color:var(--ink);font-size:10px;letter-spacing:0.2em;text-transform:uppercase;
+    border-top:1px solid var(--rule);transition:color .15s;}
+  .dr-more>summary::-webkit-details-marker{display:none;}
+  .dr-more>summary:hover{color:var(--parchment-dim);}
+  .dr-more>summary .dr-more-x{margin-left:auto;width:7px;height:7px;border-right:1.5px solid currentColor;
+    border-bottom:1.5px solid currentColor;transform:rotate(45deg);transition:transform .2s;opacity:.7;}
+  .dr-more[open]>summary .dr-more-x{transform:rotate(-135deg);}
+  .dr-more.bare>summary{display:none;}
+  .dr-more.bare{margin-top:0;}
   #dr-foil{margin:0 0 4px;font-size:13px;color:var(--parchment-dim);}
   #dr-foil .lab{color:var(--oppose);font-weight:500;}
   #dr-foil a{color:var(--parchment);border-bottom:1px dotted var(--muted);cursor:pointer;text-decoration:none;}
@@ -666,22 +675,15 @@
     color:var(--parchment-dim);max-width:340px;line-height:1.4;}
   #empty-state button{pointer-events:auto;}
 
-  /* contested / minority-view badge in dossier */
-  #dr-contested{display:flex;gap:9px;align-items:flex-start;margin:0 0 16px;padding:9px 12px;
-    border:1px solid rgba(199,90,69,0.4);border-left-width:3px;border-radius:3px;
-    background:rgba(199,90,69,0.06);font-size:11.5px;line-height:1.45;color:var(--parchment-dim);}
-  #dr-contested[hidden]{display:none;}
-  #dr-contested .tag{flex:none;font-size:9px;letter-spacing:0.14em;text-transform:uppercase;
-    color:var(--oppose);font-weight:600;margin-top:1px;}
-  /* practice / exercise badge — a discipline you DO, not only a thesis you hold.
-     Its own dusty-verdigris ink: gold is reserved for live-rivals status, vermilion
-     for contested, affirm/echo for relations — so this stands clear of all of them. */
-  #dr-practice{display:flex;gap:9px;align-items:flex-start;margin:0 0 16px;padding:9px 12px;
-    border:1px solid rgba(150,168,138,0.42);border-left-width:3px;border-radius:3px;
-    background:rgba(150,168,138,0.07);font-size:11.5px;line-height:1.45;color:var(--parchment-dim);}
-  #dr-practice[hidden]{display:none;}
-  #dr-practice .tag{flex:none;font-size:9px;letter-spacing:0.14em;text-transform:uppercase;
-    color:#aac08f;font-weight:600;margin-top:1px;}
+  /* contested / practice — quiet inline pills; the full gloss lives in the tooltip
+     (cursor:help). Each keeps its own ink — vermilion = contested, dusty-verdigris =
+     practice — and neither borrows gold, which is reserved for live-rivals status. */
+  #dr-contested,#dr-practice{display:inline-flex;align-items:center;margin:0 8px 16px 0;
+    padding:3px 11px;border:1px solid;border-radius:20px;font-size:9px;letter-spacing:0.14em;
+    text-transform:uppercase;font-weight:600;cursor:help;vertical-align:middle;}
+  #dr-contested[hidden],#dr-practice[hidden]{display:none;}
+  #dr-contested{color:var(--oppose);border-color:rgba(199,90,69,0.45);background:rgba(199,90,69,0.07);}
+  #dr-practice{color:#aac08f;border-color:rgba(150,168,138,0.45);background:rgba(150,168,138,0.08);}
 
   /* "How to read this" panel */
   #about-overlay{position:fixed;inset:0;z-index:60;background:rgba(4,7,14,0.78);
@@ -1160,22 +1162,24 @@
     <aside id="drawer" role="dialog" aria-label="Idea details" aria-modal="false">
       <div class="dr-head">
         <button id="drclose" aria-label="Close details">×</button>
+        <button type="button" class="dr-mark" id="dr-status" aria-pressed="false"></button>
         <div class="dr-figure" id="dr-figure"></div>
         <div class="dr-q" id="dr-q"></div>
-        <div class="dr-qstatus" id="dr-qstatus"></div>
         <h2 id="dr-name"></h2>
         <div class="dr-meta" id="dr-meta"></div>
-        <button type="button" class="dr-mark" id="dr-status" aria-pressed="false"></button>
       </div>
       <div class="dr-body">
         <div class="dr-passage" id="dr-passage" hidden></div>
         <p class="dr-gloss" id="dr-gloss"></p>
-        <div id="dr-contested" hidden><span class="tag">Contested</span><span>A minority or actively disputed position in its field — presented here among genuine rivals, not as consensus.</span></div>
-        <div id="dr-practice" hidden><span class="tag" data-i18n="Practice">Practice</span><span data-i18n="A discipline you perform, not only a thesis you hold — here the teaching is the exercise itself.">A discipline you perform, not only a thesis you hold — here the teaching is the exercise itself.</span></div>
+        <div id="dr-contested" hidden><span>Contested</span></div>
+        <div id="dr-practice" hidden><span data-i18n="Practice">Practice</span></div>
         <div id="dr-foil"></div>
-        <div id="dr-thinkers"></div>
-        <div id="dr-readings"></div>
-        <div id="dr-rels"></div>
+        <details class="dr-more" id="dr-more">
+          <summary><span data-i18n="Lineage &amp; sources">Lineage &amp; sources</span><span class="dr-more-x" aria-hidden="true"></span></summary>
+          <div id="dr-thinkers"></div>
+          <div id="dr-readings"></div>
+          <div id="dr-rels"></div>
+        </details>
       </div>
     </aside>
 
@@ -8736,6 +8740,10 @@
       "zh": "僅顯示已標記",
       "ru": "Только отмеченные"
     },
+    "Lineage & sources": {
+      "zh": "源流與典籍",
+      "ru": "Истоки и источники"
+    },
     "marked": {
       "zh": "已標記",
       "ru": "отмечено"
@@ -12372,18 +12380,24 @@
     const c=cById[id]; if(!c) return;
     const q=qById[c.q];
     document.getElementById('dr-figure').innerHTML='';
-    document.getElementById('dr-q').innerHTML=`<span class="dot" style="background:${q.hue}"></span>${esc0(qLabel(q))}`;
-    const dqs=document.getElementById('dr-qstatus');
-    if(dqs){ const st=STATES[q.status]||{};
-      dqs.dataset.state=q.status||'';
-      dqs.title=stDefn(q.status)+(q.statusWhy?' — '+qWhy(q):'');
-      dqs.innerHTML=q.status?`<span class="qs-mark" aria-hidden="true">${st.glyph||''}</span>`+
-        `<span class="qs-label">${esc0(stLabel(q.status))}</span>`:''; }
+    // one kicker line: question · epistemic status (was three stacked metadata strips)
+    { const st=STATES[q.status]||{};
+      const stat=q.status?`<span class="qsep" aria-hidden="true">·</span>`+
+        `<span class="qstat" data-state="${q.status}">`+
+        `<span class="qs-mark" aria-hidden="true">${st.glyph||''}</span>`+
+        `<span class="qs-label">${esc0(stLabel(q.status))}</span></span>`:'';
+      const dq=document.getElementById('dr-q');
+      dq.innerHTML=`<span class="dot" style="background:${q.hue}"></span>`+
+        `<span>${esc0(qLabel(q))}</span>`+stat;
+      if(q.status){ const qs=dq.querySelector('.qstat');
+        if(qs) qs.title=stDefn(q.status)+(q.statusWhy?' — '+qWhy(q):''); } }
     document.getElementById('dr-name').textContent=cName(c);
     document.getElementById('dr-meta').textContent=`${cTrad(c)} · ${eraTxt(c.era)}`;
     document.getElementById('dr-gloss').textContent=cGloss(c);
-    const cbadge=document.getElementById('dr-contested'); if(cbadge) cbadge.toggleAttribute('hidden',!c.contested);
-    const pbadge=document.getElementById('dr-practice'); if(pbadge) pbadge.toggleAttribute('hidden',!c.practice);
+    const cbadge=document.getElementById('dr-contested'); if(cbadge){ cbadge.toggleAttribute('hidden',!c.contested);
+      cbadge.title='A minority or actively disputed position in its field — presented here among genuine rivals, not as consensus.'; }
+    const pbadge=document.getElementById('dr-practice'); if(pbadge){ pbadge.toggleAttribute('hidden',!c.practice);
+      pbadge.title=T('A discipline you perform, not only a thesis you hold — here the teaching is the exercise itself.'); }
     const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
     // Resonant passage — the payload, rendered first and only where one exists
     // (gated; no empty slot). Provenance colophon + a quiet, non-affiliate book
@@ -12451,6 +12465,7 @@
         wrap.appendChild(it);
       });
     });
+    { const dm=document.getElementById('dr-more'); if(dm){ dm.classList.remove('bare'); dm.open=false; } }
     drawer.classList.add('open');
     renderFoil(c); renderMark(id); setHash('/'+modeSlug(currentMode)+'/idea/'+encodeURIComponent(id));
     selected=id;
@@ -13101,7 +13116,8 @@
     const n=bookmarks.size; el.innerHTML=n?('<b>'+n+'</b> '+esc0(T('marked'))):''; el.style.display=n?'':'none'; }
   function renderMark(id){ const w=document.getElementById('dr-status'); if(!w) return; const on=isMarked(id);
     w.className='dr-mark'+(on?' on':''); w.setAttribute('aria-pressed',on?'true':'false');
-    w.innerHTML='<span class="seal" aria-hidden="true">'+sealMarkup()+'</span><span>'+esc0(T(on?'Marked to return':'Mark to return'))+'</span>';
+    const lbl=T(on?'Marked to return':'Mark to return'); w.title=lbl; w.setAttribute('aria-label',lbl);
+    w.innerHTML='<span class="seal" aria-hidden="true">'+sealMarkup()+'</span>';
     w.onclick=()=>toggleMark(id); }
   function renderFoil(c){ const w=document.getElementById('dr-foil'); if(!w) return; w.innerHTML='';
     const foes=(adj.get(c.id)||[]).filter(e=>e.type==='rejects').map(e=>e.other);
@@ -13735,6 +13751,8 @@
         wrap.appendChild(it); });
     });
     document.getElementById('dr-foil').innerHTML=''; document.getElementById('dr-status').innerHTML='';
+    // a thinker's "ideas they shaped" IS the payload — show it open, with no toggle chrome
+    { const dm=document.getElementById('dr-more'); if(dm){ dm.classList.add('bare'); dm.open=true; } }
     const cbadge=document.getElementById('dr-contested'); if(cbadge) cbadge.setAttribute('hidden','');
     const pbadge=document.getElementById('dr-practice'); if(pbadge) pbadge.setAttribute('hidden','');
     drawer.classList.add('open'); selected=null; conHighlight(id);

@@ -240,11 +240,11 @@ assert(locCard?.classList.contains('sel'), 'clicking an idea search result locat
 const contestedId=D.concepts.find(c=>c.contested)?.id;
 const plainId=D.concepts.find(c=>!c.contested)?.id;
 function openByName(n){ const card=$$('#m-questions .card .c-id').find(e=>e.textContent===n); click(card?.closest('.card')); }
-// Assert computed display, not just the attribute: #dr-contested{display:flex}
+// Assert computed display, not just the attribute: #dr-contested{display:inline-flex}
 // outranks UA [hidden]{display:none} by specificity, so the attribute alone
 // would leave the badge on for every concept (regression guard).
 if(contestedId){ openByName(contestedId); assert(!$('#dr-contested').hasAttribute('hidden'), 'contested concept shows the Contested badge');
-  eq(window.getComputedStyle($('#dr-contested')).display,'flex','contested badge is display:flex (visible)'); }
+  eq(window.getComputedStyle($('#dr-contested')).display!=='none',true,'contested badge is visible (inline pill)'); }
 if(plainId){ openByName(plainId); assert($('#dr-contested').hasAttribute('hidden'), 'non-contested concept hides the badge');
   eq(window.getComputedStyle($('#dr-contested')).display,'none','non-contested badge is display:none (truly hidden)'); }
 
