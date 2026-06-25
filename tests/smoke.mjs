@@ -192,7 +192,7 @@ assert(!('journeys' in D), 'journeys data is no longer baked into the build');
 click($('#filt-btn'));
 assert(!$('#filters').hasAttribute('hidden'), 'filter panel opens');
 eq($$('#flt-q .flt-row').length, D.questions.length, 'one filter row per question');
-assert($$('#flt-read .flt-pill').length===3, 'three reading-status pills');
+assert($$('#flt-read .flt-pill').length===1, 'one bookmark filter pill');
 assert($$('#flt-region .flt-pill').length>0, 'region pills present');
 click($('.switch button[data-mode="questions"]'));
 const totalCards=$$('#m-questions .card').length;
@@ -211,18 +211,19 @@ assert(!$('#empty-state').hasAttribute('hidden'), 'empty-state appears when noth
 click($('#empty-reset'));
 assert($('#empty-state').hasAttribute('hidden'), 'reset clears the empty-state');
 
-// READING STATUS + progress + persistence
+// BOOKMARK + count chip + persistence
 click($$('#m-questions .card')[0]);
 assert(($('#dr-name').textContent||'').length>0, 'drawer shows a concept name');
-click($$('#dr-status button').find(b=>b.dataset.s==='read'));
-assert(/\d+\s*\/\s*\d+/.test($('#progress').textContent), 'progress chip shows N / M');
-assert(!!window.localStorage.getItem('aoi.reading.v1'), 'reading status persisted to localStorage');
-// renderStatus re-renders the buttons, so re-query for the now-active one.
-assert($$('#dr-status button').find(b=>b.dataset.s==='read')?.classList.contains('on'), 'read button shows active state after selection');
-// the card itself reflects status via data-rs (drives the dim+check / gold-dot CSS).
-eq($$('#m-questions .card')[0].dataset.rs, 'read', 'card carries data-rs="read" after marking read');
-click($$('#dr-status button').find(b=>b.dataset.s==='unread'));
-eq($$('#m-questions .card')[0].dataset.rs, 'unread', 'card data-rs returns to "unread"');
+click($('#dr-status')); // single bookmark toggle button
+assert(/\d+/.test($('#progress').textContent), 'count chip shows a number after marking');
+assert(!!window.localStorage.getItem('aoi.bookmarks.v1'), 'bookmarks persisted to localStorage');
+// renderMark re-renders the button, so it carries the active class after marking.
+assert($('#dr-status').classList.contains('on'), 'bookmark button shows active state after marking');
+// the card itself reflects the mark via data-mk (drives the corner-seal CSS) and
+// survives crossHighlight's className reset because it lives on the dataset.
+eq($$('#m-questions .card')[0].dataset.mk, '1', 'card carries data-mk="1" after bookmarking');
+click($('#dr-status')); // toggle off
+assert(!('mk' in $$('#m-questions .card')[0].dataset), 'card data-mk removed after un-bookmarking');
 
 // SEARCH "locate in all tabs": clicking an idea result locates it in the active tab (no forced switch)
 click($('.switch button[data-mode="questions"]'));

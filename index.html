@@ -620,25 +620,35 @@
   #tl-svg .tl-node.lab text{opacity:1;}
 
 
-  /* ---------- drawer: foil + reading status ---------- */
+  /* ---------- drawer: foil + bookmark ---------- */
   .dr-qstatus{display:flex;align-items:baseline;gap:6px;margin-top:6px;font-size:11px;cursor:help;}
   .dr-qstatus:empty{display:none;}
-  .dr-status{display:flex;gap:6px;margin-top:12px;}
-  .dr-status button{flex:1;font-size:10px;letter-spacing:.06em;text-transform:uppercase;
-    padding:6px 4px;border:1px solid var(--rule);background:transparent;color:var(--parchment-dim);
+  /* "mark to return" — a single struck seal, not a reading tracker */
+  .dr-mark{display:flex;align-items:center;gap:9px;width:100%;margin-top:12px;font-family:inherit;
+    font-size:10px;letter-spacing:.08em;text-transform:uppercase;text-align:left;
+    padding:8px 11px;border:1px solid var(--rule);background:transparent;color:var(--parchment-dim);
     border-radius:3px;cursor:pointer;transition:all .15s;}
-  .dr-status button:hover{border-color:var(--gold);color:var(--parchment);}
-  .dr-status button.on{background:var(--gold);color:#1a1205;border-color:var(--gold);font-weight:500;}
+  .dr-mark:hover{border-color:var(--gold);color:var(--parchment);}
+  .dr-mark .seal{width:16px;height:16px;flex:none;}
+  .dr-mark .seal svg{width:100%;height:100%;display:block;}
+  .dr-mark .seal path,.dr-mark .seal circle{fill:none;stroke:var(--rule);stroke-width:.9;}
+  .dr-mark .seal .seal-pin{fill:var(--rule);stroke:none;}
+  .dr-mark.on{border-color:var(--gold);color:var(--gold);}
+  .dr-mark.on .seal path,.dr-mark.on .seal circle{stroke:var(--gold);}
+  .dr-mark.on .seal .seal-pin{fill:var(--gold);}
   #dr-foil{margin:0 0 4px;font-size:13px;color:var(--parchment-dim);}
   #dr-foil .lab{color:var(--oppose);font-weight:500;}
   #dr-foil a{color:var(--parchment);border-bottom:1px dotted var(--muted);cursor:pointer;text-decoration:none;}
   #dr-foil a:hover{color:var(--gold);}
 
-  /* reading status on cards */
-  .card[data-rs="read"]{opacity:.5;}
-  .card[data-rs="read"] .c-id::after{content:" ✓";color:var(--ink);font-weight:600;}
-  .card[data-rs="reading"] .c-id::after{content:" ●";color:var(--ink);font-size:9px;vertical-align:middle;}
-  .card.sel[data-rs="read"]{opacity:1;}
+  /* the bookmark — the atlas's own seal struck on ideas you mark to return to;
+     persisted via [data-mk] so it survives card className resets (cross-highlight) */
+  .c-seal{position:absolute;bottom:7px;right:8px;width:15px;height:15px;opacity:0;
+    pointer-events:none;transform:scale(.6);transition:opacity .2s ease,transform .2s ease;}
+  .c-seal svg{width:100%;height:100%;display:block;}
+  .c-seal path,.c-seal circle{fill:none;stroke:var(--gold);stroke-width:.9;}
+  .c-seal .seal-pin{fill:var(--gold);stroke:none;}
+  .card[data-mk] .c-seal{opacity:.9;transform:scale(1);}
 
   /* keyboard focus rings on interactive SVG nodes */
   .tl-node:focus,.cnode:focus,
@@ -1003,7 +1013,7 @@
     </div>
     <button id="filt-btn" class="hbtn" aria-expanded="false" aria-controls="filters" data-i18n="Filters">Filters</button>
     <button id="about-btn" class="hbtn" aria-haspopup="dialog" data-i18n="How to read this">How to read this</button>
-    <div id="progress" class="hchip" title="Concepts marked read"></div>
+    <div id="progress" class="hchip" title="Ideas you've marked to return to"></div>
     <input id="search2" type="text" placeholder="Find a concept…" data-i18n-attr="placeholder" data-i18n="Find a concept…" autocomplete="off" aria-label="Search ideas and thinkers">
     <div id="res2"></div>
   </header>
@@ -1088,7 +1098,7 @@
     <aside id="filters" aria-label="Filters" hidden>
       <div class="flt-head"><span data-i18n="Filters">Filters</span><button id="flt-close" aria-label="Close filters">×</button></div>
       <div class="flt-body">
-        <div class="flt-sec" data-i18n="Reading status">Reading status</div>
+        <div class="flt-sec" data-i18n="Bookmarks">Bookmarks</div>
         <div id="flt-read" class="flt-pills"></div>
         <div class="flt-sec" data-i18n="Era">Era</div>
         <div class="flt-era">
@@ -1155,7 +1165,7 @@
         <div class="dr-qstatus" id="dr-qstatus"></div>
         <h2 id="dr-name"></h2>
         <div class="dr-meta" id="dr-meta"></div>
-        <div class="dr-status" id="dr-status"></div>
+        <button type="button" class="dr-mark" id="dr-status" aria-pressed="false"></button>
       </div>
       <div class="dr-body">
         <div class="dr-passage" id="dr-passage" hidden></div>
@@ -8582,9 +8592,9 @@
       "zh": "尋找觀念…",
       "ru": "Найти понятие…"
     },
-    "Reading status": {
-      "zh": "閱讀狀態",
-      "ru": "Статус чтения"
+    "Bookmarks": {
+      "zh": "書籤",
+      "ru": "Закладки"
     },
     "Era": {
       "zh": "年代",
@@ -8714,17 +8724,37 @@
       "zh": "反對：",
       "ru": "Спорит с:"
     },
-    "unread": {
-      "zh": "未讀",
-      "ru": "не прочитано"
+    "Mark to return": {
+      "zh": "標記以重溫",
+      "ru": "Отметить на потом"
     },
-    "reading": {
-      "zh": "閱讀中",
-      "ru": "читается"
+    "Marked to return": {
+      "zh": "已標記重溫",
+      "ru": "Отмечено"
     },
-    "read": {
-      "zh": "已讀",
-      "ru": "прочитано"
+    "Only my marked": {
+      "zh": "僅顯示已標記",
+      "ru": "Только отмеченные"
+    },
+    "marked": {
+      "zh": "已標記",
+      "ru": "отмечено"
+    },
+    "Read the whole thing": {
+      "zh": "閱讀全文",
+      "ru": "Читать полностью"
+    },
+    "rival reading": {
+      "zh": "對立解讀",
+      "ru": "Соперничающее прочтение"
+    },
+    "still open since": {
+      "zh": "至今未決，始於",
+      "ru": "не решён с"
+    },
+    "Each ridge shows when a question was actually being asked — floored to where this atlas holds ideas, never an even spread to now. Time is compressed so recent centuries stay legible; colour marks where the thinking stands today. Click a lane to surface its ideas; a thin ridge can mean real quiet or a gap in this atlas.": {
+      "zh": "每道山脊顯示某個問題真正被提問的時期——以本圖譜收錄思想之處為底線，而非平均鋪展至今。時間經過壓縮，使晚近世紀仍清晰可辨；色彩標示思考今日所處的位置。點擊某條軌道以浮現其思想；山脊纖細既可能是真正的沉寂，也可能是本圖譜的空缺。",
+      "ru": "Каждый гребень показывает, когда вопрос действительно ставился — с опорой на то, где этот атлас хранит идеи, а не равномерно вплоть до сегодняшнего дня. Время сжато, чтобы недавние века оставались читаемыми; цвет отмечает, где мысль стоит сегодня. Нажмите на дорожку, чтобы раскрыть её идеи; тонкий гребень может означать настоящее затишье или пробел в этом атласе."
     },
     "West": {
       "zh": "西方",
@@ -12422,7 +12452,7 @@
       });
     });
     drawer.classList.add('open');
-    renderFoil(c); renderStatus(id); setHash('/'+modeSlug(currentMode)+'/idea/'+encodeURIComponent(id));
+    renderFoil(c); renderMark(id); setHash('/'+modeSlug(currentMode)+'/idea/'+encodeURIComponent(id));
     selected=id;
     crossHighlight(id);
   }
@@ -12469,7 +12499,8 @@
       el.innerHTML=`<div class="c-glyph" aria-hidden="true"></div>`+
         `<div class="c-id">${esc0(cName(c))}</div>`+
         `<div class="c-trad">${esc0(cTrad(c))} · ${eraTxt(c.era)}</div>`+
-        `<div class="c-gloss">${esc0(cGloss(c))}</div>`;
+        `<div class="c-gloss">${esc0(cGloss(c))}</div>`+
+        `<div class="c-seal" aria-hidden="true">${sealMarkup()}</div>`;
       el.onclick=(e)=>{ e.stopPropagation(); openConcept(c.id); };
       cards.appendChild(el); cardEls[c.id]=el;
     });
@@ -13053,19 +13084,25 @@
     if(lnodeG) lnodeG.selectAll('g.lnode text').text(d=>cName(d.c));
     if(lensFocus) narrate(cById[lensFocus],null); }
 
-  // ========== reading status (persisted) ==========
-  const RKEY='aoi.reading.v1';
-  let readStatus={}; try{ const r=JSON.parse(localStorage.getItem(RKEY)); readStatus=(r&&typeof r==='object'&&!Array.isArray(r))?r:{}; }catch(e){ readStatus={}; }
-  function statusOf(id){ return readStatus[id]||'unread'; }
-  Object.keys(cardEls).forEach(id=>{ cardEls[id].dataset.rs=statusOf(id); });
-  function saveRead(){ try{ localStorage.setItem(RKEY,JSON.stringify(readStatus)); }catch(e){} }
-  function setStatus(id,st){ if(st==='unread') delete readStatus[id]; else readStatus[id]=st;
-    saveRead(); renderStatus(id); if(cardEls[id]) cardEls[id].dataset.rs=statusOf(id); updateProgress(); applyFilters(); }
-  function updateProgress(){ const n=D.concepts.filter(c=>statusOf(c.id)==='read').length;
-    const el=document.getElementById('progress'); if(el) el.innerHTML='<b>'+n+'</b> / '+D.concepts.length+' read'; }
-  function renderStatus(id){ const w=document.getElementById('dr-status'); if(!w) return; const cur=statusOf(id);
-    w.innerHTML=['unread','reading','read'].map(s=>'<button data-s="'+s+'"'+(s===cur?' class="on"':'')+'>'+esc0(T(s))+'</button>').join('');
-    w.querySelectorAll('button').forEach(b=>b.onclick=()=>setStatus(id,b.dataset.s)); }
+  // ========== bookmarks ("mark to return", persisted) ==========
+  const BKEY='aoi.bookmarks.v1';
+  let bookmarks; try{ const r=JSON.parse(localStorage.getItem(BKEY)); bookmarks=new Set(Array.isArray(r)?r:[]); }catch(e){ bookmarks=new Set(); }
+  // migrate the retired reading-tracker: any concept once touched (read/reading) becomes a bookmark
+  try{ const old=JSON.parse(localStorage.getItem('aoi.reading.v1'));
+    if(old&&typeof old==='object'&&!Array.isArray(old)){ Object.keys(old).forEach(id=>bookmarks.add(id));
+      localStorage.removeItem('aoi.reading.v1'); saveMarks(); } }catch(e){}
+  function isMarked(id){ return bookmarks.has(id); }
+  function saveMarks(){ try{ localStorage.setItem(BKEY,JSON.stringify([...bookmarks])); }catch(e){} }
+  function applyMark(id){ const el=cardEls[id]; if(!el) return; if(isMarked(id)) el.dataset.mk='1'; else delete el.dataset.mk; }
+  Object.keys(cardEls).forEach(applyMark);
+  function toggleMark(id){ if(bookmarks.has(id)) bookmarks.delete(id); else bookmarks.add(id);
+    saveMarks(); applyMark(id); renderMark(id); updateMarkChip(); applyFilters(); }
+  function updateMarkChip(){ const el=document.getElementById('progress'); if(!el) return;
+    const n=bookmarks.size; el.innerHTML=n?('<b>'+n+'</b> '+esc0(T('marked'))):''; el.style.display=n?'':'none'; }
+  function renderMark(id){ const w=document.getElementById('dr-status'); if(!w) return; const on=isMarked(id);
+    w.className='dr-mark'+(on?' on':''); w.setAttribute('aria-pressed',on?'true':'false');
+    w.innerHTML='<span class="seal" aria-hidden="true">'+sealMarkup()+'</span><span>'+esc0(T(on?'Marked to return':'Mark to return'))+'</span>';
+    w.onclick=()=>toggleMark(id); }
   function renderFoil(c){ const w=document.getElementById('dr-foil'); if(!w) return; w.innerHTML='';
     const foes=(adj.get(c.id)||[]).filter(e=>e.type==='rejects').map(e=>e.other);
     if(!foes.length) return;
@@ -13084,9 +13121,9 @@
     return 'West'; }
   const ERAS=D.concepts.map(c=>c.era), ERA_MIN=Math.min(...ERAS), ERA_MAX=Math.max(...ERAS);
   const F={questions:new Set(D.questions.map(q=>q.id)), regions:new Set(['West','Psyche','East','Indigenous']),
-    read:new Set(['unread','reading','read']), eraLo:ERA_MIN, eraHi:ERA_MAX};
-  function passes(c){ return c&&F.questions.has(c.q)&&F.regions.has(regionOf(c))&&F.read.has(statusOf(c.id))&&c.era>=F.eraLo&&c.era<=F.eraHi; }
-  function filterActive(){ return F.questions.size<D.questions.length||F.regions.size<4||F.read.size<3||F.eraLo>ERA_MIN||F.eraHi<ERA_MAX; }
+    marked:false, eraLo:ERA_MIN, eraHi:ERA_MAX};
+  function passes(c){ return c&&F.questions.has(c.q)&&F.regions.has(regionOf(c))&&(!F.marked||isMarked(c.id))&&c.era>=F.eraLo&&c.era<=F.eraHi; }
+  function filterActive(){ return F.questions.size<D.questions.length||F.regions.size<4||F.marked||F.eraLo>ERA_MIN||F.eraHi<ERA_MAX; }
   function applyFilters(){
     D.questions.forEach(q=>{ let vis=0;
       D.concepts.filter(c=>c.q===q.id).forEach(c=>{ const el=cardEls[c.id]; if(!el) return;
@@ -13104,9 +13141,8 @@
     filtBtn.setAttribute('aria-expanded',open?'true':'false'); }
   function buildFilterRail(){
     const rd=document.getElementById('flt-read');
-    rd.innerHTML=['unread','reading','read'].map(s=>'<span class="flt-pill on" data-s="'+s+'">'+esc0(T(s))+'</span>').join('');
-    rd.querySelectorAll('.flt-pill').forEach(p=>p.onclick=()=>{ const s=p.dataset.s;
-      if(F.read.has(s))F.read.delete(s); else F.read.add(s); p.classList.toggle('on',F.read.has(s)); applyFilters(); });
+    rd.innerHTML='<span class="flt-pill'+(F.marked?' on':'')+'" data-mk="1">'+esc0(T('Only my marked'))+'</span>';
+    rd.querySelector('.flt-pill').onclick=function(){ F.marked=!F.marked; this.classList.toggle('on',F.marked); applyFilters(); };
     const rg=document.getElementById('flt-region');
     rg.innerHTML=['West','Psyche','East','Indigenous'].map(s=>'<span class="flt-pill on" data-s="'+s+'">'+esc0(T(s))+'</span>').join('');
     rg.querySelectorAll('.flt-pill').forEach(p=>p.onclick=()=>{ const s=p.dataset.s;
@@ -13122,9 +13158,9 @@
     function onEra(){ let a=+lo.value,b=+hi.value; if(!Number.isFinite(a))a=ERA_MIN; if(!Number.isFinite(b))b=ERA_MAX; if(a>b){const t=a;a=b;b=t;} F.eraLo=a; F.eraHi=b; eraLabel(); applyFilters(); }
     lo.oninput=onEra; hi.oninput=onEra; eraLabel();
     document.getElementById('flt-reset').onclick=()=>{ F.questions=new Set(D.questions.map(q=>q.id));
-      F.regions=new Set(['West','Psyche','East','Indigenous']); F.read=new Set(['unread','reading','read']);
+      F.regions=new Set(['West','Psyche','East','Indigenous']); F.marked=false;
       F.eraLo=ERA_MIN; F.eraHi=ERA_MAX; lo.value=ERA_MIN; hi.value=ERA_MAX; eraLabel();
-      rd.querySelectorAll('.flt-pill').forEach(p=>p.classList.add('on'));
+      rd.querySelectorAll('.flt-pill').forEach(p=>p.classList.remove('on'));
       rg.querySelectorAll('.flt-pill').forEach(p=>p.classList.add('on'));
       ql.querySelectorAll('.flt-row').forEach(p=>p.classList.remove('off')); applyFilters(); }; }
   filtBtn.onclick=()=>toggleFilters();
@@ -13450,7 +13486,8 @@
       const tr=el.querySelector('.c-trad'); if(tr) tr.textContent=cTrad(c)+' · '+eraTxt(c.era);
       const gl=el.querySelector('.c-gloss'); if(gl) gl.textContent=cGloss(c); });
     // Filter rail: relabel pills/rows in place (preserve on/off state)
-    document.querySelectorAll('#flt-read .flt-pill, #flt-region .flt-pill').forEach(p=>{ p.textContent=T(p.dataset.s); });
+    document.querySelectorAll('#flt-region .flt-pill').forEach(p=>{ p.textContent=T(p.dataset.s); });
+    { const mp=document.querySelector('#flt-read .flt-pill'); if(mp) mp.textContent=T('Only my marked'); }
     document.querySelectorAll('#flt-q .flt-row').forEach(r=>{ const nm=r.querySelector('.nm'); if(nm){ const q=qById[r.dataset.q]; if(q) nm.textContent=qLabel(q); } });
     // dynamic surfaces
     document.getElementById('caption').innerHTML=caption(currentMode);
@@ -13460,7 +13497,7 @@
   document.querySelectorAll('#lang-switch button').forEach(b=>b.onclick=()=>applyLang(b.dataset.lang));
 
   // init
-  updateProgress();
+  updateMarkChip();
   document.getElementById('brand-mark').innerHTML=sealMarkup();
   const hadHash=parseHash();
   if(!hadHash) setMode('questions');

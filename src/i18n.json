@@ -32,9 +32,9 @@
       "zh": "尋找觀念…",
       "ru": "Найти понятие…"
     },
-    "Reading status": {
-      "zh": "閱讀狀態",
-      "ru": "Статус чтения"
+    "Bookmarks": {
+      "zh": "書籤",
+      "ru": "Закладки"
     },
     "Era": {
       "zh": "年代",
@@ -164,17 +164,37 @@
       "zh": "反對：",
       "ru": "Спорит с:"
     },
-    "unread": {
-      "zh": "未讀",
-      "ru": "не прочитано"
+    "Mark to return": {
+      "zh": "標記以重溫",
+      "ru": "Отметить на потом"
     },
-    "reading": {
-      "zh": "閱讀中",
-      "ru": "читается"
+    "Marked to return": {
+      "zh": "已標記重溫",
+      "ru": "Отмечено"
     },
-    "read": {
-      "zh": "已讀",
-      "ru": "прочитано"
+    "Only my marked": {
+      "zh": "僅顯示已標記",
+      "ru": "Только отмеченные"
+    },
+    "marked": {
+      "zh": "已標記",
+      "ru": "отмечено"
+    },
+    "Read the whole thing": {
+      "zh": "閱讀全文",
+      "ru": "Читать полностью"
+    },
+    "rival reading": {
+      "zh": "對立解讀",
+      "ru": "Соперничающее прочтение"
+    },
+    "still open since": {
+      "zh": "至今未決，始於",
+      "ru": "не решён с"
+    },
+    "Each ridge shows when a question was actually being asked — floored to where this atlas holds ideas, never an even spread to now. Time is compressed so recent centuries stay legible; colour marks where the thinking stands today. Click a lane to surface its ideas; a thin ridge can mean real quiet or a gap in this atlas.": {
+      "zh": "每道山脊顯示某個問題真正被提問的時期——以本圖譜收錄思想之處為底線，而非平均鋪展至今。時間經過壓縮，使晚近世紀仍清晰可辨；色彩標示思考今日所處的位置。點擊某條軌道以浮現其思想；山脊纖細既可能是真正的沉寂，也可能是本圖譜的空缺。",
+      "ru": "Каждый гребень показывает, когда вопрос действительно ставился — с опорой на то, где этот атлас хранит идеи, а не равномерно вплоть до сегодняшнего дня. Время сжато, чтобы недавние века оставались читаемыми; цвет отмечает, где мысль стоит сегодня. Нажмите на дорожку, чтобы раскрыть её идеи; тонкий гребень может означать настоящее затишье или пробел в этом атласе."
     },
     "West": {
       "zh": "西方",
