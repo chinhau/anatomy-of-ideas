@@ -47,24 +47,26 @@ assert(keys.size>50, `collected a sane number of UI strings (${keys.size})`);
 assert(missing.length===0, `every UI string has zh + ru — ${missing.length} gap(s):\n   `+missing.slice(0,25).join('\n   '));
 
 // ───────────────────────── 4. counts in sync ─────────────────────────
-// The landing gate + <meta> tags hard-code anchor numbers. They must equal the
-// dataset, or the first thing a visitor reads is a lie.
+// The landing front door + the atlas <meta> tags hard-code anchor numbers. They
+// must equal the dataset, or the first thing a visitor reads is a lie. The
+// "Begin Wondering" gate is gone; the counts now live in index.html's hero.
+const landing=fs.readFileSync('index.html','utf8');
 const conceptCount=ideas.concepts.length;
 const qCount=ideas.questions.length;
 const atlasCount=(atlas.nodes||[]).length;
 const eras=ideas.concepts.map(c=>c.era).filter(e=>typeof e==='number');
 const minEra=Math.min(...eras), maxEra=Math.max(...eras);
-const absMin=Math.abs(minEra), years=maxEra-minEra;
-const yearsComma=years.toLocaleString('en-US');
+const years=maxEra-minEra;
 
 const between=(s,a,b)=>{ const i=s.indexOf(a); if(i<0) return ''; const j=s.indexOf(b,i+a.length); return j<0?'':s.slice(i,j); };
 const metaDesc=(html.match(/name="description"\s+content="([^"]*)"/)||[])[1]||'';
-const gateCount=between(html,'class="gate-count"','</div>');
+const counts=between(landing,'class="counts"','</div>');
 
-assert(new RegExp(`\\b${conceptCount}\\s+ideas\\b`).test(metaDesc), `meta description says "${conceptCount} ideas" (dataset count)`);
-assert(gateCount.includes(`>${qCount}</b>`), `gate shows ${qCount} questions (dataset count)`);
-assert(gateCount.includes(`>${atlasCount}</b>`), `gate shows ${atlasCount} thinkers (atlas node count)`);
-assert(gateCount.includes(`>${yearsComma}</b>`), `gate shows ${yearsComma} years (maxEra−minEra)`);
+assert(new RegExp(`\\b${conceptCount}\\s+ideas\\b`).test(metaDesc), `atlas meta description says "${conceptCount} ideas" (dataset count)`);
+assert(counts.includes(`>${qCount}</b>`), `landing shows ${qCount} questions (dataset count)`);
+assert(counts.includes(`>${conceptCount}</b>`), `landing shows ${conceptCount} ideas (dataset count)`);
+assert(counts.includes(`>${atlasCount}</b>`), `landing shows ${atlasCount} thinkers (atlas node count)`);
+assert(counts.includes(`>${years}</b>`), `landing shows ${years} years (maxEra−minEra)`);
 
 // ───────────────────────── 5. doc counts in sync ─────────────────────────
 // The living docs cite the idea count in prose, and no build step regenerates

@@ -908,92 +908,15 @@
     transition:transform .56s cubic-bezier(.5,.05,.2,1),opacity .56s ease,border-radius .56s ease;
     will-change:transform,opacity;}
 
-  /* ---------- threshold / landing hero ---------- */
-  #gate{position:fixed;inset:0;z-index:90;display:flex;align-items:center;justify-content:center;
-    text-align:center;padding:24px;overflow:auto;
-    background:radial-gradient(ellipse 80% 70% at 50% 38%,var(--void-2),var(--void) 72%);
-    clip-path:circle(150% at 50% 38%);
-    animation:gate-in .6s ease both;}
-  #gate[hidden]{display:none;}
-  /* Crossing the threshold: the gate irises shut into the seal — the seal IS the
-     door — with a circular clip-path centred on it; opacity trails the iris out. */
-  #gate.closing{clip-path:circle(0% at 50% 38%);opacity:0;
-    transition:clip-path .62s cubic-bezier(.7,0,.3,1),opacity .5s ease .08s;}
-  @keyframes gate-in{from{opacity:0}to{opacity:1}}
-  .gate-inner{max-width:560px;display:flex;flex-direction:column;align-items:center;}
-  .gate-seal{width:72px;height:72px;display:block;margin-bottom:22px;opacity:.9;
-    animation:gate-rise .8s ease both;}
-  .gate-seal svg{width:100%;height:100%;display:block;}
-  .gate-seal path,.gate-seal circle{fill:none;stroke:var(--gold);stroke-width:0.6;opacity:.8;}
-  .gate-seal .seal-rim{stroke-linecap:round;}
-  .gate-seal svg{filter:drop-shadow(0 0.6px 0 rgba(0,0,0,0.55));}
-  .gate-seal .seal-pin{fill:var(--gold);stroke:none;opacity:1;}
-  .gate-eyebrow{font-size:10.5px;letter-spacing:0.42em;text-transform:uppercase;
-    color:var(--gold);opacity:.82;animation:gate-rise .8s .06s ease both;}
-  /* Headline must escape the 560px .gate-inner corset, or a 58px line (~870px
-     wide) wraps to two rows on any desktop. width:max-content sizes it to one
-     line of its own content; max-width:90vw lets it balance-wrap only on the
-     narrowest phones where two lines are physically unavoidable. */
-  .gate-line{font-family:'Cinzel',serif;font-weight:600;font-size:clamp(26px,5.2vw,50px);
-    line-height:1.1;margin:16px 0 0;letter-spacing:0.06em;text-transform:uppercase;color:var(--parchment);
-    width:max-content;max-width:90vw;
-    text-wrap:balance;animation:gate-rise .8s .12s ease both;}
-  .gate-sub{font-family:'EB Garamond',serif;font-style:italic;font-size:clamp(15px,2.4vw,19px);
-    line-height:1.5;color:var(--parchment-dim);margin:18px 0 0;max-width:30em;
-    animation:gate-rise .8s .2s ease both;}
-  .gate-count{display:flex;gap:34px;margin:30px 0 0;animation:gate-rise .8s .28s ease both;}
-  .gate-count .gc{display:flex;flex-direction:column;align-items:center;gap:3px;}
-  .gate-count .gc b{font-family:'EB Garamond',serif;font-weight:600;font-size:26px;
-    color:var(--parchment);line-height:1;font-style:normal;}
-  .gate-count .gc i{font-size:10px;letter-spacing:0.16em;text-transform:uppercase;
-    color:var(--muted);font-style:normal;}
-  .gate-enter{margin:34px 0 0;background:var(--gold);color:#1a1205;border:none;border-radius:3px;
-    font-family:'Inter';font-size:13px;letter-spacing:0.12em;text-transform:uppercase;font-weight:500;
-    padding:13px 34px;cursor:pointer;transition:transform .15s ease,background .15s ease,box-shadow .15s ease;
-    animation:gate-rise .8s .42s ease both;}
-  .gate-enter:hover{background:#cfa84e;box-shadow:inset 0 0 0 1px rgba(26,18,5,0.35);}
-  .gate-enter:active{transform:translateY(1px);box-shadow:inset 0 1px 3px rgba(0,0,0,0.4);}
-  @keyframes gate-rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
-  /* The seal self-engraves on first paint (stroke-dashoffset draw-on), staggered
-     so the rosette resolves last; the centre pin presses in. Engraving logic,
-     not glow. Honoured only when motion is welcome. */
-  @media (prefers-reduced-motion:no-preference){
-    .gate-seal path,.gate-seal circle{stroke-dasharray:200;stroke-dashoffset:200;
-      animation:seal-draw 1.05s cubic-bezier(.6,0,.2,1) both;}
-    .gate-seal circle:nth-of-type(1){animation-delay:.05s}
-    .gate-seal path:nth-of-type(1){animation-delay:.2s}
-    .gate-seal path:nth-of-type(2){animation-delay:.34s}
-    .gate-seal circle:nth-of-type(2){animation-delay:.5s}
-    .gate-seal .seal-pin{stroke-dasharray:none;stroke-dashoffset:0;
-      transform-origin:center;animation:seal-pin .42s ease .72s both;}
-    /* "Unlatch" recoil the instant you press Begin Wondering. */
-    .gate-seal.unlatch{animation:seal-unlatch .22s ease both;}
-  }
-  @keyframes seal-draw{to{stroke-dashoffset:0}}
-  @keyframes seal-pin{from{opacity:0;transform:scale(.2)}to{opacity:1;transform:scale(1)}}
-  @keyframes seal-unlatch{30%{transform:rotate(-8deg) scale(1.04)}to{transform:none}}
+  /* ---------- first-run onboarding cue ---------- */
   /* One-time onboarding cue: a quiet glance that the first idea is openable. */
+  @keyframes gate-rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
   .q-first-hint{position:absolute;left:2px;top:calc(100% + 5px);white-space:nowrap;
     font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
     pointer-events:none;animation:gate-rise .5s ease both;}
-  @media (max-width:560px){.gate-count{gap:22px}.gate-count .gc b{font-size:24px}}
 </style>
 </head>
 <body>
-  <div id="gate" role="dialog" aria-modal="true" aria-labelledby="gate-line" hidden>
-    <div class="gate-inner">
-      <span class="gate-seal" aria-hidden="true"></span>
-      <div class="gate-eyebrow" data-i18n="An atlas of the great questions">An atlas of the great questions</div>
-      <h2 class="gate-line" id="gate-line" data-i18n="You're not the first to wonder">You're not the first to wonder</h2>
-      <p class="gate-sub" data-i18n="For some four thousand years, the same few questions keep returning. This is one map of them — drawn from a single vantage, and offered to argue with.">For some four thousand years, the same few questions keep returning. This is one map of them — drawn from a single vantage, and offered to argue with.</p>
-      <div class="gate-count">
-        <span class="gc"><b>11</b><i data-i18n="great questions">great questions</i></span>
-        <span class="gc"><b>425</b><i data-i18n="thinkers">thinkers</i></span>
-        <span class="gc"><b>4,399</b><i data-i18n="years">years</i></span>
-      </div>
-      <button id="gate-enter" class="gate-enter" data-i18n="Begin Wondering">Begin Wondering</button>
-    </div>
-  </div>
   <header>
     <div class="brand" id="brand" role="button" tabindex="0" aria-label="Back to the landing page" title="Back to the landing page">
       <span class="brand-mark" id="brand-mark" aria-hidden="true"></span>
@@ -13519,42 +13442,14 @@
   if(!hadHash) setMode('questions');
   applyLang(LANG);
 
-  // ---------- threshold / landing hero ----------
-  // A thin first-run welcome: it names the feeling and the honest scope, then
-  // hands you a deliberate gesture across the threshold. Shown once (unless a
-  // deep link already aimed you somewhere); dismissable by the button or Esc.
-  const gate=document.getElementById('gate');
-  let gateSeen=false; try{ gateSeen=localStorage.getItem('aoi.entered')==='1'; }catch(e){}
-  let firstRunGate=false;
-  function closeGate(){
-    if(gate.hidden) return;
-    try{ localStorage.setItem('aoi.entered','1'); }catch(e){}
-    firstRunGate=false;
-    if(reduce){ gate.hidden=true; return; }
-    const seal=gate.querySelector('.gate-seal'); if(seal) seal.classList.add('unlatch');
-    gate.classList.add('closing');                // iris shuts into the seal
-    setTimeout(()=>{ gate.hidden=true; gate.classList.remove('closing'); if(seal) seal.classList.remove('unlatch'); },640);
-  }
-  function openGate(){
-    if(!gate.hidden) return;
-    gate.querySelector('.gate-seal').innerHTML=sealMarkup(true);
-    gate.classList.remove('closing');
-    gate.hidden=false;
-    document.getElementById('gate-enter').focus();
-  }
-  if(!gateSeen && !hadHash){
-    firstRunGate=true;
-    // seal injected after the atlas data is parsed (see below) so the rim arcs
-    // can read live region counts; init is synchronous, so no flash of a plain seal.
-    gate.hidden=false;
-    document.getElementById('gate-enter').focus();
-  }
-  document.getElementById('gate-enter').onclick=closeGate;
-  gate.addEventListener('keydown',e=>{ if(e.key==='Escape') closeGate(); });
+  // ---------- brand → landing ----------
+  // The hand-maintained index.html landing is the sole front door; the brand
+  // logo walks back out to it.
   const brandEl=document.getElementById('brand');
   if(brandEl){
-    brandEl.addEventListener('click',openGate);
-    brandEl.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); openGate(); } });
+    const toLanding=()=>{ location.href='index.html'; };
+    brandEl.addEventListener('click',toLanding);
+    brandEl.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); toLanding(); } });
   }
 
   // ---------- search ----------
@@ -13604,8 +13499,6 @@
   const A=JSON.parse(document.getElementById('atlas-data').textContent);
   const aGroup={}; A.groups.forEach(g=>aGroup[g.code]=g);
   const aById={}; A.nodes.forEach(n=>aById[n.id]=n);
-  // First-run gate seal: now that A/aGroup exist, inject the rim-arc seal.
-  if(firstRunGate){ const gs=gate.querySelector('.gate-seal'); if(gs) gs.innerHTML=sealMarkup(true); }
   const aAdj=new Map(); A.nodes.forEach(n=>aAdj.set(n.id,[]));
   A.links.forEach(l=>{ aAdj.get(l.source).push({other:l.target,type:l.type,dir:'out'});
                        aAdj.get(l.target).push({other:l.source,type:l.type,dir:'in'}); });

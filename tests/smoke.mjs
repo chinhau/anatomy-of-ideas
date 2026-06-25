@@ -81,16 +81,11 @@ eq(window.getComputedStyle($('#empty-state')).display,'none','empty-state is dis
 for(const mo of ['timeline','constellation','lens','questions']) click($('.switch button[data-mode="'+mo+'"]'));
 console.log('4 modes built ok');
 
-// THRESHOLD / LANDING HERO: first-run welcome that names the feeling + honest scope.
-const gate=$('#gate');
-assert(gate && !gate.hidden, 'first-run threshold gate is shown on a fresh visit');
-eq($('#gate .gate-line')?.dataset.i18n, "You're not the first to wonder", 'gate leads with the north-star feeling');
-const gcount=$('#gate .gate-count')?.textContent||'';
-assert(/11/.test(gcount)&&/425/.test(gcount)&&/4,?399/.test(gcount), 'gate shows the honest anchor count (11 questions / 425 thinkers / 4,399 years)');
-assert(!/263/.test($('#gate .gate-inner')?.textContent||''), 'gate does NOT lead with the 263-ideas number');
-click($('#gate-enter')); // cross the threshold
-eq(window.localStorage.getItem('aoi.entered'),'1','crossing the threshold records the first run so the gate stays dismissed');
-assert(gate.classList.contains('closing')||gate.hidden, 'crossing the threshold dismisses the gate');
+// FRONT DOOR: the hand-maintained index.html landing is the sole threshold —
+// the atlas no longer carries its own in-page "Begin Wondering" gate.
+assert(!$('#gate'), 'no in-atlas threshold gate (the index.html landing is the only front door)');
+const brand=$('#brand');
+assert(brand && brand.getAttribute('role')==='button', 'brand logo is an actionable control back to the landing');
 
 // EPISTEMIC STATUS (the 5-state spine): data integrity + Questions-tab surface
 const STATE_IDS=['handed-off','hardened','live-rivals','open','dissolved'];
