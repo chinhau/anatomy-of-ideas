@@ -1,0 +1,18 @@
+{
+  "id": "Utilitarianism",
+  "settled": false,
+  "text": "It is better to be a human being dissatisfied than a pig satisfied; better to be Socrates dissatisfied than a fool satisfied. And if the fool, or the pig, is of a different opinion, it is because they only know their own side of the question. The other party to the comparison knows both sides.",
+  "author": "John Stuart Mill",
+  "work": "Utilitarianism",
+  "translator": "",
+  "edition_year": "1863",
+  "locator": "ch. II",
+  "source": "Project Gutenberg eBook of Utilitarianism (ebook #11224)",
+  "source_url": "https://www.gutenberg.org/cache/epub/11224/pg11224.txt",
+  "rights": "PD",
+  "book_url": "https://www.gutenberg.org/ebooks/11224",
+  "byte_match": true,
+  "out_pulls_note": "Out-pulls the gloss: instead of restating 'greatest happiness for the greatest number,' it carries Mill's qualitative-hedonism move (higher pleasures), the part of the doctrine the bare gloss omits.",
+  "search_notes": "Found in Gutenberg #11224 (Mill, Utilitarianism), ch. II 'What Utilitarianism Is.' Verbatim contiguous span; byte-confirmed against fetched plain text using the validator's normalisation. The 'Socrates dissatisfied' line is sometimes loosely paraphrased online ('better to be Socrates unsatisfied'); I matched the literal source wording 'dissatisfied'. No verdict words used. High confidence.",
+  "fetches_used": 1
+}

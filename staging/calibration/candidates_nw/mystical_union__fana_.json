@@ -1,0 +1,18 @@
+{
+  "id": "Mystical Union (Fana)",
+  "settled": false,
+  "text": "Hearken to the reed-flute, how it discourses When complaining of the pains of separation - \" Ever since they tore me from my osier bed, My plaintive notes have moved men and women to tears. I burst my breast, striving to give vent to sighs, And to express the pangs of my yearning for my home.",
+  "author": "Jalal al-Din Rumi",
+  "work": "The Masnavi (Masnavi i Ma'navi)",
+  "translator": "E. H. Whinfield",
+  "edition_year": 1898,
+  "locator": "Book I, proem (the Song of the Reed)",
+  "source": "archive.org full text: 'Masnavi i Ma'navi; the spiritual couplets', trans. E. H. Whinfield (item masnaviimanavi)",
+  "source_url": "https://archive.org/download/masnaviimanavi/Masnavi_i_Ma_navi_djvu.txt",
+  "rights": "PD",
+  "book_url": "https://archive.org/details/masnaviimanavi",
+  "byte_match": true,
+  "out_pulls_note": "High heat: the reed torn from its bed, wailing to return home, is pure ache -- a stranger feels the longing as their own before any doctrine of self-dissolution is mentioned.",
+  "search_notes": "E. H. Whinfield abridged translation, 1898 (archive.org item 'masnaviimanavi', title page credits 'E. H. WHINFIELD, M.A.'); chosen as confirmed PD. Verbatim substring confirmed after normalising whitespace (the OCR uses double spaces between words), em-dash->hyphen, and curly->straight quotes. NOTE: the source OCR places a space after the opening quotation mark ('separation - \" Ever since'), so the verbatim span carries that extra space; kept honest rather than tidied. The famous reed-flute proem, the canonical jolt for fana. UNSETTLED concept: avoided any claim that the passage proves/settles mystical union; it is one tradition's image of it, not a verdict. Confidence high on the text; rights confirmed (Whinfield 1898, PD).",
+  "fetches_used": 4
+}

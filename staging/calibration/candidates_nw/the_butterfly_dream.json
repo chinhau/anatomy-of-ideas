@@ -1,0 +1,18 @@
+{
+  "id": "The Butterfly Dream",
+  "settled": true,
+  "text": "Formerly, I, Kwang K\u00e2u, dreamt that I was a butterfly, a butterfly flying about, feeling that it was enjoying itself I did not know that it was K\u00e2u. Suddenly I awoke, and was myself again, the veritable K\u00e2u. I did not know whether it had formerly been K\u00e2u dreaming that he was a butterfly, or it was now a butterfly dreaming that it was K\u00e2u.",
+  "author": "Zhuangzi",
+  "work": "The Writings of Kwang-dze (Zhuangzi)",
+  "translator": "James Legge",
+  "edition_year": 1891,
+  "locator": "Bk II (The Adjustment of Controversies)",
+  "source": "Internet Sacred Text Archive (SBE v39, Legge), via Wayback Machine snapshot",
+  "source_url": "http://web.archive.org/web/2025id_/https://www.sacred-texts.com/tao/sbe39/sbe39123.htm",
+  "rights": "PD",
+  "book_url": "https://www.sacred-texts.com/tao/sbe39/index.htm",
+  "byte_match": true,
+  "out_pulls_note": "High heat: the closing 'I did not know whether...' lands as a genuine vertigo a stranger feels in the body, no name required.",
+  "search_notes": "James Legge, SBE v39, 1891 ('The Writings of Kwang-dze'). No clean Legge plain text exists on Gutenberg (only Giles 1889) and all three archive.org SBE-v39 OCR scans garble the proper name 'Kwang Kau' into 'Awang Au / Adu / Kau / TTau', which would fail byte-match. I therefore used the byte-clean sacred-texts.com HTML via the Wayback Machine (sacred-texts itself is Cloudflare-blocked to curl). Verbatim substring confirmed after normalising whitespace and curly quotes; the span deliberately stops before Legge's footnote superscripts so none are included. NOTE: the source has a known OCR slip 'enjoying itself I did not know' (Legge's print has a period after 'itself'); kept verbatim, not silently fixed. Confidence high on the famous Bk II passage.",
+  "fetches_used": 7
+}

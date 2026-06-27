@@ -1,0 +1,18 @@
+{
+  "id": "Spontaneous Overflow",
+  "settled": true,
+  "text": "I have said that Poetry is the spontaneous overflow of powerful feelings: it takes its origin from emotion recollected in tranquillity: the emotion is contemplated till by a species of reaction the tranquillity gradually disappears, and an emotion, similar to that which was before the subject of contemplation, is gradually produced, and does itself actually exist in the mind.",
+  "author": "William Wordsworth",
+  "work": "Preface to Lyrical Ballads",
+  "translator": "",
+  "edition_year": "1800",
+  "locator": "Preface to Lyrical Ballads (1800), the \"emotion recollected in tranquillity\" summary passage",
+  "source": "Project Gutenberg",
+  "source_url": "https://www.gutenberg.org/cache/epub/8905/pg8905.txt",
+  "rights": "PD",
+  "book_url": "https://www.gutenberg.org/ebooks/8905",
+  "byte_match": true,
+  "out_pulls_note": "Out-pulls the gloss: gives Wordsworth's full mechanism (overflow + emotion recollected in tranquillity, then contemplated until it re-arises in the mind), not just the headline phrase the gloss compresses.",
+  "search_notes": "The 1798 'Lyrical Ballads' (Gutenberg #9622) does NOT contain this Preface, so I switched to Gutenberg #8905 ('Lyrical Ballads, with Other Poems, 1800, Volume 1'), which carries the full 1800 Preface. Verbatim substring confirmed after normalisation; no italic underscores in this span (an earlier occurrence of the phrase at another point uses _purpose_ nearby, avoided). 59 words. High confidence; well-known canonical passage, no misattribution risk.",
+  "fetches_used": 2
+}

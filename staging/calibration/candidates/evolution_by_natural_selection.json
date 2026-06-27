@@ -1,0 +1,18 @@
+{
+  "id": "Evolution by Natural Selection",
+  "settled": true,
+  "text": "It may be said that natural selection is daily and hourly scrutinising, throughout the world, every variation, even the slightest; rejecting that which is bad, preserving and adding up all that is good; silently and insensibly working, whenever and wherever opportunity offers, at the improvement of each organic being in relation to its organic and inorganic conditions of life.",
+  "author": "Charles Darwin",
+  "work": "On the Origin of Species",
+  "translator": "",
+  "edition_year": "1859",
+  "locator": "1st ed. (1859), ch. IV (\"Natural Selection\")",
+  "source": "Project Gutenberg plain text, eBook #1228 (1859 First Edition)",
+  "source_url": "https://www.gutenberg.org/cache/epub/1228/pg1228.txt",
+  "rights": "PD",
+  "book_url": "https://www.gutenberg.org/ebooks/1228",
+  "byte_match": true,
+  "out_pulls_note": "Out-pulls the gloss: 'silently and insensibly working... daily and hourly scrutinising' dramatises the blind, designer-less mechanism far more vividly than the abstract 'design without a designer' one-liner.",
+  "search_notes": "Gutenberg #1228 is explicitly the 1859 FIRST edition (the ebook header lists #1228=1859 1st, #22764=1860 2nd, #2009=1872 6th). Confirmed it is the 1st ed. by the absence of 'survival of the fittest' (introduced 5th ed.). Passage is in ch. IV 'Natural Selection'. Byte-verified verbatim. Canonical Darwin; no misattribution risk.",
+  "fetches_used": 1
+}

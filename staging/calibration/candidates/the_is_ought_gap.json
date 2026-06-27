@@ -1,0 +1,18 @@
+{
+  "id": "The Is\u2013Ought Gap",
+  "settled": false,
+  "text": "In every system of morality, which I have hitherto met with, I have always remarked, that the author proceeds for some time in the ordinary way of reasoning, and establishes the being of a God, or makes observations concerning human affairs; when of a sudden I am surprized to find, that instead of the usual copulations of propositions, is, and is not, I meet with no proposition that is not connected with an ought, or an ought not.",
+  "author": "David Hume",
+  "work": "A Treatise of Human Nature",
+  "translator": "",
+  "edition_year": "1739",
+  "locator": "Book III, Part I, \u00a7I",
+  "source": "Project Gutenberg eBook of A Treatise of Human Nature (ebook #4705)",
+  "source_url": "https://www.gutenberg.org/cache/epub/4705/pg4705.txt",
+  "rights": "PD",
+  "book_url": "https://www.gutenberg.org/ebooks/4705",
+  "byte_match": true,
+  "out_pulls_note": "Out-pulls the gloss decisively: this is the literal source of 'Hume's guillotine' - watching every moralist slide from 'is' to 'ought' without warrant - far richer than the abstract gloss.",
+  "search_notes": "Found in Gutenberg #4705 (Hume, Treatise of Human Nature), Book III 'Of Morals,' Part I, Sect. I 'Moral distinctions not deriv'd from reason' - the famous is/ought paragraph. Verbatim contiguous span, byte-confirmed; kept Hume's spelling 'surprized'. 78 words. Truncated before 'This change is imperceptible...' to stay under cap and end cleanly. No verdict words (avoided 'prove/refute' etc.). High confidence.",
+  "fetches_used": 1
+}

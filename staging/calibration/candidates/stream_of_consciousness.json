@@ -1,0 +1,18 @@
+{
+  "id": "Stream of Consciousness",
+  "settled": true,
+  "text": "Consciousness, then, does not appear to itself chopped up in bits. Such words as 'chain' or 'train' do not describe it fitly as it presents itself in the first instance. It is nothing jointed; it flows. A 'river' or a 'stream' are the metaphors by which it is most naturally described.",
+  "author": "William James",
+  "work": "The Principles of Psychology",
+  "translator": "",
+  "edition_year": "1890",
+  "locator": "Vol. I, ch. IX (\"The Stream of Thought\")",
+  "source": "Project Gutenberg plain text, eBook #57628 (Volume 1 of 2)",
+  "source_url": "https://www.gutenberg.org/cache/epub/57628/pg57628.txt",
+  "rights": "PD",
+  "book_url": "https://www.gutenberg.org/ebooks/57628",
+  "byte_match": true,
+  "out_pulls_note": "Out-pulls the gloss decisively: this is the passage the gloss is paraphrasing, and it adds the rejected 'chain/train' contrast and 'nothing jointed; it flows' that the one-liner cannot carry.",
+  "search_notes": "Gutenberg #57628 is Principles of Psychology Vol. 1, which contains ch. IX 'The Stream of Thought'. The famous line immediately after ('let us call it the stream of thought...') is wrapped in Gutenberg italic underscores, which the validator does NOT strip, so I deliberately stopped the quote at 'most naturally described.' to keep a clean byte match. Byte-verified verbatim. Canonical; no misattribution risk.",
+  "fetches_used": 1
+}

@@ -1,0 +1,18 @@
+{
+  "id": "Bundle Theory",
+  "settled": false,
+  "text": "For my part, when I enter most intimately into what I call myself, I always stumble on some particular perception or other, of heat or cold, light or shade, love or hatred, pain or pleasure. I never can catch myself at any time without a perception, and never can observe any thing but the perception.",
+  "author": "David Hume",
+  "work": "A Treatise of Human Nature",
+  "translator": "",
+  "edition_year": "1739",
+  "locator": "Book I, Part IV, \u00a76 (\"Of personal identity\")",
+  "source": "Project Gutenberg plain text, eBook #4705",
+  "source_url": "https://www.gutenberg.org/cache/epub/4705/pg4705.txt",
+  "rights": "PD",
+  "book_url": "https://www.gutenberg.org/ebooks/4705",
+  "byte_match": true,
+  "out_pulls_note": "Out-pulls the gloss: the gloss states the doctrine abstractly, while this passage shows Hume's introspective method and the failure to find an 'I', which is the live experiential force of the idea.",
+  "search_notes": "Found in Gutenberg #4705 (Treatise, single-volume text), I.IV.6 'Of personal identity', the locus classicus of bundle theory. The textbook 'bundle or collection of different perceptions' line sits two paragraphs later (verified present at the 'But setting aside some metaphysicians' paragraph) but begins with 'they are nothing but', referring back to mankind; I chose the self-contained 'when I enter most intimately' sentence instead. Byte-verified verbatim via the validator's normalisation. No misattribution risk; this is canonical Hume.",
+  "fetches_used": 1
+}

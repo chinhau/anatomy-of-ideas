@@ -1,0 +1,122 @@
+[
+  {
+    "id": "Bundle Theory",
+    "word_count": 55,
+    "byte_match": true,
+    "agent_byte_match": true,
+    "verdict": "accept",
+    "reasons": [],
+    "source_url": "https://www.gutenberg.org/cache/epub/4705/pg4705.txt",
+    "locator": "Book I, Part IV, §6 (\"Of personal identity\")"
+  },
+  {
+    "id": "Empiricism",
+    "word_count": 50,
+    "byte_match": true,
+    "agent_byte_match": true,
+    "verdict": "accept",
+    "reasons": [],
+    "source_url": "https://www.gutenberg.org/cache/epub/9662/pg9662.txt",
+    "locator": "Section VII, Part I"
+  },
+  {
+    "id": "Evolution by Natural Selection",
+    "word_count": 59,
+    "byte_match": true,
+    "agent_byte_match": true,
+    "verdict": "accept",
+    "reasons": [],
+    "source_url": "https://www.gutenberg.org/cache/epub/1228/pg1228.txt",
+    "locator": "1st ed. (1859), ch. IV (\"Natural Selection\")"
+  },
+  {
+    "id": "Idealism",
+    "word_count": 47,
+    "byte_match": true,
+    "agent_byte_match": true,
+    "verdict": "accept",
+    "reasons": [],
+    "source_url": "https://www.gutenberg.org/cache/epub/4723/pg4723.txt",
+    "locator": "§3"
+  },
+  {
+    "id": "Leviathan",
+    "word_count": 92,
+    "byte_match": true,
+    "agent_byte_match": true,
+    "verdict": "accept",
+    "reasons": [],
+    "source_url": "https://www.gutenberg.org/cache/epub/3207/pg3207.txt",
+    "locator": "Part I, ch. XIII"
+  },
+  {
+    "id": "Self-Reliance",
+    "word_count": 64,
+    "byte_match": true,
+    "agent_byte_match": true,
+    "verdict": "accept",
+    "reasons": [],
+    "source_url": "https://www.gutenberg.org/cache/epub/16643/pg16643.txt",
+    "locator": "Essay \"Self-Reliance\" (Essays: First Series), paragraph beginning \"These are the voices which we hear in solitude\""
+  },
+  {
+    "id": "Stream of Consciousness",
+    "word_count": 51,
+    "byte_match": true,
+    "agent_byte_match": true,
+    "verdict": "accept",
+    "reasons": [],
+    "source_url": "https://www.gutenberg.org/cache/epub/57628/pg57628.txt",
+    "locator": "Vol. I, ch. IX (\"The Stream of Thought\")"
+  },
+  {
+    "id": "Tabula Rasa",
+    "word_count": 68,
+    "byte_match": true,
+    "agent_byte_match": true,
+    "verdict": "accept",
+    "reasons": [],
+    "source_url": "https://www.gutenberg.org/cache/epub/10615/pg10615.txt",
+    "locator": "Book II, ch. i, §2"
+  },
+  {
+    "id": "The Harm Principle",
+    "word_count": 46,
+    "byte_match": true,
+    "agent_byte_match": true,
+    "verdict": "accept",
+    "reasons": [],
+    "source_url": "https://www.gutenberg.org/cache/epub/34901/pg34901.txt",
+    "locator": "ch. I"
+  },
+  {
+    "id": "The Is–Ought Gap",
+    "word_count": 78,
+    "byte_match": true,
+    "agent_byte_match": true,
+    "verdict": "accept",
+    "reasons": [],
+    "source_url": "https://www.gutenberg.org/cache/epub/4705/pg4705.txt",
+    "locator": "Book III, Part I, §I"
+  },
+  {
+    "id": "The Problem of Induction",
+    "word_count": 63,
+    "byte_match": true,
+    "agent_byte_match": true,
+    "verdict": "accept",
+    "reasons": [],
+    "source_url": "https://www.gutenberg.org/cache/epub/9662/pg9662.txt",
+    "locator": "Section IV, Part II"
+  },
+  {
+    "id": "Utilitarianism",
+    "word_count": 55,
+    "byte_match": true,
+    "agent_byte_match": true,
+    "verdict": "accept",
+    "reasons": [],
+    "source_url": "https://www.gutenberg.org/cache/epub/11224/pg11224.txt",
+    "locator": "ch. II"
+  }
+]

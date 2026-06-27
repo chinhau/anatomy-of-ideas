@@ -1,0 +1,18 @@
+{
+  "id": "Nirvana",
+  "settled": true,
+  "text": "From love comes grief, from love comes fear; he who is free from love knows neither grief nor fear.",
+  "author": "(Pali Canon)",
+  "work": "Dhammapada",
+  "translator": "F. Max M\u00fcller",
+  "edition_year": 1881,
+  "locator": "ch. XVI (Pleasure), v. 215",
+  "source": "Project Gutenberg eBook #2017 (Dhammapada, trans. F. Max M\u00fcller; the same text as Sacred Books of the East v10, 1881)",
+  "source_url": "https://www.gutenberg.org/cache/epub/2017/pg2017.txt",
+  "rights": "PD",
+  "book_url": "https://www.gutenberg.org/ebooks/2017",
+  "byte_match": true,
+  "out_pulls_note": "High heat: the bald equation of love with grief and fear makes any stranger flinch before they can argue with it -- the craving->suffering core of Nirvana, felt not defined.",
+  "search_notes": "F. Max M\u00fcller translation, 1881 (SBE v10); Gutenberg #2017 credits 'Translated from Pali by F. Max Muller'. Verbatim substring confirmed after whitespace normalisation; no italic underscores in span. Chose v.215 ('From love comes grief...') over the parallel vv.212-216 (pleasure/affection/lust/greed) and over the v.218 'desire for the Ineffable (Nirvana)' line and the v.154 'extinction of all desires' line: 215 is the hottest and most universal to a stranger, and the love-form bites hardest. The cited locator was 215-216; I kept 215 alone for the cleanest jolt (216 just swaps 'love' for 'greed'). Confidence high.",
+  "fetches_used": 1
+}

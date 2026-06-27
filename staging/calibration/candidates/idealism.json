@@ -1,0 +1,18 @@
+{
+  "id": "Idealism",
+  "settled": true,
+  "text": "For as to what is said of the absolute existence of unthinking things without any relation to their being perceived, that seems perfectly unintelligible. Their ESSE is PERCIPI, nor is it possible they should have any existence out of the minds or thinking things which perceive them.",
+  "author": "George Berkeley",
+  "work": "A Treatise Concerning the Principles of Human Knowledge",
+  "translator": "",
+  "edition_year": "1710",
+  "locator": "\u00a73",
+  "source": "Project Gutenberg eBook #4723 (A Treatise Concerning the Principles of Human Knowledge), plain text",
+  "source_url": "https://www.gutenberg.org/cache/epub/4723/pg4723.txt",
+  "rights": "PD",
+  "book_url": "https://www.gutenberg.org/ebooks/4723",
+  "byte_match": true,
+  "out_pulls_note": "Strongly out-pulls the gloss: 'Their ESSE is PERCIPI' is the source of the gloss's own slogan 'to be is to be perceived', delivered with Berkeley's full claim that nothing exists outside perceiving minds.",
+  "search_notes": "Gutenberg #4723, Part I, \u00a73 (the 'esse is percipi' section). Source renders the Latin in caps (ESSE, PERCIPI). Verified verbatim substring after normalization. High confidence; this is the locus classicus of subjective idealism. The Three Dialogues (1713) is the other listed primary but the Principles \u00a73 is the tighter, more famous statement.",
+  "fetches_used": 1
+}

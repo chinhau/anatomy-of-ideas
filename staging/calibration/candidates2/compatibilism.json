@@ -1,0 +1,18 @@
+{
+  "id": "Compatibilism",
+  "settled": false,
+  "text": "By liberty, then, we can only mean _a power of acting or not acting, according to the determinations of the will;_ that is, if we choose to remain at rest, we may; if we choose to move, we also may. Now this hypothetical liberty is universally allowed to belong to every one who is not a prisoner and in chains.",
+  "author": "David Hume",
+  "work": "An Enquiry Concerning Human Understanding",
+  "translator": "",
+  "edition_year": "1748",
+  "locator": "Section VIII, Part I (\u00b673)",
+  "source": "Project Gutenberg",
+  "source_url": "https://www.gutenberg.org/cache/epub/9662/pg9662.txt",
+  "rights": "PD",
+  "book_url": "https://www.gutenberg.org/ebooks/9662",
+  "byte_match": true,
+  "out_pulls_note": "Out-pulls the gloss: rather than asserting freedom 'is compatible with causation', Hume gives the compatibilist's actual definition\u2014liberty as 'a power of acting or not acting, according to the determinations of the will'\u2014and notes it 'universally allowed'.",
+  "search_notes": "Found in Gutenberg #9662 (Selby-Bigge ed. combining both Enquiries; first Enquiry Section VIII 'Of Liberty and Necessity' confirmed present, numbered para 73). Byte-verified as substring after normalisation (60 words). FLAG: span contains Gutenberg italic underscores around '_a power of acting ... the will;_'\u2014kept VERBATIM, not stripped, per rules. High confidence; canonical Hume.",
+  "fetches_used": 1
+}

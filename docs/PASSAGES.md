@@ -23,6 +23,23 @@ This is risk analysis, not legal advice.
   passage; honour promptly. (Wire a contact route into the site before any
   in-copyright passage is publicised.)
 
+## Verification policy (amended 2026-06-27)
+
+- **Byte-match is the anti-fabrication test, not a print-fidelity guarantee.** A PD
+  passage must be byte-verified **present** in `source_url` after normalising
+  *encoding* (HTML entities, curly quotes, dashes, whitespace, case). It proves the
+  text exists in a real PD source; it does not, by itself, prove the text matches
+  the author's print.
+- **A byte-mismatch is a triage signal, not an auto-reject.** Classify it: (1)
+  encoding → fix the normaliser; (2) transcription/OCR defect in the source →
+  **correct toward the cited print edition** and log "transcription-verified,
+  print-corrected: \<what changed\>"; (3) genuine fabrication/misquote → **reject**.
+  Only (3) is a real failure. The print-correction path is the PD analogue of the
+  in-copyright edition+locator record (see Ivan Ilyich below).
+- **Rival-fit (authoring).** A thesis-passage on an unsettled question needs a rival
+  that *denies its exact proposition*, not one that merely shares the topic; else it
+  is adjacency → keep searching or both stay none.
+
 ## Authoring discipline (checked at curation, NOT by the smoke test)
 
 - **No reader-directed second person.** The passage must not flatter the reader
@@ -140,6 +157,88 @@ verbatim-verified against full texts.
   experience" is **Joseph Margolis'**, not Zahavi's — verified and not attributed to
   Zahavi.)
 - **Rights:** both **in-copyright-fair-use**.
+
+### Plan-A heat-pilot (added 2026-06-27)
+
+Seven passages across five questions, non-Western-led, arranged so **no question
+debuts Western-only** (`mind` and `abs` each open with a non-Western voice). All
+selected by **heat** (does the line out-pull its gloss), not by provenance
+convenience. Independently byte-verified (fresh re-fetch, HTML-aware normaliser).
+
+#### The Dao — Laozi (solo recognition, `real`)
+- **Passage:** "The Tao that can be trodden is not the enduring and unchanging Tao.
+  The name that can be named is not the enduring and unchanging name." (26 words)
+- **Edition:** James Legge, 1891 (= Sacred Books of the East v39). **PD.** ch. 1.
+- **Source / verification:** Project Gutenberg #216
+  (<https://www.gutenberg.org/cache/epub/216/pg216.txt>); byte-verified 2026-06-27.
+- **Book pointer:** <https://www.gutenberg.org/ebooks/216>.
+
+#### The Butterfly Dream — Zhuangzi (solo recognition, `mind`)
+- **Passage:** "Formerly, I, Kwang Kâu, dreamt that I was a butterfly… or it was now
+  a butterfly dreaming that it was Kâu." (65 words)
+- **Edition:** James Legge, 1891, *The Writings of Kwang-dze* (Sacred Books of the
+  East v39), Bk II. **PD.**
+- **Verification:** **transcription-verified, print-corrected.** Full span
+  byte-verified present in the Legge SBE v39 transcription; the single period after
+  "enjoying itself" was restored to Legge's 1891 print (the digital transcription
+  drops it, fusing two sentences). No clean PD *scan* byte-matches the proper name
+  "Kwang Kâu" (archive.org SBE-v39 OCR garbles it), so edition + locator are
+  recorded per the verification policy above. Verified 2026-06-27.
+- **Source / book pointer:** <https://www.sacred-texts.com/tao/sbe39/sbe39123.htm>
+  / <https://www.sacred-texts.com/tao/sbe39/index.htm>.
+
+#### Nirvana — The Dhammapada (solo recognition, `peace`)
+- **Passage:** "From love comes grief, from love comes fear; he who is free from
+  love knows neither grief nor fear." (19 words)
+- **Edition:** F. Max Müller, 1881 (= Sacred Books of the East v10), ch. XVI, v. 215.
+  **PD.**
+- **Source / verification:** Project Gutenberg #2017
+  (<https://www.gutenberg.org/cache/epub/2017/pg2017.txt>); byte-verified 2026-06-27.
+- **Book pointer:** <https://www.gutenberg.org/ebooks/2017>.
+
+#### Mystical Union (Fana) — Rumi (solo recognition, `trans`)
+- **Passage:** "Hearken to the reed-flute, how it discourses… I burst my breast,
+  striving to give vent to sighs, And to express the pangs of my yearning for my
+  home." (56 words, the Song of the Reed)
+- **Edition:** E. H. Whinfield, 1898, *Masnavi i Ma'navi*, Book I proem. **PD.**
+- **Source / verification:** archive.org item `masnaviimanavi`
+  (<https://archive.org/download/masnaviimanavi/Masnavi_i_Ma_navi_djvu.txt>);
+  byte-verified 2026-06-27.
+- **Book pointer:** <https://archive.org/details/masnaviimanavi>.
+
+#### Tawhid (Divine Unity) — The Qur'an (rival pair on `abs`, with The Problem of Evil)
+A **partial rival pair** on an open question: Tawhid **affirms** a single,
+incomparable Absolute; The Problem of Evil **presses** the theodicy difficulty.
+Epicurus attacks the deity's *attributes*, not the Absolute's bare existence — a
+tighter counter (naturalist denial / śūnyatā on the divine) is **backlog**; the pair
+ships because two voices keep the open question plural rather than a verdict.
+- **Passage:** "SAY: He is God alone: God the eternal! He begetteth not, and He is
+  not begotten; And there is none like unto Him." (23 words)
+- **Edition:** J. M. Rodwell, 1861, *The Koran*, Surah al-Ikhlas (112:1–4). **PD.**
+- **Source / verification:** Project Gutenberg #2800
+  (<https://www.gutenberg.org/cache/epub/2800/pg2800.txt>); byte-verified 2026-06-27.
+- **Book pointer:** <https://www.gutenberg.org/ebooks/2800>. Sacred text — transmit,
+  not "answers your ache."
+
+#### Stream of Consciousness — William James (non-rival second voice on `mind`)
+- **Passage:** "Consciousness, then, does not appear to itself chopped up in bits…
+  A 'river' or a 'stream' are the metaphors by which it is most naturally described."
+  (51 words)
+- **Edition:** William James, 1890, *The Principles of Psychology*, Vol. I, ch. IX.
+  **PD.**
+- **Source / verification:** Project Gutenberg #57628
+  (<https://www.gutenberg.org/cache/epub/57628/pg57628.txt>); byte-verified 2026-06-27.
+- **Book pointer:** <https://www.gutenberg.org/ebooks/57628>.
+
+#### The Problem of Evil — David Hume (rival to Tawhid on `abs`)
+- **Passage:** "EPICURUS's old questions are yet unanswered. Is he willing to
+  prevent evil, but not able?… Is he both able and willing? whence then is evil?"
+  (39 words)
+- **Edition:** David Hume, 1779, *Dialogues Concerning Natural Religion*, Part X
+  (Philo restating Epicurus). **PD.**
+- **Source / verification:** Project Gutenberg #4583
+  (<https://www.gutenberg.org/cache/epub/4583/pg4583.txt>); byte-verified 2026-06-27.
+- **Book pointer:** <https://www.gutenberg.org/ebooks/4583>.
 
 ## Deferred (authored-but-not-shipped)
 

@@ -1,0 +1,18 @@
+{
+  "id": "Empiricism",
+  "settled": true,
+  "text": "It seems a proposition, which will not admit of much dispute, that all our ideas are nothing but copies of our impressions, or, in other words, that it is impossible for us to _think_ of any thing, which we have not antecedently _felt_, either by our external or internal senses.",
+  "author": "David Hume",
+  "work": "An Enquiry Concerning Human Understanding",
+  "translator": "",
+  "edition_year": "1748",
+  "locator": "Section VII, Part I",
+  "source": "Project Gutenberg eBook #9662 (An Enquiry Concerning Human Understanding), plain text",
+  "source_url": "https://www.gutenberg.org/cache/epub/9662/pg9662.txt",
+  "rights": "PD",
+  "book_url": "https://www.gutenberg.org/ebooks/9662",
+  "byte_match": true,
+  "out_pulls_note": "Out-pulls the blank-slate gloss: Hume's 'copy principle' (every idea traces to a prior impression) is the active engine of empiricism, sharper than the passive 'mind starts blank' restatement.",
+  "search_notes": "Gutenberg #9662. Hume restates the copy principle here at the head of Section VII, Part I; an earlier identical statement appears in Section II (\u00a712-13: 'all our ideas... are copies of our impressions'). Chose the VII.I restatement for its crisp standalone form. IMPORTANT: the Gutenberg plain text marks italics with underscores (_think_, _felt_); these underscores are kept in the text so it byte-matches literally \u2014 a renderer should strip them for display. Verified verbatim substring after normalization. High confidence. Considered Locke's Essay II.i \u00a72 instead, but reserved that for Tabula Rasa to avoid duplicate source.",
+  "fetches_used": 1
+}

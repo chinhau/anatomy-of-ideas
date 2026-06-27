@@ -1,0 +1,142 @@
+[
+  {
+    "id": "Social Contract",
+    "q": "just",
+    "q_status": "live-rivals",
+    "settled": false,
+    "contested": false,
+    "gloss": "Legitimate authority rests on an agreement among the governed.",
+    "primary_readings": [
+      {
+        "author": "Jean-Jacques Rousseau",
+        "title": "The Social Contract",
+        "year": "1762"
+      },
+      {
+        "author": "John Locke",
+        "title": "Two Treatises of Government",
+        "year": "1689"
+      }
+    ]
+  },
+  {
+    "id": "Natural Rights",
+    "q": "just",
+    "q_status": "live-rivals",
+    "settled": false,
+    "contested": false,
+    "gloss": "All have rights to life, liberty and property that the state must protect.",
+    "primary_readings": [
+      {
+        "author": "John Locke",
+        "title": "Two Treatises of Government",
+        "year": "1689"
+      },
+      {
+        "author": "Mary Wollstonecraft",
+        "title": "A Vindication of the Rights of Woman",
+        "year": "1792"
+      }
+    ]
+  },
+  {
+    "id": "Libertarian Free Will",
+    "q": "free",
+    "q_status": "live-rivals",
+    "settled": false,
+    "contested": false,
+    "gloss": "We have genuine, undetermined freedom to choose otherwise.",
+    "primary_readings": [
+      {
+        "author": "Thomas Reid",
+        "title": "Essays on the Active Powers of Man",
+        "year": "1788"
+      }
+    ]
+  },
+  {
+    "id": "Compatibilism",
+    "q": "free",
+    "q_status": "live-rivals",
+    "settled": false,
+    "contested": false,
+    "gloss": "Freedom is acting on your own desires — fully compatible with causation.",
+    "primary_readings": [
+      {
+        "author": "David Hume",
+        "title": "Enquiry Concerning Human Understanding (§8)",
+        "year": "1748"
+      }
+    ]
+  },
+  {
+    "id": "Neutral Monism",
+    "q": "mind",
+    "q_status": "handed-off",
+    "settled": true,
+    "contested": false,
+    "gloss": "Mind and matter are two arrangements of one neutral, more basic stuff.",
+    "primary_readings": [
+      {
+        "author": "Bertrand Russell",
+        "title": "The Analysis of Mind",
+        "year": "1921"
+      },
+      {
+        "author": "William James",
+        "title": "Does 'Consciousness' Exist?",
+        "year": "1904"
+      }
+    ]
+  },
+  {
+    "id": "Pragmatism",
+    "q": "know",
+    "q_status": "hardened",
+    "settled": true,
+    "contested": false,
+    "gloss": "True ideas are the ones that work — that pay their way in experience.",
+    "primary_readings": [
+      {
+        "author": "William James",
+        "title": "Pragmatism",
+        "year": "1907"
+      },
+      {
+        "author": "Charles S. Peirce",
+        "title": "How to Make Our Ideas Clear",
+        "year": "1878"
+      }
+    ]
+  },
+  {
+    "id": "Spontaneous Overflow",
+    "q": "mind",
+    "q_status": "handed-off",
+    "settled": true,
+    "contested": false,
+    "gloss": "Poetry is the spontaneous overflow of powerful feeling, recollected in tranquillity; imagination remakes experience.",
+    "primary_readings": [
+      {
+        "author": "William Wordsworth",
+        "title": "Preface to Lyrical Ballads",
+        "year": "1800"
+      }
+    ]
+  },
+  {
+    "id": "The Problem of Evil",
+    "q": "abs",
+    "q_status": "open",
+    "settled": false,
+    "contested": false,
+    "gloss": "If God is all-good and all-powerful, why is there suffering? The oldest argument against a benevolent Absolute.",
+    "primary_readings": [
+      {
+        "author": "David Hume",
+        "title": "Dialogues Concerning Natural Religion",
+        "year": "1779"
+      }
+    ]
+  }
+]

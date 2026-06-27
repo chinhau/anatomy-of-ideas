@@ -1,0 +1,18 @@
+{
+  "id": "Social Contract",
+  "settled": false,
+  "text": "MEN being, as has been said, by nature, all free, equal, and independent, no one can be put out of this estate, and subjected to the political power of another, without his own consent.",
+  "author": "John Locke",
+  "work": "Second Treatise of Government",
+  "translator": "",
+  "edition_year": "1689",
+  "locator": "ch. VIII, \u00a795",
+  "source": "Project Gutenberg",
+  "source_url": "https://www.gutenberg.org/cache/epub/7370/pg7370.txt",
+  "rights": "PD",
+  "book_url": "https://www.gutenberg.org/ebooks/7370",
+  "byte_match": true,
+  "out_pulls_note": "Out-pulls the gloss: instead of restating 'authority rests on agreement', Locke supplies the live mechanism\u2014no one is bound to political power 'without his own consent'\u2014which is the contractarian move itself.",
+  "search_notes": "Found in Gutenberg #7370 (Second Treatise), Sect. 95, opening sentence of 'Of the Beginning of Political Societies'. Byte-verified as substring after curly-quote/dash/whitespace normalisation (34 words). 'MEN' is capitalised in the source (drop-cap style); kept verbatim. Rousseau deliberately avoided per scope (translated, out of scope). High confidence; no underscores in span; no misattribution risk\u2014canonical Locke.",
+  "fetches_used": 1
+}

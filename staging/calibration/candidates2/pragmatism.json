@@ -1,0 +1,18 @@
+{
+  "id": "Pragmatism",
+  "settled": true,
+  "text": "'The true,' to put it very briefly, is only the expedient in the way of our thinking, just as 'the right' is only the expedient in the way of our behaving.",
+  "author": "William James",
+  "work": "Pragmatism: A New Name for Some Old Ways of Thinking",
+  "translator": "",
+  "edition_year": "1907",
+  "locator": "Lecture VI, \"Pragmatism's Conception of Truth\"",
+  "source": "Project Gutenberg",
+  "source_url": "https://www.gutenberg.org/cache/epub/5116/pg5116.txt",
+  "rights": "PD",
+  "book_url": "https://www.gutenberg.org/ebooks/5116",
+  "byte_match": true,
+  "out_pulls_note": "Out-pulls the gloss: James's own compressed formula ('the true is only the expedient in the way of our thinking') states the cash-value theory of truth more sharply and memorably than the paraphrase.",
+  "search_notes": "Found in Project Gutenberg #5116 (James, Pragmatism, 1907), in Lecture VI 'Pragmatism's Conception of Truth'. Verbatim substring confirmed after curly-quote/whitespace normalisation; no italic underscores in span. Chose James over Peirce's 1878 'How to Make Our Ideas Clear' because this line is the canonical compressed statement and byte-verified. 31 words. High confidence.",
+  "fetches_used": 1
+}

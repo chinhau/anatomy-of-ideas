@@ -1,0 +1,18 @@
+{
+  "id": "Libertarian Free Will",
+  "settled": false,
+  "text": "By the liberty of a moral agent, I understand, a power over the determinations of his own will.",
+  "author": "Thomas Reid",
+  "work": "Essays on the Active Powers of Man",
+  "translator": "",
+  "edition_year": "1788",
+  "locator": "Essay IV, ch. i",
+  "source": "Internet Archive (essaysonactivepo00reid)",
+  "source_url": "https://archive.org/download/essaysonactivepo00reid/essaysonactivepo00reid_djvu.txt",
+  "rights": "PD",
+  "book_url": "https://archive.org/details/essaysonactivepo00reid",
+  "byte_match": false,
+  "out_pulls_note": "Would out-pull the gloss: Reid pins libertarian freedom to 'a power over the determinations of his own will' (active control of the willing itself), sharper than the gloss's 'undetermined freedom to choose otherwise'\u2014but it could not be byte-verified.",
+  "search_notes": "Reid is NOT on Project Gutenberg (search returned no records). Located the 1788 first edition on Internet Archive (essaysonactivepo00reid; alternates essaysonactivep00reidgoog, dli.ministry.28560; a 1910 Edinburgh item has no _djvu.txt / likely not clean PD). The canonical definition IS present at Essay IV, Chap. I 'The Notions of Moral Liberty and Necessity Stated', but the OCR of the long-s 1788 typography is corrupt: it renders as 'Y the liberty of a moral agent, I underfland, a power ovei' the determinations of his own will' (dropped drop-cap 'B', 'underfland' for 'understand', 'ovei'' for 'over'). The correct English wording therefore does NOT appear verbatim in the full text, and byte-matching the corrupt OCR would ship a garbled quote. Per honesty rules I did not alter the quote to force a match and did not strip/normalise OCR errors. byte_match=false. The quotation itself is well-attested and genuinely Reid's (high confidence in attribution), but unverifiable against a clean byte-matchable full text within the fetch budget. Used 4 fetches (Gutenberg search, archive search JSON, 2 archive djvu downloads + 1 failed 404 Edinburgh).",
+  "fetches_used": 4
+}

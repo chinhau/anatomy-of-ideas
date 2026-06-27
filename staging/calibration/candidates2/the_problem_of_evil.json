@@ -1,0 +1,18 @@
+{
+  "id": "The Problem of Evil",
+  "settled": false,
+  "text": "EPICURUS's old questions are yet unanswered. Is he willing to prevent evil, but not able? then is he impotent. Is he able, but not willing? then is he malevolent. Is he both able and willing? whence then is evil?",
+  "author": "David Hume",
+  "work": "Dialogues Concerning Natural Religion",
+  "translator": "",
+  "edition_year": "1779",
+  "locator": "Part X (Philo restating Epicurus's questions)",
+  "source": "Project Gutenberg",
+  "source_url": "https://www.gutenberg.org/cache/epub/4583/pg4583.txt",
+  "rights": "PD",
+  "book_url": "https://www.gutenberg.org/ebooks/4583",
+  "byte_match": true,
+  "out_pulls_note": "Out-pulls the gloss: Hume (via Philo) lays out the dilemma as a stepwise trilemma rather than a single rhetorical question, which is exactly why this phrasing is the canonical statement of the problem.",
+  "search_notes": "Found in Project Gutenberg #4583 (Hume, Dialogues Concerning Natural Religion, 1779), Part X, spoken by Philo restating Epicurus. Verbatim substring confirmed after normalisation; Gutenberg renders EPICURUS in all-caps small-cap style (kept verbatim) and no italic underscores in span. settled=false, so wording is purely the question-form trilemma and avoids prove/proven/solved/refute/the-answer language. 39 words. High confidence; note this is Hume voicing the problem, not endorsing a resolution.",
+  "fetches_used": 1
+}

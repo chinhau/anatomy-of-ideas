@@ -1,0 +1,18 @@
+{
+  "id": "Tabula Rasa",
+  "settled": true,
+  "text": "Let us then suppose the mind to be, as we say, white paper, void of all characters, without any ideas:\u2014How comes it to be furnished? Whence comes it by that vast store which the busy and boundless fancy of man has painted on it with an almost endless variety? Whence has it all the MATERIALS of reason and knowledge? To this I answer, in one word, from EXPERIENCE.",
+  "author": "John Locke",
+  "work": "An Essay Concerning Human Understanding",
+  "translator": "",
+  "edition_year": "1689",
+  "locator": "Book II, ch. i, \u00a72",
+  "source": "Project Gutenberg eBook #10615 (An Essay Concerning Humane Understanding, Volume 1), plain text",
+  "source_url": "https://www.gutenberg.org/cache/epub/10615/pg10615.txt",
+  "rights": "PD",
+  "book_url": "https://www.gutenberg.org/ebooks/10615",
+  "byte_match": true,
+  "out_pulls_note": "Strongly out-pulls the gloss: the 'white paper... from EXPERIENCE' image is the original metaphor the gloss merely paraphrases, and it carries the rhetorical force the one-liner cannot.",
+  "search_notes": "Found in Gutenberg #10615 (Vol.1, which contains Books I-II). Located via 'white paper' and section header '2. All Ideas come from Sensation or Reflection' confirming Bk II ch.i \u00a72. Source uses caps MATERIALS/EXPERIENCE and an em-dash after 'ideas:' which normalizes to hyphen; verified verbatim substring after curly-quote/dash/whitespace normalization. High confidence; this is the canonical tabula-rasa passage (note: Locke never uses the Latin phrase 'tabula rasa' here, he says 'white paper' / 'empty cabinet' \u2014 no misattribution risk). Spelling is 'Humane' in this 1690-era edition's title.",
+  "fetches_used": 1
+}

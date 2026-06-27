@@ -1,0 +1,207 @@
+[
+  {
+    "id": "Empiricism",
+    "q": "know",
+    "q_status": "hardened",
+    "settled": true,
+    "contested": false,
+    "gloss": "All knowledge begins in sense experience; the mind starts blank.",
+    "primary_readings": [
+      {
+        "author": "David Hume",
+        "title": "An Enquiry Concerning Human Understanding",
+        "year": "1748"
+      },
+      {
+        "author": "John Locke",
+        "title": "An Essay Concerning Human Understanding",
+        "year": "1689"
+      }
+    ]
+  },
+  {
+    "id": "Tabula Rasa",
+    "q": "know",
+    "q_status": "hardened",
+    "settled": true,
+    "contested": false,
+    "gloss": "The mind at birth is a blank slate written on by experience.",
+    "primary_readings": [
+      {
+        "author": "John Locke",
+        "title": "An Essay Concerning Human Understanding (Book II)",
+        "year": "1689"
+      }
+    ]
+  },
+  {
+    "id": "Utilitarianism",
+    "q": "live",
+    "q_status": "live-rivals",
+    "settled": false,
+    "contested": false,
+    "gloss": "The right act produces the greatest happiness for the greatest number.",
+    "primary_readings": [
+      {
+        "author": "John Stuart Mill",
+        "title": "Utilitarianism",
+        "year": "1863"
+      },
+      {
+        "author": "Jeremy Bentham",
+        "title": "Introduction to the Principles of Morals and Legislation",
+        "year": "1789"
+      }
+    ]
+  },
+  {
+    "id": "The Harm Principle",
+    "q": "just",
+    "q_status": "live-rivals",
+    "settled": false,
+    "contested": false,
+    "gloss": "The only ground for coercing anyone against their will is to prevent harm to others; over himself, the individual is sovereign.",
+    "primary_readings": [
+      {
+        "author": "John Stuart Mill",
+        "title": "On Liberty",
+        "year": "1859"
+      }
+    ]
+  },
+  {
+    "id": "Leviathan",
+    "q": "just",
+    "q_status": "live-rivals",
+    "settled": false,
+    "contested": false,
+    "gloss": "Without a strong sovereign, life is a war of all against all.",
+    "primary_readings": [
+      {
+        "author": "Thomas Hobbes",
+        "title": "Leviathan",
+        "year": "1651"
+      }
+    ]
+  },
+  {
+    "id": "Bundle Theory",
+    "q": "self",
+    "q_status": "live-rivals",
+    "settled": false,
+    "contested": false,
+    "gloss": "The self is just a bundle of perceptions in flux; no enduring 'I' is found.",
+    "primary_readings": [
+      {
+        "author": "David Hume",
+        "title": "A Treatise of Human Nature (I.IV.6)",
+        "year": "1739"
+      }
+    ]
+  },
+  {
+    "id": "The Problem of Induction",
+    "q": "know",
+    "q_status": "hardened",
+    "settled": true,
+    "contested": false,
+    "gloss": "No number of past observations logically guarantees the future; the sunrise we expect rests on habit, not proof.",
+    "primary_readings": [
+      {
+        "author": "David Hume",
+        "title": "An Enquiry Concerning Human Understanding",
+        "year": "1748"
+      }
+    ]
+  },
+  {
+    "id": "The Is–Ought Gap",
+    "q": "live",
+    "q_status": "live-rivals",
+    "settled": false,
+    "contested": false,
+    "gloss": "Hume's guillotine: from premises about what *is* the case, no conclusion about what *ought* to be can validly follow. Fact and value are split by a gap that no argument from nature alone can cross.",
+    "primary_readings": [
+      {
+        "author": "David Hume",
+        "title": "A Treatise of Human Nature",
+        "year": "1739"
+      }
+    ]
+  },
+  {
+    "id": "Stream of Consciousness",
+    "q": "mind",
+    "q_status": "handed-off",
+    "settled": true,
+    "contested": false,
+    "gloss": "Consciousness is not a chain of links but a continuous, flowing river.",
+    "primary_readings": [
+      {
+        "author": "William James",
+        "title": "The Principles of Psychology",
+        "year": "1890"
+      },
+      {
+        "author": "William James",
+        "title": "The Varieties of Religious Experience",
+        "year": "1902"
+      }
+    ]
+  },
+  {
+    "id": "Self-Reliance",
+    "q": "live",
+    "q_status": "live-rivals",
+    "settled": false,
+    "contested": false,
+    "gloss": "Trust the self over the crowd; withdraw to nature to hear your own voice.",
+    "primary_readings": [
+      {
+        "author": "Ralph Waldo Emerson",
+        "title": "Self-Reliance",
+        "year": "1841"
+      },
+      {
+        "author": "Henry David Thoreau",
+        "title": "Walden",
+        "year": "1854"
+      }
+    ]
+  },
+  {
+    "id": "Evolution by Natural Selection",
+    "q": "real",
+    "q_status": "handed-off",
+    "settled": true,
+    "contested": false,
+    "gloss": "Design without a designer: life's complexity from variation and selection.",
+    "primary_readings": [
+      {
+        "author": "Charles Darwin",
+        "title": "On the Origin of Species",
+        "year": "1859"
+      }
+    ]
+  },
+  {
+    "id": "Idealism",
+    "q": "real",
+    "q_status": "handed-off",
+    "settled": true,
+    "contested": false,
+    "gloss": "To be is to be perceived; reality is fundamentally mental, not material.",
+    "primary_readings": [
+      {
+        "author": "George Berkeley",
+        "title": "A Treatise Concerning the Principles of Human Knowledge",
+        "year": "1710"
+      },
+      {
+        "author": "George Berkeley",
+        "title": "Three Dialogues between Hylas and Philonous",
+        "year": "1713"
+      }
+    ]
+  }
+]

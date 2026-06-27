@@ -1,0 +1,18 @@
+{
+  "id": "Tawhid (Divine Unity)",
+  "settled": false,
+  "text": "SAY: He is God alone: God the eternal! He begetteth not, and He is not begotten; And there is none like unto Him.",
+  "author": "The Quran",
+  "work": "Surah al-Ikhlas (112), \"The Unity\"",
+  "translator": "J. M. Rodwell",
+  "edition_year": 1861,
+  "locator": "112:1-4",
+  "source": "Project Gutenberg eBook #2800 (The Koran, trans. J. M. Rodwell)",
+  "source_url": "https://www.gutenberg.org/cache/epub/2800/pg2800.txt",
+  "rights": "PD",
+  "book_url": "https://www.gutenberg.org/ebooks/2800",
+  "byte_match": true,
+  "out_pulls_note": "High heat: four terse, hammer-blow clauses that refuse all partners and likeness -- the absoluteness lands before a stranger can place the source.",
+  "search_notes": "J. M. Rodwell translation, 1861 (Gutenberg #2800, 'Translator: J. M. Rodwell'), used because it is byte-clean PD; Palmer's SBE Quran was the alternate but I verified Rodwell within budget rather than risk a second scripture scan. The whole of Surah CXII ('The Unity') is quoted verbatim (112:1-4); substring confirmed after whitespace/quote normalisation; no italic underscores. SCRIPTURE RISK NOTED: Rodwell renders v.2 'God the eternal!' for al-Samad, where Palmer/most moderns give 'the Eternal, the Absolute' / 'the Self-Sufficient'; this is a recognised translation choice of a famously hard word, not a misattribution or error -- flagged for transparency. UNSETTLED concept: presented as one tradition's scriptural statement of divine oneness, not as a proof or final answer. Confidence high on text and rights.",
+  "fetches_used": 2
+}

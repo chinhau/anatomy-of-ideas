@@ -1,0 +1,18 @@
+{
+  "id": "Neutral Monism",
+  "settled": true,
+  "text": "My thesis is that if we start with the supposition that there is only one primal stuff or material in the world, a stuff of which everything is composed, and if we call that stuff 'pure experience,' then knowing can easily be explained as a particular sort of relation towards one another into which portions of pure experience may enter.",
+  "author": "William James",
+  "work": "Does 'Consciousness' Exist?",
+  "translator": "",
+  "edition_year": "1904",
+  "locator": "Essays in Radical Empiricism, essay I \"Does 'Consciousness' Exist?\", section I (opening of \"My thesis\")",
+  "source": "Project Gutenberg",
+  "source_url": "https://www.gutenberg.org/cache/epub/32547/pg32547.txt",
+  "rights": "PD",
+  "book_url": "https://www.gutenberg.org/ebooks/32547",
+  "byte_match": true,
+  "out_pulls_note": "Out-pulls the gloss: James names the single 'primal stuff' / 'pure experience' from which both knower and known are arrangements, giving the actual neutral-monist move rather than just asserting it.",
+  "search_notes": "Found in Project Gutenberg #32547 (James, Essays in Radical Empiricism). Passage opens section I of 'Does \"Consciousness\" Exist?' (1904). Verbatim substring confirmed after normalising curly quotes/whitespace. Span deliberately ends at 'may enter.' to avoid the footnote marker [5] a few words later; no Gutenberg italic underscores within the span. Author guidance preferred James over Russell when unsure; James used. High confidence, no misattribution risk (well-documented founding essay).",
+  "fetches_used": 1
+}

@@ -1,0 +1,18 @@
+{
+  "id": "Natural Rights",
+  "settled": false,
+  "text": "The state of nature has a law of nature to govern it, which obliges every one: and reason, which is that law, teaches all mankind, who will but consult it, that being all equal and independent, no one ought to harm another in his life, health, liberty, or possessions",
+  "author": "John Locke",
+  "work": "Second Treatise of Government",
+  "translator": "",
+  "edition_year": "1689",
+  "locator": "ch. II, \u00a76",
+  "source": "Project Gutenberg",
+  "source_url": "https://www.gutenberg.org/cache/epub/7370/pg7370.txt",
+  "rights": "PD",
+  "book_url": "https://www.gutenberg.org/ebooks/7370",
+  "byte_match": true,
+  "out_pulls_note": "Out-pulls the gloss: Locke names the very triad ('life, health, liberty, or possessions') and grounds it in a 'law of nature' that 'obliges every one', going beyond the gloss's flat assertion that such rights exist.",
+  "search_notes": "Found in Gutenberg #7370 (Second Treatise), Sect. 6, the foundational state-of-nature passage. Byte-verified as substring after normalisation (49 words); no italic underscores in span. Chose Locke over Wollstonecraft because it directly names life/liberty/possessions matching the gloss; Wollstonecraft (Gutenberg #3420) was the verified fallback but is more about women's rights than the life/liberty/property triad. High confidence; canonical Locke, no misattribution risk.",
+  "fetches_used": 1
+}

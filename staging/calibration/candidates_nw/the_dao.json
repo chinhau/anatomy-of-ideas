@@ -1,0 +1,18 @@
+{
+  "id": "The Dao",
+  "settled": true,
+  "text": "The Tao that can be trodden is not the enduring and unchanging Tao. The name that can be named is not the enduring and unchanging name.",
+  "author": "Laozi",
+  "work": "Tao Te Ching",
+  "translator": "James Legge",
+  "edition_year": 1891,
+  "locator": "ch. 1",
+  "source": "Project Gutenberg eBook #216 (Legge's translation; the same text as Sacred Books of the East v39, 1891)",
+  "source_url": "https://www.gutenberg.org/cache/epub/216/pg216.txt",
+  "rights": "PD",
+  "book_url": "https://www.gutenberg.org/ebooks/216",
+  "byte_match": true,
+  "out_pulls_note": "High heat: the apophatic paradox makes a stranger stop -- it tells you in two lines that the deepest thing slips the instant you name it.",
+  "search_notes": "James Legge translation, 1891 (his SBE v39 rendering; Gutenberg #216 is titled 'The Tao Teh King' and credits Translator: James Legge). sacred-texts.com (the SBE scan) is Cloudflare-blocked to curl, so I used the byte-clean Gutenberg plain text of Legge's same translation. Verbatim substring confirmed after normalising whitespace; no italic underscores in the span. Canonical ch.1 opening, the standard jolt. Confidence high.",
+  "fetches_used": 3
+}

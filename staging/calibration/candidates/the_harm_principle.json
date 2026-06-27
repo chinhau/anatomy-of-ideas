@@ -1,0 +1,18 @@
+{
+  "id": "The Harm Principle",
+  "settled": false,
+  "text": "The only part of the conduct of any one, for which he is amenable to society, is that which concerns others. In the part which merely concerns himself, his independence is, of right, absolute. Over himself, over his own body and mind, the individual is sovereign.",
+  "author": "John Stuart Mill",
+  "work": "On Liberty",
+  "translator": "",
+  "edition_year": "1859",
+  "locator": "ch. I",
+  "source": "Project Gutenberg eBook of On Liberty (ebook #34901)",
+  "source_url": "https://www.gutenberg.org/cache/epub/34901/pg34901.txt",
+  "rights": "PD",
+  "book_url": "https://www.gutenberg.org/ebooks/34901",
+  "byte_match": true,
+  "out_pulls_note": "Out-pulls the gloss: 'Over himself... the individual is sovereign' is the memorable, lyrical formulation the gloss flattens into prose; it earns its place as the datum.",
+  "search_notes": "Found in Gutenberg #34901 (Mill, On Liberty), ch. I 'Introductory.' Verbatim contiguous span, byte-confirmed. Considered the more literal 'the sole end... is self-protection / to prevent harm to others' sentences (also verbatim, 39 words) but they restate the gloss; chose the 'sovereign' closing as it out-pulls. No verdict words. High confidence.",
+  "fetches_used": 1
+}

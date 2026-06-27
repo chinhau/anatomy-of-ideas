@@ -11,7 +11,10 @@ ADR 0006). Render only where a passage exists — never an empty slot.
 
 Schema — keyed by concept id → list of passage dicts (a list so the
 plural-or-none rule for contested concepts can be honoured later):
-  text         verbatim passage (byte-matched to source_url when rights == "PD")
+  text         verbatim passage; for rights == "PD" it is byte-verified PRESENT
+               in source_url (the anti-fabrication test). May be print-corrected
+               toward the cited edition where the only digital source carries a
+               transcription/OCR defect, with the change logged in docs/PASSAGES.md.
   author       original author
   work         the work it is drawn from
   translator   translator / editor (or "" for an original-language author)
@@ -194,6 +197,153 @@ PASSAGES = {
     "source_url": "https://www.thephilosopher1923.org/post/we-and-i",
     "rights": "in-copyright-fair-use",
     "book_url": "https://www.thephilosopher1923.org/post/we-and-i",
+  },
+],
+
+# === Plan-A heat-pilot (added 2026-06-27) — 7 passages / 5 questions, non-Western-
+# led, arranged so NO question debuts Western-only (mind & abs each open with a
+# non-Western voice). All independently byte-verified; see docs/PASSAGES.md. ===
+
+# real (handed-off) — Laozi via Legge: the apophatic opening; the deepest thing
+# slips every instrument. Pure recognition, stands alone.
+"The Dao": [
+  {
+    "text": "The Tao that can be trodden is not the enduring and unchanging Tao. "
+            "The name that can be named is not the enduring and unchanging name.",
+    "author": "Laozi",
+    "work": "Tao Te Ching",
+    "translator": "James Legge",
+    "edition_year": "1891",
+    "locator": "ch. 1",
+    "source": "Project Gutenberg #216 (Legge; = Sacred Books of the East v39)",
+    "source_url": "https://www.gutenberg.org/cache/epub/216/pg216.txt",
+    "rights": "PD",
+    "book_url": "https://www.gutenberg.org/ebooks/216",
+  },
+],
+
+# mind (handed-off) — Zhuangzi's vertigo: which is the dream? Pure recognition,
+# pairs (non-rival) with James below. PRINT-CORRECTED: the period after "itself"
+# is restored to Legge's 1891 print (the sacred-texts transcription drops it); the
+# full span is otherwise byte-verified present. See docs/PASSAGES.md.
+"The Butterfly Dream": [
+  {
+    "text": "Formerly, I, Kwang K\u00e2u, dreamt that I was a butterfly, a butterfly "
+            "flying about, feeling that it was enjoying itself. I did not know that "
+            "it was K\u00e2u. Suddenly I awoke, and was myself again, the veritable "
+            "K\u00e2u. I did not know whether it had formerly been K\u00e2u dreaming "
+            "that he was a butterfly, or it was now a butterfly dreaming that it was "
+            "K\u00e2u.",
+    "author": "Zhuangzi",
+    "work": "The Writings of Kwang-dze",
+    "translator": "James Legge",
+    "edition_year": "1891",
+    "locator": "Bk II (The Adjustment of Controversies)",
+    "source": "Legge, Sacred Books of the East v39 (transcription, print-corrected)",
+    "source_url": "https://www.sacred-texts.com/tao/sbe39/sbe39123.htm",
+    "rights": "PD",
+    "book_url": "https://www.sacred-texts.com/tao/sbe39/index.htm",
+  },
+],
+
+# peace (handed-off) — the Dhammapada's bald equation: love is the root of grief
+# and fear. Recognition; non-contested, stands alone.
+"Nirvana": [
+  {
+    "text": "From love comes grief, from love comes fear; he who is free from love "
+            "knows neither grief nor fear.",
+    "author": "The Dhammapada",
+    "work": "The Dhammapada (Pali Canon)",
+    "translator": "F. Max M\u00fcller",
+    "edition_year": "1881",
+    "locator": "ch. XVI, v. 215",
+    "source": "Project Gutenberg #2017 (M\u00fcller; = Sacred Books of the East v10)",
+    "source_url": "https://www.gutenberg.org/cache/epub/2017/pg2017.txt",
+    "rights": "PD",
+    "book_url": "https://www.gutenberg.org/ebooks/2017",
+  },
+],
+
+# trans (live-rivals) — Rumi's reed torn from the bed, wailing to return: pure
+# ache, no contested thesis about HOW we transform. Non-contested concept, so the
+# machine rule clears and solo is honest under recognition-vs-verdict.
+"Mystical Union (Fana)": [
+  {
+    "text": "Hearken to the reed-flute, how it discourses When complaining of the "
+            "pains of separation - \" Ever since they tore me from my osier bed, "
+            "My plaintive notes have moved men and women to tears. I burst my "
+            "breast, striving to give vent to sighs, And to express the pangs of "
+            "my yearning for my home.",
+    "author": "Jalal al-Din Rumi",
+    "work": "The Masnavi",
+    "translator": "E. H. Whinfield",
+    "edition_year": "1898",
+    "locator": "Book I, proem (the Song of the Reed)",
+    "source": "archive.org 'Masnavi i Ma'navi' (Whinfield, item masnaviimanavi)",
+    "source_url": "https://archive.org/download/masnaviimanavi/Masnavi_i_Ma_navi_djvu.txt",
+    "rights": "PD",
+    "book_url": "https://archive.org/details/masnaviimanavi",
+  },
+],
+
+# abs (open) — a TRUE rival pair: Tawhid AFFIRMS a single, incomparable Absolute;
+# The Problem of Evil below PRESSES the theodicy difficulty with such a deity. Two
+# voices keep the open question plural, never a verdict. (Partial rival — Epicurus
+# attacks the attributes, not bare existence; a tighter counter is backlog.)
+"Tawhid (Divine Unity)": [
+  {
+    "text": "SAY: He is God alone: God the eternal! He begetteth not, and He is not "
+            "begotten; And there is none like unto Him.",
+    "author": "The Qur'an",
+    "work": "Surah al-Ikhlas (112), 'The Unity'",
+    "translator": "J. M. Rodwell",
+    "edition_year": "1861",
+    "locator": "112:1\u20134",
+    "source": "Project Gutenberg #2800 (Rodwell, The Koran)",
+    "source_url": "https://www.gutenberg.org/cache/epub/2800/pg2800.txt",
+    "rights": "PD",
+    "book_url": "https://www.gutenberg.org/ebooks/2800",
+  },
+],
+
+# mind — second voice (Western): James, "it is nothing jointed; it flows." A
+# non-rival recognition beside Zhuangzi, so `mind` never debuts Western-only.
+"Stream of Consciousness": [
+  {
+    "text": "Consciousness, then, does not appear to itself chopped up in bits. Such "
+            "words as 'chain' or 'train' do not describe it fitly as it presents "
+            "itself in the first instance. It is nothing jointed; it flows. A "
+            "'river' or a 'stream' are the metaphors by which it is most naturally "
+            "described.",
+    "author": "William James",
+    "work": "The Principles of Psychology",
+    "translator": "",
+    "edition_year": "1890",
+    "locator": "Vol. I, ch. IX ('The Stream of Thought')",
+    "source": "Project Gutenberg #57628 (Volume 1 of 2)",
+    "source_url": "https://www.gutenberg.org/cache/epub/57628/pg57628.txt",
+    "rights": "PD",
+    "book_url": "https://www.gutenberg.org/ebooks/57628",
+  },
+],
+
+# abs — second voice (Western), the RIVAL to Tawhid: Hume puts Epicurus's
+# unanswered trilemma. Pairs with Tawhid so the open question stays plural.
+"The Problem of Evil": [
+  {
+    "text": "EPICURUS's old questions are yet unanswered. Is he willing to prevent "
+            "evil, but not able? then is he impotent. Is he able, but not willing? "
+            "then is he malevolent. Is he both able and willing? whence then is "
+            "evil?",
+    "author": "David Hume",
+    "work": "Dialogues Concerning Natural Religion",
+    "translator": "",
+    "edition_year": "1779",
+    "locator": "Part X (Philo, restating Epicurus)",
+    "source": "Project Gutenberg #4583",
+    "source_url": "https://www.gutenberg.org/cache/epub/4583/pg4583.txt",
+    "rights": "PD",
+    "book_url": "https://www.gutenberg.org/ebooks/4583",
   },
 ],
 

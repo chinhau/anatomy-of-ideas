@@ -1,0 +1,18 @@
+{
+  "id": "Leviathan",
+  "settled": false,
+  "text": "In such condition, there is no place for Industry; because the fruit thereof is uncertain; and consequently no Culture of the Earth; no Navigation, nor use of the commodities that may be imported by Sea; no commodious Building; no Instruments of moving, and removing such things as require much force; no Knowledge of the face of the Earth; no account of Time; no Arts; no Letters; no Society; and which is worst of all, continuall feare, and danger of violent death; And the life of man, solitary, poore, nasty, brutish, and short.",
+  "author": "Thomas Hobbes",
+  "work": "Leviathan",
+  "translator": "",
+  "edition_year": "1651",
+  "locator": "Part I, ch. XIII",
+  "source": "Project Gutenberg eBook of Leviathan (ebook #3207)",
+  "source_url": "https://www.gutenberg.org/cache/epub/3207/pg3207.txt",
+  "rights": "PD",
+  "book_url": "https://www.gutenberg.org/ebooks/3207",
+  "byte_match": true,
+  "out_pulls_note": "Out-pulls the gloss: the gloss says 'war of all against all,' but the passage delivers Hobbes's full catalogue of deprivation culminating in 'solitary, poore, nasty, brutish, and short' - the line that makes the idea unforgettable.",
+  "search_notes": "Found in Gutenberg #3207 (Hobbes, Leviathan), Part I, ch. XIII 'Of the Naturall Condition of Mankind.' Kept the source's original 1651 spelling verbatim ('poore', 'feare', 'continuall', 'warre'); byte-confirmed against fetched text. 92 words, under cap. Modernised paraphrases ('poor, nasty') circulate widely - I used the literal source spelling, not the modernised quote. No verdict words. High confidence.",
+  "fetches_used": 1
+}

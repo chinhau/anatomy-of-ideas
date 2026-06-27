@@ -1,0 +1,92 @@
+[
+  {
+    "id": "The Dao",
+    "q": "real",
+    "q_status": "handed-off",
+    "settled": true,
+    "contested": false,
+    "gloss": "An ineffable source and pattern flows through all things; name it and you miss it.",
+    "tradLabel": "Chinese",
+    "primary_readings": [
+      {
+        "author": "Laozi",
+        "title": "Tao Te Ching",
+        "year": "c.400 BCE"
+      },
+      {
+        "author": "Zhuangzi",
+        "title": "Zhuangzi",
+        "year": "c.300 BCE"
+      }
+    ]
+  },
+  {
+    "id": "The Butterfly Dream",
+    "q": "mind",
+    "q_status": "handed-off",
+    "settled": true,
+    "contested": false,
+    "gloss": "Am I a man who dreamt he was a butterfly, or a butterfly dreaming he is a man?",
+    "tradLabel": "Chinese",
+    "primary_readings": [
+      {
+        "author": "Zhuangzi",
+        "title": "Zhuangzi (Inner Chapters)",
+        "year": "c.300 BCE"
+      }
+    ]
+  },
+  {
+    "id": "Nirvana",
+    "q": "peace",
+    "q_status": "handed-off",
+    "settled": true,
+    "contested": false,
+    "gloss": "The blowing-out of craving; liberation from the cycle of suffering.",
+    "tradLabel": "Buddhist",
+    "primary_readings": [
+      {
+        "author": "(Pali Canon)",
+        "title": "Dhammapada",
+        "year": "c.250 BCE"
+      }
+    ]
+  },
+  {
+    "id": "Mystical Union (Fana)",
+    "q": "trans",
+    "q_status": "live-rivals",
+    "settled": false,
+    "contested": false,
+    "gloss": "The self dissolves; lover and Beloved become one.",
+    "tradLabel": "Islamic",
+    "primary_readings": [
+      {
+        "author": "Jalal al-Din Rumi",
+        "title": "The Masnavi",
+        "year": "c.1265"
+      },
+      {
+        "author": "Ibn Arabi",
+        "title": "The Bezels of Wisdom",
+        "year": "c.1229"
+      }
+    ]
+  },
+  {
+    "id": "Tawhid (Divine Unity)",
+    "q": "abs",
+    "q_status": "open",
+    "settled": false,
+    "contested": false,
+    "gloss": "God is absolutely one — no partner, no division, no likeness; all multiplicity hangs from a single source.",
+    "tradLabel": "Islamic",
+    "primary_readings": [
+      {
+        "author": "The Quran",
+        "title": "Surah al-Ikhlas (112)",
+        "year": "c.650"
+      }
+    ]
+  }
+]

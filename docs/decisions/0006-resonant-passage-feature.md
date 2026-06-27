@@ -260,6 +260,29 @@ past the guardrail.
 - For any marquee in-copyright author later, get a one-time attorney opinion
   before launch.
 
+**Amendment (2026-06-27) — byte-match reframed as anti-fabrication, not
+print-fidelity.** The Plan-A pilot's Butterfly Dream exposed that "PD ⇒ byte-match
+exactly" silently demands two things that can conflict: (a) *anti-fabrication* (the
+text verifiably exists in a real PD source — load-bearing) and (b) *print-fidelity*
+(the text matches what the author wrote). When the only digital source carries a
+transcription/OCR defect, exact-match would force shipping the error. Resolution:
+byte-match is the **anti-fabrication** test; normalise *encoding* (HTML entities,
+curly quotes, dashes, whitespace, case) before matching. A byte-mismatch is a
+**triage** signal, not an auto-reject — (1) encoding → fix the normaliser; (2)
+source transcription/OCR defect → correct toward the cited print + log it in
+`docs/PASSAGES.md` as "transcription-verified, print-corrected: <what>"; (3) genuine
+fabrication/misquote → **reject** (only this is a real failure). This is the PD
+analogue of the in-copyright edition+locator record (cf. Ivan Ilyich). (Butterfly
+Dream: period after "itself" restored to Legge 1891.) **Rival-fit authoring rule:**
+a thesis-passage on an open/contested question needs a passage that *denies its
+exact proposition* (not merely shares the topic), else it is adjacency → keep
+searching or both stay none. Tawhid/Epicurus shipped as a *partial* rival (attacks
+the deity's attributes, not the Absolute's bare existence); a tighter counter is
+backlog. **Process:** always-on/continuous research agents stay **rejected** —
+supply was never the bottleneck (20 candidates drafted, 7 shipped); use on-demand
+isolated batches + a pull-queue, with the leverage in the drafter brief + the human
+gate, not the cadence.
+
 ### Placement & presentation
 - The passage renders **first in the drawer, above the gloss** (demote the gloss
   to a one-line dek beneath it).
