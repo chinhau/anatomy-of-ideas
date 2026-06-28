@@ -1077,7 +1077,9 @@
   });
   const neighborSet = id => new Set([id, ...(adj.get(id)||[]).map(e=>e.other)]);
 
-  const eraTxt = e => e<0 ? Math.abs(e)+' BCE' : (e<1000? e+' CE' : ''+e);
+  // zh writes the era marker as a prefix (公元前375); en/ru keep the "375 BCE" suffix.
+  const eraJoin=(n,suf)=> LANG==='zh' ? suf+n : n+' '+suf;
+  const eraTxt = e => e<0 ? eraJoin(Math.abs(e),T('BCE')) : (e<1000? eraJoin(e,T('CE')) : ''+e);
   const REL_LABEL = {builds:['Builds upon','b'], rejects:['Rejects / opposes','r'], echoes:['Echoes across traditions','e']};
 
   // Captions key off the *mode*. The old "Map I…VII" numbering was dropped with
@@ -1302,8 +1304,8 @@
   const ERA_SEAM=34, ERA_SWEEP=360-ERA_SEAM;   // degrees; gap at top so oldest≠newest
   const eraAngle=era=>{ const f=(era-LENS_ERA.lo)/((LENS_ERA.hi-LENS_ERA.lo)||1);
     return (-90 + ERA_SEAM/2 + f*ERA_SWEEP)*Math.PI/180; };   // 12 o'clock = oldest, clockwise
-  const eraYearLabel=y=>{ const a=Math.abs(Math.round(y/100)*100)||0;
-    return y<0 ? a+' '+T('BCE') : (a===0?'1 '+T('CE'):a+' '+T('CE')); };
+  const eraYearLabel=y=>{ const a=Math.abs(Math.round(y/100)*100)||0; const n=(y>=0&&a===0)?1:a;
+    return eraJoin(n, y<0?T('BCE'):T('CE')); };
   const TYPE_ORDER={builds:0,echoes:1,rejects:2};
   const REL_VERB={builds:'builds on',rejects:'rejects',echoes:'echoes'};
   // "Where will we begin?" — one curated gateway concept per question (the Lens empty state).
@@ -1385,6 +1387,7 @@
         '</div>'+
       '</div>'+
       '<div id="lb-live" class="sr-only" role="status" aria-live="polite"></div>';
+    relabelStatic(host); // board is built lazily, after applyLang's initial pass — localize its deck-button chrome now
     const deck=host.querySelector('#lens-deck');
     slotOf=LENS_DOORS.map((_,i)=>i);
     LENS_DOORS.forEach(([qid,cid],i)=>{
@@ -2436,6 +2439,14 @@
   // Declared up here (not in the constellation section below) so the bootstrap
   // applyLang(LANG) -> conRelabel() call is past their temporal dead zone.
   let conBuilt=false, conLeg=null;
+  // Relabel the static data-i18n chrome under a root. Factored out so lazily-built
+  // subtrees (e.g. buildLensBoard, which injects its deck buttons long after the
+  // initial applyLang pass) can localize their own data-i18n nodes on creation.
+  function relabelStatic(root){
+    root.querySelectorAll('[data-i18n]').forEach(el=>{ el.textContent=T(el.getAttribute('data-i18n')); });
+    root.querySelectorAll('[data-i18n-attr]').forEach(el=>{ el.setAttribute(el.getAttribute('data-i18n-attr'),T(el.getAttribute('data-i18n'))); });
+    root.querySelectorAll('[data-i18n-html]').forEach(el=>{ el.innerHTML=T(el.getAttribute('data-i18n-html')); });
+  }
   function applyLang(lang){
     if(!LANGS.includes(lang)) lang='en';
     LANG=lang; try{ localStorage.setItem('aoi.lang',lang); }catch(e){}
@@ -2443,9 +2454,7 @@
     document.querySelectorAll('#lang-switch button').forEach(b=>{ const on=b.dataset.lang===lang;
       b.classList.toggle('active',on); b.setAttribute('aria-pressed',on?'true':'false'); });
     // static chrome
-    document.querySelectorAll('[data-i18n]').forEach(el=>{ el.textContent=T(el.getAttribute('data-i18n')); });
-    document.querySelectorAll('[data-i18n-attr]').forEach(el=>{ el.setAttribute(el.getAttribute('data-i18n-attr'),T(el.getAttribute('data-i18n'))); });
-    document.querySelectorAll('[data-i18n-html]').forEach(el=>{ el.innerHTML=T(el.getAttribute('data-i18n-html')); });
+    relabelStatic(document);
     // About panel: swap whole body for the translated block, flag machine-assisted
     const ab=(I18N.about||{})[lang];
     const ac=document.getElementById('about-content'); if(ac) ac.innerHTML=(lang!=='en'&&ab)?ab:ABOUT_EN;
@@ -2461,6 +2470,11 @@
       const fr=band.querySelector('.q-frame'); if(fr) fr.textContent=qFraming(q);
       const sl=band.querySelector('.qs-label'); if(sl) sl.textContent=stLabel(q.status);
       const sw=band.querySelector('.q-why'); if(sw) sw.textContent=qWhy(q); });
+    // Status-key legend: its labels were rendered once by buildQKey (no data-i18n),
+    // so relabel them in place on language switch.
+    mQ.querySelectorAll('.q-key-item').forEach(it=>{ const s=it.dataset.state;
+      const b=it.querySelector('b'); if(b) b.textContent=stLabel(s);
+      it.setAttribute('title',stDefn(s)); });
     D.concepts.forEach(c=>{ const el=cardEls[c.id]; if(!el) return;
       const id=el.querySelector('.c-id'); if(id) id.textContent=cName(c);
       const tr=el.querySelector('.c-trad'); if(tr) tr.textContent=cTrad(c)+' · '+eraTxt(c.era);
